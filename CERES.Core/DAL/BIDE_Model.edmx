@@ -1,0 +1,1841 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BIDE_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="clientStatus" Type="bit" Nullable="false" />
+          <Property Name="createDate" Type="date" Nullable="false" />
+          <Property Name="siteFolderName" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ClientSetting">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="int" Nullable="false" />
+          <Property Name="editPeriodMgr" Type="int" Nullable="false" />
+          <Property Name="editPeriodUsr" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="locID" />
+          </Key>
+          <Property Name="locID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siteID" Type="int" Nullable="false" />
+          <Property Name="locName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="locStatus" Type="bit" Nullable="false" />
+          <Property Name="Continent" Type="varchar" MaxLength="255" />
+          <Property Name="Country" Type="varchar" MaxLength="255" />
+          <Property Name="CBPSRegion" Type="varchar" MaxLength="255" />
+          <Property Name="State" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="255" />
+          <Property Name="Campus" Type="varchar" MaxLength="255" />
+          <Property Name="Building" Type="varchar" MaxLength="255" />
+          <Property Name="Floor" Type="varchar" MaxLength="255" />
+          <Property Name="Area" Type="varchar" MaxLength="255" />
+          <Property Name="Office" Type="varchar" MaxLength="255" />
+          <Property Name="createDate" Type="date" Nullable="false" />
+          <Property Name="UIEnabledInd" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REF_AccountInfo">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="255" />
+          <Property Name="AccountOwner" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="255" />
+          <Property Name="StatusCode" Type="varchar" MaxLength="20" />
+          <Property Name="StatusDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceArea">
+          <Key>
+            <PropertyRef Name="svcID" />
+          </Key>
+          <Property Name="svcID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="locID" Type="int" Nullable="false" />
+          <Property Name="svcName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="svcStatus" Type="bit" Nullable="false" />
+          <Property Name="createDate" Type="date" Nullable="false" />
+          <Property Name="ServiceCategory" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ServiceAreaField">
+          <Key>
+            <PropertyRef Name="svcFieldID" />
+          </Key>
+          <Property Name="svcFieldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="svcID" Type="int" Nullable="false" />
+          <Property Name="svcFieldNumber" Type="int" Nullable="false" />
+          <Property Name="svcFieldName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CategoryCode" Type="char" MaxLength="1" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="Shade" Type="char" MaxLength="1" />
+          <Property Name="Description_Txt" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ServiceAreaFieldGroup_SAID" Type="int" />
+          <Property Name="FieldType" Type="smallint" />
+          <Property Name="DataType" Type="varchar" MaxLength="50" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="255" />
+          <Property Name="MetricShortName" Type="nvarchar" MaxLength="255" />
+          <Property Name="MetricFormat" Type="nvarchar" MaxLength="255" />
+          <Property Name="DefaultValue" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsLogVisible" Type="int" />
+          <Property Name="IsMandatory" Type="smallint" />
+          <Property Name="Constraint_Txt" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="ServiceAreaFieldLOV">
+          <Key>
+            <PropertyRef Name="ServiceAreaFieldLOV_SAID" />
+          </Key>
+          <Property Name="ServiceAreaFieldLOV_SAID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="svcFieldId" Type="int" Nullable="false" />
+          <Property Name="FieldId" Type="int" />
+          <Property Name="FieldText" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Site">
+          <Key>
+            <PropertyRef Name="siteID" />
+          </Key>
+          <Property Name="siteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientID" Type="int" Nullable="false" />
+          <Property Name="siteName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="siteStatus" Type="bit" Nullable="false" />
+          <Property Name="createDate" Type="date" Nullable="false" />
+          <Property Name="siteFolderName" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tDate" Type="date" Nullable="false" />
+          <Property Name="accountID" Type="int" Nullable="false" />
+          <Property Name="siteID" Type="int" Nullable="false" />
+          <Property Name="locID" Type="int" Nullable="false" />
+          <Property Name="svcID" Type="int" Nullable="false" />
+          <Property Name="field1" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field2" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field3" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field4" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field5" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field6" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field7" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field8" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field9" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field10" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field11" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field12" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field13" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field14" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field15" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field16" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field17" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field18" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field19" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field20" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field21" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field22" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field23" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field24" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field25" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field26" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field27" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field28" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field29" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field30" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field31" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field32" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field33" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field34" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field35" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field36" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field37" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field38" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field39" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field40" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field41" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field42" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field43" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field44" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field45" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field46" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field47" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field48" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field49" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field50" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field51" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field52" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field53" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field54" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field55" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field56" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field57" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field58" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field59" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field60" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field61" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field62" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field63" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field64" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field65" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field66" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field67" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field68" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field69" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field70" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field71" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field72" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field73" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field74" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field75" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field76" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field77" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field78" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field79" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field80" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field81" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field82" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field83" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field84" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field85" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field86" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field87" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field88" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field89" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field90" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field91" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field92" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field93" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field94" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field95" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field96" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field97" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field98" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field99" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field100" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field101" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field102" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field103" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field104" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field105" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field106" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field107" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field108" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field109" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field110" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field111" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field112" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field113" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field114" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field115" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field116" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field117" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field118" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field119" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field120" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field121" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field122" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field123" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field124" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field125" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field126" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field127" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field128" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field129" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field130" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field131" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field132" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field133" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field134" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field135" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field136" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field137" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field138" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field139" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field140" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field141" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field142" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field143" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field144" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field145" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field146" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field147" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field148" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field149" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field150" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field151" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field152" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field153" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field154" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field155" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field156" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field157" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field158" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field159" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field160" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field161" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field162" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field163" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field164" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field165" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field166" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field167" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field168" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field169" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field170" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field171" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field172" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field173" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field174" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field175" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field176" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field177" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field178" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field179" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field180" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field181" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field182" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field183" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field184" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field185" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field186" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field187" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field188" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field189" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field190" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field191" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field192" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field193" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field194" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field195" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field196" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field197" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field198" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field199" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="field200" Type="decimal" Precision="18" Scale="4" />
+          <Property Name="CreationUserID" Type="varchar" MaxLength="100" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+          <Property Name="StatusCode" Type="char" MaxLength="1" />
+          <Property Name="UpdateUserID" Type="varchar" MaxLength="100" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="1024" />
+          <Property Name="StringField1" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField2" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField3" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField4" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField5" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField6" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField7" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField8" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField9" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField10" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField11" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField12" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField13" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField14" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField15" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField16" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField17" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField18" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField19" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField20" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField21" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField22" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField23" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField24" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField25" Type="varchar" MaxLength="4096" />
+          <Property Name="StringField26" Type="varchar" MaxLength="250" />
+          <Property Name="StringField27" Type="varchar" MaxLength="250" />
+          <Property Name="StringField28" Type="varchar" MaxLength="250" />
+          <Property Name="StringField29" Type="varchar" MaxLength="250" />
+          <Property Name="StringField30" Type="varchar" MaxLength="250" />
+          <Property Name="StringField31" Type="varchar" MaxLength="250" />
+          <Property Name="StringField32" Type="varchar" MaxLength="250" />
+          <Property Name="StringField33" Type="varchar" MaxLength="250" />
+          <Property Name="StringField34" Type="varchar" MaxLength="250" />
+          <Property Name="StringField35" Type="varchar" MaxLength="250" />
+          <Property Name="StringField36" Type="varchar" MaxLength="250" />
+          <Property Name="StringField37" Type="varchar" MaxLength="250" />
+          <Property Name="StringField38" Type="varchar" MaxLength="250" />
+          <Property Name="StringField39" Type="varchar" MaxLength="250" />
+          <Property Name="StringField40" Type="varchar" MaxLength="250" />
+          <Property Name="StringField41" Type="varchar" MaxLength="250" />
+          <Property Name="StringField42" Type="varchar" MaxLength="250" />
+          <Property Name="StringField43" Type="varchar" MaxLength="250" />
+          <Property Name="StringField44" Type="varchar" MaxLength="250" />
+          <Property Name="StringField45" Type="varchar" MaxLength="250" />
+          <Property Name="StringField46" Type="varchar" MaxLength="250" />
+          <Property Name="StringField47" Type="varchar" MaxLength="250" />
+          <Property Name="StringField48" Type="varchar" MaxLength="250" />
+          <Property Name="StringField49" Type="varchar" MaxLength="250" />
+          <Property Name="StringField50" Type="varchar" MaxLength="250" />
+          <Property Name="StringField51" Type="varchar" MaxLength="250" />
+          <Property Name="StringField52" Type="varchar" MaxLength="250" />
+          <Property Name="StringField53" Type="varchar" MaxLength="250" />
+          <Property Name="StringField54" Type="varchar" MaxLength="250" />
+          <Property Name="StringField55" Type="varchar" MaxLength="250" />
+          <Property Name="StringField56" Type="varchar" MaxLength="250" />
+          <Property Name="StringField57" Type="varchar" MaxLength="250" />
+          <Property Name="StringField58" Type="varchar" MaxLength="250" />
+          <Property Name="StringField59" Type="varchar" MaxLength="250" />
+          <Property Name="StringField60" Type="varchar" MaxLength="250" />
+          <Property Name="StringField61" Type="varchar" MaxLength="250" />
+          <Property Name="StringField62" Type="varchar" MaxLength="250" />
+          <Property Name="StringField63" Type="varchar" MaxLength="250" />
+          <Property Name="StringField64" Type="varchar" MaxLength="250" />
+          <Property Name="StringField65" Type="varchar" MaxLength="250" />
+          <Property Name="StringField66" Type="varchar" MaxLength="250" />
+          <Property Name="StringField67" Type="varchar" MaxLength="250" />
+          <Property Name="StringField68" Type="varchar" MaxLength="250" />
+          <Property Name="StringField69" Type="varchar" MaxLength="250" />
+          <Property Name="StringField70" Type="varchar" MaxLength="250" />
+          <Property Name="StringField71" Type="varchar" MaxLength="250" />
+          <Property Name="StringField72" Type="varchar" MaxLength="250" />
+          <Property Name="StringField73" Type="varchar" MaxLength="250" />
+          <Property Name="StringField74" Type="varchar" MaxLength="250" />
+          <Property Name="StringField75" Type="varchar" MaxLength="250" />
+          <Property Name="StringField76" Type="varchar" MaxLength="250" />
+          <Property Name="StringField77" Type="varchar" MaxLength="250" />
+          <Property Name="StringField78" Type="varchar" MaxLength="250" />
+          <Property Name="StringField79" Type="varchar" MaxLength="250" />
+          <Property Name="StringField80" Type="varchar" MaxLength="250" />
+          <Property Name="StringField81" Type="varchar" MaxLength="250" />
+          <Property Name="StringField82" Type="varchar" MaxLength="250" />
+          <Property Name="StringField83" Type="varchar" MaxLength="250" />
+          <Property Name="StringField84" Type="varchar" MaxLength="250" />
+          <Property Name="StringField85" Type="varchar" MaxLength="250" />
+          <Property Name="StringField86" Type="varchar" MaxLength="250" />
+          <Property Name="StringField87" Type="varchar" MaxLength="250" />
+          <Property Name="StringField88" Type="varchar" MaxLength="250" />
+          <Property Name="StringField89" Type="varchar" MaxLength="250" />
+          <Property Name="StringField90" Type="varchar" MaxLength="250" />
+          <Property Name="StringField91" Type="varchar" MaxLength="250" />
+          <Property Name="StringField92" Type="varchar" MaxLength="250" />
+          <Property Name="StringField93" Type="varchar" MaxLength="250" />
+          <Property Name="StringField94" Type="varchar" MaxLength="250" />
+          <Property Name="StringField95" Type="varchar" MaxLength="250" />
+          <Property Name="StringField96" Type="varchar" MaxLength="250" />
+          <Property Name="StringField97" Type="varchar" MaxLength="250" />
+          <Property Name="StringField98" Type="varchar" MaxLength="250" />
+          <Property Name="StringField99" Type="varchar" MaxLength="250" />
+          <Property Name="StringField100" Type="varchar" MaxLength="250" />
+          <Property Name="StringField101" Type="varchar" MaxLength="250" />
+          <Property Name="StringField102" Type="varchar" MaxLength="250" />
+          <Property Name="StringField103" Type="varchar" MaxLength="250" />
+          <Property Name="StringField104" Type="varchar" MaxLength="250" />
+          <Property Name="StringField105" Type="varchar" MaxLength="250" />
+          <Property Name="StringField106" Type="varchar" MaxLength="250" />
+          <Property Name="StringField107" Type="varchar" MaxLength="250" />
+          <Property Name="StringField108" Type="varchar" MaxLength="250" />
+          <Property Name="StringField109" Type="varchar" MaxLength="250" />
+          <Property Name="StringField110" Type="varchar" MaxLength="250" />
+          <Property Name="StringField111" Type="varchar" MaxLength="250" />
+          <Property Name="StringField112" Type="varchar" MaxLength="250" />
+          <Property Name="StringField113" Type="varchar" MaxLength="250" />
+          <Property Name="StringField114" Type="varchar" MaxLength="250" />
+          <Property Name="StringField115" Type="varchar" MaxLength="250" />
+          <Property Name="StringField116" Type="varchar" MaxLength="250" />
+          <Property Name="StringField117" Type="varchar" MaxLength="250" />
+          <Property Name="StringField118" Type="varchar" MaxLength="250" />
+          <Property Name="StringField119" Type="varchar" MaxLength="250" />
+          <Property Name="StringField120" Type="varchar" MaxLength="250" />
+          <Property Name="StringField121" Type="varchar" MaxLength="250" />
+          <Property Name="StringField122" Type="varchar" MaxLength="250" />
+          <Property Name="StringField123" Type="varchar" MaxLength="250" />
+          <Property Name="StringField124" Type="varchar" MaxLength="250" />
+          <Property Name="StringField125" Type="varchar" MaxLength="250" />
+          <Property Name="StringField126" Type="varchar" MaxLength="250" />
+          <Property Name="StringField127" Type="varchar" MaxLength="250" />
+          <Property Name="StringField128" Type="varchar" MaxLength="250" />
+          <Property Name="StringField129" Type="varchar" MaxLength="250" />
+          <Property Name="StringField130" Type="varchar" MaxLength="250" />
+          <Property Name="StringField131" Type="varchar" MaxLength="250" />
+          <Property Name="StringField132" Type="varchar" MaxLength="250" />
+          <Property Name="StringField133" Type="varchar" MaxLength="250" />
+          <Property Name="StringField134" Type="varchar" MaxLength="250" />
+          <Property Name="StringField135" Type="varchar" MaxLength="250" />
+          <Property Name="StringField136" Type="varchar" MaxLength="250" />
+          <Property Name="StringField137" Type="varchar" MaxLength="250" />
+          <Property Name="StringField138" Type="varchar" MaxLength="250" />
+          <Property Name="StringField139" Type="varchar" MaxLength="250" />
+          <Property Name="StringField140" Type="varchar" MaxLength="250" />
+          <Property Name="StringField141" Type="varchar" MaxLength="250" />
+          <Property Name="StringField142" Type="varchar" MaxLength="250" />
+          <Property Name="StringField143" Type="varchar" MaxLength="250" />
+          <Property Name="StringField144" Type="varchar" MaxLength="250" />
+          <Property Name="StringField145" Type="varchar" MaxLength="250" />
+          <Property Name="StringField146" Type="varchar" MaxLength="250" />
+          <Property Name="StringField147" Type="varchar" MaxLength="250" />
+          <Property Name="StringField148" Type="varchar" MaxLength="250" />
+          <Property Name="StringField149" Type="varchar" MaxLength="250" />
+          <Property Name="StringField150" Type="varchar" MaxLength="250" />
+          <Property Name="StringField151" Type="varchar" MaxLength="250" />
+          <Property Name="StringField152" Type="varchar" MaxLength="250" />
+          <Property Name="StringField153" Type="varchar" MaxLength="250" />
+          <Property Name="StringField154" Type="varchar" MaxLength="250" />
+          <Property Name="StringField155" Type="varchar" MaxLength="250" />
+          <Property Name="StringField156" Type="varchar" MaxLength="250" />
+          <Property Name="StringField157" Type="varchar" MaxLength="250" />
+          <Property Name="StringField158" Type="varchar" MaxLength="250" />
+          <Property Name="StringField159" Type="varchar" MaxLength="250" />
+          <Property Name="StringField160" Type="varchar" MaxLength="250" />
+          <Property Name="StringField161" Type="varchar" MaxLength="250" />
+          <Property Name="StringField162" Type="varchar" MaxLength="250" />
+          <Property Name="StringField163" Type="varchar" MaxLength="250" />
+          <Property Name="StringField164" Type="varchar" MaxLength="250" />
+          <Property Name="StringField165" Type="varchar" MaxLength="250" />
+          <Property Name="StringField166" Type="varchar" MaxLength="250" />
+          <Property Name="StringField167" Type="varchar" MaxLength="250" />
+          <Property Name="StringField168" Type="varchar" MaxLength="250" />
+          <Property Name="StringField169" Type="varchar" MaxLength="250" />
+          <Property Name="StringField170" Type="varchar" MaxLength="250" />
+          <Property Name="StringField171" Type="varchar" MaxLength="250" />
+          <Property Name="StringField172" Type="varchar" MaxLength="250" />
+          <Property Name="StringField173" Type="varchar" MaxLength="250" />
+          <Property Name="StringField174" Type="varchar" MaxLength="250" />
+          <Property Name="StringField175" Type="varchar" MaxLength="250" />
+          <Property Name="StringField176" Type="varchar" MaxLength="250" />
+          <Property Name="StringField177" Type="varchar" MaxLength="250" />
+          <Property Name="StringField178" Type="varchar" MaxLength="250" />
+          <Property Name="StringField179" Type="varchar" MaxLength="250" />
+          <Property Name="StringField180" Type="varchar" MaxLength="250" />
+          <Property Name="StringField181" Type="varchar" MaxLength="250" />
+          <Property Name="StringField182" Type="varchar" MaxLength="250" />
+          <Property Name="StringField183" Type="varchar" MaxLength="250" />
+          <Property Name="StringField184" Type="varchar" MaxLength="250" />
+          <Property Name="StringField185" Type="varchar" MaxLength="250" />
+          <Property Name="StringField186" Type="varchar" MaxLength="250" />
+          <Property Name="StringField187" Type="varchar" MaxLength="250" />
+          <Property Name="StringField188" Type="varchar" MaxLength="250" />
+          <Property Name="StringField189" Type="varchar" MaxLength="250" />
+          <Property Name="StringField190" Type="varchar" MaxLength="250" />
+          <Property Name="StringField191" Type="varchar" MaxLength="250" />
+          <Property Name="StringField192" Type="varchar" MaxLength="250" />
+          <Property Name="StringField193" Type="varchar" MaxLength="250" />
+          <Property Name="StringField194" Type="varchar" MaxLength="250" />
+          <Property Name="StringField195" Type="varchar" MaxLength="250" />
+          <Property Name="StringField196" Type="varchar" MaxLength="250" />
+          <Property Name="StringField197" Type="varchar" MaxLength="250" />
+          <Property Name="StringField198" Type="varchar" MaxLength="250" />
+          <Property Name="StringField199" Type="varchar" MaxLength="250" />
+          <Property Name="StringField200" Type="varchar" MaxLength="250" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Publish" Type="smallint" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CommentCount" Type="int" />
+          <Property Name="JOB_ID" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fullname" Type="varchar" MaxLength="255" />
+          <Property Name="userName" Type="varchar" MaxLength="150" />
+          <Property Name="userPwd" Type="varbinary" MaxLength="200" />
+          <Property Name="userStatus" Type="tinyint" />
+          <Property Name="AccountType" Type="varchar" MaxLength="10" />
+          <Property Name="UserClientSiteFolderName" Type="varchar" MaxLength="100" />
+          <Property Name="ClientID" Type="int" />
+          <Property Name="ClientFolderName" Type="varchar" MaxLength="200" />
+          <Property Name="resetflag" Type="bit" />
+          <Property Name="lastlogin_dttm" Type="datetime" />
+          <Property Name="visit_cnt" Type="int" />
+          <Property Name="admin" Type="smallint" />
+          <Property Name="managerUserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="managerFullName" Type="nvarchar" MaxLength="255" />
+          <Property Name="company_nm" Type="varchar" MaxLength="50" />
+          <Property Name="contact_phone_nbr" Type="varchar" MaxLength="30" />
+          <Property Name="Upload_ind" Type="tinyint" />
+          <Property Name="GoldReports_ind" Type="tinyint" />
+          <Property Name="MstrUser_Ind" Type="tinyint" />
+          <Property Name="Creation_Dttm" Type="datetime" Nullable="false" />
+          <Property Name="Creation_UserID" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Modification_Dttm" Type="datetime" />
+          <Property Name="Modification_UserID" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EDS_TDB.dbo.vwGet_ClientList2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwGet_ClientList2">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EDS_TDB.dbo.vwServiceAreaFieldLOV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwServiceAreaFieldLOV">
+          <Key>
+            <PropertyRef Name="ServiceAreaFieldLOV_SAID" />
+            <PropertyRef Name="svcFieldId" />
+            <PropertyRef Name="FieldName" />
+          </Key>
+          <Property Name="ServiceAreaFieldLOV_SAID" Type="int" Nullable="false" />
+          <Property Name="svcFieldId" Type="int" Nullable="false" />
+          <Property Name="FieldId" Type="int" />
+          <Property Name="FieldText" Type="varchar" MaxLength="128" />
+          <Property Name="FieldName" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'EDS_TDB.dbo.vwUserSite' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityContainer Name="BIDE_ModelStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientSetting" EntityType="Self.ClientSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="location" EntityType="Self.location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REF_AccountInfo" EntityType="Self.REF_AccountInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceArea" EntityType="Self.ServiceArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceAreaField" EntityType="Self.ServiceAreaField" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceAreaFieldLOV" EntityType="Self.ServiceAreaFieldLOV" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Site" EntityType="Self.Site" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwGet_ClientList2" EntityType="Self.vwGet_ClientList2" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwGet_ClientList2].[ID] AS [ID], 
+    [vwGet_ClientList2].[name] AS [name], 
+    [vwGet_ClientList2].[userid] AS [userid], 
+    [vwGet_ClientList2].[username] AS [username]
+    FROM [dbo].[vwGet_ClientList2] AS [vwGet_ClientList2]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwServiceAreaFieldLOV" EntityType="Self.vwServiceAreaFieldLOV" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwServiceAreaFieldLOV].[ServiceAreaFieldLOV_SAID] AS [ServiceAreaFieldLOV_SAID], 
+    [vwServiceAreaFieldLOV].[svcFieldId] AS [svcFieldId], 
+    [vwServiceAreaFieldLOV].[FieldId] AS [FieldId], 
+    [vwServiceAreaFieldLOV].[FieldText] AS [FieldText], 
+    [vwServiceAreaFieldLOV].[FieldName] AS [FieldName]
+    FROM [dbo].[vwServiceAreaFieldLOV] AS [vwServiceAreaFieldLOV]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BIDE_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ServiceAreaField">
+          <Key>
+            <PropertyRef Name="svcFieldID" />
+          </Key>
+          <Property Name="svcFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="svcID" Type="Int32" Nullable="false" />
+          <Property Name="svcFieldNumber" Type="Int32" Nullable="false" />
+          <Property Name="svcFieldName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="Shade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Description_Txt" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceAreaFieldGroup_SAID" Type="Int32" />
+          <Property Name="FieldType" Type="Int16" />
+          <Property Name="DataType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MetricShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MetricFormat" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsLogVisible" Type="Int32" />
+          <Property Name="IsMandatory" Type="Int16" />
+          <Property Name="Constraint_Txt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="tID" />
+          </Key>
+          <Property Name="tID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="accountID" Type="Int32" Nullable="false" />
+          <Property Name="siteID" Type="Int32" Nullable="false" />
+          <Property Name="locID" Type="Int32" Nullable="false" />
+          <Property Name="svcID" Type="Int32" Nullable="false" />
+          <Property Name="field1" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field2" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field3" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field4" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field5" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field6" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field7" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field8" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field9" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field10" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field11" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field12" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field13" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field14" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field15" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field16" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field17" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field18" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field19" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field20" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field21" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field22" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field23" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field24" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field25" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field26" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field27" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field28" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field29" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field30" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field31" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field32" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field33" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field34" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field35" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field36" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field37" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field38" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field39" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field40" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field41" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field42" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field43" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field44" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field45" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field46" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field47" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field48" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field49" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field50" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field51" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field52" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field53" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field54" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field55" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field56" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field57" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field58" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field59" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field60" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field61" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field62" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field63" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field64" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field65" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field66" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field67" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field68" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field69" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field70" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="CreationUserID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StatusCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UpdateUserID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Name="StringField1" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField2" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField3" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField4" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField5" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField6" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField7" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField8" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField9" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField10" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField11" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField12" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField13" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField14" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField15" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField16" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField17" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField18" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField19" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField20" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField21" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField22" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField23" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField24" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField25" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+          <Property Name="StringField26" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField27" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField28" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField29" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField30" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField31" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField32" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField33" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField34" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField35" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField36" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField37" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField38" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField39" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField40" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField41" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField42" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField43" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField44" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField45" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField46" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField47" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField48" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField49" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField50" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Publish" Type="Int16" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="CommentCount" Type="Int32" />
+          <Property Name="JOB_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="field71" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field72" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field73" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field74" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field75" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field76" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field77" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field78" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field79" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field80" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field81" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field82" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field83" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field84" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field85" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field86" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field87" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field88" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field89" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field90" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field91" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field92" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field93" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field94" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field95" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field96" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field97" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field98" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field99" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field100" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field101" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field102" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field103" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field104" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field105" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field106" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field107" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field108" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field109" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field110" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field111" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field112" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field113" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field114" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field115" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field116" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field117" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field118" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field119" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field120" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field121" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field122" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field123" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field124" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field125" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field126" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field127" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field128" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field129" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field130" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field131" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field132" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field133" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field134" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field135" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field136" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field137" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field138" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field139" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field140" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field141" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field142" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field143" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field144" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field145" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field146" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field147" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field148" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field149" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field150" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field151" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field152" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field153" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field154" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field155" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field156" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field157" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field158" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field159" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field160" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field161" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field162" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field163" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field164" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field165" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field166" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field167" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field168" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field169" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field170" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field171" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field172" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field173" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field174" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field175" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field176" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field177" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field178" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field179" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field180" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field181" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field182" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field183" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field184" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field185" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field186" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field187" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field188" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field189" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field190" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field191" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field192" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field193" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field194" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field195" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field196" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field197" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field198" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field199" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="field200" Type="Decimal" Precision="18" Scale="4" />
+          <Property Name="StringField51" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField52" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField53" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField54" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField55" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField56" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField57" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField58" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField59" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField60" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField61" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField62" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField63" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField64" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField65" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField66" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField67" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField68" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField69" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField70" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField71" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField72" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField73" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField74" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField75" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField76" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField77" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField78" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField79" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField80" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField81" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField82" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField83" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField84" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField85" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField86" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField87" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField88" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField89" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField90" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField91" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField92" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField93" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField94" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField95" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField96" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField97" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField98" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField99" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField100" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField101" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField102" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField103" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField104" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField105" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField106" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField107" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField108" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField109" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField110" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField111" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField112" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField113" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField114" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField115" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField116" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField117" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField118" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField119" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField120" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField121" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField122" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField123" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField124" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField125" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField126" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField127" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField128" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField129" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField130" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField131" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField132" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField133" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField134" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField135" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField136" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField137" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField138" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField139" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField140" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField141" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField142" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField143" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField144" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField145" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField146" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField147" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField148" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField149" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField150" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField151" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField152" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField153" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField154" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField155" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField156" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField157" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField158" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField159" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField160" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField161" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField162" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField163" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField164" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField165" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField166" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField167" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField168" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField169" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField170" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField171" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField172" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField173" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField174" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField175" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField176" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField177" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField178" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField179" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField180" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField181" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField182" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField183" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField184" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField185" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField186" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField187" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField188" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField189" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField190" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField191" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField192" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField193" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField194" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField195" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField196" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField197" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField198" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField199" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="StringField200" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="BIDE_DbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ServiceAreaFields" EntityType="Self.ServiceAreaField" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" />
+          <EntitySet Name="Clients" EntityType="BIDE_Model.Client" />
+          <EntitySet Name="locations" EntityType="BIDE_Model.location" />
+          <EntitySet Name="ServiceAreas" EntityType="BIDE_Model.ServiceArea" />
+          <EntitySet Name="vwGet_ClientList2" EntityType="BIDE_Model.vwGet_ClientList2" />
+          <EntitySet Name="ServiceAreaFieldLOVs" EntityType="BIDE_Model.ServiceAreaFieldLOV" />
+          <EntitySet Name="User" EntityType="BIDE_Model.user" />
+          <EntitySet Name="sites" EntityType="BIDE_Model.site" />
+          <EntitySet Name="vwServiceAreaFieldLOVs" EntityType="BIDE_Model.vwServiceAreaFieldLOV" />
+          <EntitySet Name="ClientSettings" EntityType="BIDE_Model.ClientSetting" />
+          <EntitySet Name="REF_AccountInfo" EntityType="BIDE_Model.REF_AccountInfo" />
+        </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="clientStatus" Type="Boolean" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="siteFolderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="location">
+          <Key>
+            <PropertyRef Name="locID" />
+          </Key>
+          <Property Name="locID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siteID" Type="Int32" Nullable="false" />
+          <Property Name="locName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="locStatus" Type="Boolean" Nullable="false" />
+          <Property Name="Continent" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CBPSRegion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Campus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Building" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Floor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Office" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UIEnabledInd" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServiceArea">
+          <Key>
+            <PropertyRef Name="svcID" />
+          </Key>
+          <Property Name="svcID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="locID" Type="Int32" Nullable="false" />
+          <Property Name="svcName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="svcStatus" Type="Boolean" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ServiceCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwGet_ClientList2">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="name" />
+            <PropertyRef Name="userid" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ServiceAreaFieldLOV">
+          <Key>
+            <PropertyRef Name="ServiceAreaFieldLOV_SAID" />
+          </Key>
+          <Property Name="ServiceAreaFieldLOV_SAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="svcFieldId" Type="Int32" Nullable="false" />
+          <Property Name="FieldId" Type="Int32" />
+          <Property Name="FieldText" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="userName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="userPwd" Type="Binary" MaxLength="200" FixedLength="false" />
+          <Property Name="userStatus" Type="Byte" />
+          <Property Name="AccountType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserClientSiteFolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClientID" Type="Int32" />
+          <Property Name="ClientFolderName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="resetflag" Type="Boolean" />
+          <Property Name="lastlogin_dttm" Type="DateTime" Precision="3" />
+          <Property Name="visit_cnt" Type="Int32" />
+          <Property Name="admin" Type="Int16" />
+          <Property Name="managerUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="managerFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Creation_Dttm" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creation_UserID" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Modification_Dttm" Type="DateTime" Precision="3" />
+          <Property Name="Modification_UserID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="company_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact_phone_nbr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Upload_ind" Type="Byte" />
+          <Property Name="GoldReports_ind" Type="Byte" />
+          <Property Name="MstrUser_Ind" Type="Byte" />
+        </EntityType>
+        <EntityType Name="site">
+          <Key>
+            <PropertyRef Name="siteID" />
+          </Key>
+          <Property Name="siteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientID" Type="Int32" Nullable="false" />
+          <Property Name="siteName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="siteStatus" Type="Boolean" Nullable="false" />
+          <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="siteFolderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vwServiceAreaFieldLOV">
+          <Key>
+            <PropertyRef Name="ServiceAreaFieldLOV_SAID" />
+            <PropertyRef Name="svcFieldId" />
+            <PropertyRef Name="FieldName" />
+          </Key>
+          <Property Name="ServiceAreaFieldLOV_SAID" Type="Int32" Nullable="false" />
+          <Property Name="svcFieldId" Type="Int32" Nullable="false" />
+          <Property Name="FieldId" Type="Int32" />
+          <Property Name="FieldText" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ClientSetting">
+          <Key>
+            <PropertyRef Name="clientID" />
+          </Key>
+          <Property Name="clientID" Type="Int32" Nullable="false" />
+          <Property Name="editPeriodMgr" Type="Int32" Nullable="false" />
+          <Property Name="editPeriodUsr" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REF_AccountInfo">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="AccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AccountOwner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="StatusCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StatusDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BIDE_ModelStoreContainer" CdmEntityContainer="BIDE_DbContext">
+          <EntitySetMapping Name="ServiceAreaFields">
+            <EntityTypeMapping TypeName="BIDE_Model.ServiceAreaField">
+              <MappingFragment StoreEntitySet="ServiceAreaField">
+                <ScalarProperty Name="Constraint_Txt" ColumnName="Constraint_Txt" />
+                <ScalarProperty Name="IsMandatory" ColumnName="IsMandatory" />
+                <ScalarProperty Name="IsLogVisible" ColumnName="IsLogVisible" />
+                <ScalarProperty Name="svcFieldID" ColumnName="svcFieldID" />
+                <ScalarProperty Name="svcID" ColumnName="svcID" />
+                <ScalarProperty Name="svcFieldNumber" ColumnName="svcFieldNumber" />
+                <ScalarProperty Name="svcFieldName" ColumnName="svcFieldName" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="Shade" ColumnName="Shade" />
+                <ScalarProperty Name="Description_Txt" ColumnName="Description_Txt" />
+                <ScalarProperty Name="ServiceAreaFieldGroup_SAID" ColumnName="ServiceAreaFieldGroup_SAID" />
+                <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+                <ScalarProperty Name="DataType" ColumnName="DataType" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="MetricShortName" ColumnName="MetricShortName" />
+                <ScalarProperty Name="MetricFormat" ColumnName="MetricFormat" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="BIDE_Model.Transactions">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="StringField200" ColumnName="StringField200" />
+                <ScalarProperty Name="StringField199" ColumnName="StringField199" />
+                <ScalarProperty Name="StringField198" ColumnName="StringField198" />
+                <ScalarProperty Name="StringField197" ColumnName="StringField197" />
+                <ScalarProperty Name="StringField196" ColumnName="StringField196" />
+                <ScalarProperty Name="StringField195" ColumnName="StringField195" />
+                <ScalarProperty Name="StringField194" ColumnName="StringField194" />
+                <ScalarProperty Name="StringField193" ColumnName="StringField193" />
+                <ScalarProperty Name="StringField192" ColumnName="StringField192" />
+                <ScalarProperty Name="StringField191" ColumnName="StringField191" />
+                <ScalarProperty Name="StringField190" ColumnName="StringField190" />
+                <ScalarProperty Name="StringField189" ColumnName="StringField189" />
+                <ScalarProperty Name="StringField188" ColumnName="StringField188" />
+                <ScalarProperty Name="StringField187" ColumnName="StringField187" />
+                <ScalarProperty Name="StringField186" ColumnName="StringField186" />
+                <ScalarProperty Name="StringField185" ColumnName="StringField185" />
+                <ScalarProperty Name="StringField184" ColumnName="StringField184" />
+                <ScalarProperty Name="StringField183" ColumnName="StringField183" />
+                <ScalarProperty Name="StringField182" ColumnName="StringField182" />
+                <ScalarProperty Name="StringField181" ColumnName="StringField181" />
+                <ScalarProperty Name="StringField180" ColumnName="StringField180" />
+                <ScalarProperty Name="StringField179" ColumnName="StringField179" />
+                <ScalarProperty Name="StringField178" ColumnName="StringField178" />
+                <ScalarProperty Name="StringField177" ColumnName="StringField177" />
+                <ScalarProperty Name="StringField176" ColumnName="StringField176" />
+                <ScalarProperty Name="StringField175" ColumnName="StringField175" />
+                <ScalarProperty Name="StringField174" ColumnName="StringField174" />
+                <ScalarProperty Name="StringField173" ColumnName="StringField173" />
+                <ScalarProperty Name="StringField172" ColumnName="StringField172" />
+                <ScalarProperty Name="StringField171" ColumnName="StringField171" />
+                <ScalarProperty Name="StringField170" ColumnName="StringField170" />
+                <ScalarProperty Name="StringField169" ColumnName="StringField169" />
+                <ScalarProperty Name="StringField168" ColumnName="StringField168" />
+                <ScalarProperty Name="StringField167" ColumnName="StringField167" />
+                <ScalarProperty Name="StringField166" ColumnName="StringField166" />
+                <ScalarProperty Name="StringField165" ColumnName="StringField165" />
+                <ScalarProperty Name="StringField164" ColumnName="StringField164" />
+                <ScalarProperty Name="StringField163" ColumnName="StringField163" />
+                <ScalarProperty Name="StringField162" ColumnName="StringField162" />
+                <ScalarProperty Name="StringField161" ColumnName="StringField161" />
+                <ScalarProperty Name="StringField160" ColumnName="StringField160" />
+                <ScalarProperty Name="StringField159" ColumnName="StringField159" />
+                <ScalarProperty Name="StringField158" ColumnName="StringField158" />
+                <ScalarProperty Name="StringField157" ColumnName="StringField157" />
+                <ScalarProperty Name="StringField156" ColumnName="StringField156" />
+                <ScalarProperty Name="StringField155" ColumnName="StringField155" />
+                <ScalarProperty Name="StringField154" ColumnName="StringField154" />
+                <ScalarProperty Name="StringField153" ColumnName="StringField153" />
+                <ScalarProperty Name="StringField152" ColumnName="StringField152" />
+                <ScalarProperty Name="StringField151" ColumnName="StringField151" />
+                <ScalarProperty Name="StringField150" ColumnName="StringField150" />
+                <ScalarProperty Name="StringField149" ColumnName="StringField149" />
+                <ScalarProperty Name="StringField148" ColumnName="StringField148" />
+                <ScalarProperty Name="StringField147" ColumnName="StringField147" />
+                <ScalarProperty Name="StringField146" ColumnName="StringField146" />
+                <ScalarProperty Name="StringField145" ColumnName="StringField145" />
+                <ScalarProperty Name="StringField144" ColumnName="StringField144" />
+                <ScalarProperty Name="StringField143" ColumnName="StringField143" />
+                <ScalarProperty Name="StringField142" ColumnName="StringField142" />
+                <ScalarProperty Name="StringField141" ColumnName="StringField141" />
+                <ScalarProperty Name="StringField140" ColumnName="StringField140" />
+                <ScalarProperty Name="StringField139" ColumnName="StringField139" />
+                <ScalarProperty Name="StringField138" ColumnName="StringField138" />
+                <ScalarProperty Name="StringField137" ColumnName="StringField137" />
+                <ScalarProperty Name="StringField136" ColumnName="StringField136" />
+                <ScalarProperty Name="StringField135" ColumnName="StringField135" />
+                <ScalarProperty Name="StringField134" ColumnName="StringField134" />
+                <ScalarProperty Name="StringField133" ColumnName="StringField133" />
+                <ScalarProperty Name="StringField132" ColumnName="StringField132" />
+                <ScalarProperty Name="StringField131" ColumnName="StringField131" />
+                <ScalarProperty Name="StringField130" ColumnName="StringField130" />
+                <ScalarProperty Name="StringField129" ColumnName="StringField129" />
+                <ScalarProperty Name="StringField128" ColumnName="StringField128" />
+                <ScalarProperty Name="StringField127" ColumnName="StringField127" />
+                <ScalarProperty Name="StringField126" ColumnName="StringField126" />
+                <ScalarProperty Name="StringField125" ColumnName="StringField125" />
+                <ScalarProperty Name="StringField124" ColumnName="StringField124" />
+                <ScalarProperty Name="StringField123" ColumnName="StringField123" />
+                <ScalarProperty Name="StringField122" ColumnName="StringField122" />
+                <ScalarProperty Name="StringField121" ColumnName="StringField121" />
+                <ScalarProperty Name="StringField120" ColumnName="StringField120" />
+                <ScalarProperty Name="StringField119" ColumnName="StringField119" />
+                <ScalarProperty Name="StringField118" ColumnName="StringField118" />
+                <ScalarProperty Name="StringField117" ColumnName="StringField117" />
+                <ScalarProperty Name="StringField116" ColumnName="StringField116" />
+                <ScalarProperty Name="StringField115" ColumnName="StringField115" />
+                <ScalarProperty Name="StringField114" ColumnName="StringField114" />
+                <ScalarProperty Name="StringField113" ColumnName="StringField113" />
+                <ScalarProperty Name="StringField112" ColumnName="StringField112" />
+                <ScalarProperty Name="StringField111" ColumnName="StringField111" />
+                <ScalarProperty Name="StringField110" ColumnName="StringField110" />
+                <ScalarProperty Name="StringField109" ColumnName="StringField109" />
+                <ScalarProperty Name="StringField108" ColumnName="StringField108" />
+                <ScalarProperty Name="StringField107" ColumnName="StringField107" />
+                <ScalarProperty Name="StringField106" ColumnName="StringField106" />
+                <ScalarProperty Name="StringField105" ColumnName="StringField105" />
+                <ScalarProperty Name="StringField104" ColumnName="StringField104" />
+                <ScalarProperty Name="StringField103" ColumnName="StringField103" />
+                <ScalarProperty Name="StringField102" ColumnName="StringField102" />
+                <ScalarProperty Name="StringField101" ColumnName="StringField101" />
+                <ScalarProperty Name="StringField100" ColumnName="StringField100" />
+                <ScalarProperty Name="StringField99" ColumnName="StringField99" />
+                <ScalarProperty Name="StringField98" ColumnName="StringField98" />
+                <ScalarProperty Name="StringField97" ColumnName="StringField97" />
+                <ScalarProperty Name="StringField96" ColumnName="StringField96" />
+                <ScalarProperty Name="StringField95" ColumnName="StringField95" />
+                <ScalarProperty Name="StringField94" ColumnName="StringField94" />
+                <ScalarProperty Name="StringField93" ColumnName="StringField93" />
+                <ScalarProperty Name="StringField92" ColumnName="StringField92" />
+                <ScalarProperty Name="StringField91" ColumnName="StringField91" />
+                <ScalarProperty Name="StringField90" ColumnName="StringField90" />
+                <ScalarProperty Name="StringField89" ColumnName="StringField89" />
+                <ScalarProperty Name="StringField88" ColumnName="StringField88" />
+                <ScalarProperty Name="StringField87" ColumnName="StringField87" />
+                <ScalarProperty Name="StringField86" ColumnName="StringField86" />
+                <ScalarProperty Name="StringField85" ColumnName="StringField85" />
+                <ScalarProperty Name="StringField84" ColumnName="StringField84" />
+                <ScalarProperty Name="StringField83" ColumnName="StringField83" />
+                <ScalarProperty Name="StringField82" ColumnName="StringField82" />
+                <ScalarProperty Name="StringField81" ColumnName="StringField81" />
+                <ScalarProperty Name="StringField80" ColumnName="StringField80" />
+                <ScalarProperty Name="StringField79" ColumnName="StringField79" />
+                <ScalarProperty Name="StringField78" ColumnName="StringField78" />
+                <ScalarProperty Name="StringField77" ColumnName="StringField77" />
+                <ScalarProperty Name="StringField76" ColumnName="StringField76" />
+                <ScalarProperty Name="StringField75" ColumnName="StringField75" />
+                <ScalarProperty Name="StringField74" ColumnName="StringField74" />
+                <ScalarProperty Name="StringField73" ColumnName="StringField73" />
+                <ScalarProperty Name="StringField72" ColumnName="StringField72" />
+                <ScalarProperty Name="StringField71" ColumnName="StringField71" />
+                <ScalarProperty Name="StringField70" ColumnName="StringField70" />
+                <ScalarProperty Name="StringField69" ColumnName="StringField69" />
+                <ScalarProperty Name="StringField68" ColumnName="StringField68" />
+                <ScalarProperty Name="StringField67" ColumnName="StringField67" />
+                <ScalarProperty Name="StringField66" ColumnName="StringField66" />
+                <ScalarProperty Name="StringField65" ColumnName="StringField65" />
+                <ScalarProperty Name="StringField64" ColumnName="StringField64" />
+                <ScalarProperty Name="StringField63" ColumnName="StringField63" />
+                <ScalarProperty Name="StringField62" ColumnName="StringField62" />
+                <ScalarProperty Name="StringField61" ColumnName="StringField61" />
+                <ScalarProperty Name="StringField60" ColumnName="StringField60" />
+                <ScalarProperty Name="StringField59" ColumnName="StringField59" />
+                <ScalarProperty Name="StringField58" ColumnName="StringField58" />
+                <ScalarProperty Name="StringField57" ColumnName="StringField57" />
+                <ScalarProperty Name="StringField56" ColumnName="StringField56" />
+                <ScalarProperty Name="StringField55" ColumnName="StringField55" />
+                <ScalarProperty Name="StringField54" ColumnName="StringField54" />
+                <ScalarProperty Name="StringField53" ColumnName="StringField53" />
+                <ScalarProperty Name="StringField52" ColumnName="StringField52" />
+                <ScalarProperty Name="StringField51" ColumnName="StringField51" />
+                <ScalarProperty Name="field200" ColumnName="field200" />
+                <ScalarProperty Name="field199" ColumnName="field199" />
+                <ScalarProperty Name="field198" ColumnName="field198" />
+                <ScalarProperty Name="field197" ColumnName="field197" />
+                <ScalarProperty Name="field196" ColumnName="field196" />
+                <ScalarProperty Name="field195" ColumnName="field195" />
+                <ScalarProperty Name="field194" ColumnName="field194" />
+                <ScalarProperty Name="field193" ColumnName="field193" />
+                <ScalarProperty Name="field192" ColumnName="field192" />
+                <ScalarProperty Name="field191" ColumnName="field191" />
+                <ScalarProperty Name="field190" ColumnName="field190" />
+                <ScalarProperty Name="field189" ColumnName="field189" />
+                <ScalarProperty Name="field188" ColumnName="field188" />
+                <ScalarProperty Name="field187" ColumnName="field187" />
+                <ScalarProperty Name="field186" ColumnName="field186" />
+                <ScalarProperty Name="field185" ColumnName="field185" />
+                <ScalarProperty Name="field184" ColumnName="field184" />
+                <ScalarProperty Name="field183" ColumnName="field183" />
+                <ScalarProperty Name="field182" ColumnName="field182" />
+                <ScalarProperty Name="field181" ColumnName="field181" />
+                <ScalarProperty Name="field180" ColumnName="field180" />
+                <ScalarProperty Name="field179" ColumnName="field179" />
+                <ScalarProperty Name="field178" ColumnName="field178" />
+                <ScalarProperty Name="field177" ColumnName="field177" />
+                <ScalarProperty Name="field176" ColumnName="field176" />
+                <ScalarProperty Name="field175" ColumnName="field175" />
+                <ScalarProperty Name="field174" ColumnName="field174" />
+                <ScalarProperty Name="field173" ColumnName="field173" />
+                <ScalarProperty Name="field172" ColumnName="field172" />
+                <ScalarProperty Name="field171" ColumnName="field171" />
+                <ScalarProperty Name="field170" ColumnName="field170" />
+                <ScalarProperty Name="field169" ColumnName="field169" />
+                <ScalarProperty Name="field168" ColumnName="field168" />
+                <ScalarProperty Name="field167" ColumnName="field167" />
+                <ScalarProperty Name="field166" ColumnName="field166" />
+                <ScalarProperty Name="field165" ColumnName="field165" />
+                <ScalarProperty Name="field164" ColumnName="field164" />
+                <ScalarProperty Name="field163" ColumnName="field163" />
+                <ScalarProperty Name="field162" ColumnName="field162" />
+                <ScalarProperty Name="field161" ColumnName="field161" />
+                <ScalarProperty Name="field160" ColumnName="field160" />
+                <ScalarProperty Name="field159" ColumnName="field159" />
+                <ScalarProperty Name="field158" ColumnName="field158" />
+                <ScalarProperty Name="field157" ColumnName="field157" />
+                <ScalarProperty Name="field156" ColumnName="field156" />
+                <ScalarProperty Name="field155" ColumnName="field155" />
+                <ScalarProperty Name="field154" ColumnName="field154" />
+                <ScalarProperty Name="field153" ColumnName="field153" />
+                <ScalarProperty Name="field152" ColumnName="field152" />
+                <ScalarProperty Name="field151" ColumnName="field151" />
+                <ScalarProperty Name="field150" ColumnName="field150" />
+                <ScalarProperty Name="field149" ColumnName="field149" />
+                <ScalarProperty Name="field148" ColumnName="field148" />
+                <ScalarProperty Name="field147" ColumnName="field147" />
+                <ScalarProperty Name="field146" ColumnName="field146" />
+                <ScalarProperty Name="field145" ColumnName="field145" />
+                <ScalarProperty Name="field144" ColumnName="field144" />
+                <ScalarProperty Name="field143" ColumnName="field143" />
+                <ScalarProperty Name="field142" ColumnName="field142" />
+                <ScalarProperty Name="field141" ColumnName="field141" />
+                <ScalarProperty Name="field140" ColumnName="field140" />
+                <ScalarProperty Name="field139" ColumnName="field139" />
+                <ScalarProperty Name="field138" ColumnName="field138" />
+                <ScalarProperty Name="field137" ColumnName="field137" />
+                <ScalarProperty Name="field136" ColumnName="field136" />
+                <ScalarProperty Name="field135" ColumnName="field135" />
+                <ScalarProperty Name="field134" ColumnName="field134" />
+                <ScalarProperty Name="field133" ColumnName="field133" />
+                <ScalarProperty Name="field132" ColumnName="field132" />
+                <ScalarProperty Name="field131" ColumnName="field131" />
+                <ScalarProperty Name="field130" ColumnName="field130" />
+                <ScalarProperty Name="field129" ColumnName="field129" />
+                <ScalarProperty Name="field128" ColumnName="field128" />
+                <ScalarProperty Name="field127" ColumnName="field127" />
+                <ScalarProperty Name="field126" ColumnName="field126" />
+                <ScalarProperty Name="field125" ColumnName="field125" />
+                <ScalarProperty Name="field124" ColumnName="field124" />
+                <ScalarProperty Name="field123" ColumnName="field123" />
+                <ScalarProperty Name="field122" ColumnName="field122" />
+                <ScalarProperty Name="field121" ColumnName="field121" />
+                <ScalarProperty Name="field120" ColumnName="field120" />
+                <ScalarProperty Name="field119" ColumnName="field119" />
+                <ScalarProperty Name="field118" ColumnName="field118" />
+                <ScalarProperty Name="field117" ColumnName="field117" />
+                <ScalarProperty Name="field116" ColumnName="field116" />
+                <ScalarProperty Name="field115" ColumnName="field115" />
+                <ScalarProperty Name="field114" ColumnName="field114" />
+                <ScalarProperty Name="field113" ColumnName="field113" />
+                <ScalarProperty Name="field112" ColumnName="field112" />
+                <ScalarProperty Name="field111" ColumnName="field111" />
+                <ScalarProperty Name="field110" ColumnName="field110" />
+                <ScalarProperty Name="field109" ColumnName="field109" />
+                <ScalarProperty Name="field108" ColumnName="field108" />
+                <ScalarProperty Name="field107" ColumnName="field107" />
+                <ScalarProperty Name="field106" ColumnName="field106" />
+                <ScalarProperty Name="field105" ColumnName="field105" />
+                <ScalarProperty Name="field104" ColumnName="field104" />
+                <ScalarProperty Name="field103" ColumnName="field103" />
+                <ScalarProperty Name="field102" ColumnName="field102" />
+                <ScalarProperty Name="field101" ColumnName="field101" />
+                <ScalarProperty Name="field100" ColumnName="field100" />
+                <ScalarProperty Name="field99" ColumnName="field99" />
+                <ScalarProperty Name="field98" ColumnName="field98" />
+                <ScalarProperty Name="field97" ColumnName="field97" />
+                <ScalarProperty Name="field96" ColumnName="field96" />
+                <ScalarProperty Name="field95" ColumnName="field95" />
+                <ScalarProperty Name="field94" ColumnName="field94" />
+                <ScalarProperty Name="field93" ColumnName="field93" />
+                <ScalarProperty Name="field92" ColumnName="field92" />
+                <ScalarProperty Name="field91" ColumnName="field91" />
+                <ScalarProperty Name="field90" ColumnName="field90" />
+                <ScalarProperty Name="field89" ColumnName="field89" />
+                <ScalarProperty Name="field88" ColumnName="field88" />
+                <ScalarProperty Name="field87" ColumnName="field87" />
+                <ScalarProperty Name="field86" ColumnName="field86" />
+                <ScalarProperty Name="field85" ColumnName="field85" />
+                <ScalarProperty Name="field84" ColumnName="field84" />
+                <ScalarProperty Name="field83" ColumnName="field83" />
+                <ScalarProperty Name="field82" ColumnName="field82" />
+                <ScalarProperty Name="field81" ColumnName="field81" />
+                <ScalarProperty Name="field80" ColumnName="field80" />
+                <ScalarProperty Name="field79" ColumnName="field79" />
+                <ScalarProperty Name="field78" ColumnName="field78" />
+                <ScalarProperty Name="field77" ColumnName="field77" />
+                <ScalarProperty Name="field76" ColumnName="field76" />
+                <ScalarProperty Name="field75" ColumnName="field75" />
+                <ScalarProperty Name="field74" ColumnName="field74" />
+                <ScalarProperty Name="field73" ColumnName="field73" />
+                <ScalarProperty Name="field72" ColumnName="field72" />
+                <ScalarProperty Name="field71" ColumnName="field71" />
+                <ScalarProperty Name="JOB_ID" ColumnName="JOB_ID" />
+                <ScalarProperty Name="tID" ColumnName="tID" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="tDate" ColumnName="tDate" />
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="siteID" ColumnName="siteID" />
+                <ScalarProperty Name="locID" ColumnName="locID" />
+                <ScalarProperty Name="svcID" ColumnName="svcID" />
+                <ScalarProperty Name="field1" ColumnName="field1" />
+                <ScalarProperty Name="field2" ColumnName="field2" />
+                <ScalarProperty Name="field3" ColumnName="field3" />
+                <ScalarProperty Name="field4" ColumnName="field4" />
+                <ScalarProperty Name="field5" ColumnName="field5" />
+                <ScalarProperty Name="field6" ColumnName="field6" />
+                <ScalarProperty Name="field7" ColumnName="field7" />
+                <ScalarProperty Name="field8" ColumnName="field8" />
+                <ScalarProperty Name="field9" ColumnName="field9" />
+                <ScalarProperty Name="field10" ColumnName="field10" />
+                <ScalarProperty Name="field11" ColumnName="field11" />
+                <ScalarProperty Name="field12" ColumnName="field12" />
+                <ScalarProperty Name="field13" ColumnName="field13" />
+                <ScalarProperty Name="field14" ColumnName="field14" />
+                <ScalarProperty Name="field15" ColumnName="field15" />
+                <ScalarProperty Name="field16" ColumnName="field16" />
+                <ScalarProperty Name="field17" ColumnName="field17" />
+                <ScalarProperty Name="field18" ColumnName="field18" />
+                <ScalarProperty Name="field19" ColumnName="field19" />
+                <ScalarProperty Name="field20" ColumnName="field20" />
+                <ScalarProperty Name="field21" ColumnName="field21" />
+                <ScalarProperty Name="field22" ColumnName="field22" />
+                <ScalarProperty Name="field23" ColumnName="field23" />
+                <ScalarProperty Name="field24" ColumnName="field24" />
+                <ScalarProperty Name="field25" ColumnName="field25" />
+                <ScalarProperty Name="field26" ColumnName="field26" />
+                <ScalarProperty Name="field27" ColumnName="field27" />
+                <ScalarProperty Name="field28" ColumnName="field28" />
+                <ScalarProperty Name="field29" ColumnName="field29" />
+                <ScalarProperty Name="field30" ColumnName="field30" />
+                <ScalarProperty Name="field31" ColumnName="field31" />
+                <ScalarProperty Name="field32" ColumnName="field32" />
+                <ScalarProperty Name="field33" ColumnName="field33" />
+                <ScalarProperty Name="field34" ColumnName="field34" />
+                <ScalarProperty Name="field35" ColumnName="field35" />
+                <ScalarProperty Name="field36" ColumnName="field36" />
+                <ScalarProperty Name="field37" ColumnName="field37" />
+                <ScalarProperty Name="field38" ColumnName="field38" />
+                <ScalarProperty Name="field39" ColumnName="field39" />
+                <ScalarProperty Name="field40" ColumnName="field40" />
+                <ScalarProperty Name="field41" ColumnName="field41" />
+                <ScalarProperty Name="field42" ColumnName="field42" />
+                <ScalarProperty Name="field43" ColumnName="field43" />
+                <ScalarProperty Name="field44" ColumnName="field44" />
+                <ScalarProperty Name="field45" ColumnName="field45" />
+                <ScalarProperty Name="field46" ColumnName="field46" />
+                <ScalarProperty Name="field47" ColumnName="field47" />
+                <ScalarProperty Name="field48" ColumnName="field48" />
+                <ScalarProperty Name="field49" ColumnName="field49" />
+                <ScalarProperty Name="field50" ColumnName="field50" />
+                <ScalarProperty Name="field51" ColumnName="field51" />
+                <ScalarProperty Name="field52" ColumnName="field52" />
+                <ScalarProperty Name="field53" ColumnName="field53" />
+                <ScalarProperty Name="field54" ColumnName="field54" />
+                <ScalarProperty Name="field55" ColumnName="field55" />
+                <ScalarProperty Name="field56" ColumnName="field56" />
+                <ScalarProperty Name="field57" ColumnName="field57" />
+                <ScalarProperty Name="field58" ColumnName="field58" />
+                <ScalarProperty Name="field59" ColumnName="field59" />
+                <ScalarProperty Name="field60" ColumnName="field60" />
+                <ScalarProperty Name="field61" ColumnName="field61" />
+                <ScalarProperty Name="field62" ColumnName="field62" />
+                <ScalarProperty Name="field63" ColumnName="field63" />
+                <ScalarProperty Name="field64" ColumnName="field64" />
+                <ScalarProperty Name="field65" ColumnName="field65" />
+                <ScalarProperty Name="field66" ColumnName="field66" />
+                <ScalarProperty Name="field67" ColumnName="field67" />
+                <ScalarProperty Name="field68" ColumnName="field68" />
+                <ScalarProperty Name="field69" ColumnName="field69" />
+                <ScalarProperty Name="field70" ColumnName="field70" />
+                <ScalarProperty Name="CreationUserID" ColumnName="CreationUserID" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="UpdateUserID" ColumnName="UpdateUserID" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="StringField1" ColumnName="StringField1" />
+                <ScalarProperty Name="StringField2" ColumnName="StringField2" />
+                <ScalarProperty Name="StringField3" ColumnName="StringField3" />
+                <ScalarProperty Name="StringField4" ColumnName="StringField4" />
+                <ScalarProperty Name="StringField5" ColumnName="StringField5" />
+                <ScalarProperty Name="StringField6" ColumnName="StringField6" />
+                <ScalarProperty Name="StringField7" ColumnName="StringField7" />
+                <ScalarProperty Name="StringField8" ColumnName="StringField8" />
+                <ScalarProperty Name="StringField9" ColumnName="StringField9" />
+                <ScalarProperty Name="StringField10" ColumnName="StringField10" />
+                <ScalarProperty Name="StringField11" ColumnName="StringField11" />
+                <ScalarProperty Name="StringField12" ColumnName="StringField12" />
+                <ScalarProperty Name="StringField13" ColumnName="StringField13" />
+                <ScalarProperty Name="StringField14" ColumnName="StringField14" />
+                <ScalarProperty Name="StringField15" ColumnName="StringField15" />
+                <ScalarProperty Name="StringField16" ColumnName="StringField16" />
+                <ScalarProperty Name="StringField17" ColumnName="StringField17" />
+                <ScalarProperty Name="StringField18" ColumnName="StringField18" />
+                <ScalarProperty Name="StringField19" ColumnName="StringField19" />
+                <ScalarProperty Name="StringField20" ColumnName="StringField20" />
+                <ScalarProperty Name="StringField21" ColumnName="StringField21" />
+                <ScalarProperty Name="StringField22" ColumnName="StringField22" />
+                <ScalarProperty Name="StringField23" ColumnName="StringField23" />
+                <ScalarProperty Name="StringField24" ColumnName="StringField24" />
+                <ScalarProperty Name="StringField25" ColumnName="StringField25" />
+                <ScalarProperty Name="StringField26" ColumnName="StringField26" />
+                <ScalarProperty Name="StringField27" ColumnName="StringField27" />
+                <ScalarProperty Name="StringField28" ColumnName="StringField28" />
+                <ScalarProperty Name="StringField29" ColumnName="StringField29" />
+                <ScalarProperty Name="StringField30" ColumnName="StringField30" />
+                <ScalarProperty Name="StringField31" ColumnName="StringField31" />
+                <ScalarProperty Name="StringField32" ColumnName="StringField32" />
+                <ScalarProperty Name="StringField33" ColumnName="StringField33" />
+                <ScalarProperty Name="StringField34" ColumnName="StringField34" />
+                <ScalarProperty Name="StringField35" ColumnName="StringField35" />
+                <ScalarProperty Name="StringField36" ColumnName="StringField36" />
+                <ScalarProperty Name="StringField37" ColumnName="StringField37" />
+                <ScalarProperty Name="StringField38" ColumnName="StringField38" />
+                <ScalarProperty Name="StringField39" ColumnName="StringField39" />
+                <ScalarProperty Name="StringField40" ColumnName="StringField40" />
+                <ScalarProperty Name="StringField41" ColumnName="StringField41" />
+                <ScalarProperty Name="StringField42" ColumnName="StringField42" />
+                <ScalarProperty Name="StringField43" ColumnName="StringField43" />
+                <ScalarProperty Name="StringField44" ColumnName="StringField44" />
+                <ScalarProperty Name="StringField45" ColumnName="StringField45" />
+                <ScalarProperty Name="StringField46" ColumnName="StringField46" />
+                <ScalarProperty Name="StringField47" ColumnName="StringField47" />
+                <ScalarProperty Name="StringField48" ColumnName="StringField48" />
+                <ScalarProperty Name="StringField49" ColumnName="StringField49" />
+                <ScalarProperty Name="StringField50" ColumnName="StringField50" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Publish" ColumnName="Publish" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CommentCount" ColumnName="CommentCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BIDE_Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="siteFolderName" ColumnName="siteFolderName" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="clientStatus" ColumnName="clientStatus" />
+                <ScalarProperty Name="clientName" ColumnName="clientName" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locations">
+            <EntityTypeMapping TypeName="BIDE_Model.location">
+              <MappingFragment StoreEntitySet="location">
+                <ScalarProperty Name="UIEnabledInd" ColumnName="UIEnabledInd" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Campus" ColumnName="Campus" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CBPSRegion" ColumnName="CBPSRegion" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Continent" ColumnName="Continent" />
+                <ScalarProperty Name="locStatus" ColumnName="locStatus" />
+                <ScalarProperty Name="locName" ColumnName="locName" />
+                <ScalarProperty Name="siteID" ColumnName="siteID" />
+                <ScalarProperty Name="locID" ColumnName="locID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceAreas">
+            <EntityTypeMapping TypeName="BIDE_Model.ServiceArea">
+              <MappingFragment StoreEntitySet="ServiceArea">
+                <ScalarProperty Name="ServiceCategory" ColumnName="ServiceCategory" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="svcStatus" ColumnName="svcStatus" />
+                <ScalarProperty Name="svcName" ColumnName="svcName" />
+                <ScalarProperty Name="locID" ColumnName="locID" />
+                <ScalarProperty Name="svcID" ColumnName="svcID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwGet_ClientList2">
+            <EntityTypeMapping TypeName="BIDE_Model.vwGet_ClientList2">
+              <MappingFragment StoreEntitySet="vwGet_ClientList2">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceAreaFieldLOVs">
+            <EntityTypeMapping TypeName="BIDE_Model.ServiceAreaFieldLOV">
+              <MappingFragment StoreEntitySet="ServiceAreaFieldLOV">
+                <ScalarProperty Name="FieldText" ColumnName="FieldText" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="svcFieldId" ColumnName="svcFieldId" />
+                <ScalarProperty Name="ServiceAreaFieldLOV_SAID" ColumnName="ServiceAreaFieldLOV_SAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="BIDE_Model.user">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="MstrUser_Ind" ColumnName="MstrUser_Ind" />
+                <ScalarProperty Name="GoldReports_ind" ColumnName="GoldReports_ind" />
+                <ScalarProperty Name="Upload_ind" ColumnName="Upload_ind" />
+                <ScalarProperty Name="contact_phone_nbr" ColumnName="contact_phone_nbr" />
+                <ScalarProperty Name="company_nm" ColumnName="company_nm" />
+                <ScalarProperty Name="Modification_UserID" ColumnName="Modification_UserID" />
+                <ScalarProperty Name="Modification_Dttm" ColumnName="Modification_Dttm" />
+                <ScalarProperty Name="Creation_UserID" ColumnName="Creation_UserID" />
+                <ScalarProperty Name="Creation_Dttm" ColumnName="Creation_Dttm" />
+                <ScalarProperty Name="managerFullName" ColumnName="managerFullName" />
+                <ScalarProperty Name="managerUserName" ColumnName="managerUserName" />
+                <ScalarProperty Name="admin" ColumnName="admin" />
+                <ScalarProperty Name="visit_cnt" ColumnName="visit_cnt" />
+                <ScalarProperty Name="lastlogin_dttm" ColumnName="lastlogin_dttm" />
+                <ScalarProperty Name="resetflag" ColumnName="resetflag" />
+                <ScalarProperty Name="ClientFolderName" ColumnName="ClientFolderName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="UserClientSiteFolderName" ColumnName="UserClientSiteFolderName" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="userStatus" ColumnName="userStatus" />
+                <ScalarProperty Name="userPwd" ColumnName="userPwd" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sites">
+            <EntityTypeMapping TypeName="BIDE_Model.site">
+              <MappingFragment StoreEntitySet="Site">
+                <ScalarProperty Name="siteFolderName" ColumnName="siteFolderName" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="siteStatus" ColumnName="siteStatus" />
+                <ScalarProperty Name="siteName" ColumnName="siteName" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+                <ScalarProperty Name="siteID" ColumnName="siteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwServiceAreaFieldLOVs">
+            <EntityTypeMapping TypeName="BIDE_Model.vwServiceAreaFieldLOV">
+              <MappingFragment StoreEntitySet="vwServiceAreaFieldLOV">
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="FieldText" ColumnName="FieldText" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+                <ScalarProperty Name="svcFieldId" ColumnName="svcFieldId" />
+                <ScalarProperty Name="ServiceAreaFieldLOV_SAID" ColumnName="ServiceAreaFieldLOV_SAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientSettings">
+            <EntityTypeMapping TypeName="BIDE_Model.ClientSetting">
+              <MappingFragment StoreEntitySet="ClientSetting">
+                <ScalarProperty Name="editPeriodUsr" ColumnName="editPeriodUsr" />
+                <ScalarProperty Name="editPeriodMgr" ColumnName="editPeriodMgr" />
+                <ScalarProperty Name="clientID" ColumnName="clientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REF_AccountInfo">
+            <EntityTypeMapping TypeName="BIDE_Model.REF_AccountInfo">
+              <MappingFragment StoreEntitySet="REF_AccountInfo">
+                <ScalarProperty Name="StatusDate" ColumnName="StatusDate" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AccountOwner" ColumnName="AccountOwner" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

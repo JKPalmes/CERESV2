@@ -1,0 +1,395 @@
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll.config
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Antlr3.Runtime.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\BIDE_GOLD.Core.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\EntityFramework.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\EntityFramework.SqlServer.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Web.Infrastructure.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Newtonsoft.Json.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Owin.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Net.Http.Formatting.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Helpers.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Http.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Http.Owin.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Http.WebHost.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Mvc.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Optimization.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Razor.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.WebPages.Deployment.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.WebPages.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.WebPages.Razor.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\WebGrease.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\BIDE_GOLD.Core.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\BIDE_GOLD.Core.dll.config
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\EntityFramework.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\EntityFramework.SqlServer.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Newtonsoft.Json.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Net.Http.Formatting.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Http.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Helpers.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Http.WebHost.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Mvc.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Optimization.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Razor.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.WebPages.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.WebPages.Deployment.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.WebPages.Razor.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Antlr3.Runtime.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Web.Http.Owin.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csprojAssemblyReference.cache
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CopyComplete
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\Microsoft.CSharp.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.ComponentModel.DataAnnotations.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.Configuration.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD\bin\System.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll.config
+D:\Website\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.pdb
+D:\Website\eds.dev\BIDE_GOLD\bin\Antlr3.Runtime.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\EntityFramework.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\EntityFramework.SqlServer.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\log4net.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.CSharp.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Web.Infrastructure.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Newtonsoft.Json.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\Owin.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.ComponentModel.DataAnnotations.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Configuration.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Net.Http.Formatting.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Helpers.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Http.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Http.Owin.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Http.WebHost.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Mvc.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Optimization.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Razor.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Deployment.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Razor.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\WebGrease.dll
+D:\Website\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.pdb
+D:\Website\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.dll.config
+D:\Website\eds.dev\BIDE_GOLD\bin\EntityFramework.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\EntityFramework.SqlServer.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\log4net.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Newtonsoft.Json.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Net.Http.Formatting.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Http.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Helpers.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Http.WebHost.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Mvc.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Optimization.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Razor.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Deployment.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Razor.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Antlr3.Runtime.pdb
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Website\eds.dev\BIDE_GOLD\bin\System.Web.Http.Owin.xml
+D:\Website\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csprojAssemblyReference.cache
+D:\Website\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CoreCompileInputs.cache
+D:\Website\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CopyComplete
+D:\Website\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.dll
+D:\Website\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.pdb
+E:\development\eds.dev\BIDE_GOLD\bin\index3.html
+E:\development\eds.dev\BIDE_GOLD\bin\App.Config
+E:\development\eds.dev\BIDE_GOLD\bin\Content\w2ui-1.5.min.css
+E:\development\eds.dev\BIDE_GOLD\bin\Scripts\w2ui-1.5.min.js
+E:\development\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll.config
+E:\development\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll
+E:\development\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.pdb
+E:\development\eds.dev\BIDE_GOLD\bin\Antlr3.Runtime.dll
+E:\development\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.dll
+E:\development\eds.dev\BIDE_GOLD\bin\EntityFramework.dll
+E:\development\eds.dev\BIDE_GOLD\bin\EntityFramework.SqlServer.dll
+E:\development\eds.dev\BIDE_GOLD\bin\log4net.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.CSharp.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Web.Infrastructure.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Newtonsoft.Json.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Owin.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.ComponentModel.DataAnnotations.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Configuration.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Net.Http.Formatting.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Helpers.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Http.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Http.Owin.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Http.WebHost.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Mvc.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Optimization.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Razor.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Deployment.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.dll
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Razor.dll
+E:\development\eds.dev\BIDE_GOLD\bin\WebGrease.dll
+E:\development\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.dll.config
+E:\development\eds.dev\BIDE_GOLD\bin\EntityFramework.xml
+E:\development\eds.dev\BIDE_GOLD\bin\EntityFramework.SqlServer.xml
+E:\development\eds.dev\BIDE_GOLD\bin\log4net.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Newtonsoft.Json.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Net.Http.Formatting.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Http.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Helpers.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Http.WebHost.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Mvc.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Optimization.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Razor.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Deployment.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Razor.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Antlr3.Runtime.pdb
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\development\eds.dev\BIDE_GOLD\bin\System.Web.Http.Owin.xml
+E:\development\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CoreCompileInputs.cache
+E:\development\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CopyComplete
+E:\development\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.dll
+E:\development\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.pdb
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.FileSystems.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.StaticFiles.dll
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.FileSystems.xml
+E:\development\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.StaticFiles.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\index3.html
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\App.Config
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Content\w2ui-1.5.min.css
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Scripts\w2ui-1.5.min.js
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll.config
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.pdb
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Antlr3.Runtime.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\BIDE_GOLD.Core.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\EntityFramework.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\EntityFramework.SqlServer.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\log4net.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.CSharp.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.FileSystems.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.StaticFiles.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Web.Infrastructure.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Newtonsoft.Json.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Owin.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.ComponentModel.DataAnnotations.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Configuration.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Net.Http.Formatting.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Helpers.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Http.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Http.Owin.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Http.WebHost.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Mvc.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Optimization.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Razor.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.WebPages.Deployment.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.WebPages.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.WebPages.Razor.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\WebGrease.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\BIDE_GOLD.Core.pdb
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\BIDE_GOLD.Core.dll.config
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\EntityFramework.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\EntityFramework.SqlServer.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\log4net.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.FileSystems.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.StaticFiles.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Newtonsoft.Json.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Net.Http.Formatting.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Http.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Helpers.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Http.WebHost.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Mvc.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Optimization.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Razor.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.WebPages.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.WebPages.Deployment.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.WebPages.Razor.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Antlr3.Runtime.pdb
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\bin\System.Web.Http.Owin.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csprojAssemblyReference.cache
+E:\development\eds.dev - Copy latest\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CoreCompileInputs.cache
+E:\development\eds.dev - Copy latest\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CopyComplete
+E:\development\eds.dev - Copy latest\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.pdb
+E:\development\eds.dev\BIDE_GOLD\bin\GdPicture.NET.14.dll
+E:\development\eds.dev\BIDE_GOLD\bin\GdPicture.NET.14.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\index3.html
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\App.Config
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Content\w2ui-1.5.min.css
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Scripts\w2ui-1.5.min.js
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll.config
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Web.Api.pdb
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Antlr3.Runtime.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\EntityFramework.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\EntityFramework.SqlServer.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\log4net.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.CSharp.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.FileSystems.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.StaticFiles.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Web.Infrastructure.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Newtonsoft.Json.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Owin.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.ComponentModel.DataAnnotations.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Configuration.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Net.Http.Formatting.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Helpers.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Http.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Http.Owin.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Http.WebHost.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Mvc.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Optimization.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Razor.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Deployment.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Razor.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\WebGrease.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.pdb
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\BIDE_GOLD.Core.dll.config
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\EntityFramework.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\EntityFramework.SqlServer.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\GdPicture.NET.14.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\log4net.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.FileSystems.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.StaticFiles.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Newtonsoft.Json.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Net.Http.Formatting.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Http.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Helpers.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Http.WebHost.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Mvc.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Optimization.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Razor.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Deployment.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.WebPages.Razor.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Antlr3.Runtime.pdb
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Core.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Facebook.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Cookies.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.OAuth.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Google.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.Twitter.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\bin\System.Web.Http.Owin.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.AssemblyReference.cache
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CoreCompileInputs.cache
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.CopyComplete
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.pdb
+E:\development\eds.dev\BIDE_GOLD\obj\Release\BIDE_GOLD.Web.Api.csproj.AssemblyReference.cache
+E:\development\eds.dev\BIDE_GOLD\bin\images\ceres blk logo.png

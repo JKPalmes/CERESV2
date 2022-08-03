@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.pTitle = "Dashboard";
+    ViewBag.pageTitle = "Dashboards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+<!-- jsvectormap css -->
+<link href="~/assets/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+
+<!--Swiper slider css-->
+<link href="~/assets/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+}
+
+<div class="row">
+    <div class="col-xl-7">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-1 overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">Client</p>
+                                <div style="padding-right: 5px; padding-left: 5px;">
+                                    <select id="ddlClient" name="ddlClient" class="form-control" required="required">
+                                        <option value="--- Select Client ---">--- Select Client ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-primary ms-auto">
+                                <i class="ri-stack-line font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-1 overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">Site &nbsp;&nbsp;<span id="siteRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-site"></span></p>
+                                <div style="padding-right: 5px; padding-left: 5px;">
+                                    <select id="ddlSite" name="ddlSite" class="form-control" required="required">
+                                        <option value="--- Select Site ---">--- Select Site ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-primary ms-auto">
+                                <i class="ri-store-2-line font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-1 overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">Location&nbsp;&nbsp;<span id="locationRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-location"></span></p>
+                                <div style="padding-right: 5px; padding-left: 5px;">
+                                    <select id="ddlLocation" name="ddlLocation" class="form-control" required="required">
+                                        <option value="--- Select Location ---">--- Select Location ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-primary ms-auto">
+                                <i class="ri-briefcase-4-line font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="flex-1 overflow-hidden">
+                                <p class="text-truncate font-size-14 mb-2">Service Area &nbsp;&nbsp;<span id="serviceAreaRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-servicearea"></span></p>
+                                <div style="padding-right: 5px; padding-left: 5px;">
+                                    <select id="ddlServiceArea" name="ddlServiceArea" class="form-control" required="required">
+                                        <option value="--- Select Service Area ---">--- Select ServiceArea ---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-primary ms-auto">
+                                <i class="ri-briefcase-4-line font-size-24"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <div class="float-end d-none d-md-inline-block">
+                    <div class="btn-group mb-2">
+                        <button type="button" class="btn btn-sm btn-light">All</button>
+                        <button type="button" class="btn btn-sm btn-light active">Pending</button>
+                        <button type="button" class="btn btn-sm btn-light">Completed</button>
+                    </div>
+                </div>
+                <h4 class="card-title mb-4">Production Data</h4>
+                <div class="gridContainer" id="gridContainer" style="height: 720px; width: auto; overflow: auto;">
+                    <div class="div-signin-loading" style="position: fixed; left: 50%;top:15%;z-index:10">
+                        @*<div style="position: relative; left: -50%;">
+                            <img src="images/2.gif" alt="" width="32px" height="32px" />
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- end row -->
+    </div>
+
+    <div class="col-xl-5">
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Attributes</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Metrics</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- sample modal content -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Modal Heading</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h5>Overflowing text to show scroll behavior</h5>
+                    <p>
+                        Cras mattis consectetur purus sit amet fermentum.
+                        Cras justo odio, dapibus ac facilisis in,
+                        egestas eget quam. Morbi leo risus, porta ac
+                        consectetur ac, vestibulum at eros.
+                    </p>
+                    <p>
+                        Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Vivamus sagittis lacus vel
+                        augue laoreet rutrum faucibus dolor auctor.
+                    </p>
+                    <p>
+                        Aenean lacinia bibendum nulla sed consectetur.
+                        Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Donec sed odio dui. Donec
+                        ullamcorper nulla non metus auctor
+                        fringilla.
+                    </p>
+                    <p>
+                        Cras mattis consectetur purus sit amet fermentum.
+                        Cras justo odio, dapibus ac facilisis in,
+                        egestas eget quam. Morbi leo risus, porta ac
+                        consectetur ac, vestibulum at eros.
+                    </p>
+                    <p>
+                        Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Vivamus sagittis lacus vel
+                        augue laoreet rutrum faucibus dolor auctor.
+                    </p>
+                    <p>
+                        Aenean lacinia bibendum nulla sed consectetur.
+                        Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Donec sed odio dui. Donec
+                        ullamcorper nulla non metus auctor
+                        fringilla.
+                    </p>
+                    <p>
+                        Cras mattis consectetur purus sit amet fermentum.
+                        Cras justo odio, dapibus ac facilisis in,
+                        egestas eget quam. Morbi leo risus, porta ac
+                        consectetur ac, vestibulum at eros.
+                    </p>
+                    <p>
+                        Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Vivamus sagittis lacus vel
+                        augue laoreet rutrum faucibus dolor auctor.
+                    </p>
+                    <p>
+                        Aenean lacinia bibendum nulla sed consectetur.
+                        Praesent commodo cursus magna, vel scelerisque
+                        nisl consectetur et. Donec sed odio dui. Donec
+                        ullamcorper nulla non metus auctor
+                        fringilla.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+
+@section scripts{
+<!-- apexcharts -->
+<script src="~/assets/libs/apexcharts/apexcharts.min.js"></script>
+
+<!-- Vector map-->
+<script src="~/assets/libs/jsvectormap/js/jsvectormap.min.js"></script>
+<script src="~/assets/libs/jsvectormap/maps/world-merc.js"></script>
+
+<!--Swiper slider js-->
+<script src="~/assets/libs/swiper/swiper-bundle.min.js"></script>
+
+<!-- Dashboard init -->
+<script src="~/assets/js/pages/dashboard-ecommerce.init.js"></script>
+
+<!-- App js -->
+<script src="~/assets/js/app.js"></script>
+}

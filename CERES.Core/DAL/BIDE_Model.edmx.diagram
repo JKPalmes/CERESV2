@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="50f578232c5549f08b6f5984e49f90fd" Name="Diagram1">
+        <EntityTypeShape EntityType="BIDE_Model.ServiceAreaField" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BIDE_Model.Transactions" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BIDE_Model.Client" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="BIDE_Model.location" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BIDE_Model.ServiceArea" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="BIDE_Model.vwGet_ClientList2" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BIDE_Model.ServiceAreaFieldLOV" Width="1.5" PointX="9.375" PointY="2.75" />
+        <EntityTypeShape EntityType="BIDE_Model.user" Width="1.5" PointX="9.375" PointY="5.75" />
+        <EntityTypeShape EntityType="BIDE_Model.site" Width="1.5" PointX="11.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BIDE_Model.vwServiceAreaFieldLOV" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="BIDE_Model.ClientSetting" Width="1.5" PointX="11.375" PointY="6.75" />
+        <EntityTypeShape EntityType="BIDE_Model.REF_AccountInfo" Width="1.5" PointX="11.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

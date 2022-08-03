@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#e60000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="description" content="CBPS BI EDS App">
+    <meta name="author" content="CBPS DTG">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>CBPS | EDS</title>
+    <link href="Content/new-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="Content/styles.css" />
+    <link rel="stylesheet" type="text/css" href="Content/w2ui-1.5.min.css" />
+
+</head>
+<body class="dx-viewport">
+    <div id="" class="" style="height: 850px;">
+        <div class="flexbox" style="height: 80px; ">
+            <div id="header" style="flex-grow: 1">
+                <div class="bg-image">
+                    <div id="toolbarAdmin" class="nav navbar-nav d-md-down-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flexbox">
+            <div id="main" style="width: 100%; height: 830px;"></div>
+            <!--<input id="submitButton1" type="submit" value="Submit" class="submit" hidden />-->
+        </div>
+
+        <div class="flexbox">
+            <div id="" class="" style="flex-grow: 1; height: 40px; padding: 0px; text-align: center;">
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+            </div>
+            <div id="" style="height: 20px; padding: 0px;">
+                <div id="">
+                    <img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" onclick="toggleShowSelectors();" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/w2ui-1.5.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--<script src="Scripts/index.js"></script>-->
+    <script src="Scripts/toastr.min.js"></script>
+
+    <script type="text/javascript">
+        /*function getserviceAreaFields() {*/
+        var trueFalse = [{ id: true, text: 'true' }, { id: false, text: 'false' }];
+        var yesNo = [{ id: 0, text: 'false' }, { id: 1, text: 'true' }];
+        var dataTypes = [{ id: 'A/N', text: 'A/N' }, { id: 'DATE', text: 'DATE' }, { id: 'LONG', text: 'LONG' }, { id: 'LOV', text: 'LOV' }, { id: 'NUMERIC', text: 'NUMERIC' }, { id: 'TIME', text: 'TIME' }];
+        var fieldTypes = [{ id: 0, text: '0' }, { id: 1, text: '1' }];
+        var shades = [{ id: 'A', text: 'A' }, { id: 'T', text: 'T' }, { id: 'N', text: 'N' }];
+
+        let baseUrl = "";
+        let sessionEmail = sessionStorage.getItem("email");
+        let sessionToken = sessionStorage.getItem("accessToken");
+        //sessionUserName = sessionStorage.getItem("userName");
+        //sessionAccountType = sessionStorage.getItem("accountType");
+        let headerToken = {
+            "Authorization": "Bearer " + sessionToken
+        };
+        let areaId = localStorage.getItem('areaId');
+        if (areaId != null) {
+            let svcId = localStorage.getItem('areaId').split('_')[0];
+            $.ajax({
+                url: baseUrl + "api/Client/GetAllServiceAreaFields",
+                method: "POST",
+                data: { Id: svcId, email: sessionEmail },
+                dataType: "json",
+                headers: headerToken,
+                success: function (data) {
+                    var serviceAreaFields = data;
+                    var records = [], l = serviceAreaFields.length, i;
+                    for (i = 0; i < l; i++) {
+                        var record = {
+                            recid: i + 1,
+                            'CategoryCode': serviceAreaFields[i].CategoryCode,
+                            'DataType': serviceAreaFields[i].DataType,
+                            'DefaultValue': serviceAreaFields[i].DefaultValue,
+                            'Description_Txt': serviceAreaFields[i].Description_Txt,
+                            'FieldType': serviceAreaFields[i].FieldType,
+                            'GroupName': serviceAreaFields[i].GroupName,
+                            'IsLogVisible': serviceAreaFields[i].IsLogVisible,
+                            'IsMandatory': serviceAreaFields[i].IsMandatory,
+                            'IsVisible': serviceAreaFields[i].IsVisible,
+                            'MetricFormat': serviceAreaFields[i].MetricFormat,
+                            'MetricShortName': serviceAreaFields[i].MetricShortName,
+                            'ServiceAreaFieldGroup_SAID': serviceAreaFields[i].ServiceAreaFieldGroup_SAID,
+                            'Shade': serviceAreaFields[i].Shade,
+                            'svcFieldID': serviceAreaFields[i].svcFieldID,
+                            'svcFieldName': serviceAreaFields[i].svcFieldName,
+                            'svcFieldNumber': serviceAreaFields[i].svcFieldNumber,
+                            'svcID': serviceAreaFields[i].svcID
+                        };
+                        records.push(record);
+                    }
+                    // widget configuration
+                    var config = {
+                        layout: {
+                            name: 'layout',
+                            padding: 4,
+                            panels: [
+                                { type: 'left', size: '50%', resizable: true, minSize: 300 },
+                                { type: 'main', minSize: 300 }
+                            ]
+                        },
+                        grid: {
+                            name: 'grid',
+                            show: {
+                                toolbar: true,
+                                toolbarAdd: true,
+                                toolbarDelete: true
+                            },
+                            columns: [
+                                { field: 'svcID', text: 'svcID', size: '5%' },
+                                { field: 'svcFieldID', text: 'FieldID', size: '15%' },
+                                { field: 'svcFieldNumber', text: 'FieldNo', size: '15%', sortable: true, searchable: true },
+                                { field: 'svcFieldName', text: 'FieldName', size: '40%', sortable: true, searchable: true },
+                                { field: 'DataType', text: 'DataType', size: '15%', sortable: true, searchable: true },
+                                { field: 'Description_Txt', text: 'Description', size: '33%', sortable: true, searchable: true },
+                                { field: 'FieldType', text: 'FieldType', size: '15%', sortable: true, searchable: true },
+                                { field: 'IsVisible', text: 'IsVisible', size: '15%', sortable: true, searchable: true },
+                                { field: 'IsLogVisible', text: 'IsLogVisible', size: '15%', sortable: true, searchable: true },
+                                { field: 'IsMandatory', text: 'IsMandatory', size: '15%', sortable: true, searchable: true },
+                                { field: 'MetricFormat', text: 'MetricFormat', size: '20%' },
+                                { field: 'Shade', text: 'Shade', size: '5%' },
+                            ],
+                            //records: [
+                            //    { recid: 1, fname: 'John', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                            //],
+                            records: records,
+                            onClick: function (event) {
+                                var grid = this;
+                                var form = w2ui.form;
+                                console.log(event);
+                                event.onComplete = function () {
+                                    var sel = grid.getSelection();
+                                    console.log(sel);
+                                    if (sel.length == 1) {
+                                        form.recid = sel[0];
+                                        form.record = $.extend(true, {}, grid.get(sel[0]));
+                                        form.refresh();
+                                    } else {
+                                        form.clear();
+                                    }
+                                }
+                            },
+                            onAdd: function (event) {
+                                //var grid = this;
+                                var form = w2ui.form;
+                                //var sel = grid.getSelection();
+                                //if (sel.length == 1) {
+                                    this.recid = 0;
+                                    form.record.recid = 0;
+                                    form.record.svcFieldID = 0;
+                                    form.record.svcFieldNumber = 0;
+                                    form.record.svcFieldName = "";
+                                    form.refresh();
+                                //}
+                            },
+                            onDelete: function (event) {
+                                event.preventDefault();
+                                w2confirm('Are you sure you want to delete this record?')
+                                    .yes(() => {
+                                        var grid = this;
+                                        var form = w2ui.form;
+                                        var sel = grid.getSelection();
+                                        if (sel.length == 1) {
+                                            form.recid = sel[0];
+                                            form.record = $.extend(true, {}, grid.get(sel[0]));
+                                            form.record.svcFieldName = "";
+                                            saveToDb(form.record, 'delete')
+                                        }
+                                    })
+                                    .no(() => { console.log('NO'); });
+                            }
+                        },
+                        form: {
+                            header: 'Edit Record',
+                            name: 'form',
+                            fields: [
+                                { field: 'recid', type: 'text', html: { label: 'ID', attr: 'size="10" readonly' } },
+                                { field: 'svcID', type: 'text', html: { label: 'Service Area ID', attr: 'size="10" readonly' } },
+                                { field: 'svcFieldID', type: 'text', html: { label: 'Field Id', attr: 'size="10" readonly' } },
+                                { field: 'svcFieldNumber', type: 'text', html: { label: 'Field Number', attr: 'size="10" ' } },
+                                { field: 'svcFieldName', type: 'text', html: { label: 'Field Name', attr: 'size="40" ' } },
+                                { field: 'DataType', type: 'list', html: { label: 'Data Type', attr: 'size="20" ' }, options: { items: dataTypes, placeholder: "" } },
+                                { field: 'Description_Txt', type: 'text', html: { label: 'Description', attr: 'size="80" ' } },
+                                { field: 'CategoryCode', type: 'text', html: { label: 'Category Code', attr: 'size="10" ' } },
+                                { field: 'FieldType', type: 'list', html: { label: 'Field Type', attr: 'size="10" ' }, options: { items: fieldTypes, placeholder: "" } },
+                                { field: 'IsVisible', type: 'list', html: { label: 'Visible In Details', attr: 'size="10"'}, options: { items: trueFalse, placeholder: "" }},
+                                { field: 'IsLogVisible', type: 'list', html: { label: 'Visible In Log', attr: 'size="10" ' }, options: { items: yesNo, placeholder: "" } },
+                                { field: 'IsMandatory', type: 'list', html: { label: 'Required Field', attr: 'size="10" ' }, options: { items: yesNo, placeholder: "" } },
+                                { field: 'MetricFormat', type: 'text', html: { label: 'Metric Format', attr: 'size="40" ' } },
+                                { field: 'MetricShortName', type: 'text', html: { label: 'Metric Short Name', attr: 'size="40" ' } },
+                                { field: 'Shade', type: 'list', html: { label: 'Shading', attr: 'size="10" ' }, options: { items: shades, placeholder: "" } },
+                            ],
+                            actions: {
+                                //Reset: function () {
+                                //    this.clear();
+                                //},
+                                Save: function () {
+                                    var errors = this.validate();
+                                    if (errors.length > 0) return;
+                                    if (this.record.recid == 0) {
+                                    } else {
+                                        w2ui.grid.set(this.recid, this.record);
+                                    }
+                                    //save to db
+                                    saveToDb(this.record, '');
+                                }
+                            }
+                        }
+                    };
+
+                    $(function () {
+                        // initialization
+                        $('#main').w2layout(config.layout);
+                        w2ui.layout.html('left', $().w2grid(config.grid));
+                        w2ui.layout.html('main', $().w2form(config.form));
+                    });
+
+                },
+                error: handleXHRError
+            });
+        }
+
+        function saveToDb(rec, op) {
+            var inputData = {
+                'categoryCode': rec.CategoryCode,
+                'dataType': rec.DataType,
+                'defaultValue': rec.DefaultValue,
+                'description_Txt': rec.Description_Txt,
+                'fieldType': rec.FieldType,
+                'groupName': rec.GroupName,
+                'isLogVisible': rec.IsLogVisible,
+                'isMandatory': rec.IsMandatory,
+                'isVisible': rec.IsVisible,
+                'metricFormat': rec.MetricFormat,
+                'metricShortName': rec.MetricShortName,
+                'serviceAreaFieldGroup_SAID': rec.ServiceAreaFieldGroup_SAID,
+                'shade': rec.Shade,
+                'svcFieldID': rec.svcFieldID,
+                'svcFieldName': rec.svcFieldName,
+                'svcFieldNumber': rec.svcFieldNumber,
+                'svcID': rec.svcID
+            };
+
+            var sessionToken = sessionStorage.getItem("accessToken");
+            headerToken = {
+                "Authorization": "Bearer " + sessionToken
+            };
+
+            var opUrl = op == "delete" ? "DeleteServiceAreaFieldInfo" : "SaveServiceAreaFieldInfo";
+            $.ajax({
+                url: baseUrl + "api/client/" + opUrl,
+                //url: baseUrl + "api/client/DeleteServiceAreaFieldInfo",
+                method: "POST",
+                data: inputData,
+                dataType: "json",
+                headers: headerToken,
+                //xhrFields: {withCredentials:true},
+                success: function (data) {
+                    w2ui.grid.selectNone();
+                    window.location.reload();
+                },
+                error: handleXHRError
+            });
+        }
+
+
+        function handleXHRError(err) {
+            toastr.error("Oops! Something went wrong. Please contact BI administrator");
+            if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
+                sessionStorage.clear();
+                window.location.href = "Login3.html";
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+    //$(document).ready(function () {
+        //$('input[type=list]').w2field('list', { items: yesNo });
+
+    //})
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CERES.Web.Api", "CERES\CERES.Web.Api.csproj", "{5F3E1BD1-E3F8-4F80-BAAE-772D19630E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CERES.Core", "CERES.Core\CERES.Core.csproj", "{DC7437EB-2515-4380-99E4-D393B86895B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F3E1BD1-E3F8-4F80-BAAE-772D19630E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F3E1BD1-E3F8-4F80-BAAE-772D19630E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F3E1BD1-E3F8-4F80-BAAE-772D19630E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F3E1BD1-E3F8-4F80-BAAE-772D19630E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7437EB-2515-4380-99E4-D393B86895B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC7437EB-2515-4380-99E4-D393B86895B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC7437EB-2515-4380-99E4-D393B86895B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC7437EB-2515-4380-99E4-D393B86895B3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAD5FDDE-6802-41E3-8D18-859BDC478ECF}
+	EndGlobalSection
+EndGlobal

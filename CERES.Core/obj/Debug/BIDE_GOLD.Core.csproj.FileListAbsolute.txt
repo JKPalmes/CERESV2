@@ -1,0 +1,54 @@
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll.config
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\EntityFramework.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\EntityFramework.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CopyComplete
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csprojAssemblyReference.cache
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll.config
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.pdb
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.dll
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.xml
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CopyComplete
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.dll
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.pdb
+E:\dwebsite\bide.gold.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csprojAssemblyReference.cache
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll.config
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.pdb
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.xml
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.xml
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CopyComplete
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.pdb
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csprojAssemblyReference.cache
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\App.Config
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll.config
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\GdPicture.NET.14.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\Newtonsoft.Json.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.xml
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\EntityFramework.SqlServer.xml
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\GdPicture.NET.14.xml
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\Newtonsoft.Json.xml
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.dll
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\System.Security.Claims.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Debug\System.Security.Principal.Windows.dll
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.CopyComplete
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Debug\BIDE_GOLD.Core.csproj.AssemblyReference.cache

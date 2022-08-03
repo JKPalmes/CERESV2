@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>CERES</title>
+    <link href="Content/my-style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div id="container">
+        <div class="myflexbox">
+            <div id="" style="height: 45px; width:216px;">
+                <div id="">
+                    <!--<img style="height: auto; display: block; width: 100%;" src="images/cbps-216.png" />-->
+                    <img style="height: auto; display: block; width: 100%;" src="images/cbps_logo.png" />
+                </div>
+            </div>
+            <div id="" class="" style="flex-grow: 1; height: 45px; padding: 0px;">
+                <span></span>
+            </div>
+            <div id="" style="height: 45px; width:300px; padding-top: 10px;">
+                <div id="">
+                    <!--<img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" />-->
+                </div>
+            </div>
+        </div>
+
+        <!--<div id="header">
+            <div class="bg-image"></div>
+        </div>-->
+
+        <div id="banner">
+            <section id="section-a">
+                <div class="bg-img"></div>
+            </section>
+        </div>
+
+        <div id="main">
+            <div class="bi-banner">
+                <img src="./images/ceres_banner.png" alt="" />
+                <p>You have been logged-out due to inactivity. Please sign in again to start your session</p>
+            </div>
+
+            <div class="bi-banner">
+                <!--<a href="https://microstrategy.cbpsportal.com/eds/Login3.html" target="_self">Login</a>-->
+                <a href="javascript:login();">Login</a>
+            </div>
+        </div>
+
+        <div id="main-footer" style="margin-top: 145px;">
+            <div class="box">
+                Canon BusinessInsights Web Portal - Professional Solutions Division   <br /><br />Having trouble?&nbsp; <br />
+                Contact the CBPS Client Support Center at 877-988-2265 or Email: <a href="mailto:CBPS-CSC@cbps.canon.com" target="_blank">CBPS-CSC@cbps.canon.com</a>
+                <br />
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+                <br />
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="plugins/iCheck/icheck.min.js"></script>
+
+
+    <script type="text/javascript">
+        function login() {
+            sessionStorage.clear();
+            window.location.href = "Login3.html";
+        }
+    </script>
+
+</body>
+</html>

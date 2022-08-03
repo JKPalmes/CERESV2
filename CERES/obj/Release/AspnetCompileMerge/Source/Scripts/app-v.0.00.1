@@ -1,0 +1,810 @@
+﻿//DataEntry 
+var nullDefaultValueClientId = "1000001";   //LIBERTY MUTUAL CLIENT ID; CSV: e.g: "1000001,123" for multiple client IDs MUST BE EQUAL IN WEB.CONFIG APPSETTINGS.KEYS
+var windowInnerHeight;
+var sessionEmail;
+var sessionToken;
+var sessionUserName;
+var pattern = /[a-zA-Z]/;
+var model = {
+    savedData: [],
+    lastSavedData: {},
+    Transaction: {}
+};
+var pageNumber = 0;
+var headerToken;
+var submitButtonType = -1;
+var transactionId=0;
+var trIndex = 0;
+var isClientWithDefaultValue = false;
+var isUpdateFlag = false;
+const pageItems = 20;
+var isLastPage = false;
+var didRequestSavedData = false;
+
+function setInputDate(target) {
+    $(target).datepicker({
+        autoclose: true,
+        disableTouchKeyboard: true,
+        orientation: 'bottom', showOnFocus: true, todayHighlight: true,
+        zIndexOffset: 9
+    });
+}
+
+function generateDateFormControl(target, label) {
+    return [
+        '<div class="form-group">',
+        '    <div class="divAttribLabel">', label, '</div>',
+        '    <div class="input-group">',
+        '        <input type="text" class="form-control pull-right date-', target,'" id="', target, '" name="', target, '" placeholder="', label, '">',
+        '        <div class="input-group-addon calendar-icon" onclick="$(this).prev().focus()">',
+        '            <i class="glyphicon glyphicon-calendar" onclick="$(this).parent().prev().focus()"></i>',
+        '        </div>',
+        '    </div>',
+        '</div>'].join('');
+}
+
+function getRecentSavedData() {
+    if (isLastPage)
+        return;
+
+    var pageNo = sessionStorage.getItem("pageNumber");
+    if (pageNo == null)
+        sessionStorage.setItem("pageNumber", ++pageNumber);
+    else
+        pageNumber = parseInt(pageNo)+1;
+    
+    console.log("pageNumber", pageNumber);
+    didRequestSavedData = true;
+    $.ajax({
+        url: baseUrl + "/api/client/GetSavedData",
+        method: "GET",
+        headers: headerToken,
+        data: { "pageNumber": pageNumber, "date": $("#txtProductionDate").val(), "serviceArea": $("#ddlServiceArea").val() },
+        dataType: "json",
+        success: handleSavedData,
+        error: handleXHRError
+    });
+
+}
+
+function getRecentActivity() {
+    didRequestSavedData = false;
+    var d_data = sessionStorage.getItem("savedData");
+    if (d_data != null)
+        handleSavedData(JSON.parse(d_data));
+    else
+        getRecentSavedData();
+}
+
+
+function setupDOM() {
+    //EVENTS HANDLER
+    $("#ddlClient").on("change", function () {
+        ajaxRequest("#ddlSite", baseUrl + "/api/client/GetSiteByUserName", { Id: $("#ddlClient").val(), email: sessionEmail })
+    });
+    $("#ddlSite").on("change", function () {
+        ajaxRequest("#ddlLocation", baseUrl + "/api/client/GetLocationById", { Id: $("#ddlSite").val(), email: sessionEmail })
+    });
+    $("#ddlLocation").on("change", function () {
+        ajaxRequest("#ddlServiceArea", baseUrl + "/api/client/GetServiceAreaById", { Id: $("#ddlLocation").val(), email: sessionEmail })
+    });
+
+    $("#ddlServiceArea").on("change", function () {
+        $("footer").show();
+        resetFields();
+        preSubmitForm();
+        $.ajax({
+            url: baseUrl + "/api/client/GetServiceAreaFields",
+            type: "POST",
+            headers: headerToken,
+            data: { Id: $("#ddlServiceArea").val(), email: sessionEmail },
+            success: serviceAreaCallback, //function (data) { serviceAreaCallback(data); },
+            error: handleXHRError //function (err) {handleXHRError(err);}
+        });
+    });
+    $("form").on("submit", submitForm);
+
+    //DEFAULT VALUE FOR NON/LM USERS
+    $("#btnReset").on("click", resetCallback);
+    $("#btnNew").on("click", function () {
+        location.reload();
+    });
+
+    setInputDate("#txtProductionDate");
+    
+    $(".datepicker").removeAttr("style");
+
+    $(".prod-date, div.date div").on("click", function () {
+        $("#txtProductionDate").focus();
+    });
+
+
+    preSubmitForm();
+    $("footer").show();
+
+
+    $(".load-more-data").on("click", function () {
+        getRecentSavedData();
+    })
+}
+
+function initClientList() {
+    //POPULATE USERS CLIENT LIST
+    if (sessionStorage.getItem("clientData") != null)
+        handleClientData(JSON.parse(sessionStorage.getItem("clientData")));
+    else
+        ajaxRequest("#ddlClient", baseUrl + "/api/client/GetClientByUserName", { Id: 0, email: sessionEmail });
+}
+
+function generateTrElement(e) {
+    return ["<tr title='Date Created:", e.CreationDate, "'>",
+        "<td><span class='glyphicon glyphicon-edit' onclick='getTransactionData(this)' data-id='", e.TransactionId, "'></span> &nbsp; ",
+        "<span class='glyphicon glyphicon-remove hidden' onclick='doDelete(this)' data-id='", e.TransactionId, "'></span> ",
+        "<span class='glyphicon glyphicon-trash' onclick='verifyDelete(this)'></span></td > ",
+        "<td nowrap='nowrap'>", formatDate(e.ProductionDate), "</td>",
+        "<td><strong>", e.AccountName, "</strong>: ", e.LocationName, " - ", e.ServiceAreaName, "</td>",
+        "</tr>"].join('');
+}
+
+
+function handleSavedData(data) {
+    if (data.length == 0)
+        $(".load-more-data").remove();
+
+    if (sessionStorage.getItem("savedData") == null)
+        model.savedData = data;
+    else {
+        model.savedData = data.concat(model.savedData);
+        if (data != pageItems && didRequestSavedData)
+            toastr.info("Loading more data completed");
+    }
+
+    $(".load-more-data-count").text(model.savedData.length + " item(s) ");
+}
+
+
+
+watch(model, "savedData", function () {
+    var savedDataDOM = [];
+    var tbl = $("#tblSavedData tbody");
+    var firstTrElement = generateTrElement(model.savedData[0]);
+    if (tbl.find("tr").length > 0 && (submitButtonType >=0 && submitButtonType < 2)) {        //save, save&new
+        tbl.find("tr:last").remove();
+        tbl.prepend(firstTrElement);
+        console.log("Save");
+    }
+    else if (tbl.find("tr").length > 0 && submitButtonType == 2) {  //update
+        tbl.find("tr:eq(" + trIndex + ")").replaceWith(firstTrElement);
+        console.log("update");
+    }
+    else if (tbl.find("tr").length > 0 && submitButtonType == 3) {  //delete
+        tbl.find("tr:eq(" + trIndex + ")").remove();
+        console.log("Delete");
+    }
+    else {
+        if (model.savedData.length > 0) {
+            $.each(model.savedData, function (i, e) {
+                savedDataDOM.push(generateTrElement(e));
+            });
+        }
+
+        tbl.append(savedDataDOM);
+    }
+
+    sessionStorage.setItem("savedData", JSON.stringify(model.savedData));
+
+    $(".div-signin-loading img").addClass("hidden");
+    resizeDivContent();
+
+});
+
+
+function handleClientData(data) {
+    if (sessionStorage.getItem("clientData") == null)
+        sessionStorage.setItem("clientData", JSON.stringify(data));
+
+    populateClientHierarchyData(data, "#ddlClient");
+}
+
+function populateClientHierarchyData(data, targetElement) {
+    var selData = [];
+    $(targetElement).find('option').not(':first').remove();
+    if (targetElement == "#ddlLocation")
+        $("#ddlServiceArea").find('option').not(':first').remove();
+    else if (targetElement == "#ddlSite") {
+        $("#ddlLocation").find('option').not(':first').remove();
+        $("#ddlServiceArea").find('option').not(':first').remove();
+    }
+
+    $.each(data, function (i, e) {
+        var opt = ["<option value=", e.Id, ">", e.Value, "</option>"].join('');
+        selData.push(opt);
+
+    });
+    $(targetElement).append(selData.join(''));
+}
+
+function handleTransactionView(data, id) {
+    isUpdateFlag = true;
+    console.log(data);
+    var newSavedData = model.savedData.filter(function (obj) {
+        return obj.TransactionId == id;
+    });
+    console.log("newSavedData", newSavedData[0]);
+    console.log("newSavedData[0].ProductionDate",newSavedData[0].ProductionDate);
+    var d = formatDate(newSavedData[0].ProductionDate).split('-');
+    var yyyy = d[0];
+    var mm = d[1];
+    var dd = d[2];
+    $("#txtProductionDate").val(mm + '/' + dd + '/' + yyyy);
+    $("#ddlClient, #ddlSite, #ddlLocation, #ddlServiceArea").find('option').remove();
+
+    $("#ddlClient").append(["<option value=", newSavedData[0].AccountId, ">", newSavedData[0].AccountName,"</option>"].join(''));    
+    $("#ddlSite").append(["<option value=", newSavedData[0].SiteId, ">", newSavedData[0].SiteName, "</option>"].join(''));
+    $("#ddlLocation").append(["<option value=", newSavedData[0].LocationId, ">", newSavedData[0].LocationName, "</option>"].join(''));
+    $("#ddlServiceArea").append(["<option value=", newSavedData[0].ServiceAreaId, ">", newSavedData[0].ServiceAreaName, "</option>"].join(''));
+
+    model.Transaction = data.Transaction;
+    serviceAreaCallback(data.ServiceAreaFields);
+}
+
+function getTransactionData(e) {
+    var tranId = e.getAttribute("data-id");    
+    trIndex = $(e).parent().parent().index();
+    $(e).next().addClass("hidden");
+    $(e).next().next().removeClass("hidden");    
+    $("#tID").val(tranId);
+
+    if (transactionId == tranId)
+        return;
+
+    transactionId = tranId;
+    $.ajax({
+        url: "api/client/GetTransactionById",
+        method: "GET",
+        data: { "transactionId": tranId },
+        dataType: "json",
+        headers: headerToken,
+        success: function (data) {
+            handleTransactionView(data, tranId);
+        },
+        error: handleXHRError
+    });
+}
+
+function doDelete(e) {
+    var tranId = e.getAttribute("data-id");
+    if (tranId == transactionId) {
+        $("#btnDelete").click();
+        return;
+    }
+
+    trIndex = $(e).parent().parent().index();    
+    submitButtonType = 3;
+
+    $.ajax({
+        url: "api/client/DeleteTransactionById",
+        method: "GET",
+        data: { "transactionId": tranId },
+        dataType: "json",
+        headers: headerToken,
+        success: function (data) {
+            toastr.success("Deleted");
+            console.log("model.savedData", model.savedData.length);
+            var newSavedData = model.savedData.filter(function (obj) {
+                return obj.TransactionId != tranId;
+            });
+            console.log("newSavedData", newSavedData.length);
+            model.savedData = newSavedData;
+
+
+        },
+        error: handleXHRError
+    });
+}
+
+function verifyDelete(e) {
+    trIndex = $(e).parent().parent().index();
+    console.log("row index:", trIndex);
+    $(e).addClass("hidden");
+    $(e).prev().removeClass("hidden");
+}
+
+
+function handleXHRError(err) {
+    //$("footer").hide();
+    toastr.error("Oops! Something went wrong. Please contact BI administrator");
+    if (err.status >= 400 && err.status < 404) {
+        sessionStorage.clear();
+        window.location.href = "Login3.html";
+    }
+}
+
+function toggleAction(flag) {
+    if (flag) {
+        $("#btnNew, #btnUpdate, #btnDelete").removeClass("hidden").show();
+        $("#btnSaveNew, #btnSave").hide();
+        $("#ddlClient, #ddlSite, #ddlLocation, #ddlServiceArea").find('option').not(':selected').remove();
+    } else {
+        $("#btnReset").click();
+        $("#btnNew, #btnDelete").hide();
+        $("#btnSaveNew, #btnSave").show();
+    }
+}
+
+function submitForm(e) {
+    console.log("submitType", submitButtonType);
+    e.preventDefault();
+
+
+    if ($("#ddlClient").val().match(pattern) != null
+        || $("#ddlSite").val().match(pattern) != null
+        || $("#ddlLocation").val().match(pattern) != null
+        || $("#ddlServiceArea").val().match(pattern) != null)
+        return;
+
+
+    $("footer").show();
+    inputData = {
+        "userName": sessionStorage.getItem("email")
+        , "tDate": $("#txtProductionDate").val()
+        , "accountID": $("#ddlClient").val()
+        , "siteID": $("#ddlSite").val()
+        , "locID": $("#ddlLocation").val()
+        , "svcID": $("#ddlServiceArea").val()
+    };
+    inputData["tID"] = $("#tID").val();
+
+    if (isClientWithDefaultValue)   //LIBERTY MUTUAL CLIENT ID
+        inputData["Remarks"] = $("#remarks").val();
+
+    $.each($("input[id^=field]"), function (i, e) {
+        inputData[e.id] = e.value;
+    });
+    $.each($("input[id^=StringField]"), function (i, e) {
+        inputData[e.id] = e.value;
+    });
+    if (transactionId > 0)
+        inputData.tID = transactionId;
+
+    //submit data
+    //0 = Save
+    //1 = Save New
+    //2 = Update
+    //3 = Delete
+    if (submitButtonType == 3)
+        inputData["StatusCode"] = "D";
+
+    var toastrMsg = ["Saved", "Saved", "Updated", "Deleted"];
+        
+    $.ajax({
+        url: "http://localhost:58957/api/client/SaveData",
+        type: "POST",
+        headers: headerToken,
+        data: JSON.stringify(inputData),
+        contentType: 'application/json',
+        success: function (data) {
+            toastr.success(toastrMsg[submitButtonType]);
+            if (submitButtonType == 3) {
+                var newSavedData = model.savedData.filter(function (obj) {
+                    return obj.TransactionId != transactionId;
+                });                               
+                sessionStorage.setItem("savedData", JSON.stringify(newSavedData));
+                window.location.reload();
+            }
+
+            transactionId = data;
+            inputData["tID"] = data;
+            inputData.tID = transactionId;
+            if (submitButtonType == 0) {
+                toggleAction(true);
+            }
+            else if (submitButtonType == 1) {
+                toggleAction(false);
+            }
+
+            //UPDATE MODEL
+            model.lastSavedData = inputData;
+
+            var tmpArray = model.savedData.slice(); //[...model.savedData];
+            var item = {
+                TransactionId: data,
+                UserName: sessionEmail,
+                ProductionDate: $("#txtProductionDate").val(),
+                AccountId: $("#ddlClient").val(),
+                SiteId: $("#ddlSite").val(),
+                LocationId: $("#ddlLocation").val(),
+                ServiceAreaId: $("#ddlServiceArea").val(),
+                AccountName: $("#ddlClient option:selected").text(),
+                SiteName: $("#ddlSite option:selected").text(),
+                LocationName: $("#ddlLocation option:selected").text(),
+                ServiceAreaName: $("#ddlServiceArea option:selected").text(),
+                Remarks: $("#remarks").val(),
+                CreationDate: Date.now(),
+                UpdateDate: ""
+            };
+
+            if (submitButtonType == 3) {
+
+            }
+            else if (submitButtonType == 2) { //update
+                tmpArray[0] = item;
+            }
+            else {  //save/new
+                tmpArray.pop();
+                tmpArray.unshift(item);
+            }
+            model.savedData = tmpArray;
+        },
+        error: handleXHRError
+    });
+    
+}
+
+
+
+function resetCallback() {
+    $("input[id^=field], input[id^=StringField]").hide();
+
+    $.each($("input[id^=field]"), function (i, e) {
+        if ($("#ddlClient option:selected").text() == "Liberty Mutual")
+            e.value = "";
+        else
+            e.value = "0.0";
+    });
+
+    $.each($("input[id^=StringField]"), function (i, e) {
+        e.value = "";
+    });
+
+    $("input[id^=field], input[id^=StringField]").show();
+}
+
+
+//POPULATE METRIC FIELDS
+function serviceAreaCallback(data) {
+    //POPULATE USERS SAVED DATA FIRST    
+    $(".div-signin-loading").removeClass("hidden");
+    $(".load-more-data, .load-more-data-count").hide();
+    getRecentActivity();
+
+
+
+    var dataSize = data.length;
+    var metricData = [];
+    var tblDataAttrib = [];
+    var tblDataMetric = [];
+    var defaultVal = "0.0";
+    var required = " required='required' ";
+    var nullClientId = nullDefaultValueClientId.split(',');
+    var noAttribSvcAreaSum = data.reduce(function (cnt, o) { return cnt + o.FieldType; }, 0);
+    var shade = "";
+    isClientWithDefaultValue = $.inArray($("#ddlClient").val(), nullClientId) >= 0 ? true : false;
+    //var cssToUpdate0 = '"h h h h h h h h h h h u" "l p p p m m n n o o o o" "l f f f f f f f f f f f"'; // "col-lg-8";
+    //var cssToUpdate1 = '"h h h h h h h h h h h u" "l p p p m m o o o o o o" "l f f f f f f f f f f f"'; //"col-lg-12";
+    var cssToUpdate0 = '"h h h h h h h h h h h u" "m m n n n n n o o o o o" "m m f f f f f f f f f f"'; // "col-lg-8";
+    var cssToUpdate1 = '"h h h h h h h h h h h u" "m m o o o o o o o o o o" "m m f f f f f f f f f f"'; //"col-lg-12";
+
+    $(".bide-content-attrib, .bide-content-metric").hide();
+    if (noAttribSvcAreaSum == data.length) {
+        //$(".bide-content-metric").hide().removeClass(cssToUpdate0).addClass(cssToUpdate1).show();   //bootstrap
+        $("#grid-container").css("grid-template-areas", cssToUpdate1);                              //css-grid
+        $("#main-metric-capture").css("-ms-grid-column", "3").css("-ms-grid-column-span", "5");      //css-grid ie
+        if (isClientWithDefaultValue) { //DEFAULT NULL E.G: LIBERTY MUTUAL
+            defaultVal = "";
+            required = "";
+        }
+    } else {
+        //$(".bide-content-metric").hide().removeClass(cssToUpdate1).addClass(cssToUpdate0);    //bootstrap
+        //$(".bide-content-attrib, .bide-content-metric").show();
+        $("#grid-container").css("grid-template-areas", cssToUpdate0);                              //css-grid
+        $("#main-metric-capture").css("-ms-grid-column", "3").css("-ms-grid-column-span", "10");     //css-grid ie
+    }
+
+    $.each(data, function (i, e) {
+        var isLast = i == dataSize - 1 ? true : false;
+        var row = ["<tr><td>", e.svcFieldName, "<input class='form-control attrib-input' type='text' id='StringField", e.svcFieldNumber, "' placeholder='", e.svcFieldName, "' value='' /></td></tr>"].join('');
+        if (e.DataType == "date")
+            row = ["<tr><td>", generateDateFormControl("StringField" + e.svcFieldNumber, e.svcFieldName)].join('');
+
+        //row = ["<tr><td>", e.svcFieldName, "<input class='form-control attrib-input' type='text' id='StringField", e.svcFieldNumber, "' placeholder='", e.svcFieldName, "' value='' /></td></tr>"].join('');
+
+
+        if (e.Shade == "T")
+            shade = " btn-info "
+        else if (e.Shade == "A")
+            shade = " btn-warning "
+        else
+            shade = "";
+
+        if (e.FieldType == 0) {
+            tblDataAttrib.push(row);
+        }
+        else {
+            var colSpan = 1;//(isLast && (i % 2 == 0)) ? 2 : 1;
+            metricData.push(
+                ["<td width='34%' colspan=", colSpan, ">", e.svcFieldName, "</td>",
+                 "<td width='16%'>",
+                    "<input class='form-control", shade, "' type='text' id='field", e.svcFieldNumber, "' title='", e.Description_Txt, "' value='", defaultVal, "' ", required, " onkeyup='checkNum(this,\"d\")' />",
+                    "</td>"].join(''));
+            if (i % 2 == 1 || (i % 2 == 0 && isLast)) {
+                tblDataMetric.push(["<tr>", metricData.join(''), "</tr>"].join(''));
+                metricData = [];
+            }
+        }
+
+    });
+    if (isClientWithDefaultValue)
+        tblDataMetric.push(["<tr>", "<td colspan='4'>Note:<br/><textarea class='form-control' height='4' id='remarks'  placeholder='Notes for ", $("#ddlServiceArea option:selected").text(), "' /></td>", "</tr>"].join(''));
+
+    if (isUpdateFlag) 
+        $("#tblMetricFields tbody tr,#tblAttribFields tbody tr").remove();
+    
+    
+    $("#tblMetricFields tbody").append(tblDataMetric.join(''));
+    $("#tblAttribFields tbody").append(tblDataAttrib.join(''));
+
+    //APPLY FIELD PROPERTIES
+    $('*[class*="date-StringField"]').datepicker({
+        autoclose: true,
+        disableTouchKeyboard: true,
+        orientation: 'bottom', showOnFocus: true, todayHighlight: true,
+        zIndexOffset: 9
+    });
+
+    $(".div-footer").addClass("container");
+
+    if (tblDataAttrib.length > 0)
+        $(".bide-content-attrib").show();
+
+    if (tblDataMetric.length > 0)
+        $(".bide-content-metric").show();
+
+
+    if ($("#ddlServiceArea").val().match(pattern) == null)
+        readySubmitForm();
+
+    if (isUpdateFlag) {
+        toggleAction(true);
+
+        //POPULATE VALUES
+        var input = $("input[id^=StringField]");    //ATRIB
+        $.each(input, function (i, e) {
+            $(e).val(model.Transaction[e.id]);
+        });
+        var input = $("input[id^=field]");          //METRIC
+        $.each(input, function (i, e) {
+            $(e).val(model.Transaction[e.id]);
+        });
+    }
+    //readjust content-height
+    resizeDivContent();
+
+}
+
+function getDefaultValues() {
+    windowInnerHeight = window.innerHeight;
+    sessionEmail = sessionStorage.getItem("email");
+    sessionToken = sessionStorage.getItem("accessToken");
+    sessionUserName = sessionStorage.getItem("userName");
+    headerToken = {
+        "Authorization": "Bearer " + sessionToken
+    };
+    $("#divUserName, .full-name").text("  " + sessionUserName);
+    $(".user-name").text(" " + sessionUserName + " ");
+}
+
+function ajaxRequest(targetElement, url, paramemeter) {
+    //$("footer").show();
+    if ($("#tblMetricFields tbody tr").length > 0) {
+        resetFields();
+        preSubmitForm();
+    }
+    $.ajax({
+        url: url,
+        method: "POST",
+        data: { Id: paramemeter.Id, UserName: paramemeter.email }, //todo: replace with parameter object
+        dataType: "json",
+        headers: headerToken,
+        //xhrFields: {withCredentials:true},
+        success: function (data) {
+            //$("footer").hide();
+            if (targetElement == "#ddlClient")
+                sessionStorage.setItem("clientData", JSON.stringify(data));
+
+            populateClientHierarchyData(data, targetElement);
+
+            $(targetElement).focus();
+        },
+        error: handleXHRError
+    });
+}
+
+function makeBSCols(table) {
+    var html = ["<div class='container'>"];
+    $(table).find('tr').each(function () {
+        var $td = $(this).find('td').length ? $(this).find('td') : $(this).find('th');
+        // get the column width
+        if ($td.length > 12) return alert("too many columns");
+        var cls = Math.floor(12 / $td.length);
+        if (cls !== (12 / $td.length)) return alert("invalid column count");
+        html.push("<div class='row'>");
+        $td.each(function () {
+            html.push('<div class="col-sm-' + cls + '">' + $(this).html() + '</div>');
+        });
+        html.push('</div>');
+    });
+    html.push('</div>');
+    $(table).replaceWith(html.join(''));
+}
+
+function makeBSTable(otable) {
+    var table = $(otable).clone(); console.log(table);
+    table.addClass("table table-hover table-bordered table-striped");
+    var div = $('<div class="table-responsive" />');
+    $(otable).replaceWith(div);
+    div.append(table);
+}
+
+function resetFields() {
+    ////$(".bide-content").css({ height: $(window).innerHeight() - ($(".navbar").height() * 2) });
+    //$(".start-content, .bide-navigation-left, .bide-navigation-center, .bide-navigation-right").css({ height: $(window).innerHeight() - ($(".navbar").height() * 2) });
+    $("#tblAttribFields tbody tr").remove();
+    $("#tblMetricFields tbody tr").remove();
+}
+
+function preSubmitForm() {
+    $(".bide-btn, .a-panel, .m-panel").hide();
+    $(".div-footer").removeClass("container");
+}
+
+function readySubmitForm() {
+    $(".bide-btn, .a-panel, .m-panel").show();
+    //$(".bide-content").removeProp("style");
+    $(".bide-btn").removeClass("bide-buttons");
+}
+
+
+function resizeDivContent() {
+    return;
+    var sizeHeight = new Array();
+    sizeHeight.push($(".bide-navigation-right").height());
+    //sizeHeight.push($(".bide-content-metric").height());
+    //sizeHeight.push($(".bide-content-attrib").height());
+    sizeHeight.push($(".bide-content").height());
+    sizeHeight.push($("bide-navigation-center").height());
+
+    sizeHeight.sort(function (a, b) { return b - a });
+    var sizeL = $(".bide-navigation-left").height();
+    var sizeC = $(".bide-navigation-center").height();
+    var sizeR = sizeHeight[0];
+
+    if (sizeR > sizeL) {
+        $(".bide-navigation-left").css({ height: sizeR });
+        sizeL = sizeR;
+    }
+
+    if (sizeR > sizeC) {
+        $(".bide-navigation-center").css({ height: sizeR });
+        sizeC = sizeR;
+    }
+
+    if (sizeC > sizeL) {
+        $(".bide-navigation-left").css({ height: sizeC });
+        sizeL = sizeC;
+    }
+
+    if (sizeC > sizeR || sizeC > $(".bide-navigation-right").height()) {
+        $(".bide-navigation-right").css({ height: sizeC });
+        sizeR = sizeC;
+    }
+
+
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+        makeBSCols("#tblMetricFields");
+
+
+}
+
+function checkNum(F, t) {
+    var nv, fv = F.value;
+    if (t.substring(0, 1) == 'i')
+        nv = parseInt(fv, 10)
+    else {
+        nv = parseFloat(fv);
+    }
+    if (isNaN(nv))
+        F.value = isClientWithDefaultValue ? '' : '0.0';
+    else if (fv != nv)
+        F.value = nv;
+}
+
+function bake_cookie(name, value, days) {
+    var expires;
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+
+    var cookie = [name, '=', JSON.stringify(value), '; domain=.', window.location.host.toString(), expires, '; path=/;'].join('').replace(/\"/g,"\'");
+    console.log("cookie", cookie);
+    document.cookie = cookie;
+    console.log("document.cookie", document.cookie);
+}
+
+function read_cookie(name) {
+    var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+    result && (result = JSON.parse(result[1]));
+    return result;
+}
+
+function delete_cookie(name) {
+    document.cookie = [name, '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.', window.location.host.toString()].join('');
+}
+
+
+function createCookie(name, value, days) {
+    var expires;
+
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    } else {
+        expires = "";
+    }
+    document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(JSON.stringify(value)) + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = encodeURIComponent(name) + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ')
+            c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0)
+            return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+
+// FROM SO: Restricts input for the given textbox to the given inputFilter function.
+function setInputFilter(textbox, inputFilter) {
+    ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
+        textbox.addEventListener(event, function () {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+        });
+    });
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}

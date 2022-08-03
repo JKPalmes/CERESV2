@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#e60000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="description" content="CBPS BI EDS App">
+    <meta name="author" content="CBPS DTG">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>CBPS | EDS</title>
+    <link href="Content/new-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="Content/styles.css" />
+    <link rel="stylesheet" type="text/css" href="Content/w2ui-1.5.min.css" />
+
+</head>
+<body class="dx-viewport">
+    <!--<form id="myform1" class="myclass1" method="get">-->
+    <div id="" class="" style="height: 850px;">
+        <div class="flexbox" style="height: 80px; ">
+            <div id="header" style="flex-grow: 1">
+                <div class="bg-image">
+                    <div id="toolbarAdmin" class="nav navbar-nav d-md-down-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flexbox">
+            <div id="main" style="width: 100%; height: 830px;"></div>
+            <!--<input id="submitButton1" type="submit" value="Submit" class="submit" hidden />-->
+        </div>
+
+        <div class="flexbox">
+            <div id="" class="" style="flex-grow: 1; height: 40px; padding: 0px; text-align: center;">
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+            </div>
+            <div id="" style="height: 20px; padding: 0px;">
+                <div id="">
+                    <img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" onclick="toggleShowSelectors();" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</form>-->
+
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/w2ui-1.5.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="Scripts/app.js"></script>
+
+    <script type="text/javascript">
+        /*function getAccountInfos() {*/
+        var statusCodes = [{ id: 'Active', text: 'Active' }, { id: 'Closed', text: 'Closed' }];
+        var accountInfos = JSON.parse(sessionStorage.getItem('accountInfos'));
+        var flags = [], records = [], l = accountInfos.length, i;
+        for (i = 0; i < l; i++) {
+            if (flags[accountInfos[i].ClientID]) continue;
+            flags[accountInfos[i].ClientID] = true;
+            var record = {
+                recid: i + 1,
+                'ClientID': accountInfos[i].ClientID,
+                'AccountName': accountInfos[i].AccountName,
+                'AccountOwner': accountInfos[i].AccountOwner,
+                'Email': accountInfos[i].Email,
+                'Phone': accountInfos[i].PhoneNumber,
+                'Comment': accountInfos[i].Comment,
+                'StatusCode': accountInfos[i].StatusCode
+            };
+            records.push(record);
+        }
+        // widget configuration
+        var config = {
+            layout: {
+                name: 'layout',
+                padding: 4,
+                panels: [
+                    { type: 'left', size: '50%', resizable: true, minSize: 300 },
+                    { type: 'main', minSize: 300 }
+                ]
+            },
+            grid: {
+                name: 'grid',
+                show: {
+                    toolbar: true,
+                    //toolbarAdd: true,
+                    //toolbarDelete: true
+                },
+                columns: [
+                    { field: 'AccountName', text: 'Account Name', size: '20%', sortable: true, searchable: true },
+                    { field: 'AccountOwner', text: 'Account Owner', size: '20%', sortable: true, searchable: true },
+                    { field: 'Email', text: 'Email', size: '20%' },
+                    { field: 'Phone', text: 'Phone', size: '120px' },
+                    { field: 'Comment', text: 'Comment', size: '20%', sortable: true, searchable: true },
+                    { field: 'StatusCode', text: 'Status', size: '20%', sortable: true, searchable: true },
+                ],
+                records: records,
+                onClick: function (event) {
+                    //$("#ClientID").prop("readonly", true);
+                    var grid = this;
+                    var form = w2ui.form;
+                    //form.disable('ClientID');
+                    //console.log(event);
+                    event.onComplete = function () {
+                        var sel = grid.getSelection();
+                        //console.log(sel);
+                        if (sel.length == 1) {
+                            form.recid = sel[0];
+                            form.record = $.extend(true, {}, grid.get(sel[0]));
+                            form.refresh();
+                        } else {
+                            form.clear();
+                        }
+                    }
+                },
+                onAdd: function (event) {
+                    var form = w2ui.form;
+                    //form.enable('ClientID');
+                        this.recid = 0;
+                        form.record.recid = 0;
+                        form.record.ClientID = 0;
+                        form.record.AccountName = "";
+                        form.record.AccountOwner = "";
+                        form.record.Email = "";
+                        form.record.Phone = "";
+                        form.record.Comment = "";
+                        form.record.StatusCode= "Active";
+                        form.refresh();
+                    //}
+                },
+                onDelete: function (event) {
+                    event.preventDefault();
+                    w2confirm('Are you sure you want to delete this record?')
+                        .yes(() => {
+                            var grid = this;
+                            var form = w2ui.form;
+                            var sel = grid.getSelection();
+                            if (sel.length == 1) {
+                                form.recid = sel[0];
+                                form.record = $.extend(true, {}, grid.get(sel[0]));
+                                form.record.AccountName = "";
+                                saveToDb(form.record)
+                            }
+                        })
+                        .no(() => { console.log('NO'); });
+                }
+            },
+            form: {
+                header: 'Edit Record',
+                name: 'form',
+                fields: [
+                    { field: 'recid', type: 'text', html: { label: 'ID', attr: 'size="10" readonly' } },
+                    { field: 'ClientID', type: 'text', html: { label: 'Client ID', attr: 'size="10" readonly' } },
+                    { field: 'AccountName', type: 'text', required: true, html: { label: 'Account Name', attr: 'size="40" readonly maxlength="40"' } },
+                    { field: 'AccountOwner', type: 'text', required: true, html: { label: 'Account Owner', attr: 'size="40" maxlength="40"' } },
+                    { field: 'Email', type: 'email', required: true, html: { label: 'Email', attr: 'size="30"' } },
+                    { field: 'Phone', type: 'text', html: { label: 'Phone', attr: 'size="12"' } },
+                    { field: 'Comment', type: 'text', required: false, html: { label: 'Comment', attr: 'size="40" maxlength="40"' } },
+                    { field: 'StatusCode', type: 'list', required: false, html: { label: 'Status', attr: 'size="30" maxlength="30" ' }, options: { items: statusCodes, placeholder: "" } },
+                ],
+                actions: {
+                    //Reset: function () {
+                     //   this.clear();
+                    //},
+                    Save: function () {
+                        var errors = this.validate();
+                        if (errors.length > 0) return;
+                        //if (this.recid == 0) {
+                            //w2ui.grid.add($.extend(true, rec, { recid: w2ui.grid.records.length + 2 }));
+                            //w2ui.grid.selectNone();
+                            //this.clear();
+                        //} else {
+                            w2ui.grid.set(this.recid, this.record);
+                        //}
+                        saveToDb(this.record);
+                    }
+                }
+            }
+        };
+        /*}*/
+
+        $(function () {
+            // initialization
+            $('#main').w2layout(config.layout);
+            w2ui.layout.html('left', $().w2grid(config.grid));
+            w2ui.layout.html('main', $().w2form(config.form));
+        });
+
+        function saveToDb(rec) {
+            var inputData = {
+                "clientId": rec.ClientID,
+                "accountName": rec.AccountName,
+                "accountOwner": rec.AccountOwner,
+                "email": rec.Email,
+                "phone": rec.Phone,
+                "comment": rec.Comment,
+                "statusCode": rec.StatusCode
+            };
+
+            var sessionToken = sessionStorage.getItem("accessToken");
+            headerToken = {
+                "Authorization": "Bearer " + sessionToken
+            };
+
+            $.ajax({
+                url: baseUrl + "api/client/SaveAccountInfo",
+                method: "POST",
+                data: inputData,
+                dataType: "json",
+                headers: headerToken,
+                //xhrFields: {withCredentials:true},
+                success: function (data) {
+                    w2ui.grid.selectNone();
+                    //window.location.reload();
+                },
+                error: handleXHRError
+            });
+        }
+
+        function handleXHRError(err) {
+            toastr.error("Oops! Something went wrong. Please contact BI administrator");
+            if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
+                sessionStorage.clear();
+                window.location.href = "Login3.html";
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //getAccountInfo();
+            var accountInfos = JSON.parse(sessionStorage.getItem('accountInfos'));
+            if (accountInfos == null) alert("You need to have a valid session to access this site!");
+        })
+    </script>
+
+</body>
+</html>

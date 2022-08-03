@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#e60000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="description" content="CBPS BI EDS App">
+    <meta name="author" content="CBPS DTG">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>CBPS | EDS</title>
+    <link href="Content/new-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="Content/styles.css" />
+    <link rel="stylesheet" type="text/css" href="Content/w2ui-1.5.min.css" />
+
+</head>
+<body class="dx-viewport">
+    <div id="" class="" style="height: 850px;">
+        <div class="flexbox" style="height: 80px; ">
+            <div id="header" style="flex-grow: 1">
+                <div class="bg-image">
+                    <div id="toolbarAdmin" class="nav navbar-nav d-md-down-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flexbox">
+            <div id="main" style="width: 100%; height: 830px;"></div>
+            <!--<input id="submitButton1" type="submit" value="Submit" class="submit" hidden />-->
+        </div>
+
+        <div class="flexbox">
+            <div id="" class="" style="flex-grow: 1; height: 40px; padding: 0px; text-align: center;">
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+            </div>
+            <div id="" style="height: 20px; padding: 0px;">
+                <div id="">
+                    <img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" onclick="toggleShowSelectors();" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/w2ui-1.5.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--<script src="Scripts/index.js"></script>-->
+    <script src="Scripts/toastr.min.js"></script>
+
+    <script type="text/javascript">
+        let baseUrl = "";
+        let sessionEmail = sessionStorage.getItem("email");
+        let sessionToken = sessionStorage.getItem("accessToken");
+        //sessionUserName = sessionStorage.getItem("userName");
+        //sessionAccountType = sessionStorage.getItem("accountType");
+        let headerToken = {
+            "Authorization": "Bearer " + sessionToken
+        };
+        let areaId = localStorage.getItem('areaId');
+        if (areaId != null) {
+            let svcId = localStorage.getItem('areaId').split('_')[0];
+            $.ajax({
+                url: baseUrl + "api/Client/GetAllServiceAreaFieldLOV",
+                method: "POST",
+                data: { Id: svcId, email: sessionEmail },
+                dataType: "json",
+                headers: headerToken,
+                success: function (data) {
+                    var serviceAreaFieldsLOV = data;
+                    var records = [], l = serviceAreaFieldsLOV.length, i;
+                    for (i = 0; i < l; i++) {
+                        var record = {
+                            recid: i + 1,
+                            'ServiceAreaFieldsLOV_SAID': serviceAreaFieldsLOV[i].ServiceAreaFieldLOV_SAID,
+                            'svcFieldId': serviceAreaFieldsLOV[i].svcFieldId,
+                            'FieldId': serviceAreaFieldsLOV[i].FieldId,
+                            'FieldText': serviceAreaFieldsLOV[i].FieldText,
+                            'FieldName': serviceAreaFieldsLOV[i].FieldName,
+                        };
+                        records.push(record);
+                    }
+                    // widget configuration
+                    var config = {
+                        layout: {
+                            name: 'layout',
+                            padding: 4,
+                            panels: [
+                                { type: 'left', size: '50%', resizable: true, minSize: 300 },
+                                { type: 'main', minSize: 300 }
+                            ]
+                        },
+                        grid: {
+                            name: 'grid',
+                            show: {
+                                toolbar: true,
+                                toolbarAdd: true,
+                                toolbarDelete: true
+                            },
+                            columns: [
+                                { field: 'ServiceAreaFieldsLOV_SAID', text: 'SAID', size: '5%' },
+                                { field: 'svcFieldId', text: 'Svc Field ID', size: '15%' },
+                                { field: 'FieldId', text: 'Field ID', size: '15%', sortable: true, searchable: true },
+                                { field: 'FieldText', text: 'Field Text', size: '40%', sortable: true, searchable: true },
+                                { field: 'FieldName', text: 'Field Name', size: '40%', sortable: true, searchable: true }
+                            ],
+                            records: records,
+                            onClick: function (event) {
+                                var grid = this;
+                                var form = w2ui.form;
+                                //console.log(event);
+                                event.onComplete = function () {
+                                    var sel = grid.getSelection();
+                                    //console.log(sel);
+                                    if (sel.length == 1) {
+                                        form.recid = sel[0];
+                                        form.record = $.extend(true, {}, grid.get(sel[0]));
+                                        form.refresh();
+                                    } else {
+                                        form.clear();
+                                    }
+                                }
+                            },
+                            onAdd: function (event) {
+                                var grid = this;
+                                var form = w2ui.form;
+                                var sel = grid.getSelection();
+                                if (sel.length == 1) {
+                                    this.recid = 0;
+                                    form.record.recid = 0;
+                                    form.record.FieldId = 0;
+                                    form.record.FieldText = "";
+                                    form.refresh();
+                                }
+                            },
+                            onDelete: function (event) {
+                                event.preventDefault();
+                                w2confirm('Are you sure you want to delete this record?')
+                                    .yes(() => {
+                                        //console.log('YES');
+                                        var grid = this;
+                                        var form = w2ui.form;
+                                        var sel = grid.getSelection();
+                                        if (sel.length == 1) {
+                                            form.recid = sel[0];
+                                            form.record = $.extend(true, {}, grid.get(sel[0]));
+                                            form.record.FieldText = "";
+                                            saveToDb(form.record)
+                                        }
+                                    })
+                                    .no(() => { console.log('NO'); });
+                            }
+                        },
+                        form: {
+                            header: 'Edit Record',
+                            name: 'form',
+                            fields: [
+                                { field: 'recid', type: 'text', html: { label: 'ID', attr: 'size="10" readonly' } },
+                                { field: 'svcFieldId', type: 'text', html: { label: 'Service Field Id', attr: 'size="10" readonly' } },
+                                { field: 'FieldId', type: 'text', html: { label: 'Field ID', attr: 'size="10" readonly' } },
+                                { field: 'FieldText', type: 'text', html: { label: 'Field Text', attr: 'size="40" ' } },
+                                { field: 'FieldName', type: 'text', html: { label: 'Field Name', attr: 'size="40" readonly' } }
+                            ],
+                            actions: {
+                                //Reset: function () {
+                                //    this.clear();
+                                //},
+                                Save: function () {
+                                    var errors = this.validate();
+                                    if (errors.length > 0) return;
+                                    if (this.record.recid == 0) {
+                                        //w2ui.grid.add($.extend(true, this.record, { recid: w2ui.grid.records.length + 2 }));
+                                        //w2ui.grid.add($.extend(true, { recid: w2ui.grid.records.length + 1 }, this.record));
+                                        //w2ui.grid.selectNone();
+                                        //this.clear();
+                                    } else {
+                                        w2ui.grid.set(this.recid, this.record);
+                                    }
+                                        //save to db
+                                    saveToDb(this.record);
+                                }
+                            }
+                        }
+                    };
+                    /*}*/
+
+                    $(function () {
+                        // initialization
+                        $('#main').w2layout(config.layout);
+                        w2ui.layout.html('left', $().w2grid(config.grid));
+                        w2ui.layout.html('main', $().w2form(config.form));
+                    });
+
+                },
+                error: handleXHRError
+            });
+        }
+
+        function saveToDb(rec) {
+            var inputData = {
+                'recid': rec.recid,
+                'svcFieldId': rec.svcFieldId,
+                'FieldId': rec.FieldId,
+                'FieldText': rec.FieldText,
+                'FieldName': rec.FieldName,
+            };
+
+            var sessionToken = sessionStorage.getItem("accessToken");
+            headerToken = {
+                "Authorization": "Bearer " + sessionToken
+            };
+
+            $.ajax({
+                url: baseUrl + "api/client/SaveServiceAreaFieldLOV",
+                method: "POST",
+                data: inputData,
+                dataType: "json",
+                headers: headerToken,
+                //xhrFields: {withCredentials:true},
+                success: function (data) {
+                    w2ui.grid.selectNone();
+                    //window.location.reload();
+                },
+                error: handleXHRError
+            });
+
+        }
+
+        function handleXHRError(err) {
+            toastr.error("Oops! Something went wrong. Please contact BI administrator");
+            if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
+                sessionStorage.clear();
+                window.location.href = "Login3.html";
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+    //$(document).ready(function () {
+        //$('input[type=list]').w2field('list', { items: yesNo });
+
+    //})
+    </script>
+
+</body>
+</html>

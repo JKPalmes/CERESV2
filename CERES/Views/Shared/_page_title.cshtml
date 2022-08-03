@@ -1,0 +1,83 @@
+﻿<div id="page-title" class="page-toolbar px-xl-4 px-sm-2 px-0 py-1">
+    @*<div class="container-fluid">*@
+    @*<div class="row g-3 mb-3 align-items-center">
+            <div class="col">
+                <ol class="breadcrumb bg-transparent mb-0">
+                    <li class="breadcrumb-item"><a class="text-secondary" href="javascript: void(0);">@ViewBag.pagetitle</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.ptitle</li>
+                </ol>
+            </div>
+        </div>*@ <!-- .row end -->
+    <div class="row align-items-center">
+        <div class="col">
+                <h6 class="fs-14 color-900 mt-1 mb-0">
+                    Welcome back, 
+                    <span class="text-start ms-xl-2 ">
+                        <span class="d-none d-xl-inline-block ms-1 fw-normal user-name-text"></span>
+                    </span>
+                </h6>
+                @*<small class="text-muted user-name-sub-text "></small>*@
+        </div>
+
+        <div class="main-search px-3 flex-fill">
+            <input class="form-control" type="text" placeholder="Enter your search key word">
+            <div class="card shadow rounded-4 search-result slidedown">
+                <div class="card-body">
+                    <small class="text-uppercase text-muted">Recent searches</small>
+                    <div class="d-flex flex-wrap align-items-start mt-2 mb-4">
+                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-primary text-white" href="#">HRMS Admin</a>
+                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-secondary text-white" href="#">Hospital Admin</a>
+                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-info text-white" href="../app-project.html">Project</a>
+                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-dark text-white" href="../app-social.html">Social App</a>
+                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-danger text-white" href="#">University Admin</a>
+                    </div>
+                    <small class="text-uppercase text-muted">Suggestions</small>
+                    <div class="card list-group list-group-flush list-group-custom mt-2">
+                        <a class="list-group-item list-group-item-action text-truncate" href="..//docs/doc-helperclass.html">
+                            <div class="fw-bold">Helper Class</div>
+                            <small class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                        </a>
+                        <a class="list-group-item list-group-item-action text-truncate" href="..//docs/element-daterange.html">
+                            <div class="fw-bold">Date Range Picker</div>
+                            <small class="text-muted">There are many variations of passages of Lorem Ipsum available</small>
+                        </a>
+                        <a class="list-group-item list-group-item-action text-truncate" href="..//docs/element-imageinput.html">
+                            <div class="fw-bold">Image Input</div>
+                            <small class="text-muted">It is a long established fact that a reader will be distracted</small>
+                        </a>
+                        <a class="list-group-item list-group-item-action text-truncate" href="..//docs/plugin-table.html">
+                            <div class="fw-bold">DataTables for jQuery</div>
+                            <small class="text-muted">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small>
+                        </a>
+                        <a class="list-group-item list-group-item-action text-truncate" href="..//docs/doc-setup.html">
+                            <div class="fw-bold">Development Setup</div>
+                            <small class="text-muted">Contrary to popular belief, Lorem Ipsum is not simply random text.</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-12 mt-2 mt-md-0">
+            <div class="input-group justify-content-end">
+                <input type="text" name="daterange" class="form-control">
+                <button class="btn btn-outline-secondary" type="button" onclick="hideSelectorPanel()" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide Selectors"><i class="fa fa-arrow-up"></i></button>
+                <button class="btn btn-outline-secondary" type="button" onclick="showSelectorPanel()" data-bs-toggle="tooltip" data-bs-placement="top" title="Show Selectors"><i class="fa fa-arrow-down"></i></button>
+                @*<button class="btn btn-outline-secondary" type="button" onclick="expandPanels()" data-bs-toggle="tooltip" data-bs-placement="top" title="Expand/Collapse Panels"><i class="fa fa-window-restore"></i></button>*@
+                @*<button class="btn btn-outline-secondary" type="button" onclick="hideProductionData()" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide Production Data"><i class="fa fa-arrow-left"></i></button>
+        <button class="btn btn-outline-secondary" type="button" onclick="restoreDefaultView()" data-bs-toggle="tooltip" data-bs-placement="top" title="Restore"><i class="fa fa-window-restore"></i></button>*@
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Report"><i class="fa fa-envelope"></i></button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Reports"><i class="fa fa-download"></i></button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate PDF"><i class="fa fa-file-pdf-o"></i></button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Report"><i class="fa fa-envelope"></i></button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Reports"><i class="fa fa-download"></i></button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate PDF"><i class="fa fa-file-pdf-o"></i></button>
+                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Send Report"><i class="fa fa-envelope"></i></button>
+                <button class="btn btn-outline-secondary" hidden type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Download Reports"><i class="fa fa-download"></i></button>
+                <button class="btn btn-outline-secondary" hidden type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Generate PDF"><i class="fa fa-file-pdf-o"></i></button>
+
+            </div>
+        </div>
+    </div> <!-- .row end -->
+    @*</div>*@
+</div>

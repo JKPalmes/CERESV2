@@ -1,0 +1,233 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap);
+
+@font-face {
+    font-family: hkgrotesk;
+    src: url(../fonts/hkgrotesk-light.eot);
+    src: local("hkgrotesk light"), url(../fonts/hkgrotesk-light.woff) format("woff");
+    font-weight: 300
+}
+
+@font-face {
+    font-family: hkgrotesk;
+    src: url(../fonts/hkgrotesk-regular.eot);
+    src: local("hkgrotesk regular"), url(../fonts/hkgrotesk-regular.woff) format("woff");
+    font-weight: 400
+}
+
+@font-face {
+    font-family: hkgrotesk;
+    src: url(../fonts/hkgrotesk-medium.eot);
+    src: local("hkgrotesk medium"), url(../fonts/hkgrotesk-medium.woff) format("woff");
+    font-weight: 500
+}
+
+@font-face {
+    font-family: hkgrotesk;
+    src: url(../fonts/hkgrotesk-semibold.eot);
+    src: local("hkgrotesk semibold"), url(../fonts/hkgrotesk-semibold.woff) format("woff");
+    font-weight: 600
+}
+
+@font-face {
+    font-family: hkgrotesk;
+    src: url(../fonts/hkgrotesk-bold.eot);
+    src: local("hkgrotesk bold"), url(../fonts/hkgrotesk-bold.woff) format("woff");
+    font-weight: 700
+}
+
+:root {
+    --vz-body-bg: #f3f3f9;
+    --vz-body-color: #212529;
+    --vz-body-color-rgb: 33, 37, 41;
+    --vz-vertical-menu-bg: #fff;
+    --vz-vertical-menu-item-color: #6d7080;
+    --vz-vertical-menu-item-hover-color: #405189;
+    --vz-vertical-menu-item-active-color: #405189;
+    --vz-vertical-menu-sub-item-color: #7c7f90;
+    --vz-vertical-menu-sub-item-hover-color: #405189;
+    --vz-vertical-menu-sub-item-active-color: #405189;
+    --vz-vertical-menu-title-color: #919da9;
+    --vz-vertical-menu-bg-dark: #405189;
+    --vz-vertical-menu-item-color-dark: #abb9e8;
+    --vz-vertical-menu-item-hover-color-dark: #fff;
+    --vz-vertical-menu-item-active-color-dark: #fff;
+    --vz-vertical-menu-sub-item-color-dark: #abb9e8;
+    --vz-vertical-menu-sub-item-hover-color-dark: #fff;
+    --vz-vertical-menu-sub-item-active-color-dark: #fff;
+    --vz-vertical-menu-title-color-dark: #838fb9;
+    --vz-header-bg: #fff;
+    --vz-header-item-color: #e9ecef;
+    --vz-header-bg-dark: #405189;
+    --vz-header-item-color-dark: #b0c4d9;
+    --vz-topbar-search-bg: #f3f3f9;
+    --vz-topbar-user-bg: #f3f3f9;
+    --vz-topbar-user-bg-dark: #52639c;
+    --vz-footer-bg: #fff;
+    --vz-footer-color: #98a6ad;
+    --vz-topnav-bg: #fff;
+    --vz-topnav-item-color: #6d7080;
+    --vz-topnav-item-color-active: #405189;
+    --vz-twocolumn-menu-iconview-bg: #fff;
+    --vz-twocolumn-menu-bg: #fff;
+    --vz-twocolumn-menu-iconview-bg-dark: var(--vz-vertical-menu-bg-dark);
+    --vz-twocolumn-menu-bg-dark: #435590;
+    --vz-twocolumn-menu-item-color-dark: var(--vz-vertical-menu-item-color-dark);
+    --vz-twocolumn-menu-item-active-color-dark: #fff;
+    --vz-twocolumn-menu-item-active-bg-dark: rgba(255, 255, 255, 0.15);
+    --vz-boxed-body-bg: #e5e5f2;
+    --vz-heading-color: #495057;
+    --vz-light: #f3f6f9;
+    --vz-light-rgb: 243, 246, 249;
+    --vz-dark: #212529;
+    --vz-dark-rgb: 33, 37, 41;
+    --vz-link-color: #405189;
+    --vz-link-hover-color: #405189;
+    --vz-border-color: #e9ebec;
+    --vz-dropdown-bg: #fff;
+    --vz-dropdown-link-color: #212529;
+    --vz-dropdown-link-hover-color: #1e2125;
+    --vz-dropdown-link-hover-bg: #f3f6f9;
+    --vz-dropdown-border-width: 0px;
+    --vz-card-bg: #fff;
+    --vz-card-cap-bg: #fff;
+    --vz-card-logo-dark: block;
+    --vz-card-logo-light: none;
+    --vz-modal-bg: #fff;
+    --vz-nav-tabs-link-active-color: #495057;
+    --vz-nav-tabs-link-active-bg: #f3f3f9;
+    --vz-accordion-button-active-color: #3a497b;
+    --vz-progress-bg: #eff2f7;
+    --vz-toast-background-color: rgba(255, 255, 255, 0.85);
+    --vz-toast-border-color: rgba(0, 0, 0, 0.1);
+    --vz-toast-header-border-color: rgba(0, 0, 0, 0.05);
+    --vz-list-group-hover-bg: #f3f6f9;
+    --vz-popover-bg: #fff;
+    --vz-pagination-hover-bg: #eff2f7;
+    --vz-input-bg: #fff;
+    --vz-input-border: #ced4da;
+    --vz-input-focus-border: #a0a8c4;
+    --vz-input-disabled-bg: #eff2f7;
+    --vz-input-group-addon-bg: #eff2f7;
+    --vz-input-check-border: var(--vz-input-border)
+}
+
+.auth-page-wrapper .auth-page-content {
+    padding-bottom: 60px;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-top: 120px;
+  }
+  .auth-page-wrapper .footer {
+    left: 0;
+    background-color: transparent;
+    color: #212529;
+  }
+  
+  .auth-one-bg-position {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 380px;
+  }
+  @media (max-width: 575.98px) {
+    .auth-one-bg-position {
+      height: 280px;
+    }
+  }
+  
+  .auth-one-bg {
+    background-image: url("../images/auth-one-bg.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+  .auth-one-bg .bg-overlay {
+    background: -webkit-gradient(linear, left top, right top, from(#364574), to(#405189));
+    background: linear-gradient(to right, #364574, #405189);
+    opacity: 0.9;
+  }
+  .auth-one-bg .shape {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .auth-one-bg .shape > svg {
+    width: 100%;
+    height: auto;
+    fill: var(--vz-body-bg);
+  }
+  
+  .auth-pass-inputgroup input[type=text] + .btn .ri-eye-fill:before {
+    content: "\ecb6";
+  }
+  
+  .particles-js-canvas-el {
+    position: relative;
+  }
+  
+  .signin-other-title {
+    position: relative;
+  }
+  .signin-other-title:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed var(--vz-border-color);
+    top: 10px;
+  }
+  .signin-other-title .title {
+    display: inline-block;
+    position: relative;
+    z-index: 9;
+    background-color: var(--vz-card-bg);
+    padding: 2px 16px;
+  }
+  
+  .auth-bg-cover {
+    background: linear-gradient(-45deg, #405189 50%, #0ab39c);
+  }
+  .auth-bg-cover > .bg-overlay {
+    background-image: url("../images/cover-pattern.png");
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+    background-color: transparent;
+  }
+  .auth-bg-cover .footer {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  #password-contain {
+    display: none;
+  }
+  #password-contain p {
+    padding-left: 13px;
+  }
+  #password-contain p.valid {
+    color: #0ab39c;
+  }
+  #password-contain p.valid::before {
+    position: relative;
+    left: -8px;
+    content: "✔";
+  }
+  #password-contain p.invalid {
+    color: #f06548;
+  }
+  #password-contain p.invalid::before {
+    position: relative;
+    left: -8px;
+    content: "✖";
+  }
+
+  
+/*# sourceMappingURL=app.min.css.map */

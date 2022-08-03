@@ -1,0 +1,71 @@
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll.config
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\EntityFramework.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\EntityFramework.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.xml
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CopyComplete
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.dll
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.pdb
+D:\DEV PROJECTS\BIDE_GOLD\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csprojAssemblyReference.cache
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll.config
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.pdb
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.xml
+D:\Website\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.xml
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CopyComplete
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.dll
+D:\Website\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\App.Config
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll.config
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\Newtonsoft.Json.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.xml
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.xml
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\Newtonsoft.Json.xml
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CopyComplete
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.dll
+E:\development\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.pdb
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\App.Config
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll.config
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.pdb
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\EntityFramework.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\Newtonsoft.Json.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\EntityFramework.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\bin\Release\Newtonsoft.Json.xml
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csprojAssemblyReference.cache
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CopyComplete
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.dll
+E:\development\eds.dev - Copy latest\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\GdPicture.NET.14.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\GdPicture.NET.14.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\App.Config
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll.config
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\BIDE_GOLD.Core.pdb
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\Newtonsoft.Json.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\EntityFramework.SqlServer.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\GdPicture.NET.14.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\bin\Release\Newtonsoft.Json.xml
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.AssemblyReference.cache
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CoreCompileInputs.cache
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.csproj.CopyComplete
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.dll
+E:\development\bak\eds_dev bak\eds.dev\BIDE_GOLD.Core\obj\Release\BIDE_GOLD.Core.pdb
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\System.Security.Claims.dll
+E:\development\eds.dev\BIDE_GOLD.Core\bin\Release\System.Security.Principal.Windows.dll

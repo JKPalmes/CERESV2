@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BIDE_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ServiceAreaField">
+    <Key>
+      <PropertyRef Name="svcFieldID" />
+    </Key>
+    <Property Name="svcFieldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="svcID" Type="Int32" Nullable="false" />
+    <Property Name="svcFieldNumber" Type="Int32" Nullable="false" />
+    <Property Name="svcFieldName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CategoryCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="IsVisible" Type="Boolean" />
+    <Property Name="Shade" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Description_Txt" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceAreaFieldGroup_SAID" Type="Int32" />
+    <Property Name="FieldType" Type="Int16" />
+    <Property Name="DataType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GroupName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MetricShortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MetricFormat" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DefaultValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IsLogVisible" Type="Int32" />
+    <Property Name="IsMandatory" Type="Int16" />
+    <Property Name="Constraint_Txt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="tID" />
+    </Key>
+    <Property Name="tID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="accountID" Type="Int32" Nullable="false" />
+    <Property Name="siteID" Type="Int32" Nullable="false" />
+    <Property Name="locID" Type="Int32" Nullable="false" />
+    <Property Name="svcID" Type="Int32" Nullable="false" />
+    <Property Name="field1" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field2" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field3" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field4" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field5" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field6" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field7" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field8" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field9" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field10" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field11" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field12" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field13" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field14" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field15" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field16" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field17" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field18" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field19" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field20" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field21" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field22" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field23" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field24" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field25" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field26" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field27" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field28" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field29" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field30" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field31" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field32" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field33" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field34" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field35" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field36" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field37" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field38" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field39" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field40" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field41" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field42" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field43" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field44" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field45" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field46" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field47" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field48" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field49" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field50" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field51" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field52" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field53" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field54" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field55" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field56" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field57" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field58" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field59" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field60" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field61" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field62" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field63" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field64" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field65" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field66" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field67" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field68" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field69" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field70" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="CreationUserID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StatusCode" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="UpdateUserID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="Remarks" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Name="StringField1" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField2" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField3" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField4" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField5" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField6" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField7" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField8" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField9" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField10" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField11" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField12" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField13" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField14" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField15" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField16" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField17" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField18" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField19" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField20" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField21" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField22" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField23" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField24" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField25" Type="String" MaxLength="4096" FixedLength="false" Unicode="false" />
+    <Property Name="StringField26" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField27" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField28" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField29" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField30" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField31" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField32" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField33" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField34" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField35" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField36" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField37" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField38" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField39" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField40" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField41" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField42" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField43" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField44" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField45" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField46" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField47" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField48" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField49" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField50" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Publish" Type="Int16" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="CommentCount" Type="Int32" />
+    <Property Name="JOB_ID" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="field71" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field72" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field73" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field74" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field75" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field76" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field77" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field78" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field79" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field80" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field81" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field82" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field83" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field84" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field85" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field86" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field87" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field88" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field89" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field90" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field91" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field92" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field93" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field94" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field95" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field96" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field97" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field98" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field99" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field100" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field101" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field102" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field103" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field104" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field105" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field106" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field107" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field108" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field109" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field110" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field111" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field112" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field113" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field114" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field115" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field116" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field117" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field118" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field119" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field120" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field121" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field122" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field123" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field124" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field125" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field126" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field127" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field128" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field129" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field130" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field131" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field132" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field133" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field134" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field135" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field136" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field137" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field138" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field139" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field140" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field141" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field142" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field143" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field144" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field145" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field146" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field147" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field148" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field149" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field150" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field151" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field152" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field153" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field154" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field155" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field156" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field157" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field158" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field159" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field160" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field161" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field162" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field163" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field164" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field165" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field166" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field167" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field168" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field169" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field170" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field171" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field172" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field173" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field174" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field175" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field176" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field177" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field178" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field179" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field180" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field181" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field182" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field183" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field184" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field185" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field186" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field187" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field188" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field189" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field190" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field191" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field192" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field193" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field194" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field195" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field196" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field197" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field198" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field199" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="field200" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="StringField51" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField52" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField53" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField54" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField55" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField56" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField57" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField58" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField59" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField60" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField61" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField62" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField63" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField64" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField65" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField66" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField67" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField68" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField69" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField70" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField71" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField72" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField73" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField74" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField75" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField76" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField77" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField78" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField79" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField80" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField81" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField82" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField83" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField84" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField85" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField86" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField87" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField88" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField89" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField90" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField91" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField92" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField93" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField94" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField95" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField96" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField97" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField98" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField99" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField100" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField101" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField102" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField103" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField104" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField105" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField106" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField107" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField108" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField109" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField110" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField111" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField112" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField113" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField114" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField115" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField116" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField117" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField118" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField119" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField120" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField121" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField122" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField123" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField124" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField125" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField126" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField127" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField128" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField129" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField130" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField131" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField132" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField133" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField134" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField135" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField136" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField137" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField138" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField139" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField140" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField141" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField142" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField143" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField144" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField145" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField146" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField147" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField148" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField149" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField150" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField151" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField152" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField153" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField154" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField155" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField156" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField157" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField158" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField159" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField160" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField161" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField162" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField163" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField164" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField165" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField166" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField167" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField168" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField169" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField170" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField171" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField172" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField173" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField174" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField175" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField176" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField177" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField178" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField179" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField180" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField181" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField182" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField183" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField184" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField185" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField186" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField187" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField188" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField189" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField190" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField191" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField192" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField193" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField194" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField195" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField196" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField197" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField198" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField199" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="StringField200" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="BIDE_DbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ServiceAreaFields" EntityType="Self.ServiceAreaField" />
+    <EntitySet Name="Transactions" EntityType="Self.Transactions" />
+    <EntitySet Name="Clients" EntityType="BIDE_Model.Client" />
+    <EntitySet Name="locations" EntityType="BIDE_Model.location" />
+    <EntitySet Name="ServiceAreas" EntityType="BIDE_Model.ServiceArea" />
+    <EntitySet Name="vwGet_ClientList2" EntityType="BIDE_Model.vwGet_ClientList2" />
+    <EntitySet Name="ServiceAreaFieldLOVs" EntityType="BIDE_Model.ServiceAreaFieldLOV" />
+    <EntitySet Name="User" EntityType="BIDE_Model.user" />
+    <EntitySet Name="sites" EntityType="BIDE_Model.site" />
+    <EntitySet Name="vwServiceAreaFieldLOVs" EntityType="BIDE_Model.vwServiceAreaFieldLOV" />
+    <EntitySet Name="ClientSettings" EntityType="BIDE_Model.ClientSetting" />
+    <EntitySet Name="REF_AccountInfo" EntityType="BIDE_Model.REF_AccountInfo" />
+  </EntityContainer>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="clientID" />
+    </Key>
+    <Property Name="clientID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clientName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="clientStatus" Type="Boolean" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="siteFolderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="location">
+    <Key>
+      <PropertyRef Name="locID" />
+    </Key>
+    <Property Name="locID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="siteID" Type="Int32" Nullable="false" />
+    <Property Name="locName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="locStatus" Type="Boolean" Nullable="false" />
+    <Property Name="Continent" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CBPSRegion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Campus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Building" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Floor" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Area" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Office" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UIEnabledInd" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServiceArea">
+    <Key>
+      <PropertyRef Name="svcID" />
+    </Key>
+    <Property Name="svcID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="locID" Type="Int32" Nullable="false" />
+    <Property Name="svcName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="svcStatus" Type="Boolean" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ServiceCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwGet_ClientList2">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="userid" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userid" Type="Int32" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ServiceAreaFieldLOV">
+    <Key>
+      <PropertyRef Name="ServiceAreaFieldLOV_SAID" />
+    </Key>
+    <Property Name="ServiceAreaFieldLOV_SAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="svcFieldId" Type="Int32" Nullable="false" />
+    <Property Name="FieldId" Type="Int32" />
+    <Property Name="FieldText" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fullname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="userName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="userPwd" Type="Binary" MaxLength="200" FixedLength="false" />
+    <Property Name="userStatus" Type="Byte" />
+    <Property Name="AccountType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UserClientSiteFolderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ClientID" Type="Int32" />
+    <Property Name="ClientFolderName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="resetflag" Type="Boolean" />
+    <Property Name="lastlogin_dttm" Type="DateTime" Precision="3" />
+    <Property Name="visit_cnt" Type="Int32" />
+    <Property Name="admin" Type="Int16" />
+    <Property Name="managerUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="managerFullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Creation_Dttm" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Creation_UserID" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Modification_Dttm" Type="DateTime" Precision="3" />
+    <Property Name="Modification_UserID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="company_nm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact_phone_nbr" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Upload_ind" Type="Byte" />
+    <Property Name="GoldReports_ind" Type="Byte" />
+    <Property Name="MstrUser_Ind" Type="Byte" />
+  </EntityType>
+  <EntityType Name="site">
+    <Key>
+      <PropertyRef Name="siteID" />
+    </Key>
+    <Property Name="siteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clientID" Type="Int32" Nullable="false" />
+    <Property Name="siteName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="siteStatus" Type="Boolean" Nullable="false" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="siteFolderName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="vwServiceAreaFieldLOV">
+    <Key>
+      <PropertyRef Name="ServiceAreaFieldLOV_SAID" />
+      <PropertyRef Name="svcFieldId" />
+      <PropertyRef Name="FieldName" />
+    </Key>
+    <Property Name="ServiceAreaFieldLOV_SAID" Type="Int32" Nullable="false" />
+    <Property Name="svcFieldId" Type="Int32" Nullable="false" />
+    <Property Name="FieldId" Type="Int32" />
+    <Property Name="FieldText" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="FieldName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ClientSetting">
+    <Key>
+      <PropertyRef Name="clientID" />
+    </Key>
+    <Property Name="clientID" Type="Int32" Nullable="false" />
+    <Property Name="editPeriodMgr" Type="Int32" Nullable="false" />
+    <Property Name="editPeriodUsr" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="REF_AccountInfo">
+    <Key>
+      <PropertyRef Name="ClientID" />
+    </Key>
+    <Property Name="ClientID" Type="Int32" Nullable="false" />
+    <Property Name="AccountName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AccountOwner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="StatusCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="StatusDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+</Schema>

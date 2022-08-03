@@ -1,0 +1,16 @@
+E:\development\ceres.dev\CERES.Core\bin\Release\CERES.Core.dll.config
+E:\development\ceres.dev\CERES.Core\bin\Release\CERES.Core.dll
+E:\development\ceres.dev\CERES.Core\bin\Release\CERES.Core.pdb
+E:\development\ceres.dev\CERES.Core\bin\Release\EntityFramework.dll
+E:\development\ceres.dev\CERES.Core\bin\Release\EntityFramework.SqlServer.dll
+E:\development\ceres.dev\CERES.Core\bin\Release\Newtonsoft.Json.dll
+E:\development\ceres.dev\CERES.Core\bin\Release\System.Security.Claims.dll
+E:\development\ceres.dev\CERES.Core\bin\Release\System.Security.Principal.Windows.dll
+E:\development\ceres.dev\CERES.Core\bin\Release\EntityFramework.xml
+E:\development\ceres.dev\CERES.Core\bin\Release\EntityFramework.SqlServer.xml
+E:\development\ceres.dev\CERES.Core\bin\Release\Newtonsoft.Json.xml
+E:\development\ceres.dev\CERES.Core\obj\Release\CERES.Core.csproj.CoreCompileInputs.cache
+E:\development\ceres.dev\CERES.Core\obj\Release\CERES.Core.csproj.CopyComplete
+E:\development\ceres.dev\CERES.Core\obj\Release\CERES.Core.dll
+E:\development\ceres.dev\CERES.Core\obj\Release\CERES.Core.pdb
+E:\development\ceres.dev\CERES.Core\obj\Release\CERES.Core.csproj.AssemblyReference.cache

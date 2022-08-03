@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>CBPS | EDS</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://rawgit.com/vitmalina/w2ui/master/dist/w2ui.min.css" />
+    <link href="Content/my-style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Content/styles.css" />
+    <!--<link rel="stylesheet" type="text/css" href="Content/w2ui-1.5.min.css" />-->
+    <!--<link href="Content/new-style.css" rel="stylesheet" />-->
+</head>
+<body class="dx-viewport">
+    <!--<form id="myform" class="myclass" method="get">-->
+    <div id="" class="container-fluid" style="height: 870px;">
+        <!--<div id="main" style="width: 100%; height: 400px;"></div>-->
+        <!--<div class="flexbox" style="height: 80px; ">-->
+        <div id="header" style="flex-grow: 1">
+            <div class="bg-image">
+            </div>
+        </div>
+        <div id="main" style="width: 100%; height: 700px;"></div>
+    </div>
+
+    <!--</div>-->
+    <!--</form>-->
+    <!--<script src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/w2ui-1.5.min.js"></script>
+
+    <script src="Scripts/appAccount.js"></script>-->
+
+    <script type="text/javascript">
+        var accountInfos = JSON.parse(sessionStorage.getItem('accountInfo'));
+        var flags = [], records = [], l = accountInfos.length, i;
+        for (i = 0; i < l; i++) {
+            if (flags[accountInfos[i].ClientID]) continue;
+            flags[accountInfos[i].ClientID] = true;
+            var record = {
+                recid: i+1,
+                'ClientID': accountInfos[i].ClientID,
+                'AccountName': accountInfos[i].AccountName,
+                'AccountOwner': accountInfos[i].AccountOwner,
+                'Email': accountInfos[i].Email,
+                'Phone': accountInfos[i].PhoneNumber
+            };
+            records.push(record);
+        }
+        // widget configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        6
+        var config = {
+            layout: {
+                name: 'layout',
+                padding: 4,
+                panels: [
+                    { type: 'left', size: '50%', resizable: true, minSize: 300 },
+                    { type: 'main', minSize: 300 }
+                ]
+            },
+            grid: {
+                name: 'grid',
+                show: {
+                    toolbar: true,
+                    toolbarDelete: true
+                },
+                columns: [
+                    { field: 'AccountName', text: 'Account Name', size: '33%', sortable: true, searchable: true },
+                    { field: 'AccountOwner', text: 'Account Owner', size: '33%', sortable: true, searchable: true },
+                    { field: 'Email', text: 'Email', size: '33%' },
+                    { field: 'Phone', text: 'Phone', size: '120px'}
+                ],
+                //records: [
+                //    { recid: 1, fname: 'John', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                //],
+                records: records,
+                onClick: function (event) {
+                    var grid = this;
+                    var form = w2ui.form;
+                    console.log(event);
+                    event.onComplete = function () {
+                        var sel = grid.getSelection();
+                        console.log(sel);
+                        if (sel.length == 1) {
+                            form.recid = sel[0];
+                            form.record = $.extend(true, {}, grid.get(sel[0]));
+                            form.refresh();
+                        } else {
+                            form.clear();
+                        }
+                    }
+                }
+            },
+            form: {
+                header: 'Edit Record',
+                name: 'form',
+                fields: [
+                    { field: 'recid', type: 'text', html: { caption: 'ID', attr: 'size="10" readonly' } },
+                    { field: 'ClientID', type: 'text', html: { caption: 'Client ID', attr: 'size="10" readonly' } },
+                    { field: 'AccountName', type: 'text', required: true, html: { caption: 'Account Name', attr: 'size="40" maxlength="40"' } },
+                    { field: 'AccountOwner', type: 'text', required: true, html: { caption: 'Account Owner', attr: 'size="40" maxlength="40"' } },
+                    { field: 'Email', type: 'email', html: { caption: 'Email', attr: 'size="30"' } },
+                    { field: 'Phone', type: 'text', html: { caption: 'Phone', attr: 'size="12"' } }
+                ],
+                actions: {
+                    Reset: function () {
+                        this.clear();
+                    },
+                    Save: function () {
+                        var errors = this.validate();
+                        if (errors.length > 0) return;
+                        if (this.recid == 0) {
+                            w2ui.grid.add($.extend(true, this.record, { recid: w2ui.grid.records.length + 2 }));
+                            w2ui.grid.selectNone();
+                            this.clear();
+                        } else {
+                            w2ui.grid.set(this.recid, this.record);
+                            w2ui.grid.selectNone();
+                            this.clear();
+                            //save to db
+
+                        }
+                    }
+                }
+            }
+        };
+
+        $(function () {
+            // initialization
+            $('#main').w2layout(config.layout);
+            w2ui.layout.html('left', $().w2grid(config.grid));
+            w2ui.layout.html('main', $().w2form(config.form));
+        });
+
+
+    </script>
+
+</body>
+</html>

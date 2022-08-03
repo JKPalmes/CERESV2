@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+    <title>CERES</title>
+    <link href="Content/my-style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript">
+    var home = "index3.html";
+    if (sessionStorage.getItem("accessToken"))
+        window.location.href = home;
+    </script>
+
+</head>
+<body>
+    <div id="container">
+        <div class="myflexbox">
+            <div id="" style="height: 45px; width:216px;">
+                <div id="">
+                    <!--<img style="height: auto; display: block; width: 100%;" src="images/cbps-216.png" />-->
+                    <img style="height: auto; display: block; width: 100%;" src="images/cbps_logo.png" />
+                </div>
+            </div>
+            <div id="" class="" style="flex-grow: 1; height: 45px; padding: 0px;">
+                <span></span>
+            </div>
+            <div id="" style="height: 45px; width:300px; padding-top: 10px;">
+                <div id="">
+                    <!--<img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" />-->
+                </div>
+            </div>
+        </div>
+
+        <!--<div id="header">
+            <div class="bg-image"></div>
+        </div>-->
+
+        <div id="banner">
+            <section id="section-a">
+                <div class="bg-img"></div>
+            </section>
+        </div>
+
+        <div id="main">
+            <div class="bi-banner">
+                <img src="./images/ceres_banner.png" alt="" />
+                <p>Sign in to start your session</p>
+            </div>
+
+            <section id="section-b">
+
+                <form>
+                    <div class="form-group has-feedback">
+                        <input class="form-control" placeholder="Email" id="txtUserName" required="required">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" placeholder="Password" id="txtPassword" required="required">
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+
+
+                    <input type="submit" id="btnLogin" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+                    <div class="div-signin-loading">
+                        <img src="images/2.gif" alt="" class="hidden" width="32px" height="32px" />
+                    </div>
+                </form>
+            </section>
+            <div class="bi-banner">
+                <a href="/admin-security/#/user/base/form" target="_blank">Change/Request Access to the Site</a>
+            </div>
+        </div>
+
+        <div id="main-footer">
+            <div class="box">
+                Canon DTS - Professional Solutions Division   <br /><br />Having trouble?&nbsp; <br />
+                Contact the CBPS Client Support Center at 877-988-2265 or Email: <a href="mailto:CBPS-CSC@cbps.canon.com" target="_blank">CBPS-CSC@cbps.canon.com</a>
+                <br />
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+                <br />
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header btn-danger">
+                    <button type="button" class="close" data-dismiss="modal" style="color:#fff;">&times;</button>
+                    <h4 id="hModalTitle" class="modal-title" style="text-transform:uppercase;color:#fff;">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="divErrorText"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!-- jQuery 3 -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="plugins/iCheck/icheck.min.js"></script>
+
+
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        });
+
+        $(document).ready(function () {
+
+            $("form").submit(function (e) {
+                $("#btnLogin").hide();
+                $(".div-signin-loading img").removeClass("hidden");
+                e.preventDefault();
+
+                $("#btnLogin").addClass("disabled").disabled = true;
+                $("footer").show();
+                $.ajax({
+                    url: "token",
+                    method: "POST",
+                    //contentType: "application/json",
+                    //headers: {
+                    //    "Vary": "Origin",
+                    //    "Access-Control-Allow-Origin": "localhost"
+                    //},
+                    data: {
+                        username: $("#txtUserName").val(),
+                        password: $("#txtPassword").val(),
+                        grant_type: "password"
+                    },
+                    success: function (data, textStatus, xhr) {
+                        if (xhr.status == 200) {
+                            $("#btnLogin").disabled = false;
+                            $("footer").hide();
+                            $("#divError").hide();
+                            sessionStorage.setItem("data", JSON.stringify(data));
+                            sessionStorage.setItem("accessToken", data.access_token);
+                            sessionStorage.setItem("userName", data.userName);
+                            sessionStorage.setItem("email", data.email);
+                            sessionStorage.setItem("accountType", data.accountType);
+                            //sessionStorage.setItem("accountType", "U");
+
+                            window.location.href = data.clientId == 0 ? "reset.html" : home;
+                        }
+                    },
+                    error: function (err) {
+                        $("#btnLogin").removeClass("disabled");
+                        $("footer").hide();
+                        $("#btnLogin").disabled = false;
+                        console.log(err);
+                        if (err.status == 500) {
+                            $("#hModalTitle").text("ERROR");
+                            $("#divErrorText").text("Oops! Something went wrong! Please contact your BI administrator.");
+                        }
+                        else {
+                            $("#hModalTitle").text(err.responseJSON.error);
+                            $("#divErrorText").text(err.responseJSON.error_description);
+                        }
+                        $("#btnLogin").removeClass("hidden").show();
+                        $(".div-signin-loading img").addClass("hidden").hide();
+                        $("#myModal").modal("show");
+                    }
+                });
+            });
+
+
+            $("footer").hide();
+
+            $("#linkClose").click(function () {
+                $("#divError").hide("fade");
+            });
+        });
+    </script>
+</body>
+</html>
