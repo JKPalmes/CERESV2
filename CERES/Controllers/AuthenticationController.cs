@@ -16,8 +16,9 @@ namespace Ceres.Controllers
         }
 
         [ActionName("SignInCover")]
-        public ActionResult SignInCover()
+        public ActionResult SignInCover(string email)
         {
+            Session["Email"] = email;
             return View();
         }
 

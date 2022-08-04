@@ -1,0 +1,89 @@
+﻿.form-control-feedback{
+    color:#333;
+}
+
+.bi-banner {    
+    align-self:center;    
+}
+
+.bi-banner img{width:100%;}
+
+    .bi-banner p {
+        color: #000;
+        padding: 0px;
+    }
+
+#divErrorText {color:#000;}
+
+.div-signin-loading{display: inline-block;}
+.div-signin-loading img {
+        width: 32px;
+        height: 32px;
+    }
+
+/*@media (min-width: 197px) {
+    .bi-banner img{width:197px; height: 67px;}
+*/
+/*    @media (min-width: 476px) {
+        .bi-banner img {
+            width: 476px;
+            height: 80px;
+        }*/
+
+     /*   @media (min-width: 211px) {
+            .bi-banner img {
+                width: 320px;
+                height: 133px;
+                padding-left: 40px;
+            }*/
+
+
+            @media (min-width: 211px) {
+                .bi-banner img {
+                    width: 320px;
+                    height: 120px;
+                    padding-left: 10px;
+                }
+
+
+                #banner, #main {
+                    display: block;
+                    min-height: 278px;
+                    color: #fff;
+                    text-align: center;
+                }
+
+                #section-a .bg-img {
+                    height: 250px;
+                }
+
+                #main {
+                    justify-self: center;
+                    justify-content: center;
+                    align-self: center;
+                    display: inline-block;
+                    padding-top: 0;
+                }
+
+                #main-footer {
+                    position: sticky;
+                    position: page;
+                }
+            }
+
+.ms-banner {
+    align-self: center;
+}
+
+.ms-banner img {
+    display: inherit;
+}
+
+.ms-banner p {
+    color: #000;
+}
+.ms-banner img {
+    width: 215px;
+    height: 41px;
+}
+

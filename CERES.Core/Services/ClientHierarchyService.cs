@@ -321,5 +321,22 @@ namespace CERES.Core.Services
             }
         }
 
+        public static IEnumerable<ClientSelector> GetClientData()
+        {
+            using (BIDE_DbContext dbContext = new BIDE_DbContext())
+            {
+                try
+                {
+                    var lookup = dbContext.Database.SqlQuery<ClientSelector>("select distinct convert(varchar(10),clientid) + '-' + clientname as AccountIdName from [EDS_TDB].[dbo].[Client] where clientname != 'Enterprise Two' ").ToList();
+                    return lookup;
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(e.Message, e);
+                }
+            }
+        }
+
+
     }
 }

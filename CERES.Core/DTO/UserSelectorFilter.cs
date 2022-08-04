@@ -23,4 +23,9 @@ namespace CERES.Core.DTO
         public string Text { get; set; }
     }
 
+    public class ClientSelector
+    {
+        public string AccountIdName { get; set; }
+    }
+
 }

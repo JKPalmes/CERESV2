@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.pTitle = "Dashboard";
+    ViewBag.pageTitle = "Dashboards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <!-- Application vendor css url-->
+    <link href="~/assets/cssbundle/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/cssbundle/flatpickr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="~/Content/w2ui-1.5.min.css" />
+    <!-- DevExtreme theme -->
+    <link rel="stylesheet" href="~/Content/dx.common.css">
+    <link rel="stylesheet" href="~/Content/dx.light.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/jquery-idle-hands.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://rawcdn.githack.com/dmhendricks/file-icon-vectors/master/dist/file-icon-vectors.min.css" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    @*<link href="~/Content/new-style.css" rel="stylesheet" />*@
+
+}
+
+<!-- start: page body -->
+<div class="page-body px-xl-4 px-sm-2 px-0 py-lg-0 py-0 mt-0 mt-lg-0">
+    <div id="main-panel" flex-grow: 2000">
+        <div id="selector-panel" class="col-lg-12 col-md-12" style="padding-top: 0rem; padding-bottom: .5rem;">
+            <div class="row">
+                <input type="text" hidden id="txtProductionDate" name="txtProductionDate">
+
+                <div class="card fieldset border border-primary mb-5">
+                    <span class="fieldset-tile text-primary bg-body">Selectors:</span>
+                    <div class="row g-2 row-deck">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card p-3">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-1 overflow-hidden">
+                                            <p class="text-truncate font-size-14 mb-2">Client</p>
+                                            <div style="padding-right: 5px; padding-left: 5px;">
+                                                <select id="ddlClient" name="ddlClient" class="form-control" required="required">
+                                                    <option value="--- Select Client ---">Enterprise One</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-primary ms-auto">
+                                            @*<i class="ri-stack-line font-size-24"></i>*@
+                                            <i class="fa fa-building font-size-24"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card p-3">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-1 overflow-hidden">
+                                            <p class="text-truncate font-size-14 mb-2">Site &nbsp;&nbsp;<span id="siteRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-site"></span></p>
+                                            <div style="padding-right: 5px; padding-left: 5px;">
+                                                <select id="ddlSite" name="ddlSite" class="form-control" required="required">
+                                                    <option value="--- Select Site ---">DEMO_A</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-primary ms-auto">
+                                            @*<i class="ri-store-2-line font-size-24"></i>*@
+                                            <i class="fa fa-sitemap font-size-24"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card p-3">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-1 overflow-hidden">
+                                            <p class="text-truncate font-size-14 mb-2">Location&nbsp;&nbsp;<span id="locationRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-location"></span></p>
+                                            <div style="padding-right: 5px; padding-left: 5px;">
+                                                <select id="ddlLocation" name="ddlLocation" class="form-control" required="required">
+                                                    <option value="--- Select Location ---">DEMO_A</option>
+                                                    <option value="--- Select Location ---">DEMO_AB</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-primary ms-auto">
+                                            @*<i class="ri-briefcase-4-line font-size-24"></i>*@
+                                            <i class="fa fa-location-arrow font-size-24"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card p-3">
+                                <div class="card-body">
+                                    <div class="d-flex">
+                                        <div class="flex-1 overflow-hidden">
+                                            <p class="text-truncate font-size-14 mb-2">Service Area &nbsp;&nbsp;<span id="serviceAreaRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-servicearea"></span></p>
+                                            <div style="padding-right: 5px; padding-left: 5px;">
+                                                <select id="ddlServiceArea" name="ddlServiceArea" class="form-control" required="required">
+                                                    <option value="--- Select Service Area ---">All</option>
+                                                    <option value="--- Select Service Area ---">Central Print</option>
+                                                    <option value="--- Select Service Area ---">Commentary/option>
+                                                    <option value="--- Select Service Area ---">Facilities</option>
+                                                    <option value="--- Select Service Area ---">Hospitality</option>
+                                                    <option value="--- Select Service Area ---">Imaging</option>
+                                                    <option value="--- Select Service Area ---">Mail</option>
+                                                    <option value="--- Select Service Area ---">Managed Print</option>
+                                                    <option value="--- Select Service Area ---">Records</option>
+                                                    <option value="--- Select Service Area ---">Shipping & Receiving</option>
+                                                    <option value="--- Select Service Area ---">Warehouse</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="text-primary ms-auto">
+                                            @*<i class="ri-briefcase-4-line font-size-24"></i>*@
+                                            <i class="fa fa-server font-size-24"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 row-deck" id="prod-panel">
+            <div id="data-panel" class="col-lg-4 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">Production Data</h6>
+                        <div class="btn-group me-3 justify-content-between" role="group">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="transView = 'ShowPendingTransactions';filterByStatus()">
+                            <label class="btn btn-sm btn-outline-secondary" for="btnradio1">Pending</label>
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="transView = 'ShowAllTransactions';filterByStatus()" checked="">
+                            <label class="btn btn-sm btn-outline-secondary" for="btnradio2">All</label>
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="transView = 'ShowCompletedTransactions';filterByStatus()">
+                            <label class="btn btn-sm btn-outline-secondary" for="btnradio3">Completed</label>
+                        </div>
+
+                        <div class="dropdown morphing scale-left">
+                            <button class="btn btn-outline-secondary" type="button" onclick="expandPanels()" data-bs-toggle="tooltip" data-bs-placement="top" title="Expand/Collapse Panels"><i class="fa fa-window-restore"></i></button>
+                            <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="" data-bs-original-title="Card Full-Screen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                            <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
+                            <ul class="dropdown-menu shadow border-0 p-2" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">File Info</a></li>
+                                <li><a class="dropdown-item" href="#">Copy to</a></li>
+                                <li><a class="dropdown-item" href="#">Move to</a></li>
+                                <li><a class="dropdown-item" href="#">Rename</a></li>
+                                <li><a class="dropdown-item" href="#">Block</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body gridContainer" id="gridContainer">
+                    </div>
+                </div>
+            </div>
+
+            <div id="attributes-panel" class="col-lg-4 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">Attributes</h6>
+                        <div class="dropdown morphing scale-left">
+                            <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                            <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
+                            <ul class="dropdown-menu shadow border-0 p-2">
+                                <li><a class="dropdown-item" href="#">File Info</a></li>
+                                <li><a class="dropdown-item" href="#">Copy to</a></li>
+                                <li><a class="dropdown-item" href="#">Move to</a></li>
+                                <li><a class="dropdown-item" href="#">Rename</a></li>
+                                <li><a class="dropdown-item" href="#">Block</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body divEntry">
+                        <table id="tblAttribFields" class="table table-responsive table-hover">
+                            <tbody></tbody>
+                        </table>
+                        <div class="div-signin-loading-attrib" style="position: fixed; left: 50%;top:30%;z-index:10">
+                            <div style="position: relative; left: -50%;">
+                                <img src="~/images/2.gif" alt="" width="32px" height="32px" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="metrics-panel" class="col-lg-4 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title mb-0">Metrics</h6>
+                        <div class="dropdown morphing scale-left">
+                            <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                            <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
+                            <ul class="dropdown-menu shadow border-0 p-2">
+                                <li><a class="dropdown-item" href="#">File Info</a></li>
+                                <li><a class="dropdown-item" href="#">Copy to</a></li>
+                                <li><a class="dropdown-item" href="#">Move to</a></li>
+                                <li><a class="dropdown-item" href="#">Rename</a></li>
+                                <li><a class="dropdown-item" href="#">Block</a></li>
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-body divEntry">
+                        <table id="tblMetricFields" class="table table-responsive table-hover">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @*</div>*@
+        </div> <!-- .row end -->
+        <div id="context-menu"></div>
+        <!--brb 5/20/2022-->
+        <div id="context-menu1"></div>
+        <!--brb 5/23/2022-->
+        <div id="context-menu2"></div>
+    </div>
+</div>
+
+
+@section scripts{
+    <!-- App js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/basil.js/0.4.10/basil.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <!--<script src="Scripts/additional-methods.min.js"></script>-->
+
+    <script type="text/javascript" src="~/Scripts/w2ui-1.5.min.js"></script>
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="~/Scripts/dx.all.js"></script>
+
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/jquery-idle-hands.js"></script>
+
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/index.js"></script>
+    <script src="~/Scripts/ceres.js"></script>
+    <script src="~/Scripts/ceres-dashboard.js"></script>
+}

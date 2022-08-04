@@ -42,6 +42,7 @@ namespace CERES.Web.Api.Controllers
         private readonly string _serverFolderPath = WebConfigurationManager.AppSettings["ServerFolderPath"];
         private readonly int _maxUploadFileSize = Int32.Parse(WebConfigurationManager.AppSettings["MaxUploadFileSize"]);
         private readonly string _allowedFileExtensions = WebConfigurationManager.AppSettings["AllowedFileExtensions"];
+        private readonly string _eDUploadsFolderLocation = WebConfigurationManager.AppSettings["ExecutiveDashboardUploadsLocation"];
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -1080,6 +1081,88 @@ namespace CERES.Web.Api.Controllers
             }
 
 
+        }
+
+        [HttpPost]
+        [Route("api/Client/Auth")]
+        public IHttpActionResult Auth([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+
+            var email = values.data.email.ToString();
+            var password = values.data.password.ToString();
+
+            try
+            {
+                var userSvc = new UserService();
+                User user = userSvc.ValidateUser(email, password);
+                if (user != null)
+                {
+                    if (user.CompanyName == null) user.CompanyName = "Milbank";
+                    var token = Providers.OAuthProvider.GenerateToken(user.Email, user.AccountType, user.ClientID.ToString(), user.CompanyName);
+
+                    user.Id = user.ClientID;
+                    var roles = new List<string>();
+                    roles.Add(user.AccountType);
+                    var role = "Guest";
+                    switch (user.AccountType)
+                    {
+                        case "A":
+                            role = "Administrator";
+                            break;
+                        case "M":
+                            role = "Manager";
+                            break;
+                        case "U":
+                            role = "User";
+                            break;
+                        default:
+                            break;
+                    }
+                    var userED = new UserED
+                    {
+                        displayName = "Executive Dashboard",
+                        username = user.Email,
+                        occupation = role,
+                        avatar = "assets/images/avatars/" + role + ".png",
+                        photoURL = _eDUploadsFolderLocation + "/" + user.ClientID + ".png",
+                        shortcuts = "",
+                        Id = user.Id,
+                        Name = user.Name,
+                        Email = user.Email,
+                        AccountType = user.AccountType,
+                        ClientID = user.ClientID,
+                        CompanyName = user.CompanyName
+                    };
+
+                    var userData = new UserData
+                    {
+                        User = userED,
+                        Role = roles,
+                        Access_Token = token
+                    };
+
+                    return Ok(userData);
+                }
+                else
+                    return Unauthorized();
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message, ex);
+                //return Problem($"Something Went Wrong in the {nameof(Login)}", statusCode: 500);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Client/GetClientData")]
+        public IHttpActionResult GetClientData()
+        {
+            var lookup = ClientHierarchyService.GetClientData();
+            return Ok(lookup);
+
+            //return Ok(UserService.UpdateUserProfile(_email, contactNo));
         }
 
     }

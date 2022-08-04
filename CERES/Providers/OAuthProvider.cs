@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using CERES.Core;
 using System.Web;
 using CERES.Core.Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace CERES.Web.Api.Providers
 {
@@ -81,5 +83,32 @@ namespace CERES.Web.Api.Providers
         }
         #endregion
 
+        public static string GenerateToken(string userName, string accountType, string clientId, string clientName)
+        {
+            var mySecret = "asdv234234^&%&^%&^hjsdfb2%%%";
+            var mySecurityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.ASCII.GetBytes(mySecret));
+            var myIssuer = "https://ceres.cbpsportal.com";
+            var myAudience = "http://microstrategy.cbpsportal.com";
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.Sid, HttpUtility.HtmlEncode(clientId)),
+                        new Claim(ClaimTypes.Name, HttpUtility.HtmlEncode(userName)),
+                        new Claim(ClaimTypes.Email, HttpUtility.HtmlEncode(userName)),//user.Email)),
+                        new Claim(ClaimTypes.Role, HttpUtility.HtmlEncode(accountType)),
+                        new Claim(ClaimTypes.NameIdentifier, HttpUtility.HtmlEncode(clientName))
+                    };
+
+            var tokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(7),
+                Issuer = myIssuer,
+                Audience = myAudience,
+                SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(mySecurityKey, Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
     }
 }

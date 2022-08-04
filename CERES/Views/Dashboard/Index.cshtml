@@ -10,22 +10,23 @@
     <link href="~/assets/cssbundle/daterangepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="~/assets/cssbundle/flatpickr.min.css" rel="stylesheet" type="text/css" />
 
-    <link rel="stylesheet" type="text/css" href="~/Content/w2ui-1.5.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/content/w2ui-1.5.min.css" />
     <!-- DevExtreme theme -->
-    <link rel="stylesheet" href="~/Content/dx.common.css">
-    <link rel="stylesheet" href="~/Content/dx.light.css">
+    <link rel="stylesheet" href="~/content/dx.common.css">
+    <link rel="stylesheet" href="~/content/dx.light.css">
 
-    <link rel="stylesheet" type="text/css" href="~/Content/jquery-idle-hands.css" />
+    <link rel="stylesheet" type="text/css" href="~/content/jquery-idle-hands.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://rawcdn.githack.com/dmhendricks/file-icon-vectors/master/dist/file-icon-vectors.min.css" />
-    <link href="~/Content/toastr.min.css" rel="stylesheet" />
-    @*<link href="~/Content/new-style.css" rel="stylesheet" />*@
+    <link href="~/content/toastr.min.css" rel="stylesheet" />
+    <link href="~/assets/css/custom.css" rel="stylesheet" />
+    @*<link href="~/content/new-style.css" rel="stylesheet" />*@
 
 }
 
 <!-- start: page body -->
 <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-0 py-0 mt-0 mt-lg-0">
-    <div id="main-body" class="container-fluid">
+    <div id="main-panel" flex-grow: 2000">
         <div id="selector-panel" class="col-lg-12 col-md-12" style="padding-top: 0rem; padding-bottom: .5rem;">
             <div class="row">
                 <input type="text" hidden id="txtProductionDate" name="txtProductionDate">
@@ -46,7 +47,8 @@
                                             </div>
                                         </div>
                                         <div class="text-primary ms-auto">
-                                            <i class="ri-stack-line font-size-24"></i>
+                                            @*<i class="ri-stack-line font-size-24"></i>*@
+                                            <i class="fa fa-building font-size-24"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +67,8 @@
                                             </div>
                                         </div>
                                         <div class="text-primary ms-auto">
-                                            <i class="ri-store-2-line font-size-24"></i>
+                                            @*<i class="ri-store-2-line font-size-24"></i>*@
+                                            <i class="fa fa-sitemap font-size-24"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +88,8 @@
                                             </div>
                                         </div>
                                         <div class="text-primary ms-auto">
-                                            <i class="ri-briefcase-4-line font-size-24"></i>
+                                            @*<i class="ri-briefcase-4-line font-size-24"></i>*@
+                                            <i class="fa fa-location-arrow font-size-24"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +118,8 @@
                                             </div>
                                         </div>
                                         <div class="text-primary ms-auto">
-                                            <i class="ri-briefcase-4-line font-size-24"></i>
+                                            @*<i class="ri-briefcase-4-line font-size-24"></i>*@
+                                            <i class="fa fa-server font-size-24"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -130,11 +135,11 @@
                     <div class="card-header">
                         <h6 class="card-title mb-0">Production Data</h6>
                         <div class="btn-group me-3 justify-content-between" role="group">
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="transView = 'ShowPendingTransactions';filterByStatus()">
                             <label class="btn btn-sm btn-outline-secondary" for="btnradio1">Pending</label>
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" checked="">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" onclick="transView = 'ShowAllTransactions';filterByStatus()" checked="">
                             <label class="btn btn-sm btn-outline-secondary" for="btnradio2">All</label>
-                            <input type="radio" class="btn-check" name="btnradio" id="btnradio3">
+                            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="transView = 'ShowCompletedTransactions';filterByStatus()">
                             <label class="btn btn-sm btn-outline-secondary" for="btnradio3">Completed</label>
                         </div>
 
@@ -212,13 +217,12 @@
             </div>
             @*</div>*@
         </div> <!-- .row end -->
+        <div id="context-menu"></div>
+        <!--brb 5/20/2022-->
+        <div id="context-menu1"></div>
+        <!--brb 5/23/2022-->
+        <div id="context-menu2"></div>
     </div>
-    <div id="context-menu"></div>
-    <!--brb 5/20/2022-->
-    <div id="context-menu1"></div>
-    <!--brb 5/23/2022-->
-    <div id="context-menu2"></div>
-
 </div>
 
 
@@ -229,17 +233,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/basil.js/0.4.10/basil.min.js"></script>
 
-    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/scripts/jquery.validate.min.js"></script>
     <!--<script src="Scripts/additional-methods.min.js"></script>-->
 
-    <script type="text/javascript" src="~/Scripts/w2ui-1.5.min.js"></script>
+    <script type="text/javascript" src="~/scripts/w2ui-1.5.min.js"></script>
     <!-- DevExtreme library -->
-    <script type="text/javascript" src="~/Scripts/dx.all.js"></script>
+    <script type="text/javascript" src="~/scripts/dx.all.js"></script>
 
-    <script src="~/Scripts/toastr.min.js"></script>
-    <script src="~/Scripts/jquery-idle-hands.js"></script>
+    <script src="~/scripts/toastr.min.js"></script>
+    <script src="~/scripts/jquery-idle-hands.js"></script>
 
-    <script src="~/Scripts/app.js"></script>
-    <script src="~/Scripts/index.js"></script>
-    <script src="~/Scripts/ceres.js"></script>
+    <script src="~/scripts/app.js"></script>
+    <script src="~/scripts/index.js"></script>
+    <script src="~/scripts/ceres.js"></script>
 }
