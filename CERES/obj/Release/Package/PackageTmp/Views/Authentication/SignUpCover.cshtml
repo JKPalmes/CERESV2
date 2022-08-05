@@ -26,8 +26,8 @@
                                         <div class="bg-overlay"></div>
                                         <div class="position-relative h-100 d-flex flex-column">
                                             <div class="mb-4">
-                                                <a href="@Url.Action("Index", "Dashboard")" class="d-block">
-                                                    <img src="~/assets/images/logo-light.png" alt="" height="18">
+                                                <a href="../Dashboard/Index" class="d-block">
+                                                    <img src="../assets/images/logo-light.png" alt="" height="18">
                                                 </a>
                                             </div>
                                             <div class="mt-auto">
@@ -71,7 +71,7 @@
                                         </div>
 
                                         <div class="mt-4">
-                                            <form class="needs-validation" novalidate action="@Url.Action("Index", "Dashboard")">
+                                            <form class="needs-validation" novalidate action="../Dashboard/Index">
 
                                                 <div class="mb-3">
                                                     <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
@@ -165,9 +165,9 @@
     @Html.Partial("~/Views/Shared/_vendor_scripts.cshtml")
 
     <!-- validation init -->
-    <script src="~/assets/js/pages/form-validation.init.js"></script>
+    <script src="../assets/js/pages/form-validation.init.js"></script>
     <!-- password create init -->
-    <script src="~/assets/js/pages/passowrd-create.init.js"></script>
+    <script src="../assets/js/pages/passowrd-create.init.js"></script>
 
 </body>
 </html>

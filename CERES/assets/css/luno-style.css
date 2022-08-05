@@ -26272,9 +26272,9 @@ button:focus:not(:focus-visible) {
 }
 
 .company-logo {
-    width: 64px;
-    min-width: 64px;
-    height: 48px
+    width: 128px;
+    min-width: 128px;
+    height: 54px
 }
 
 .avatar {

@@ -243,15 +243,15 @@ File: Main Js File
 
         init();
 
-        $("input[type='text']").on("click", function () {
-            $(this).select();
-        });
-        $("input").focus(function () {
-            $(this).select();
-        });
-        $("input").focusin(function () {
-            $(this).select();
-        });
+        //$("input[type='text']").on("click", function () {
+        //    $(this).select();
+        //});
+        //$("input").focus(function () {
+        //    $(this).select();
+        //});
+        //$("input").focusin(function () {
+        //    $(this).select();
+        //});
 
         $('input[rel="txtTooltip"]').tooltip();
 

@@ -18,9 +18,9 @@
                     <span class="line"></span>
                 </span>
             </button>*@
-                <a href="@Url.Action("Index", "Dashboard")" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary ">
+                <a href="../Dashboard/Index" class="brand-icon d-flex align-items-center mx-2 mx-sm-3 text-primary ">
                     <span class="logo-lg">
-                        <img src="~/assets/images/CBPS_LOGO.png" alt="" height="48">
+                        <img src="../assets/images/CBPS_LOGO.png" alt="" height="48">
                     </span>
                 </a>
             </div>
@@ -54,7 +54,7 @@
             <!-- start: link -->
         <ul class="header-right justify-content-end d-flex align-items-center mb-0">
             <li>
-                <a class="nav-link dropdown-toggle after-none p-0" href="#" role="button" data-bs-toggle="dropdown">
+                <a class="nav-link dropdown-toggle after-none p-0" style="margin-bottom: 15px;" href="#" role="button" data-bs-toggle="dropdown">
                     <img id="company-logo" class="company-logo img-thumbnail shadow" src="../images/1000001.png" alt="company_logo">
                 </a>
 
@@ -287,7 +287,9 @@
                                 <a class="list-group-item list-group-item-action border-0" href="#" onclick="popupChangePasswordForm();"><i class="w30 fa fa-credit-card"></i>Change Password</a>
                                 <a class="list-group-item list-group-item-action border-0" href="#" onclick="popupSettingsForm();"><i class="w30 fa fa-gear"></i>Change User Settings</a>
                             </div>
-                            <a href="@Url.Action("LogoutBasic", "Authentication")" class="btn bg-secondary text-light text-uppercase rounded-0">Sign out</a>
+                            @*<a href="@Url.Action("LogoutBasic", "Authentication")" class="btn bg-secondary text-light text-uppercase rounded-0">Sign out</a>*@
+                            <a href="../Authentication/LogoutBasic")" class="btn bg-secondary text-light text-uppercase rounded-0">Sign out</a>
+                            
                         </div>
                     </div>
                 </div>
@@ -304,7 +306,7 @@
                     <div class="dropdown-menu rounded-4 shadow border-0 p-0" data-bs-popper="none">
                         <div class="card" id="myinfo">
                             <div class="list-group list-group-custom" style="width: 200px;">
-                                <a class="list-group-item list-group-item-action border-0" href="@Url.Action("SignInBasic", "Authentication")" onclick="clearCache();"><i class="w30 fa fa-refresh"></i>Clear Cache</a>
+                                <a class="list-group-item list-group-item-action border-0" href="../Authentication/SignInBasic")" onclick="clearCache();"><i class="w30 fa fa-refresh"></i>Clear Cache</a>
                                 <a class="list-group-item list-group-item-action border-0" href="#"><i class="w30 fa fa-info-circle"></i>Help - Using Ceres</a>
                                 <a class="list-group-item list-group-item-action border-0" href="https://canonbps.box.com/s/60l9gvqz2jec1s9rpqh0pf3rthr7o5iw" target="_blank"><i class="w30 fa fa-question-circle"></i>Users Guide</a>
                                 <a class="list-group-item list-group-item-action border-0" href="#" onclick="openCredits();"><i class="w30 fa fa-info"></i>About Ceres</a>

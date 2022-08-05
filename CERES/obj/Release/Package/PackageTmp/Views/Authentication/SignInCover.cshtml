@@ -26,8 +26,8 @@
                                             <div class="bg-overlay"></div>
                                             <div class="position-relative h-100 d-flex flex-column">
                                                 <div class="mb-4">
-                                                    <a href="@Url.Action("Index", "Dashboard")" class="d-block">
-                                                        <img src="~/assets/images/logo-light.png" alt="" height="18">
+                                                    <a href="../Dashboard/Index" class="d-block">
+                                                        <img src="../assets/images/logo-light.png" alt="" height="18">
                                                     </a>
                                                 </div>
                                                 <div class="mt-auto">
@@ -71,7 +71,7 @@
                                             </div>
             
                                             <div class="mt-4">
-                                                <form action="@Url.Action("Index", "Dashboard")">
+                                                <form action="../Dashboard/Index">
                     
                                                     <div class="mb-3">
                                                         <label for="username" class="form-label">Username</label>
@@ -153,7 +153,7 @@
     @Html.Partial("~/Views/Shared/_vendor_scripts.cshtml")
 
     <!-- password-addon init -->
-    <script src="~/assets/js/pages/password-addon.init.js"></script>
+    <script src="../assets/js/pages/password-addon.init.js"></script>
 
 </body>
 </html>

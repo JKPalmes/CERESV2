@@ -51,6 +51,7 @@ File: Main Js File
         $("#divUserName, .full-name").text("  " + sessionUserName);
         $(".user-name-text").text(" " + sessionUserName + " ");
         $(".user-name-sub-text").text(" " + userType + " ");
+        $(".user-email-text").text(" " + sessionEmail + " ");
 
         getUserFolders();
         getUserProfile();
@@ -174,7 +175,7 @@ File: Main Js File
 
         $("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
 
-        $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("click", function () {
+        $(".fa-sitemap, .fa-location-arrow, .fa-server").on("click", function () {
             if ($(this).prop("class").indexOf("site") >= 0)
                 $("#ddlClient").change();
             else if ($(this).prop("class").indexOf("location") >= 0) {
@@ -187,7 +188,7 @@ File: Main Js File
 
         });
 
-        $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseover", function () {
+        $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseover", function () {
             $('#siteRefresh').w2tag();
             if ($(this).prop("class").indexOf("site") >= 0) {
                 $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "right", className: 'w2ui-dark' });
@@ -196,10 +197,10 @@ File: Main Js File
                 $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "right", className: 'w2ui-dark' });
             }
             else
-                $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "right", className: 'w2ui-dark' });
+                $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "left", className: 'w2ui-dark' });
         });
 
-        $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseout", function () {
+        $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseout", function () {
             $('#siteRefresh').w2tag();
             $('#locationRefresh').w2tag();
             $('#serviceAreaRefresh').w2tag();
@@ -243,15 +244,15 @@ File: Main Js File
 
         init();
 
-        $("input[type='text']").on("click", function () {
-            $(this).select();
-        });
-        $("input").focus(function () {
-            $(this).select();
-        });
-        $("input").focusin(function () {
-            $(this).select();
-        });
+        //$("input[type='text']").on("click", function () {
+        //    $(this).select();
+        //});
+        //$("input").focus(function () {
+        //    $(this).select();
+        //});
+        //$("input").focusin(function () {
+        //    $(this).select();
+        //});
 
         $('input[rel="txtTooltip"]').tooltip();
 

@@ -578,7 +578,7 @@ function setup() {
 
     $("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
 
-    $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("click", function () {
+    $(".fa-sitemap, .fa-location-arrow, .fa-server").on("click", function () {
         if ($(this).prop("class").indexOf("site") >= 0)
             $("#ddlClient").change();
         else if ($(this).prop("class").indexOf("location") >= 0) {
@@ -591,7 +591,7 @@ function setup() {
 
     });
 
-    $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseover", function () {
+    $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseover", function () {
         $('#siteRefresh').w2tag();
         if ($(this).prop("class").indexOf("site") >= 0) {
             $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "right", className: 'w2ui-dark' });
@@ -603,7 +603,7 @@ function setup() {
             $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "right", className: 'w2ui-dark' });
     });
 
-    $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseout", function () {
+    $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseout", function () {
         $('#siteRefresh').w2tag();
         $('#locationRefresh').w2tag();
         $('#serviceAreaRefresh').w2tag();
@@ -964,7 +964,9 @@ function handleRecentSavedData(data) {
         clearProductionLog;
         //hideProductionDetails();
     } else {
-        setSelectors(localStorage.getItem('areaId'));
+        if (sessionStorage.getItem('selectedArea') != 'All') {
+            setSelectors(localStorage.getItem('areaId'));
+        }
         showProductionDetails();
         isUpdate = true;
         selectGridRow();
@@ -1330,7 +1332,7 @@ function setupGenericColumns(model, isAddMode) {
 //var ordersStore = new DevExpress.data.CustomStore({
 //    key: "TransactionId",
 //    remove: function (key) {
-//        return sendRequest(baseUrl + "/DeleteTran", "DELETE", {
+//        return sendRequest(baseUrl + "DeleteTran", "DELETE", {
 //            key: key
 //        });
 //    }
@@ -1364,6 +1366,8 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
         },
         showBorders: true,
         onContentReady: function (e) {
+            //if (searchEntered == false) $('.dx-clear-button-area').trigger('click');  
+
             replaceHeaderClass();
             //if (e.component.__searchChanged) {
             //e.component.__searchChanged = false;
@@ -1387,24 +1391,23 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             }
 
             //brb 5/13/2022
-            //brb 8/3/2022
-            //let rowKeys = JSON.parse(localStorage.getItem('storage'))
-            //if (rowKeys && rowKeys.selectedRowKeys != null) {
-            //    let rowKey = rowKeys.selectedRowKeys[0]
-            //    e.component.selectRows(rowKey);
-            //    focusedRowKey = rowKey;
-            //}
+            let rowKeys = JSON.parse(localStorage.getItem('storage'))
+            if (rowKeys && rowKeys.selectedRowKeys != null) {
+                let rowKey = rowKeys.selectedRowKeys[0]
+                e.component.selectRows(rowKey);
+                focusedRowKey = rowKey;
+            }
             //brb 5/13/2022
         },
         hoverStateEnabled: true,
-        //stateStoring: {
-        //    enabled: true,
-        //    type: "localStorage",
-        //    storageKey: "storage"
-        //},
+        stateStoring: {
+            enabled: true,
+            type: "localStorage",
+            storageKey: "storage"
+        },
         onOptionChanged: function (args) {
         //    return;
-        //    searchEntered = false;
+            searchEntered = false;
         //    if (args.fullName === 'filterValue') {
         //        //var x = document.getElementsByClassName('w2ui-button');
         //        if (args.value === null) {
@@ -1441,16 +1444,18 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
         //            }
         //        }
         //    } else if (args.fullName === 'paging.pageIndex') {
-        //        isPageChanged = true;
-        //    } else if (args.fullName == "searchPanel.text") {
-        //        //e.component.__searchChanged = true;
-        //        searchEntered = true;
-        //    }
+        if (args.fullName === 'paging.pageIndex') {
+                isPageChanged = true;
+            } else if (args.fullName == "searchPanel.text") {
+                //e.component.__searchChanged = true;
+                searchEntered = true;
+            }
         },
         searchPanel: {
             visible: true,
             width: 160,
             placeholder: "Search Grid Data..."
+            
         },
         paging: {
             pageSize: userSettings.PageSize,
@@ -1460,7 +1465,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             //displayMode: "compact",
             //displayMode: "full",
             showPageSizeSelector: true,
-            allowedPageSizes: [5, 10, 20, 50],
+            allowedPageSizes: [1, 2, 3, 5, 10, 20, 30, 50],
             showInfo: true,
             showNavigationButtons: true
         },
@@ -1669,13 +1674,13 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             sessionStorage.setItem("rowKey", e.data.TransactionId);
             if (!isFiltered) {
                 let areaId = e.data.ServiceAreaId + '_' + e.data.AccountId
-                let savedSelectorsArr = JSON.parse(localStorage.getItem('userSavedPreferences'));
-                if (savedSelectorsArr.length > 0) {
-                    let savedSelectors = savedSelectorsArr.filter(function (obj) { return obj.Id == areaId });
+                //let savedSelectorsArr = JSON.parse(localStorage.getItem('userSavedPreferences'));
+                //if (savedSelectorsArr && savedSelectorsArr.length > 0) {
+                    //let savedSelectors = savedSelectorsArr.filter(function (obj) { return obj.Id == areaId });
                     //if (savedSelectors.length > 0) w2ui.sidebar.click(areaId);
                     //else 
                     getSavedDataByServiceArea(areaId);
-                }
+                //}
             }
         },
         hoverStateEnabled: true,
@@ -1708,14 +1713,14 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 if (keyIndex > -1) getTransactionData(model.GenericTransactions[keyIndex], false);
             }
         },
-        //filterRow: { visible: true },
+        filterRow: { visible: true },
         filterPanel: { visible: true },
         headerFilter: { visible: true },
-        //filterBuilder: {},
-        //filterBuilderPopup: {
-        //    position: { of: window, at: "top", my: "top", offset: { y: 10 } },
-        //},
-        //filterSyncEnabled: true,
+        filterBuilder: {},
+        filterBuilderPopup: {
+            position: { of: window, at: "top", my: "top", offset: { y: 10 } },
+        },
+        filterSyncEnabled: true,
 
         showBorders: true,
         columns: oColumns
@@ -1937,7 +1942,7 @@ function handleXHRError(err) {
     toastr.error("Oops! Something went wrong. Please contact BI administrator");
     if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
         sessionStorage.clear();
-        window.location.href = "/Authentication/Errors500/";
+        window.location.href = "../Authentication/Errors500/";
     }
 }
 
@@ -2353,7 +2358,7 @@ function populateForms(data) {
 
         showForm();
 
-        $("input:text").focus(function () { $(this).select(); });
+        //$("input:text").focus(function () { $(this).select(); });
     }
 
     if (isNew) {
@@ -2409,7 +2414,7 @@ function populateForms(data) {
 
         showForm();
 
-        $("input:text").focus(function () { $(this).select(); });
+        //$("input:text").focus(function () { $(this).select(); });
     }
     ////APPLY flatpickr FIELD PROPERTIES
     $('*[class*="date-StringField"]').flatpickr({
@@ -3788,7 +3793,7 @@ function clearCache() {
             localStorage.clear();
             sessionStorage.clear();
             //history.go(0);
-            window.location.href = '/Authentication/SignInBasic/';
+            window.location.href = '../Authentication/SignInBasic/';
         })
         .no(() => {
             //console.log('No')
