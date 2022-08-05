@@ -414,7 +414,9 @@ function showForm() {
     //$(".prod-details-text").text(" " + prodDetailsTextContent + " ");
 
     //var oldSrc = '../images/1000001.png';
+
     var newSrc = '../images/' + clientId + '.png';
+    if (clientId == 1) newSrc = '../images/1000001.png';
     $('#company-logo').attr('src', newSrc);
     //$('img[src="' + oldSrc + '"]').attr('src', newSrc);
 

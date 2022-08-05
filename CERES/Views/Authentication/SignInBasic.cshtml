@@ -30,8 +30,8 @@
                     <div class="col-lg-12">
                         <div class="text-center mt-sm-5 mb-4 text-white-50">
                             <div>
-                                <a href="@Url.Action("Index", "Dashboard")" class="d-inline-block auth-logo">
-                                    <img src="~/assets/images/logo-light.svg" alt="" height="20">
+                                <a href="../Dashboard/Index" class="d-inline-block auth-logo">
+                                    <img src="../assets/images/logo-light.svg" alt="" height="20">
                                 </a>
                             </div>
                             <p class="mt-3 fs-15 fw-semibold">Canon Enterprise Record Entry System</p>
@@ -50,7 +50,7 @@
                                     <p class="text-muted">Sign in to continue to Ceres.</p>
                                 </div>
                                 <div class="p-2 mt-4">
-                                    <form action="@Url.Action("Index", "Dashboard")">
+                                    <form action="../Dashboard/Index">
 
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Username</label>
@@ -76,7 +76,7 @@
                                         <div class="mt-4 text-center">
                                             <input type="submit" id="btnLogin" class="btn btn-light-primary btn-block btn-flat" value="Sign In" />
                                             <div class="div-signin-loading">
-                                                <img src="~/assets/images/2.gif" alt="" class="hidden" width="32px" height="32px" />
+                                                <img src="../assets/images/2.gif" alt="" class="hidden" width="32px" height="32px" />
                                             </div>
                                         </div>
 
@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="ms-banner">
                                                 <a href="javascript:" onclick="sso();">
-                                                    <img alt="Single Sign-On" src="~/assets/images/ms-symbollockup_signin_light.png" width="215" height="41">
+                                                    <img alt="Single Sign-On" src="../assets/images/ms-symbollockup_signin_light.png" width="215" height="41">
                                                 </a>
                                             </div>
 
@@ -158,13 +158,13 @@
     @Html.Partial("~/Views/Shared/_vendor_scripts.cshtml")
 
     <!-- particles js -->
-    <script src="~/assets/libs/particles.js/particles.js"></script>
+    <script src="../assets/libs/particles.js/particles.js"></script>
     <!-- particles app js -->
-    <script src="~/assets/js/pages/particles.app.js"></script>
+    <script src="../assets/js/pages/particles.app.js"></script>
     <!-- password-addon init -->
-    <script src="~/assets/js/pages/password-addon.init.js"></script>
+    <script src="../assets/js/pages/password-addon.init.js"></script>
 
-    <script src="~/Scripts/ceres-authentication.js"></script>
+    <script src="../Scripts/ceres-authentication.js"></script>
 
 </body>
 </html>
