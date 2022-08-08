@@ -59,7 +59,7 @@
 
                                         <div class="mb-3">
                                             <div class="float-end">
-                                                <a href="@Url.Action("PasswordResetBasic", "Authentication")" class="text-muted">Forgot password?</a>
+                                                <a href="/admin-security/#/user/base/form" class="text-muted">Forgot password?</a>
                                             </div>
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
@@ -85,13 +85,15 @@
                                                 <h5 class="fs-13 mb-4 title">OR</h5>
                                             </div>
                                             <div class="ms-banner">
-                                                <a href="javascript:" onclick="sso();">
+                                                <a href="#" id="btnSSO">
+                                                    @*<button btn id="btnSSO">*@
                                                     <img alt="Single Sign-On" src="../assets/images/ms-symbollockup_signin_light.png" width="215" height="41">
+                                                    @*</button>*@
                                                 </a>
                                             </div>
 
                                             <!--<div>
-                                                <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-microsoft-fill fs-16"></i></button>-->
+                                            <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-microsoft-fill fs-16"></i></button>-->
                                             @*<button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></button>
                                                 <button type="button" class="btn btn-danger btn-icon waves-effect waves-light"><i class="ri-google-fill fs-16"></i></button>
                                                 <button type="button" class="btn btn-dark btn-icon waves-effect waves-light"><i class="ri-github-fill fs-16"></i></button>
@@ -106,7 +108,9 @@
                         <!-- end card -->
 
                         <div class="mt-4 text-center">
-                            <p class="mb-0">Don't have an account ? <a href="@Url.Action("SignUpBasic", "Authentication")" class="fw-bold text-primary text-decoration-underline"> Signup </a> </p>
+                            <p class="mb-0">
+                                Don't have an account ? <a href="/admin-security/#/user/base/form" class="fw-bold text-primary text-decoration-underline"> Signup </a>
+                            </p>
                         </div>
 
                     </div>
@@ -164,7 +168,11 @@
     <!-- password-addon init -->
     <script src="../assets/js/pages/password-addon.init.js"></script>
 
-    <script src="../Scripts/ceres-authentication.js"></script>
+    <script src="https://alcdn.msftauth.net/lib/1.2.0/js/msal.js"></script>
+    <script src="../Scripts/jwt-decode.js"></script>
 
+    <script src="../Scripts/ceres-authentication.js"></script>
+    @*<script src="../scripts/ceres.js"></script>*@
+    <script src="../scripts/sso.js"></script>
 </body>
 </html>

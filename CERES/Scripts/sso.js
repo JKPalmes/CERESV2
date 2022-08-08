@@ -1,9 +1,16 @@
-﻿function sso() {
+﻿$("#btnSSO").on("click", function () {
+    sso();
+    init();
+})
+
+function sso() {
     const config = {
         auth: {
             clientId: '91be1c6c-891e-4bd6-b876-b67f5606020d',
             authority: 'https://login.microsoftonline.com/869c0d1d-42e3-4230-a045-be018a9ea361',
-            redirectUri: 'https://localhost:44392'
+            redirectUri: 'http://localhost:55979'
+            //redirectUri: 'https://localhost:44392'
+            //redirectUri: 'https://microstrategy.cbpsportal.com/edsv2'
         },
         cache: {
             cacheLocation: "sessionStorage",
@@ -37,13 +44,18 @@
             //userEmail = "bbeltran@cbps.canon.com";
 
             //let apiEndPoint = "https://localhost:44326/hello";
-            let apiEndPoint = "https://localhost:44326/api/users/" + userEmail;
+            //let apiEndPoint = "https://localhost:44326/api/users/" + userEmail;
+            //let apiEndPoint = "https://ceres.cbpsportal.com/birequests/nexus/api/Users/" + userEmail;
+
+            let baseUrl = "http://localhost:55979/";
+            let url = baseUrl + "api/Client/SetUserProfile";
 
             $.ajax({
-                url: apiEndPoint,
-                type: "GET",
-                //data: { "email": userEmail },
-                //dataType: "json",
+                //url: apiEndPoint,
+                url: url,
+                type: "POST",
+                data: { "email": userEmail },
+                dataType: "json",
                 beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', bearer) }
             }).done((result) => {
                 console.log('user: ' + result);
@@ -52,12 +64,25 @@
                     $("#btnLogin").disabled = false;
                     $("footer").hide();
                     $("#divError").hide();
-                    sessionStorage.setItem("accessToken", accessToken);
+                    localStorage.setItem("accessToken", accessToken);
+                    localStorage.setItem("email", userEmail);
                     sessionStorage.setItem("email", userEmail);
                     let user = result;
                     sessionStorage.setItem("userName", user.Name);
+                    //sessionStorage.setItem("userData", JSON.stringify(user));
                     sessionStorage.setItem("accountType", user.AccountType);
-                    window.location.href = 'https://localhost:44392/index3.html';
+                    sessionStorage.setItem("userClientID", user.ClientID);
+                    sessionStorage.setItem("userId", user.Id);
+
+                    //window.location.href = 'https://localhost:44392/index3.html';
+                    /*window.location.href = 'http://localhost:55979/dashboard/index';*/
+                    //window.location.href = 'https://microstrategy.cbpsportal.com/edsv2/dashboard/index';
+                    //window.location.href = '/dashboard/index';
+
+                    window.location.href = user.clientID == 0 ? "reset.html" : baseUrl + "/Dashboard/Index"
+
+                    //window.location.replace("http://localhost:55979/dashboard/index");
+                    //window.location.replace("https://microstrategy.cbpsportal.com/edsv2/dashboard/index");
                 }
                 else {
                     $("#btnLogin").removeClass("disabled");

@@ -29,7 +29,7 @@ using System.Net.Http.Formatting;
 
 namespace CERES.Web.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ClientController : ApiController
     {
         private readonly string[] NullDefaultValueClientId = WebConfigurationManager.AppSettings["NullDefaultValueClientID"].Split(',');
@@ -78,6 +78,8 @@ namespace CERES.Web.Api.Controllers
             //return list;
             using (BIDE_DbContext dbContext = new BIDE_DbContext())
             {
+                if (string.IsNullOrEmpty(_identity[0])) return new List<int>();
+                
                 int userId = Int32.Parse(_identity[0]);
                 //if (clientId == 0)
                 //{
@@ -175,11 +177,11 @@ namespace CERES.Web.Api.Controllers
                 List<int> svcFields = result.ServiceAreaFields.Select(o => o.svcFieldID).ToList();
                 result.FieldLOV = ClientHierarchyService.GetServiceAreaFieldLOVs(svcFields);
                 return Ok(result);
-            } else
+            }
+            else
             {
                 return Ok("No data");
             }
-
             //return InternalServerError(new Exception("Invalid Request"));
         }
 
@@ -460,13 +462,40 @@ namespace CERES.Web.Api.Controllers
             return Ok(UserService.UpdateResetFlag(_email));
         }
 
+        [HttpPost]
+        [Route("api/Client/SetUserFolders")]
+        public IHttpActionResult SetUserFolders([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+            var email = values.email.ToString();
+            var folderClass = new FolderStuctureClass(email);
+            TreeNode treeNodes = folderClass.PopulateTree();
+            var serverPath = HostingEnvironment.MapPath(_serverFolderPath);
+            var jsonString = folderClass.ConvertTreeNodeToJson(treeNodes, serverPath);
+
+            return Ok(jsonString.ToString().Replace("\"items\": {},", ""));
+        }
+
         [HttpGet]
         [Route("api/Client/GetUserProfile")]
-        public IHttpActionResult GetUserProfile()
+        public IHttpActionResult GetUserProfile(string email)
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), transactionId));
 
-            return Ok(UserService.GetUserProfile(_email));
+            return Ok(UserService.GetUserProfile(email));
+        }
+
+        [HttpPost]
+        [Route("api/Client/SetUserProfile")]
+        public IHttpActionResult SetUserProfile([FromBody] JObject value)
+        {
+            //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString()));
+
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+            var email = values.email.ToString();
+            return Ok(UserService.GetUserProfile(email));
         }
 
         [HttpPost]

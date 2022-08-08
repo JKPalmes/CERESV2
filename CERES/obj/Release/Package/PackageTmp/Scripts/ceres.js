@@ -51,6 +51,7 @@ File: Main Js File
         $("#divUserName, .full-name").text("  " + sessionUserName);
         $(".user-name-text").text(" " + sessionUserName + " ");
         $(".user-name-sub-text").text(" " + userType + " ");
+        $(".user-email-text").text(" " + sessionEmail + " ");
 
         getUserFolders();
         getUserProfile();
@@ -67,6 +68,7 @@ File: Main Js File
         getAppSettings();
         getAccountInfos();
         getUserPreferences();
+        saveUserPreferences();
 
     }
 
@@ -174,7 +176,11 @@ File: Main Js File
 
         $("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
 
-        $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("click", function () {
+        $(".fa-building").on("click", function () {
+            popupAccountInfoForm();
+        });
+
+        $(".fa-sitemap, .fa-location-arrow, .fa-server").on("click", function () {
             if ($(this).prop("class").indexOf("site") >= 0)
                 $("#ddlClient").change();
             else if ($(this).prop("class").indexOf("location") >= 0) {
@@ -187,31 +193,107 @@ File: Main Js File
 
         });
 
-        $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseover", function () {
+        $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseover", function () {
             $('#siteRefresh').w2tag();
             if ($(this).prop("class").indexOf("site") >= 0) {
-                $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "right", className: 'w2ui-dark' });
+                $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "left", className: 'w2ui-dark' });
             }
             else if ($(this).prop("class").indexOf("location") >= 0) {
-                $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "right", className: 'w2ui-dark' });
+                $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "left", className: 'w2ui-dark' });
             }
             else
-                $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "right", className: 'w2ui-dark' });
+                $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "left", className: 'w2ui-dark' });
         });
 
-        $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseout", function () {
+        $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseout", function () {
             $('#siteRefresh').w2tag();
             $('#locationRefresh').w2tag();
             $('#serviceAreaRefresh').w2tag();
 
         });
 
-        $(".w2ui-sidebar-top").on("mouseover", function () {
-            $('#sidebarLabel').w2tag("Entry View - User Saved Preferences [Client | Site | Location | Service Area]", { position: "right", className: 'w2ui-dark' });
+        $('#btnHide').on("mouseover", function () {
+            $('#btnHide').w2tag("Hide Selector Panel", { position: "bottom", className: 'w2ui-dark' });
+        });
+        $("#btnHide").on("mouseout", function () {
+            $('#btnHide').w2tag();
+        });
+            
+        $('#btnShow').on("mouseover", function () {
+            $('#btnShow').w2tag("Show Selector Panel", { position: "bottom", className: 'w2ui-dark' });
+        });
+        $("#btnShow").on("mouseout", function () {
+            $('#btnShow').w2tag();
         });
 
-        $(".w2ui-sidebar-top").on("mouseout", function () {
-            $('#sidebarLabel').w2tag();
+        $('#btn1').on("mouseover", function () {
+            $('#btn1').w2tag("Upload Report", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btn1").on("mouseout", function () {
+            $('#btn1').w2tag();
+        });
+
+        $('#btnExpand').on("mouseover", function () {
+            $('#btnExpand').w2tag("Expand/Collapse Production DataGrid", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnExpand").on("mouseout", function () {
+            $('#btnExpand').w2tag();
+        });
+
+        $('#btnFullScreen').on("mouseover", function () {
+            $('#btnFullScreen').w2tag("Show Production Data Full-Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnFullScreen").on("mouseout", function () {
+            $('#btnFullScreen').w2tag();
+        });
+
+        $('#btnFullScreenAttrib').on("mouseover", function () {
+            $('#btnFullScreenAttrib').w2tag("Show Attributes Full-Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnFullScreenAttrib").on("mouseout", function () {
+            $('#btnFullScreenAttrib').w2tag();
+        });
+
+        $('#btnFullScreenMetrics').on("mouseover", function () {
+            $('#btnFullScreenMetrics').w2tag("Show Metrics Full-Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnFullScreenMetrics").on("mouseout", function () {
+            $('#btnFullScreenMetrics').w2tag();
+        });
+
+        $('#btnAppFullScreen').on("mouseover", function () {
+            $('#btnAppFullScreen').w2tag("Show App Full Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnAppFullScreen").on("mouseout", function () {
+            $('#btnAppFullScreen').w2tag();
+        });
+
+        $('#btnThemeSettings').on("mouseover", function () {
+            $('#btnThemeSettings').w2tag("Theme Settings", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnThemeSettings").on("mouseout", function () {
+            $('#btnThemeSettings').w2tag();
+        });
+
+        $('#btnSwitchMode').on("mouseover", function () {
+            $('#btnSwitchMode').w2tag("Switch App Mode", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnSwitchMode").on("mouseout", function () {
+            $('#btnSwitchMode').w2tag();
+        });
+
+        $('#btnSendReport').on("mouseover", function () {
+            $('#btnSendReport').w2tag("Send Report", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnSendReport").on("mouseout", function () {
+            $('#btnSendReport').w2tag();
+        });
+
+        $('#btnDownloadReports').on("mouseover", function () {
+            $('#btnDownloadReports').w2tag("Download Reports", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnDownloadReports").on("mouseout", function () {
+            $('#btnDownloadReports').w2tag();
         });
 
         //POPULATE RECENT DATA

@@ -54,7 +54,7 @@ File: Main Js File
         $(".user-email-text").text(" " + sessionEmail + " ");
 
         getUserFolders();
-        getUserProfile();
+        getUserProfile(sessionEmail);
 
         let settings = JSON.parse(localStorage.getItem('userSettings'));
         if (settings == null) getUserSettings();
@@ -68,6 +68,7 @@ File: Main Js File
         getAppSettings();
         getAccountInfos();
         getUserPreferences();
+        saveUserPreferences();
 
     }
 
@@ -175,6 +176,10 @@ File: Main Js File
 
         $("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
 
+        $(".fa-building").on("click", function () {
+            popupAccountInfoForm();
+        });
+
         $(".fa-sitemap, .fa-location-arrow, .fa-server").on("click", function () {
             if ($(this).prop("class").indexOf("site") >= 0)
                 $("#ddlClient").change();
@@ -191,10 +196,10 @@ File: Main Js File
         $(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseover", function () {
             $('#siteRefresh').w2tag();
             if ($(this).prop("class").indexOf("site") >= 0) {
-                $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "right", className: 'w2ui-dark' });
+                $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "left", className: 'w2ui-dark' });
             }
             else if ($(this).prop("class").indexOf("location") >= 0) {
-                $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "right", className: 'w2ui-dark' });
+                $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "left", className: 'w2ui-dark' });
             }
             else
                 $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "left", className: 'w2ui-dark' });
@@ -207,12 +212,88 @@ File: Main Js File
 
         });
 
-        $(".w2ui-sidebar-top").on("mouseover", function () {
-            $('#sidebarLabel').w2tag("Entry View - User Saved Preferences [Client | Site | Location | Service Area]", { position: "right", className: 'w2ui-dark' });
+        $('#btnHide').on("mouseover", function () {
+            $('#btnHide').w2tag("Hide Selector Panel", { position: "bottom", className: 'w2ui-dark' });
+        });
+        $("#btnHide").on("mouseout", function () {
+            $('#btnHide').w2tag();
+        });
+            
+        $('#btnShow').on("mouseover", function () {
+            $('#btnShow').w2tag("Show Selector Panel", { position: "bottom", className: 'w2ui-dark' });
+        });
+        $("#btnShow").on("mouseout", function () {
+            $('#btnShow').w2tag();
         });
 
-        $(".w2ui-sidebar-top").on("mouseout", function () {
-            $('#sidebarLabel').w2tag();
+        $('#btn1').on("mouseover", function () {
+            $('#btn1').w2tag("Upload Report", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btn1").on("mouseout", function () {
+            $('#btn1').w2tag();
+        });
+
+        $('#btnExpand').on("mouseover", function () {
+            $('#btnExpand').w2tag("Expand/Collapse Production DataGrid", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnExpand").on("mouseout", function () {
+            $('#btnExpand').w2tag();
+        });
+
+        $('#btnFullScreen').on("mouseover", function () {
+            $('#btnFullScreen').w2tag("Show Production Data Full-Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnFullScreen").on("mouseout", function () {
+            $('#btnFullScreen').w2tag();
+        });
+
+        $('#btnFullScreenAttrib').on("mouseover", function () {
+            $('#btnFullScreenAttrib').w2tag("Show Attributes Full-Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnFullScreenAttrib").on("mouseout", function () {
+            $('#btnFullScreenAttrib').w2tag();
+        });
+
+        $('#btnFullScreenMetrics').on("mouseover", function () {
+            $('#btnFullScreenMetrics').w2tag("Show Metrics Full-Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnFullScreenMetrics").on("mouseout", function () {
+            $('#btnFullScreenMetrics').w2tag();
+        });
+
+        $('#btnAppFullScreen').on("mouseover", function () {
+            $('#btnAppFullScreen').w2tag("Show App Full Screen", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnAppFullScreen").on("mouseout", function () {
+            $('#btnAppFullScreen').w2tag();
+        });
+
+        $('#btnThemeSettings').on("mouseover", function () {
+            $('#btnThemeSettings').w2tag("Theme Settings", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnThemeSettings").on("mouseout", function () {
+            $('#btnThemeSettings').w2tag();
+        });
+
+        $('#btnSwitchMode').on("mouseover", function () {
+            $('#btnSwitchMode').w2tag("Switch App Mode", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnSwitchMode").on("mouseout", function () {
+            $('#btnSwitchMode').w2tag();
+        });
+
+        $('#btnSendReport').on("mouseover", function () {
+            $('#btnSendReport').w2tag("Send Report", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnSendReport").on("mouseout", function () {
+            $('#btnSendReport').w2tag();
+        });
+
+        $('#btnDownloadReports').on("mouseover", function () {
+            $('#btnDownloadReports').w2tag("Download Reports", { position: "left", className: 'w2ui-dark' });
+        });
+        $("#btnDownloadReports").on("mouseout", function () {
+            $('#btnDownloadReports').w2tag();
         });
 
         //POPULATE RECENT DATA
@@ -239,6 +320,130 @@ File: Main Js File
             getRecentSavedData();
         }
     }
+
+    //$("#btnSSO").on("click", function () {
+    //    sso();
+    //})
+
+    //function sso() {
+    //    const config = {
+    //        auth: {
+    //            clientId: '91be1c6c-891e-4bd6-b876-b67f5606020d',
+    //            authority: 'https://login.microsoftonline.com/869c0d1d-42e3-4230-a045-be018a9ea361',
+    //            redirectUri: 'http://localhost:55979'
+    //            //redirectUri: 'https://localhost:44392'
+    //            //redirectUri: 'https://microstrategy.cbpsportal.com/edsv2'
+    //        },
+    //        cache: {
+    //            cacheLocation: "sessionStorage",
+    //            storeAuthStateInCookie: false
+    //        }
+    //    }
+
+    //    const myMSALObj = new Msal.UserAgentApplication(config);
+
+    //    const loginRequest = {
+    //        scopes: ["openid", "profile", "user.read"]
+    //    }
+
+    //    myMSALObj.loginPopup(loginRequest).then((loginResponse) => {
+
+    //        console.log("Response => ", JSON.stringify(loginResponse));
+    //        const accessTokenRequest = {
+    //            //scopes: ["api://7af858ea-81ec-486e-b7b1-a34ba4db4730/.default"]
+    //            scopes: ["api://210c9336-7d09-45d2-99f2-d6a55755831b/.default"]
+    //        };
+
+    //        myMSALObj.acquireTokenSilent(accessTokenRequest).then((accessTokenResponse) => {
+
+    //            let accessToken = accessTokenResponse.accessToken;
+    //            let bearer = "Bearer " + accessToken;
+    //            var decoded = jwt_decode(accessToken);
+    //            //console.log(decoded);
+    //            //let userEmail = decoded.upn;
+    //            let userEmail = decoded.preferred_username;
+    //            //for testing
+    //            //userEmail = "bbeltran@cbps.canon.com";
+
+    //            //let apiEndPoint = "https://localhost:44326/hello";
+    //            //let apiEndPoint = "https://localhost:44326/api/users/" + userEmail;
+    //            //let apiEndPoint = "https://ceres.cbpsportal.com/birequests/nexus/api/Users/" + userEmail;
+
+    //            let baseUrl = "http://localhost:55979/";
+    //            let url = baseUrl + "api/Client/SetUserProfile";
+
+    //            $.ajax({
+    //                //url: apiEndPoint,
+    //                url: url,
+    //                type: "POST",
+    //                data: { "email": userEmail },
+    //                dataType: "json",
+    //                beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', bearer) }
+    //            }).done((result) => {
+    //                console.log('user: ' + result);
+    //                if (result != undefined || result != null) {
+    //                    $(".div-signin-loading img").addClass("hidden").hide();
+    //                    $("#btnLogin").disabled = false;
+    //                    $("footer").hide();
+    //                    $("#divError").hide();
+    //                    localStorage.setItem("accessToken", accessToken);
+    //                    localStorage.setItem("email", userEmail);
+    //                    sessionStorage.setItem("email", userEmail);
+    //                    let user = result;
+    //                    sessionStorage.setItem("userName", user.Name);
+    //                    sessionStorage.setItem("userData", JSON.stringify(user));
+    //                    sessionStorage.setItem("accountType", user.AccountType);
+    //                    sessionStorage.setItem("userClientID", user.ClientID);
+    //                    sessionStorage.setItem("userId", user.Id);
+
+    //                    window.location.href = user.clientID == 0 ? "reset.html" : baseUrl + "/Dashboard/Index"
+
+    //                    //window.location.href = 'https://localhost:44392/index3.html';
+    //                    /*window.location.href = 'http://localhost:55979/dashboard/index';*/
+    //                    //window.location.href = 'https://microstrategy.cbpsportal.com/edsv2/dashboard/index';
+    //                    //window.location.href = '/dashboard/index';
+
+    //                    //window.location.replace("http://localhost:55979/dashboard/index");
+    //                    //window.location.replace("https://microstrategy.cbpsportal.com/edsv2/dashboard/index");
+    //                }
+    //                else {
+    //                    $("#btnLogin").removeClass("disabled");
+    //                    $("footer").hide();
+    //                    $("#btnLogin").disabled = false;
+    //                    $("#hModalTitle").text("ERROR");
+    //                    $("#divErrorText").text("User is not registered/authorized to use the application.");
+    //                    $("#btnLogin").removeClass("hidden").show();
+    //                    $(".div-signin-loading img").addClass("hidden").hide();
+    //                    $("#myModal").modal("show");
+    //                }
+    //                //sessionStorage.setItem("data", JSON.stringify(data));
+    //                //sessionStorage.setItem("accessToken", data.access_token);
+    //                //sessionStorage.setItem("accountType", data.accountType);
+    //                //sessionStorage.setItem("accountType", "A");
+    //                //window.location.href = data.clientId == 0 ? "reset.html" : home;
+
+    //            }).fail((err) => {
+    //                console.log("ERROR => ", err);
+    //                $("#btnLogin").removeClass("disabled");
+    //                $("footer").hide();
+    //                $("#btnLogin").disabled = false;
+    //                if (err.status == 500) {
+    //                    $("#hModalTitle").text("ERROR");
+    //                    $("#divErrorText").text("Oops! Something went wrong! Please contact your BI administrator.");
+    //                }
+    //                else {
+    //                    //$("#hModalTitle").text(err.responseJSON.error);
+    //                    //$("#divErrorText").text(err.responseJSON.error_description);
+    //                }
+    //                $("#btnLogin").removeClass("hidden").show();
+    //                $(".div-signin-loading img").addClass("hidden").hide();
+    //                $("#myModal").modal("show");
+    //            })
+
+    //        });
+    //    });
+    //}
+
 
     $(document).ready(function () {
 

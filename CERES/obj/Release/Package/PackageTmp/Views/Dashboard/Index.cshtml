@@ -27,7 +27,7 @@
 <!-- start: page body -->
 <form id="myform" class="myclass" method="get" autocomplete="off">
     <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-0 py-0 mt-0 mt-lg-0">
-        <div id="main-panel" flex-grow: 2000">
+        <div id="main-panel">
             <div id="selector-panel" class="col-lg-12 col-md-12" style="padding-top: 0rem; padding-bottom: .5rem;">
                 <div class="row">
                     <input type="text" hidden id="txtProductionDate" name="txtProductionDate">
@@ -47,10 +47,18 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="text-primary ms-auto">
-                                                @*<i class="ri-stack-line font-size-24"></i>*@
-                                                <i class="fa fa-building font-size-24"></i>
+                                            <div id="clientMenu" class="dropdown morphing scale-left" style="padding-top:0px;">
+                                                <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
+                                                <ul class="dropdown-menu shadow border-0 p-2">
+                                                    <li><a class="dropdown-item" href="#" onclick="popupAccountInfoForm();" ;><i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;Account Info</a></li>
+                                                    <li><a class="dropdown-item" href="#" onclick="redirectTo('approvers');"><i class="fa fa-plus-square-o"></i>&nbsp;&nbsp;&nbsp;Enter Other Data</a></li>
+                                                </ul>
                                             </div>
+
+                                            <!--<div class="text-primary ms-auto" id="clientRefresh">-->
+                                                @*<i class="ri-stack-line font-size-24"></i>*@
+                                                <!--<i class="fa fa-building font-size-24"></i>
+                                            </div>-->
                                         </div>
                                     </div>
                                 </div>
@@ -60,15 +68,14 @@
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-1 overflow-hidden">
-                                                <p class="text-truncate font-size-14 mb-2">Site &nbsp;&nbsp;<span id="siteRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-site"></span></p>
+                                                <p class="text-truncate font-size-14 mb-2">Site &nbsp;&nbsp;</p>
                                                 <div style="padding-right: 5px; padding-left: 5px;">
                                                     <select id="ddlSite" name="ddlSite" class="form-control" required="required">
                                                         <option value="--- Select Site ---">DEMO_A</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="text-primary ms-auto">
-                                                @*<i class="ri-store-2-line font-size-24"></i>*@
+                                            <div class="text-primary ms-auto" id="siteRefresh">
                                                 <i class="fa fa-sitemap font-size-24"></i>
                                             </div>
                                         </div>
@@ -80,7 +87,7 @@
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-1 overflow-hidden">
-                                                <p class="text-truncate font-size-14 mb-2">Location&nbsp;&nbsp;<span id="locationRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-location"></span></p>
+                                                <p class="text-truncate font-size-14 mb-2">Location&nbsp;&nbsp;</p>
                                                 <div style="padding-right: 5px; padding-left: 5px;">
                                                     <select id="ddlLocation" name="ddlLocation" class="form-control" required="required">
                                                         <option value="--- Select Location ---">DEMO_A</option>
@@ -88,8 +95,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="text-primary ms-auto">
-                                                @*<i class="ri-briefcase-4-line font-size-24"></i>*@
+                                            <div class="text-primary ms-auto" id="locationRefresh">
                                                 <i class="fa fa-location-arrow font-size-24"></i>
                                             </div>
                                         </div>
@@ -101,9 +107,9 @@
                                     <div class="card-body">
                                         <div class="d-flex">
                                             <div class="flex-1 overflow-hidden">
-                                                <p class="text-truncate font-size-14 mb-2">Service Area &nbsp;&nbsp;<span id="serviceAreaRefresh" class="glyphicon glyphicon-refresh glyphicon-refresh-servicearea"></span></p>
+                                                <p class="text-truncate font-size-14 mb-2">Service Area &nbsp;&nbsp;</p>
                                                 <div style="padding-right: 5px; padding-left: 5px;">
-                                                    <select id="ddlServiceArea" name="ddlServiceArea" class="form-control" required="required">
+                                                    <select id="ddlServiceArea" name="ddlServiceArea" class="form-control svcArea" required="required">
                                                         <option value="--- Select Service Area ---">All</option>
                                                         <option value="--- Select Service Area ---">Central Print</option>
                                                         <option value="--- Select Service Area ---">Commentary/option>
@@ -118,8 +124,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="text-primary ms-auto">
-                                                @*<i class="ri-briefcase-4-line font-size-24"></i>*@
+                                            <div class="text-primary ms-auto" id="serviceAreaRefresh">
                                                 <i class="fa fa-server font-size-24"></i>
                                             </div>
                                         </div>
@@ -145,16 +150,16 @@
                             </div>
 
                             <div class="dropdown morphing scale-left">
-                                <button class="btn btn-outline-secondary" type="button" onclick="expandPanels()" data-bs-toggle="tooltip" data-bs-placement="top" title="Expand/Collapse Panels"><i class="fa fa-window-restore"></i></button>
-                                <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="" data-bs-original-title="Card Full-Screen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                                <button id="btnExpand" class="btn btn-outline-secondary" type="button" onclick="expandPanels()"><i class="fa fa-window-restore"></i></button>
+                                <a id="btnFullScreen" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#">File Info</a></li>
-                                    <li><a class="dropdown-item" href="#">Copy to</a></li>
-                                    <li><a class="dropdown-item" href="#">Move to</a></li>
-                                    <li><a class="dropdown-item" href="#">Rename</a></li>
-                                    <li><a class="dropdown-item" href="#">Block</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="submitForm()";><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="exportToCsv(false);"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;&nbsp;Export Transaction Records To Csv</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="helpContext();"><i class="fa fa-question-circle-o"></i>&nbsp;&nbsp;&nbsp;Help On Data Entry</a></li>
+                                    @*<li><a class="dropdown-item" href="#">Delete Transaction</a></li>*@
                                 </ul>
                             </div>
                         </div>
@@ -168,15 +173,15 @@
                         <div class="card-header">
                             <h6 class="card-title mb-0">Attributes</h6>
                             <div class="dropdown morphing scale-left">
-                                <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                                <a id="btnFullScreenAttrib" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2">
-                                    <li><a class="dropdown-item" href="#">File Info</a></li>
-                                    <li><a class="dropdown-item" href="#">Copy to</a></li>
-                                    <li><a class="dropdown-item" href="#">Move to</a></li>
-                                    <li><a class="dropdown-item" href="#">Rename</a></li>
-                                    <li><a class="dropdown-item" href="#">Block</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="exportToCsv(false);"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;&nbsp;Export Transaction Records To Csv</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="helpContext();"><i class="fa fa-question-circle-o"></i>&nbsp;&nbsp;&nbsp;Help On Data Entry</a></li>
+                                    @*<li><a class="dropdown-item" href="#">Delete Transaction</a></li>*@
                                 </ul>
                             </div>
                         </div>
@@ -197,15 +202,15 @@
                         <div class="card-header">
                             <h6 class="card-title mb-0">Metrics</h6>
                             <div class="dropdown morphing scale-left">
-                                <a href="#" class="card-fullscreen" data-bs-toggle="tooltip" title="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                                <a id="btnFullScreenMetrics" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2">
-                                    <li><a class="dropdown-item" href="#">File Info</a></li>
-                                    <li><a class="dropdown-item" href="#">Copy to</a></li>
-                                    <li><a class="dropdown-item" href="#">Move to</a></li>
-                                    <li><a class="dropdown-item" href="#">Rename</a></li>
-                                    <li><a class="dropdown-item" href="#">Block</a></li>
-                                    <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="exportToCsv(false);"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;&nbsp;Export Transaction Records To Csv</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="helpContext();"><i class="fa fa-question-circle-o"></i>&nbsp;&nbsp;&nbsp;Help On Data Entry</a></li>
+                                    @*<li><a class="dropdown-item" href="#">Delete Transaction</a></li>*@
                                 </ul>
                             </div>
                         </div>
@@ -244,6 +249,8 @@
         <script src="../scripts/toastr.min.js"></script>
         <script src="../scripts/jquery-idle-hands.js"></script>
 
+        <script src="../assets/js/app.js"></script>
+        
         <script src="../scripts/app.js"></script>
         <script src="../scripts/index.js"></script>
         <script src="../scripts/ceres.js"></script>

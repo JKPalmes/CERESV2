@@ -259,7 +259,7 @@
 .gridContainer {
     height: auto;
 /*    height: 720px;*/
-max-height:720px;
+max-height:600px;
     overflow: hidden;
     width: auto;
     max-width: 100%;
@@ -280,6 +280,7 @@ max-height:720px;
         padding-right: 0px;
         /*background-color: transparent;*/
         background-color: #f4f7f6;
+        padding-top: 0px;
     }
 
     #gridContainer .dx-datagrid-header-panel .dx-toolbar-items-container {
@@ -296,12 +297,28 @@ max-height:720px;
     }
 
     #gridContainer .dx-datagrid-header-panel .dx-selectbox {
-        margin: 17px 0px;
+        margin: 14px 0px;
     }
 
     #gridContainer .dx-datagrid-header-panel .dx-button {
-        margin: 17px 0px;
+        margin: 14px 0px;
     }
+
+#gridContainer .informer {
+    height: 50px;
+    width: 80px;
+    text-align: center;
+    /*color: #fff;*/
+}
+
+#gridContainer .count {
+    padding-top: 10px;
+    line-height: 20px;
+    margin: 0;
+    /*color: white;*/
+    width: 70px;
+}
+
 
 .dx-dropdownlist-popup-wrapper .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item-content {
     padding-left: 7px;

@@ -247,6 +247,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="approvers.html" />
     <Content Include="assets\cssbundle\daterangepicker.min.css" />
     <Content Include="assets\cssbundle\flatpickr.min.css" />
     <Content Include="assets\css\app-rtl.min.css" />
@@ -1230,6 +1231,7 @@
     <Content Include="assets\img\xs\avatar7.jpg" />
     <Content Include="assets\img\xs\avatar8.jpg" />
     <Content Include="assets\img\xs\avatar9.jpg" />
+    <Content Include="assets\js\app.js" />
     <Content Include="assets\js\bundle\daterangepicker.bundle.js" />
     <Content Include="assets\js\bundle\flatpickr.bundle.js" />
     <Content Include="assets\js\layout.js" />
@@ -1841,7 +1843,12 @@
     <Content Include="images\cbps.png" />
     <Content Include="images\CBPS_LOGO.png" />
     <Content Include="images\ceres_logo.png" />
+    <Content Include="images\favicon-16x16.png" />
+    <Content Include="images\favicon-32x32.png" />
+    <Content Include="images\favicon.ico" />
     <Content Include="images\ms-symbollockup_signin_light.png" />
+    <Content Include="images\null.png" />
+    <Content Include="images\small cbpslogo.png" />
     <Content Include="index3.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1926,11 +1933,15 @@
     <Content Include="Scripts\dx.all.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-idle-hands.js" />
+    <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jwt-decode.js" />
+    <Content Include="Scripts\lookup-data.js" />
     <Content Include="Scripts\sso.js" />
     <Content Include="Scripts\theme.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Scripts\w2ui-1.5.min.js" />
+    <Content Include="userinfo.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -21125,7 +21125,7 @@ fieldset:disabled .btn {
 
 .py-1 {
     padding-top: .25rem !important;
-    padding-bottom: .25rem !important
+    padding-bottom: 0rem !important
 }
 
 .py-2 {
@@ -25142,9 +25142,17 @@ img {
             width: 100%
         }
 }
-.main-search {
+
+.main-title {
     position: relative;
     width: calc(100% - 3000px);
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    z-index: 1;
+}
+
+.main-search {
+    position: relative;
+    width: calc(100% - 2000px);
     border-color: rgba(255, 255, 255, 0.1) !important;
     z-index: 1;
 }
@@ -25166,7 +25174,7 @@ img {
 
     .main-search .search-result {
         position: absolute;
-        /* width: calc(100% - 30px); */
+         /*width: calc(100% - 30px); */
         width: calc(100% - 100px);
         top: 40px
     }
@@ -25183,7 +25191,7 @@ img {
 @media only screen and (max-width: 991px) {
     .main-search .search-result {
         position: fixed;
-        /* width: calc(100% - 32px); */
+         /*width: calc(100% - 32px); */
         width: calc(100% - 120px);
         margin: 0 1rem;
         top: 68px;
@@ -26272,9 +26280,9 @@ button:focus:not(:focus-visible) {
 }
 
 .company-logo {
-    width: 64px;
-    min-width: 64px;
-    height: 48px
+    width: 128px;
+    min-width: 128px;
+    height: 54px;
 }
 
 .avatar {
@@ -33826,7 +33834,7 @@ body.layout-2 .body-layout-1 .order-2 {
         position: relative;
         border-style: dashed !important;
         margin-top: 1rem;
-        padding: 1rem
+        padding: .5rem !important
     }
 
         .card.fieldset .fieldset-tile {

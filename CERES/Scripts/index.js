@@ -1,3 +1,4 @@
+//var baseUrl = "http://localhost:55979/";
 var fileSystem = [];
 //var transView = "ShowPendingTransactions";
 //var transView = "ShowAllTransactions";
@@ -990,26 +991,26 @@ $(function () {
     $('#toolbarAdmin').w2toolbar({
         name: 'toolbarAdmin',
         items: [
-            { type: 'button', id: 'uploadFiles', text: 'Upload Files', img: 'upload-icon', disabled: true, hidden: true },
+            //{ type: 'button', id: 'uploadFiles', text: 'Upload Files', img: 'upload-icon', disabled: true, hidden: true },
+            ////{ type: 'break' },
+            //{ type: 'button', id: 'goldReports', text: 'Professional Reports', img: 'reports-icon', disabled: true },
             //{ type: 'break' },
-            { type: 'button', id: 'goldReports', text: 'Professional Reports', img: 'reports-icon', disabled: true },
-            { type: 'break' },
-            { type: 'button', id: 'platinumReports', text: 'Enterprise Reports', img: 'microstrategy-icon', disabled: true },
-            { type: 'spacer' },
-            {
-                type: 'menu', id: 'acctMenu', text: 'Account Info', icon: '', img: 'accounts-ico', hidden: false,
-                items: [
-                           { id: 'accountInfo', text: 'Client Info', icon: 'fa fa-star' }
-                           //{ id: 'userInfo', text: 'Client Users', icon: 'fa fa-star' }
-                ]
-            },
-            { type: 'break' },
+            //{ type: 'button', id: 'platinumReports', text: 'Enterprise Reports', img: 'microstrategy-icon', disabled: true },
+            //{ type: 'spacer' },
+            //{
+            //    type: 'menu', id: 'acctMenu', text: 'Account Info', icon: '', img: 'accounts-ico', hidden: false,
+            //    items: [
+            //               { id: 'accountInfo', text: 'Client Info', icon: 'fa fa-star' }
+            //               //{ id: 'userInfo', text: 'Client Users', icon: 'fa fa-star' }
+            //    ]
+            //},
+            //{ type: 'break' },
             {
                 type: 'menu', id: 'adminMenu', text: 'Administration', icon: '', img: 'admin-ico', hidden: false,
                 items: [
                     { id: 'appSecurity', text: 'App Security', icon: 'fa fa-star' },
                     { id: 'appSettings', text: 'App Settings', icon: 'fa fa-star' },
-                    /*{ id: 'appApprover', text: 'App Approvers', icon: 'fa fa-star' },*/
+                    { id: 'appApprover', text: 'App Approvers', icon: 'fa fa-star' },
                     {
                         id: 'accountMaster', text: 'Account Maintenance', icon: 'fa fa-star', expanded: true,
                         items: [
@@ -1055,20 +1056,20 @@ $(function () {
                     );
                     return;
                 case "adminMenu:appApprover":
-                    window.location.href = 'approvers.html';
+                    window.location.href = baseUrl + 'approvers.html';
                     return;
                 case "adminMenu:appSettings":
                     popupAppSettingsForm();
                     return;
                 case "adminMenu:userMaster":
-                    window.location.href = 'userInfo.html';
+                    window.location.href = baseUrl + 'userInfo.html';
                     return;
                 case "acctMenu:accountInfo":
                     popupAccountInfoForm();
                     return;
                 case "adminMenu:sm1_1":
                     //window.location.href = 'acctInfo.html';
-                    window.location.href = 'approvers.html';
+                    window.location.href = baseUrl + 'approvers.html';
                     return;
                 case "adminMenu:sm1_6":
                     window.location.href = 'clientsetting.html';

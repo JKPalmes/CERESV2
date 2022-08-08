@@ -5,9 +5,12 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\N52776\source\repos\BI\CERESV2\CERES\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-08-05T07:09:31.9113404Z;True|2022-08-04T22:49:21.3069403-04:00;True|2022-08-04T07:47:07.8661142-04:00;False|2022-08-04T07:46:15.6279528-04:00;False|2022-08-04T07:45:23.4267393-04:00;True|2022-08-03T07:48:22.2728323-04:00;</History>
+    <History>True|2022-08-08T07:50:23.2060662Z;True|2022-08-08T02:48:47.5012025-04:00;True|2022-08-05T03:09:31.9113404-04:00;True|2022-08-04T22:49:21.3069403-04:00;True|2022-08-04T07:47:07.8661142-04:00;False|2022-08-04T07:46:15.6279528-04:00;False|2022-08-04T07:45:23.4267393-04:00;True|2022-08-03T07:48:22.2728323-04:00;</History>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="approvers.html">
+      <publishTime>08/08/2022 01:06:32</publishTime>
+    </File>
     <File Include="assets/css/app-rtl.min.css">
       <publishTime>06/26/2022 02:40:56</publishTime>
     </File>
@@ -60,7 +63,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/26/2022 02:40:56</publishTime>
     </File>
     <File Include="assets/css/luno-style.css">
-      <publishTime>08/02/2022 09:48:28</publishTime>
+      <publishTime>08/06/2022 08:20:12</publishTime>
     </File>
     <File Include="assets/css/luno-style.css.map">
       <publishTime>06/09/2022 08:00:24</publishTime>
@@ -3110,6 +3113,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="assets/img/xs/avatar9.jpg">
       <publishTime>06/09/2022 08:00:46</publishTime>
     </File>
+    <File Include="assets/js/app.js">
+      <publishTime>08/06/2022 08:40:29</publishTime>
+    </File>
     <File Include="assets/js/bundle/daterangepicker.bundle.js">
       <publishTime>06/09/2022 08:00:24</publishTime>
     </File>
@@ -4587,7 +4593,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/09/2022 08:00:24</publishTime>
     </File>
     <File Include="assets/vendor/jsgrid/jsgrid.min.js">
-      <publishTime>06/09/2022 08:00:24</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="assets/vendor/jspreadsheet/index.js">
       <publishTime>06/09/2022 08:00:24</publishTime>
@@ -4740,7 +4746,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/09/2022 08:00:26</publishTime>
     </File>
     <File Include="assets/vendor/x-editable/select2.js">
-      <publishTime>06/09/2022 08:00:26</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="assets/vendor/x-editable/wysihtml5-0.0.2.js">
       <publishTime>06/09/2022 08:00:26</publishTime>
@@ -4755,19 +4761,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/22/2013 11:43:40</publishTime>
     </File>
     <File Include="bin/CERES.Core.dll">
-      <publishTime>08/05/2022 03:09:10</publishTime>
+      <publishTime>08/08/2022 03:50:06</publishTime>
     </File>
     <File Include="bin/CERES.Core.dll.config">
       <publishTime>06/18/2022 22:46:28</publishTime>
     </File>
     <File Include="bin/CERES.Core.pdb">
-      <publishTime>08/05/2022 03:09:10</publishTime>
+      <publishTime>08/08/2022 03:50:06</publishTime>
     </File>
     <File Include="bin/CERES.Web.Api.dll">
-      <publishTime>08/05/2022 03:09:12</publishTime>
+      <publishTime>08/08/2022 03:50:08</publishTime>
     </File>
     <File Include="bin/CERES.Web.Api.pdb">
-      <publishTime>08/05/2022 03:09:12</publishTime>
+      <publishTime>08/08/2022 03:50:08</publishTime>
     </File>
     <File Include="bin/Content/w2ui-1.5.min.css">
       <publishTime>04/16/2021 12:31:20</publishTime>
@@ -4782,7 +4788,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>11/16/2019 06:00:40</publishTime>
     </File>
     <File Include="bin/index3.html">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/05/2022 03:30:18</publishTime>
     </File>
     <File Include="bin/log4net.dll">
       <publishTime>03/08/2017 22:26:22</publishTime>
@@ -5103,7 +5109,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>12/27/2019 08:32:08</publishTime>
     </File>
     <File Include="Content/styles.css">
-      <publishTime>08/03/2022 07:10:21</publishTime>
+      <publishTime>08/07/2022 22:46:33</publishTime>
     </File>
     <File Include="Content/timepicker.less">
       <publishTime>07/29/2022 08:09:32</publishTime>
@@ -5168,11 +5174,26 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="images/ceres_logo.png">
       <publishTime>12/21/2021 11:19:54</publishTime>
     </File>
+    <File Include="images/favicon-16x16.png">
+      <publishTime>12/28/2021 09:15:10</publishTime>
+    </File>
+    <File Include="images/favicon-32x32.png">
+      <publishTime>12/28/2021 09:15:10</publishTime>
+    </File>
+    <File Include="images/favicon.ico">
+      <publishTime>09/09/2021 14:09:31</publishTime>
+    </File>
     <File Include="images/ms-symbollockup_signin_light.png">
       <publishTime>03/05/2022 06:16:32</publishTime>
     </File>
+    <File Include="images/null.png">
+      <publishTime>08/04/2022 07:32:38</publishTime>
+    </File>
+    <File Include="images/small cbpslogo.png">
+      <publishTime>11/19/2021 04:29:13</publishTime>
+    </File>
     <File Include="index3.html">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/05/2022 03:30:18</publishTime>
     </File>
     <File Include="Login3.html">
       <publishTime>07/01/2022 05:14:38</publishTime>
@@ -5181,34 +5202,43 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/03/2022 03:13:00</publishTime>
     </File>
     <File Include="Scripts/app.js">
-      <publishTime>08/05/2022 02:17:36</publishTime>
+      <publishTime>08/08/2022 01:08:17</publishTime>
     </File>
     <File Include="Scripts/ceres-authentication.js">
-      <publishTime>07/28/2022 03:34:42</publishTime>
+      <publishTime>08/08/2022 02:20:21</publishTime>
     </File>
     <File Include="Scripts/ceres-dashboard.js">
       <publishTime>08/03/2022 03:27:20</publishTime>
     </File>
     <File Include="Scripts/ceres.js">
-      <publishTime>08/05/2022 01:24:12</publishTime>
+      <publishTime>08/08/2022 03:25:49</publishTime>
     </File>
     <File Include="Scripts/dx.all.js">
       <publishTime>06/28/2021 08:50:48</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>08/04/2022 04:44:29</publishTime>
+      <publishTime>08/07/2022 23:13:06</publishTime>
     </File>
     <File Include="Scripts/jquery-idle-hands.js">
       <publishTime>07/02/2020 14:19:34</publishTime>
     </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>08/07/2022 23:19:20</publishTime>
+    </File>
     <File Include="Scripts/jquery.validate.min.js">
       <publishTime>03/03/2021 10:15:50</publishTime>
     </File>
+    <File Include="Scripts/jwt-decode.js">
+      <publishTime>09/27/2021 05:26:15</publishTime>
+    </File>
+    <File Include="Scripts/lookup-data.js">
+      <publishTime>04/20/2022 07:37:57</publishTime>
+    </File>
     <File Include="Scripts/sso.js">
-      <publishTime>03/08/2022 22:37:24</publishTime>
+      <publishTime>08/08/2022 03:44:45</publishTime>
     </File>
     <File Include="Scripts/theme.js">
-      <publishTime>08/03/2022 03:40:55</publishTime>
+      <publishTime>08/07/2022 03:01:49</publishTime>
     </File>
     <File Include="Scripts/toastr.min.js">
       <publishTime>06/15/2018 23:54:40</publishTime>
@@ -5216,17 +5246,20 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/w2ui-1.5.min.js">
       <publishTime>03/05/2021 14:46:44</publishTime>
     </File>
+    <File Include="userinfo.html">
+      <publishTime>08/08/2022 01:06:32</publishTime>
+    </File>
     <File Include="Views/Authentication/Errors404Alt.cshtml">
-      <publishTime>08/04/2022 23:44:16</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Authentication/Errors404Basic.cshtml">
-      <publishTime>08/04/2022 23:44:16</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Authentication/Errors404Cover.cshtml">
-      <publishTime>08/04/2022 23:44:16</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Authentication/Errors500.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 10:51:58</publishTime>
     </File>
     <File Include="Views/Authentication/LockScreenBasic.cshtml">
       <publishTime>08/04/2022 23:44:16</publishTime>
@@ -5235,7 +5268,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 23:44:16</publishTime>
     </File>
     <File Include="Views/Authentication/LogoutBasic.cshtml">
-      <publishTime>08/04/2022 23:44:16</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Authentication/LogoutCover.cshtml">
       <publishTime>08/04/2022 23:44:16</publishTime>
@@ -5256,7 +5289,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 23:44:16</publishTime>
     </File>
     <File Include="Views/Authentication/SignInBasic.cshtml">
-      <publishTime>08/04/2022 23:44:16</publishTime>
+      <publishTime>08/08/2022 03:25:49</publishTime>
     </File>
     <File Include="Views/Authentication/SignInCover.cshtml">
       <publishTime>08/04/2022 23:44:16</publishTime>
@@ -5280,7 +5313,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 23:44:16</publishTime>
     </File>
     <File Include="Views/Dashboard/Index.cshtml">
-      <publishTime>08/05/2022 01:54:45</publishTime>
+      <publishTime>08/07/2022 10:19:07</publishTime>
     </File>
     <File Include="Views/Pages/ComingSoon.cshtml">
       <publishTime>08/04/2022 23:05:30</publishTime>
@@ -5289,34 +5322,34 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 23:05:30</publishTime>
     </File>
     <File Include="Views/Pages/Gallery.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/Maintenance.cshtml">
       <publishTime>08/04/2022 23:44:16</publishTime>
     </File>
     <File Include="Views/Pages/Pricing.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/ProfileSettings.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/ProfileSimple.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/SearchResults.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/Sitemap.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/Starter.cshtml">
       <publishTime>08/04/2022 23:05:30</publishTime>
     </File>
     <File Include="Views/Pages/Team.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Pages/Timeline.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 08:50:11</publishTime>
     </File>
     <File Include="Views/Shared/_customizer.cshtml">
       <publishTime>03/20/2022 09:58:34</publishTime>
@@ -5325,7 +5358,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 23:44:16</publishTime>
     </File>
     <File Include="Views/Shared/_head_css.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/07/2022 10:19:07</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>08/01/2022 22:07:23</publishTime>
@@ -5337,7 +5370,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 23:05:30</publishTime>
     </File>
     <File Include="Views/Shared/_page_title.cshtml">
-      <publishTime>08/04/2022 04:42:33</publishTime>
+      <publishTime>08/06/2022 11:28:29</publishTime>
     </File>
     <File Include="Views/Shared/_sidebar.cshtml">
       <publishTime>08/04/2022 23:44:16</publishTime>
@@ -5346,10 +5379,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/04/2022 22:40:40</publishTime>
     </File>
     <File Include="Views/Shared/_topbar.cshtml">
-      <publishTime>08/04/2022 23:44:16</publishTime>
+      <publishTime>08/07/2022 23:41:47</publishTime>
     </File>
     <File Include="Views/Shared/_vendor_scripts.cshtml">
-      <publishTime>08/04/2022 23:05:30</publishTime>
+      <publishTime>08/08/2022 02:33:56</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>06/25/2022 09:41:48</publishTime>
@@ -5358,7 +5391,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>06/25/2022 09:41:38</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/05/2022 03:09:27</publishTime>
+      <publishTime>08/08/2022 03:50:19</publishTime>
     </File>
   </ItemGroup>
 </Project>

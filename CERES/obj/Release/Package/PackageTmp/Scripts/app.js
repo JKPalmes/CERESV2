@@ -54,7 +54,7 @@ var clientSettings = {
     EditPeriodUser: 7
 };
 var userSettings = {
-    PageSize: 20,
+    PageSize: 15,
     ValidPeriod: 4,
     ViewablePeriod: 4
 };
@@ -403,6 +403,8 @@ function showForm() {
         $("#ddlServiceArea").append(selData.join(''));        
     }
 
+    if (clientName == '--- Select Client ---') getClientName();
+
     //brb 6/16/2022
     let prodDetailsTextContent = "" + siteName + " | " + locName + " | " + serviceAreaName + "";
     let prodDataTextContent = "QUERY VIEW (" + clientName;
@@ -421,7 +423,7 @@ function showForm() {
     //$('img[src="' + oldSrc + '"]').attr('src', newSrc);
 
     //PLACE CSS-GRID STYLING
-    isEditMode = true;
+    //isEditMode = true;
     //$("#main-data-list").hide();
     //$("#main-attrib-capture, #main-metric-capture, .bide-content-attrib, .bide-content-metric").removeClass("hidden").show().children().removeClass("hidden").show();
     //var cssToUpdate = '"h h h h h h h h h h h u" "m m n n n o o o o o o o" "f f f f f f f f f f f lr"';
@@ -576,47 +578,48 @@ function setup() {
         //$("#ddlServiceArea").change();
     });
 
-    $("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
+    //$("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
 
-    $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("click", function () {
-        if ($(this).prop("class").indexOf("site") >= 0)
-            $("#ddlClient").change();
-        else if ($(this).prop("class").indexOf("location") >= 0) {
-            $("#ddlSite").change();
-            $("#ddlServiceArea option").remove();
-            $("#ddlServiceArea").append('<option value="--- Select ServiceArea---">--- Select ServiceArea ---</option>');
-        }
-        else
-            $("#ddlLocation").change();
+    //$(".fa-sitemap, .fa-location-arrow, .fa-server").on("click", function () {
+    //    if ($(this).prop("class").indexOf("site") >= 0)
+    //        $("#ddlClient").change();
+    //    else if ($(this).prop("class").indexOf("location") >= 0) {
+    //        $("#ddlSite").change();
+    //        $("#ddlServiceArea option").remove();
+    //        $("#ddlServiceArea").append('<option value="--- Select ServiceArea---">--- Select ServiceArea ---</option>');
+    //    }
+    //    else
+    //        $("#ddlLocation").change();
 
-    });
+    //});
 
-    $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseover", function () {
-        $('#siteRefresh').w2tag();
-        if ($(this).prop("class").indexOf("site") >= 0) {
-            $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "right", className: 'w2ui-dark' });
-        }
-        else if ($(this).prop("class").indexOf("location") >= 0) {
-            $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "right", className: 'w2ui-dark' });
-        }
-        else
-            $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "right", className: 'w2ui-dark' });
-    });
+    //$(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseover", function () {
+    //    $('#siteRefresh').w2tag();
+    //    if ($(this).prop("class").indexOf("site") >= 0) {
+    //        $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "left", className: 'w2ui-dark' });
+    //    }
+    //    else if ($(this).prop("class").indexOf("location") >= 0) {
+    //        $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "left", className: 'w2ui-dark' });
+    //    }
+    //    else
+    //        $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "right", className: 'w2ui-dark' });
+    //});
 
-    $(".glyphicon-refresh-site, .glyphicon-refresh-location, .glyphicon-refresh-servicearea").on("mouseout", function () {
-        $('#siteRefresh').w2tag();
-        $('#locationRefresh').w2tag();
-        $('#serviceAreaRefresh').w2tag();
+    //$(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseout", function () {
+    //    $('#siteRefresh').w2tag();
+    //    $('#locationRefresh').w2tag();
+    //    $('#serviceAreaRefresh').w2tag();
 
-    });
+    //});
 
-    $(".w2ui-sidebar-top").on("mouseover", function () {
-        $('#sidebarLabel').w2tag("Entry View - User Saved Preferences [Client | Site | Location | Service Area]", { position: "right", className: 'w2ui-dark' });
-    });
+    
+    //$(".w2ui-sidebar-top").on("mouseover", function () {
+    //    $('#sidebarLabel').w2tag("Entry View - User Saved Preferences [Client | Site | Location | Service Area]", { position: "right", className: 'w2ui-dark' });
+    //});
 
-    $(".w2ui-sidebar-top").on("mouseout", function () {
-        $('#sidebarLabel').w2tag();
-    });
+    //$(".w2ui-sidebar-top").on("mouseout", function () {
+    //    $('#sidebarLabel').w2tag();
+    //});
 
     //POPULATE RECENT DATA
     let areaId = localStorage.getItem('areaId');
@@ -641,6 +644,7 @@ function setup() {
         //initClientList();
         getRecentSavedData();
     }
+
 }
 
 function hideProductionDetails() {
@@ -924,6 +928,22 @@ function getUserPreferences() {
     });
 }
 
+function saveUserPreferences() {
+    //ajaxPostRequest("#sidebar", baseUrl + "api/client/GetTop10ServiceAreasByUserName", { Id: $("#sidebar").val(), email: sessionEmail })
+    $.ajax({
+        url: baseUrl + "api/client/GetTop10ServiceAreasByUserName",
+        method: "POST",
+        data: { Id: 0, UserName: sessionStorage.getItem('email') },
+        dataType: "json",
+        headers: headerToken,
+        success: function (data) {
+                localStorage.setItem("userSavedPreferences", JSON.stringify(data));
+                //insertItems(data);
+        },
+        error: handleXHRError
+    });
+}
+
 function initClientList() {
 
     getMaxTransactionId();
@@ -964,7 +984,9 @@ function handleRecentSavedData(data) {
         clearProductionLog;
         //hideProductionDetails();
     } else {
-        setSelectors(localStorage.getItem('areaId'));
+        if (sessionStorage.getItem('selectedArea') != 'All') {
+            setSelectors(localStorage.getItem('areaId'));
+        }
         showProductionDetails();
         isUpdate = true;
         selectGridRow();
@@ -1461,9 +1483,10 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
         },
         pager: {
             //displayMode: "compact",
-            //displayMode: "full",
+            visible: true,
+            displayMode: "full",
             showPageSizeSelector: true,
-            allowedPageSizes: [5, 10, 20, 50],
+            allowedPageSizes: [5, 10, 15, 20],
             showInfo: true,
             showNavigationButtons: true
         },
@@ -1576,27 +1599,46 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 location: "before",
                 widget: "dxButton",
                 options: {
-                    visible: isFiltered,
-                    //icon: "add-icon",
-                    text: "New Tran",
+                    visible: true,
+                    text: "Query View",
                     showText: "always",
-                    icon: "fa fa-plus",
-                    hint: "Add New Transaction (Entry View)",
+                    icon: "refresh-icon",
+                    hint: "Switch to Query View",
                     onClick: function () {
-                        addNew();
+                        reloadAllUserTrans();
                     }
                 }
             }, {
                 location: "before",
                 widget: "dxButton",
                 options: {
-                    visible: true,
-                    text: "Query View",
+                    elementAttr: { id: 'entryViewButton' },
+                    //visible: !isFiltered && isEditMode,
+                    visible: false,
+                    text: "Entry View",
                     showText: "always",
-                    icon: "refresh-icon",
-                    hint: "Show User Transactions",
+                    icon: "fa fa-plus-circle",
+                    hint: "Switch to Entry View",
                     onClick: function () {
-                        reloadAllUserTrans();
+                        if (clientId == undefined) {
+                            let client = $("#ddlClient");
+                            clientId = parseInt(client.val());
+                        }
+                        let areaId = "";
+                        let svc = $("#ddlServiceArea");
+                        if (svc.val() == "--- Select ServiceArea---" || svc.val() == "--- Select All---") { 
+                            var userPref = JSON.parse(localStorage.getItem('userSavedPreferences'));
+                            areaId = userPref[0].Id;
+                        }
+                        //else if (svc.val() == "--- Select All---") {
+                        //    getFirstServiceArea(clientId);
+                        //    areaId = serviceAreaId + '_' + clientId;
+                        //}
+                        else {
+                            serviceAreaId = parseInt(svc.val());
+                            areaId = serviceAreaId + '_' + clientId;
+                        }
+                        getSavedDataByServiceArea(areaId);
                     }
                 }
             }, {
@@ -1615,35 +1657,34 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                         submitForm();
                     }
                 }
-            //brb 5/20/22
-            },{
-                location: "after",
+            }, {
+                location: "before",
                 widget: "dxButton",
                 options: {
-                    visible: true,
-                    icon: "help",
-                    hint: "Help on Data Entry",
+                    visible: isFiltered,
+                    //icon: "add-icon",
+                    text: "New Tran",
+                    showText: "always",
+                    icon: "fa fa-plus",
+                    hint: "Add New Transaction (Entry View)",
                     onClick: function () {
-                        $('#context-menu').dxContextMenu("show");
+                        addNew();
                     }
                 }
             }, {
-                location: "after",
-                widget: "dxButton",
-                options: {
-                    visible: isFiltered,// && !isAddMode,
-                    //icon: "add-icon",
-                    text: "Export Log",
-                    showText: "always",
-                    //icon: "xlsx-icon",
-                    icon: "export",
-                    //hint: "Export All Grid Data To Excel",
-                    hint: "Export Transaction Records To Excel",
-                    onClick: function () {
-                        //exportToCsv(false);
-                        $('#context-menu1').dxContextMenu("show");
-                    }
-                }
+                location: 'center',
+                template() {
+                    return $('<div>')
+                        .addClass('informer')
+                        .append(
+                            $('<h6>')
+                                .addClass('count')
+                                .text(getGroupCount('TransactionId')),
+                            $('<span>')
+                                .addClass('name')
+                                .text('Total Count'),
+                        );
+                },
             });
         },
         editing: {
@@ -1663,8 +1704,11 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
         onSelectionChanged: function (selectedItems) {
             if (isFiltered) return;
             if (isAddMode) return;
+            isEditMode = true;
             var data = selectedItems.selectedRowsData[0];
             if (data) {
+                //show Entry View button
+                if (!isFiltered) $("#entryViewButton").dxButton("instance").option("visible", true);  
                 getTransactionData(data, false);
             }
         },
@@ -1725,6 +1769,12 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
     });
 }
 
+function getGroupCount(groupField) {
+    return DevExpress.data.query(model.GenericTransactions)
+        .groupBy(groupField)
+        .toArray().length;
+}
+
 function setNewSelectors(selector) {
     switch (selector) {
         case "Client":
@@ -1767,15 +1817,14 @@ function getTransactionData(e, isTr) {
     //brb 6/16/2022
     sessionStorage.setItem('selectedArea', serviceAreaName)
     //brb 6/16/2022
-
     //toggleShowData();
     //showData();
     //hideSelectors();
-    showProductionDetails();
-
+    //showProductionDetails();
     console.log("row", isTr, e);
 
     if (!isClone) isNew = false;
+
 
     submitButtonType = 2;
     isPrevious = false;
@@ -1939,8 +1988,8 @@ function handleXHRError(err) {
     //$(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
     toastr.error("Oops! Something went wrong. Please contact BI administrator");
     if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
-        sessionStorage.clear();
-        window.location.href = "../Authentication/Errors500/";
+        //sessionStorage.clear();
+        window.location.href = baseUrl + "Authentication/Errors500/";
     }
 }
 
@@ -2094,7 +2143,8 @@ function refreshGrid() {
 function populateForms(data) {
     //if ($("#ddlServiceArea").val().match(pattern) != null)
         //return;
-    scrollUpFunction();
+
+    scrollFunction();
 
     var client = $("#ddlClient");
     clientName = client.find("option:selected").text();
@@ -2793,7 +2843,7 @@ function toggleShowSelectors() {
 
 //brb new 
 function ajaxGetRequest(targetElement, url) {
-    sessionToken = sessionStorage.getItem("accessToken");
+    sessionToken = localStorage.getItem("accessToken");
     headerToken = {
         "Authorization": "Bearer " + sessionToken
     };
@@ -2809,22 +2859,25 @@ function ajaxGetRequest(targetElement, url) {
 
             if (targetElement == "userProfile") {
                 if (data.AccountType === 'M' || data.AccountType === 'A') {
-                    //document.querySelector("#settings").hidden = false;
-
-                    //document.querySelector("#changeUserSetting").hidden = false;
+                    document.querySelector("#execDashboard").hidden = false;
+                    document.querySelector("#changeUserSetting").hidden = false;
+                    //document.querySelector("#adminMenu").hidden = false;
                 }
 
                 //if (data.AccessGoldReports == 1) w2ui['toolbarAdmin'].enable('goldReports');
+                if (data.AccessGoldReports == 1) document.querySelector("#goldReports").hidden = false;
                 //if (data.MstrUser == 1) w2ui['toolbarAdmin'].enable('platinumReports');
+                if (data.MstrUser == 1) document.querySelector("#enterpriseReports").hidden = false;
                 ////if (data.CanUpload == 1) w2ui['toolbarAdmin'].enable('uploadFiles');
+                if (data.CanUpload == 1) document.querySelector("#uploadFiles").hidden = false;
 
-                //if (data.AccountType !== 'A') {
-                //    w2ui['toolbarAdmin'].hide('adminMenu');
-                ////} else {
-                ////    isAdmin = true;
+                if (data.AccountType !== 'A') {
+                    w2ui['toolbarAdmin'].hide('adminMenu');
+                } else {
+                    isAdmin = true;
                 ////    w2ui['toolbarAdmin'].enable('uploadFiles');
                 ////    w2ui['toolbarAdmin'].show('uploadFiles');
-                //}
+                }
             }
         },
         error: handleXHRError
@@ -3518,6 +3571,10 @@ function reloadAllUserTrans() {
     getRecentSavedData();
 }
 
+function helpContext() {
+    $('#context-menu').dxContextMenu("show");
+}
+
 function checkNum(F, t) {
     var nv, fv = F.value;
     if (t.substring(0, 1) == 'i')
@@ -3791,16 +3848,17 @@ function clearCache() {
             localStorage.clear();
             sessionStorage.clear();
             //history.go(0);
-            window.location.href = '../Authentication/SignInBasic/';
+            //window.location.href = baseUrl + 'Authentication/SignInBasic/';
+            redirectTo('login');
         })
         .no(() => {
             //console.log('No')
         })
 }
 
-function sso() {
-    alert("sso!");
-}
+//function sso() {
+//    alert("sso!");
+//}
 
 function execDashboard() {
     let userprofile = JSON.parse(sessionStorage.getItem('userProfile'));
@@ -3890,27 +3948,62 @@ function filterByStatus() {
 }
 
 var mybutton = document.getElementById("back-to-top");
-function scrollUpFunction() {
-    //if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+function scrollFunction() {
         mybutton.style.display = "block";
-    //} else {
-        //mybutton.style.display = "none";
-    //}
 }
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-    //document.body.scrollTop = 0;
-    //document.documentElement.scrollTop = 0;
     document.getElementById('page-title').scrollIntoView();
-    //mybutton.style.display = "none";
 }
 
 //Common plugins
 //if (document.querySelectorAll("[toast-list]") || document.querySelectorAll('[data-choices]') || document.querySelectorAll("[data-provider]")) {
 //if (document.querySelectorAll("[data-provider]")) {
-    //document.writeln("<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js'></script>");
-    //document.writeln("<script type='text/javascript' src='assets/libs/choices.js/public/assets/scripts/choices.min.js'></script>");
-    //document.writeln("<script type='text/javascript' src='assets/libs/flatpickr/flatpickr.min.js'></script>");
+//    document.writeln("<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/toastify-js'></script>");
+//    document.writeln("<script type='text/javascript' src='assets/libs/choices.js/public/assets/scripts/choices.min.js'></script>");
+//    document.writeln("<script type='text/javascript' src='assets/libs/flatpickr/flatpickr.min.js'></script>");
 //}
 
+//var mybutton = document.getElementById("back-to-top");
+//function scrollFunction() {
+//    100 < document.body.scrollTop || 100 < document.documentElement.scrollTop ? (mybutton.style.display = "block") : (mybutton.style.display = "none");
+//}
+//function topFunction() {
+//    (document.body.scrollTop = 0), (document.documentElement.scrollTop = 0);
+//}
+//window.onscroll = function () {
+//    scrollFunction();
+//};
+
+function getClientName() {
+    let areaId = localStorage.getItem('areaId');
+    clientId = areaId.split('_')[1];
+    let clients = JSON.parse(sessionStorage.getItem('clientData'));
+    clientName = clients.filter(c => c.Id == clientId).Value;
+}
+
+function redirectTo(route) {
+    switch (route) {
+        case "login":
+            window.location.href = baseUrl + 'authentication/signinbasic';
+            break;
+        case "dashboard":
+            window.location.href = baseUrl + 'dashboard/index';
+            break;
+        case "approvers":
+            window.location.href = baseUrl + 'approvers.html';
+            break;
+    //    case "login":
+    //        break;
+    //    case "login":
+    //        break;
+    //    case "login":
+    //        break;
+    //    case "login":
+    //        break;
+    //    case "login":
+    //        break;
+    }
+
+}

@@ -1,10 +1,4 @@
-﻿// Admin Layout (LUNO)
-// @author: WrrapTheme ( https://themeforest.net/user/wrraptheme )
-// @design by: ThemeMakker Infotech LLP.
-// @event-namespace: LUNO
-// Copyright 2021 WrrapTheme
-
-if (typeof jQuery === "undefined") {
+﻿if (typeof jQuery === "undefined") {
     throw new Error("jQuery plugins need to be before this file");
 }
 
@@ -451,17 +445,14 @@ $(function () {
 
 function hideSelectorPanel() {
     $("#selector-panel").hide();
-    //$("#prod-panel").css("padding-top", "3rem").css("padding-bottom", "1rem");
 }
 
 function showSelectorPanel() {
     $("#selector-panel").show();
-    //$("#prod-panel").css("padding-top", "0rem").css("padding-bottom", "0rem");
 }
 
 function expandPanels() {
     $("#data-panel").toggleClass('col-lg-12 col-md-12');
-    //$("#gridContainer").width("100%");
     $("#attributes-panel").toggleClass('col-lg-6 col-md-12');
     $("#metrics-panel").toggleClass('col-lg-6 col-md-12');
     //let gridInstance = $("#gridContainer").dxDataGrid("instance");

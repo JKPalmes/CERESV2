@@ -1807,7 +1807,7 @@ the specific language governing permissions and limitations under the Apache Lic
             var container = $(document.createElement("div")).attr({
                 "class": "select2-container"
             }).html([
-                "<a href='javascript:void(0)' onclick='return false;' class='select2-choice' tabindex='-1'>",
+                "<a href='#(0)' onclick='return false;' class='select2-choice' tabindex='-1'>",
                 "   <span class='select2-chosen'>&nbsp;</span><abbr class='select2-search-choice-close'></abbr>",
                 "   <span class='select2-arrow'><b></b></span>",
                 "</a>",

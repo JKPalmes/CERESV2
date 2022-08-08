@@ -10,6 +10,7 @@ File: Main Js File
 (function ($) {
 
     'use strict';
+    var baseUrl = "http://localhost:55979/";
 
     $(document).ready(function () {
         $(".div-signin-loading img").addClass("hidden").hide();
@@ -21,7 +22,8 @@ File: Main Js File
 
             $("#btnLogin").addClass("disabled").disabled = true;
             $.ajax({
-                url: "token",
+                url: baseUrl + "token",
+                //url: "token",
                 method: "POST",
                 data: {
                     username: $("#username").val(),
@@ -33,12 +35,14 @@ File: Main Js File
                         $("#btnLogin").disabled = false;
                         $("#divError").hide();
                         sessionStorage.setItem("data", JSON.stringify(data));
+                        localStorage.setItem("accessToken", data.access_token);
                         sessionStorage.setItem("accessToken", data.access_token);
                         sessionStorage.setItem("userName", data.userName);
                         sessionStorage.setItem("email", data.email);
                         sessionStorage.setItem("accountType", data.accountType);
 
-                        window.location.href = data.clientId == 0 ? "reset.html" : "/Dashboard/Index"
+                        window.location.href = data.clientId == 0 ? "reset.html" : baseUrl + "/Dashboard/Index"
+                        //window.location.href = data.clientId == 0 ? "reset.html" : "/Dashboard/Index"
                     }
                 },
                 error: function (err) {
