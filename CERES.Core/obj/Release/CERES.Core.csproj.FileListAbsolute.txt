@@ -42,3 +42,4 @@ C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Release\CERES.Core.csproj
 C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Release\CERES.Core.csproj.CopyComplete
 C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Release\CERES.Core.dll
 C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Release\CERES.Core.pdb
+C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Release\CERES.Core.csprojAssemblyReference.cache

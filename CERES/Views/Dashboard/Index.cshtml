@@ -255,20 +255,12 @@
     <script src="../scripts/index.js"></script>
     @*<script src="../scripts/ceres.js"></script>*@
 
-    <script type="text/javascript">
+    <script>
         $(document).ready(function () {
-
+            //let delayInMilliseconds = 3000;
+            //setTimeout(function () {
             init();
-
-            //$("input[type='text']").on("click", function () {
-            //    $(this).select();
-            //});
-            //$("input").focus(function () {
-            //    $(this).select();
-            //});
-            //$("input").focusin(function () {
-            //    $(this).select();
-            //});
+            //}, delayInMilliseconds);
 
             $('input[rel="txtTooltip"]').tooltip();
 
@@ -276,6 +268,12 @@
                 placement: $(this).data("placement") || 'top'
             });
 
+            // date range picker
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'right'
+            }, function (start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            });
         })
     </script>
 

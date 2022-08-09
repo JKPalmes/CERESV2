@@ -290,7 +290,7 @@ function getRecentSavedDataAll(clientId) {
     sessionStorage.setItem('selectedArea', 'All');
 
     //will only be called if !isFiltered
-    var payload = { "validPeriod": userSettings.ViewablePeriod, "viewData": transView, "userName": sessionStorage.getItem("email"), "accountType": sessionStorage.getItem("accountType"), "clientId": clientId };
+    var payload = { "userId": +sessionStorage.getItem("userId"), "validPeriod": userSettings.ViewablePeriod, "viewData": transView, "userName": sessionStorage.getItem("email"), "accountType": sessionStorage.getItem("accountType"), "clientId": clientId };
 
     $.ajax({
         url: baseUrl + "api/client/GetSavedDataAll",
@@ -322,7 +322,7 @@ function getRecentSavedData() {
     sessionStorage.setItem('selectedArea', svcId);
 
     //will only be called if !isFiltered
-    var payload = { "validPeriod": userSettings.ViewablePeriod, "viewData": transView, "userName": sessionStorage.getItem("email"), "accountType": sessionStorage.getItem("accountType") };
+    var payload = { "userId": +sessionStorage.getItem("userId"), "validPeriod": userSettings.ViewablePeriod, "viewData": transView, "userName": sessionStorage.getItem("email"), "accountType": sessionStorage.getItem("accountType") };
 
     var transactions = JSON.parse(sessionStorage.getItem("savedData"));
     try {
@@ -369,7 +369,7 @@ function getSavedDataByServiceArea(areaId) {
     isFiltered = true;
     localStorage.setItem('userMode', 'Entry');
 
-    var payload = { "validPeriod": userSettings.ValidPeriod, "viewData": transView, "userName": sessionStorage.getItem("email"), "accountType": sessionStorage.getItem("accountType"), "date": $("#txtProductionDate").val(), "clientId": clientId, "serviceAreaId": serviceAreaId };
+    var payload = { "userId": +sessionStorage.getItem("userId"), "validPeriod": userSettings.ValidPeriod, "viewData": transView, "userName": sessionStorage.getItem("email"), "accountType": sessionStorage.getItem("accountType"), "date": $("#txtProductionDate").val(), "clientId": clientId, "serviceAreaId": serviceAreaId };
 
     $.ajax({
         url: baseUrl + "api/client/GetSavedDataByServiceArea",
@@ -796,6 +796,7 @@ function getUserProfile(userEmail) {
         headers: headerToken,
         success: function (data) {
             sessionStorage.setItem('userProfile', JSON.stringify(data));
+            sessionStorage.setItem("userId", data.Id);
             if (data.AccountType === 'M' || data.AccountType === 'A') {
                 document.querySelector("#execDashboard").hidden = false;
                 document.querySelector("#changeUserSetting").hidden = false;
@@ -946,10 +947,10 @@ function getAppSettings() {
     });
 }
 
-function getUserFolders() {
-    let url = baseUrl + "api/Client/GetUserFolders";
-    ajaxGetRequest("userFolders", url);
-}
+//function getUserFolders() {
+//    let url = baseUrl + "api/Client/GetUserFolders";
+//    ajaxGetRequest("userFolders", url);
+//}
 
 function getUserPreferences() {
     //ajaxPostRequest("#sidebar", baseUrl + "api/client/GetTop10ServiceAreasByUserName", { Id: $("#sidebar").val(), email: sessionEmail })
@@ -976,29 +977,6 @@ function saveUserPreferences() {
         },
         error: handleXHRError
     });
-}
-
-function initClientList() {
-
-    getMaxTransactionId();
-    var now = new Date();
-    var firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-    var d = formatDate(firstDay.toDateString().split('-'));
-    var yyyy = d[0] + d[1] + d[2] + d[3];
-    var mm = d[5] + d[6];
-    var dd = "01"
-    $("#txtProductionDate").val(mm + '/' + dd + '/' + yyyy);
-
-    //POPULATE USERS CLIENT LIST
-    if (sessionStorage.getItem("clientData") != null)
-        handleClientData(JSON.parse(sessionStorage.getItem("clientData")), "#ddlClient");
-    else
-        ajaxRequest("#ddlClient", baseUrl + "api/client/GetClientByUserName", { Id: 0, email: sessionEmail });
-
-    ajaxRequest("#ddlSite", baseUrl + "api/client/GetSiteByUserName", { Id: $("#ddlClient").val(), email: sessionEmail });
-    ajaxRequest("#ddlLocation", baseUrl + "api/client/GetLocationById", { Id: $("#ddlSite").val(), email: sessionEmail });
-    ajaxRequest("#ddlServiceArea", baseUrl + "api/client/GetServiceAreaById", { Id: $("#ddlLocation").val(), email: sessionEmail });
-
 }
 
 function handleRecentSavedData(data) {
@@ -1813,11 +1791,11 @@ function setNewSelectors(selector) {
     switch (selector) {
         case "Client":
             initClientList();
-            showSelectors();
+            showSelectorPanel();
             $("#ddlClient").focus();
             break;
         case "Site":
-            showSelectors();
+            showSelectorPanel();
             setSelectors();
             ajaxRequest("#ddlSite", baseUrl + "api/client/GetSiteByUserName", { Id: $("#ddlClient").val(), email: sessionEmail });
             populateSelectorOptions("#ddlSite");
@@ -1826,7 +1804,7 @@ function setNewSelectors(selector) {
             $("#ddlSite").focus();
             break;
         case "Location":
-            showSelectors();
+            showSelectorPanel();
             setSelectors();
             ajaxRequest("#ddlLocation", baseUrl + "api/client/GetLocationById", { Id: $("#ddlSite").val(), email: sessionEmail });
             populateSelectorOptions("#ddlLocation");
@@ -1834,7 +1812,7 @@ function setNewSelectors(selector) {
             $("#ddlLocation").focus();
             break;
         case "Service Area":
-            showSelectors();
+            showSelectorPanel();
             setSelectors();
             ajaxRequest("#ddlServiceArea", baseUrl + "api/client/GetServiceAreaById", { Id: $("#ddlLocation").val(), email: sessionEmail })
             populateSelectorOptions("#ddlServiceArea");
@@ -1881,6 +1859,7 @@ function getTransactionData(e, isTr) {
     }
 
     var payload = {
+        "userId": +sessionStorage.getItem("userId"),
         "transactionId": tranId,
         "accountId": e.AccountId,
         "siteId": e.SiteId,
@@ -2161,7 +2140,7 @@ function submitForm(e) {
 function refreshGrid() {
     //if (submitButtonType != 2) hideData();
     var areaId = localStorage.getItem('areaId');
-    //var delayInMilliseconds = 0;
+    var delayInMilliseconds = 0;
     //var userPref = JSON.parse(localStorage.getItem('userSavedPreferences'));
     //if (userPref.filter(u => u.Id === areaId).length == 0) {
         //getUserPreferences();//refresh sidebar
@@ -2838,15 +2817,15 @@ function hideSelectors() {
     }
 }
 
-function showSelectors() {
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[5]) {
-        x[5].textContent = "Hide Selectors";
-        $("#selector-panel").show();
-        var i = document.getElementsByClassName("w2ui-tb-image");
-        i[5].children[0].className = "fa fa-arrow-left";
-    }
-}
+//function showSelectors() {
+//    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+//    if (x[5]) {
+//        x[5].textContent = "Hide Selectors";
+//        $("#selector-panel").show();
+//        var i = document.getElementsByClassName("w2ui-tb-image");
+//        i[5].children[0].className = "fa fa-arrow-left";
+//    }
+//}
 
 function toggleExpandDetails() {
     var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
@@ -3999,17 +3978,6 @@ function topFunction() {
 //    document.writeln("<script type='text/javascript' src='assets/libs/flatpickr/flatpickr.min.js'></script>");
 //}
 
-//var mybutton = document.getElementById("back-to-top");
-//function scrollFunction() {
-//    100 < document.body.scrollTop || 100 < document.documentElement.scrollTop ? (mybutton.style.display = "block") : (mybutton.style.display = "none");
-//}
-//function topFunction() {
-//    (document.body.scrollTop = 0), (document.documentElement.scrollTop = 0);
-//}
-//window.onscroll = function () {
-//    scrollFunction();
-//};
-
 function getClientName() {
     let areaId = localStorage.getItem('areaId');
     clientId = areaId.split('_')[1];
@@ -4028,18 +3996,24 @@ function redirectTo(route) {
         case "approvers":
             window.location.href = baseUrl + 'approvers.html';
             break;
-    //    case "login":
-    //        break;
-    //    case "login":
-    //        break;
-    //    case "login":
-    //        break;
-    //    case "login":
-    //        break;
-    //    case "login":
-    //        break;
     }
 }
+
+function init() {
+    let delayInMilliseconds = 3000;
+
+    getDefaultValues();
+
+    setTimeout(function () {
+        initClientList();
+        setup();
+    }, delayInMilliseconds);
+
+    //setTimeout(function () {
+    //setup();
+    //}, delayInMilliseconds);
+}
+
 function getDefaultValues() {
     windowInnerHeight = window.innerHeight;
     sessionEmail = sessionStorage.getItem("email");
@@ -4067,9 +4041,7 @@ function getDefaultValues() {
     $(".user-email-text").text(" " + sessionEmail + " ");
 
     //getUserFolders();
-    //getUserProfile();
-
-    getUserFolders(sessionEmail);
+    //getUserProfile(sessionEmail);
     getUserProfile(sessionEmail);
 
     let settings = JSON.parse(localStorage.getItem('userSettings'));
@@ -4085,6 +4057,7 @@ function getDefaultValues() {
     getAccountInfos();
     getUserPreferences();
     saveUserPreferences();
+    getUserFolders(sessionEmail);
 
 }
 
@@ -4314,7 +4287,7 @@ function setup() {
 
     //POPULATE RECENT DATA
     let areaId = localStorage.getItem('areaId');
-    if (areaId == null || areaId.indexOf('null') > -1) {
+    if (areaId == null || areaId.indexOf('null') > -1 || areaId.indexOf('Select Client' > -1)) {
         let userSavedPref = localStorage.getItem('userSavedPreferences');
         if (userSavedPref) {
             areaId = JSON.parse(userSavedPref)[0].Id;
@@ -4335,12 +4308,4 @@ function setup() {
         //initClientList();
         getRecentSavedData();
     }
-}
-
-function init() {
-    getDefaultValues();
-
-    initClientList();
-
-    setup();
 }

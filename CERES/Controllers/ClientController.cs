@@ -71,16 +71,17 @@ namespace CERES.Web.Api.Controllers
 
         public bool AllowMultiple => throw new NotImplementedException();
 
-        private IEnumerable<int> GetSitesAccess(int clientId = 0)
+        private IEnumerable<int> GetSitesAccess(int userId, int clientId = 0)
         {
             //var list = new List<int>();
             //list.Add(18);
             //return list;
             using (BIDE_DbContext dbContext = new BIDE_DbContext())
             {
-                if (string.IsNullOrEmpty(_identity[0])) return new List<int>();
+                //if (string.IsNullOrEmpty(_identity[0])) return new List<int>();
                 
-                int userId = Int32.Parse(_identity[0]);
+                //int userId = Int32.Parse(_identity[0]);
+
                 //if (clientId == 0)
                 //{
                 //return (from a in dbContext.vwGet_ClientList2
@@ -100,21 +101,21 @@ namespace CERES.Web.Api.Controllers
             }
         }
 
-        private bool IsUserAllowedTransactionUpdates(int clientId = 0)
+        private bool IsUserAllowedTransactionUpdates(int userId, int clientId = 0)
         {
-            IEnumerable<int> accessList = this.GetSitesAccess(clientId);
+            IEnumerable<int> accessList = this.GetSitesAccess(userId, clientId);
             return accessList.Contains(clientId) ? true : false;
             //return false;
         }
 
         [HttpGet]
         [Route("api/Client/GetTransactionById")]
-        public IHttpActionResult GetTransactionById(int transactionId, int accountId, int svcId)
+        public IHttpActionResult GetTransactionById(int userId, int transactionId, int accountId, int svcId)
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), transactionId));
 
             var userSvc = new UserService();
-            if (this.IsUserAllowedTransactionUpdates(accountId))
+            if (this.IsUserAllowedTransactionUpdates(userId, accountId))
             {
                 var result = new TransactionUpdateViewModel
                 {
@@ -161,12 +162,12 @@ namespace CERES.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Client/GetSavedDataByServiceArea")]
-        public IHttpActionResult GetSavedDataByServiceArea(int validPeriod, string viewData, string userName, string accountType, string date, int clientId, int serviceAreaId)
+        public IHttpActionResult GetSavedDataByServiceArea(int userId, int validPeriod, string viewData, string userName, string accountType, string date, int clientId, int serviceAreaId)
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), serviceAreaId));
 
             var userSvc = new UserService();
-            if (this.IsUserAllowedTransactionUpdates(clientId))
+            if (this.IsUserAllowedTransactionUpdates(userId, clientId))
             {
                 var result = new TransactionUpdateViewModel
                 {
@@ -208,14 +209,14 @@ namespace CERES.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Client/GetSavedData")]
-        public IHttpActionResult GetSavedData(int validPeriod, string viewData, string userName, string accountType)
+        public IHttpActionResult GetSavedData(int userId, int validPeriod, string viewData, string userName, string accountType)
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), viewData));
 
             var userSvc = new UserService();
             var result = new TransactionUpdateViewModel
             {
-                GenericTransactions = userSvc.GetDataBySiteAccess(userName, this.GetSitesAccess().ToList(), _pageSize, viewData, accountType, validPeriod * 30)
+                GenericTransactions = userSvc.GetDataBySiteAccess(userName, this.GetSitesAccess(userId).ToList(), _pageSize, viewData, accountType, validPeriod * 30)
                 //GenericTransactions = userSvc.GetDataBySiteAccess(userName, this.GetSitesAccess().ToList(), _pageSize, viewAllData, _lastDayProductionDate),
                 //Transactions = userSvc.GetDataBySiteAccess(_pageSize, date, serviceAreaId, pageNumber, _lastDayProductionDate),
                 //ServiceAreaFields = ClientHierarchyService.GetServiceAreaFields(serviceAreaId).Where(e => e.IsVisible == true)
@@ -228,13 +229,13 @@ namespace CERES.Web.Api.Controllers
 
         [HttpGet]
         [Route("api/Client/GetSavedDataAll")]
-        public IHttpActionResult GetSavedDataAll(int validPeriod, string viewData, string userName, string accountType, int clientId)
+        public IHttpActionResult GetSavedDataAll(int userId, int validPeriod, string viewData, string userName, string accountType, int clientId)
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), viewData));
             var userSvc = new UserService();
             var result = new TransactionUpdateViewModel
             {
-                GenericTransactions = userSvc.GetDataBySiteAccess(userName, this.GetSitesAccess().ToList(), _pageSize, viewData, accountType, clientId, validPeriod * 30)
+                GenericTransactions = userSvc.GetDataBySiteAccess(userName, this.GetSitesAccess(userId).ToList(), _pageSize, viewData, accountType, clientId, validPeriod * 30)
             };
             return Ok(result);
 
@@ -343,7 +344,8 @@ namespace CERES.Web.Api.Controllers
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString()));
 
-            return Ok(ClientHierarchyService.GetClientByUserName(_email));
+            //return Ok(ClientHierarchyService.GetClientByUserName(_email));
+            return Ok(ClientHierarchyService.GetClientByUserName(value.UserName));
         }
 
         [HttpPost]
@@ -352,7 +354,7 @@ namespace CERES.Web.Api.Controllers
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString()));
 
-            value.UserName = _email;
+            //value.UserName = _email;
             return Ok(ClientHierarchyService.GetSiteByClientByIdAndUserName(value));
         }
 
@@ -407,7 +409,8 @@ namespace CERES.Web.Api.Controllers
         {
             //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString()));
 
-            return Ok(ClientHierarchyService.GetTop10ServiceAreasByUserName(_email));
+            //return Ok(ClientHierarchyService.GetTop10ServiceAreasByUserName(_email));
+            return Ok(ClientHierarchyService.GetTop10ServiceAreasByUserName(value.UserName));
         }
 
         [HttpGet]
@@ -494,6 +497,7 @@ namespace CERES.Web.Api.Controllers
 
             var json = value.ToString(Formatting.None);
             dynamic values = JObject.Parse(json);
+            if (values.email.ToString() == "") return Ok("");
             var email = values.email.ToString();
             return Ok(UserService.GetUserProfile(email));
         }

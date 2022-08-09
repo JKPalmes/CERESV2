@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#e60000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="description" content="CBPS Enterprise Record Entry System">
+    <meta name="author" content="CBPS DTG">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <title>CERES</title>
+    <link href="Content/new-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="Content/w2ui-1.5.min.css" />
+    <!-- DevExtreme theme -->
+    <!--<link rel="stylesheet" href="Content/dx.common.css">
+    <link rel="stylesheet" href="Content/dx.light.css">-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/Content/styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery.min.js"%3E%3C/script%3E'))</script>
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.7/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/21.2.7/css/dx.light.css" />
+    <script src="https://cdn3.devexpress.com/jslib/21.2.7/js/dx.all.js"></script>
+    <script src="https://unpkg.com/devextreme-aspnet-data@2.8.6/js/dx.aspnet.data.js"></script>
+    <!--<script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/jquery.validate.min.js"></script>-->
+    <!-- DevExtreme library -->
+    <!--<script type="text/javascript" src="Scripts/dx.all.js"></script>-->
+    <!--<script src="https://cdn3.devexpress.com/jslib/20.2.5/js/dx.all.js"></script>-->
+    <!--<script src="https://cdn3.devexpress.com/jslib/21.1.3/js/dx.all.js"></script>-->
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
+    <!-- Bootstrap 3.3.7 -->
+    <!--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="bower_components/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>-->
+
+    <script src="Scripts/lookup-data.js"></script>
+    <!--<script src="Scripts/index1.js"></script>-->
+
+</head>
+<body class="dx-viewport">
+    <!--<form id="myform1" class="myclass1" method="get">-->
+    <div id="" class="" style="height: 850px;">
+        <div class="flexbox" style="height: 80px; ">
+            <div id="header" style="flex-grow: 1">
+                <div class="bg-image">
+                    <div id="toolbarAdmin" class="nav navbar-nav d-md-down-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flexbox">
+            <!--<div id="main" style="width: 100%; height: 830px;"></div>-->
+
+            <div class="dx-viewport demo-container">
+                <div id="gridContainer"></div></br></br>
+                <div rel="buttons">
+                    <button class="w2ui-btn w2ui-btn-blue" onclick="window.location.href = baseUrl + '/Dashboard/Index'">Close</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flexbox">
+            <div id="" class="" style="flex-grow: 1; height: 40px; padding: 0px; text-align: center;">
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+            </div>
+            <div id="" style="height: 20px; padding: 0px;">
+                <div id="">
+                    <!--<img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" onclick="toggleShowSelectors();" />-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--</form>-->
+
+    <script type="text/javascript">
+        //let baseUrl = "https://microstrategy.cbpsportal.com/edsv2";
+        let baseUrl = "http://localhost:55979";
+        let sessionEmail = sessionStorage.getItem("email");
+        let sessionToken = sessionStorage.getItem("accessToken");
+        let headerToken = {
+            "Authorization": "Bearer " + sessionToken
+        };
+        const url = baseUrl + "/api/Client";
+
+        $(() => {
+            const clients = new DevExpress.data.CustomStore({
+                key: 'Value',
+                loadMode: 'raw',
+                load() {
+                    return sendRequest(`${url}/ClientLookup`);
+                },
+            });
+
+            const customDataSource = new DevExpress.data.CustomStore({
+                key: 'ClientID',
+                load: function (loadOptions) {
+                    loadMode: 'raw'
+                    return sendRequest(`${url}/GetApproverInfo`);
+                    //    const d = $.Deferred();
+                    //    $.ajax(`${url}/GetApproverInfo`, {
+                    //        method: 'GET',
+                    //        data,
+                    //        cache: false,
+                    //        headers: headerToken
+                    //        //xhrFields: { withCredentials: true },
+                    //    })
+                    //        .done(function (response) {
+                    //            d.resolve({ data: response.data, totalCount: response.totalCount });
+                    //        });
+                    //        return d.promise();
+                },
+
+                //byKey: function (key) {
+                //    return $.getJSON(SERVICE_URL + "/" + encodeURIComponent(key));
+                //},
+
+                insert(values) {
+                    return sendRequest(`${url}/SaveAccountInfo`, 'POST', {
+                        values: JSON.stringify(values)
+                    });
+                },
+                update(key, values) {
+                    return sendRequest(`${url}/SaveAccountInfo`, 'POST', {
+                        key,
+                        values: JSON.stringify(values),
+                    });
+                },
+                remove(key) {
+                    return sendRequest(`${url}/DeleteAccountInfo`, 'DELETE', {
+                        key
+                    });
+                }
+            });
+
+            //customDataSource.totalCount()
+            //    .done(function (count) {
+            //        // Process the "count" here
+            //    })
+            //    .fail(function (error) {
+            //        // Handle the "error" here
+            //    })
+
+            const dataGrid = $("#gridContainer").dxDataGrid({
+                dataSource: customDataSource,
+                columnsAutoWidth: false,
+                allowColumnResizing: true,
+                //columnResizingMode: "widget",
+                showColumnLines: true,
+                showRowLines: true,
+                rowAlternationEnabled: true,
+                columnFixing: {
+                    enabled: false
+                },
+                keyboardNavigation: {
+                    enterKeyAction: 'startEdit',//moveFocus
+                    enterKeyDirection: 'column',//row
+                    editOnKeyPress: true,
+                },
+                showBorders: true,
+                //paging: {
+                //    enabled: true,
+                //    pageSize: 15,
+                //},
+                headerFilter: {
+                    visible: true,
+                },
+                searchPanel: {
+                    visible: true,
+                },
+                editing: {
+                    mode: 'batch',
+                    allowAdding: true,
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    selectTextOnEditStart: true,
+                    startEditAction: 'click'
+                    //useIcons: true
+                },
+                onRowInserted(e) {
+                    e.component.navigateToRow(e.key);
+                },
+                remoteOperations: false,
+                repaintChangesOnly: true,
+                onSaving(e) {
+                    e.cancel = true;
+
+                    if (e.changes.length) {
+                        e.promise = sendBatchRequest(`${url}/BatchSaveAccountInfo`, e.changes).done(() => {
+                            e.component.refresh(true).done(() => {
+                                e.component.cancelEditData();
+                            });
+                        });
+                    }
+                },
+                columns: [{
+                    dataField: 'ClientID',
+                    caption: 'Client Name',
+                    validationRules: [{ type: 'required' }],
+                    width: 300,
+                    allowSorting: false,
+                    lookup: {
+                        dataSource: clients,
+                        valueExpr: 'Value',
+                        displayExpr: 'Text',
+                    },
+                    //editCellTemplate: dropDownBoxEditorTemplate,
+                }, {
+                    dataField: 'AccountName',
+                    visible: false
+                }, {
+                    dataField: 'AccountOwner',
+                    width: 300,
+                    validationRules: [{ type: 'required' }],
+                }, {
+                    dataField: 'Email',
+                    validationRules: [{
+                        type: 'required',
+                    }, {
+                        type: 'email',
+                        //}, {
+                        //    type: 'async',
+                        //    message: 'Email address is not unique',
+                        //    validationCallback(params) {
+                        //        return $.ajax({
+                        //            url: 'https://js.devexpress.com/Demos/Mvc/RemoteValidation/CheckUniqueEmailAddress',
+                        //            type: 'POST',
+                        //            dataType: 'json',
+                        //            contentType: 'application/json',
+                        //            data: JSON.stringify({
+                        //                id: params.data.ID,
+                        //                email: params.value,
+                        //            }),
+                        //        });
+                        //    },
+                    }],
+                }, {
+                    dataField: 'StatusDate',
+                    caption: 'Status Date',
+                    dataType: 'datetime',
+                    format: "MM/dd/yyyy"
+                //}, {
+                //    dataField: 'StatusDate',
+                //    caption: 'Status Time',
+                //    dataType: 'datetime',
+                //    format: "hh:mm a"
+                }, {
+                    dataField: 'PhoneNumber',
+                    width: 200,
+                    //validationRules: [{
+                    //    type: 'pattern',
+                    //    message: 'Your phone must have "(555) 555-5555" format!',
+                    //    pattern: /^\(\d{3}\) \d{3}-\d{4}$/i,
+                    //}],
+                }, {
+                    dataField: 'StatusCode',
+                    caption: 'Status',
+                    lookup: {
+                        dataSource: clientStatus,
+                        valueExpr: 'id',
+                        displayExpr: 'name',
+                    },
+                    validationRules: [{ type: 'required' }],
+                    width: 200,
+                    //editorOptions: {
+                    //    itemTemplate(itemData, itemIndex, itemElement) {
+                    //        if (itemData != null) {
+                    //            const imageContainer = $('<span>').addClass('status-icon middle').appendTo(itemElement);
+                    //            $('<img>').attr('src', `images/icons/status-${itemData.id}.svg`).appendTo(imageContainer);
+                    //            $('<span>').addClass('middle').text(itemData.name).appendTo(itemElement);
+                    //        } else {
+                    //            $('<span>').text('(All)').appendTo(itemElement);
+                    //        }
+                    //    },
+                    //},
+                },
+                ],
+            //    toolbar: {
+            //        items: [
+            //            {
+            //                location: 'after',
+            //                widget: 'dxButton',
+            //                options: {
+            //                    text: 'Close',
+            //                    width: 136,
+            //                    onClick(e) {
+            //                        window.location.href = "index3.html";
+            //                    },
+            //                },
+            //            }
+            //        ],
+            //    },
+            }).dxDataGrid('instance');
+
+            function dropDownBoxEditorTemplate(cellElement, cellInfo) {
+                return $('<div>').dxDropDownBox({
+                    dropDownOptions: { width: 500 },
+                    dataSource: clients,
+                    value: cellInfo.value,
+                    valueExpr: 'Value',
+                    displayExpr: 'Text',
+                    contentTemplate(e) {
+                        return $('<div>').dxDataGrid({
+                            dataSource: clients,
+                            remoteOperations: true,
+                            columns: ['Text'],
+                            hoverStateEnabled: true,
+                            scrolling: { mode: 'virtual' },
+                            height: 250,
+                            selection: { mode: 'single' },
+                            selectedRowKeys: [cellInfo.value],
+                            focusedRowEnabled: true,
+                            focusedRowKey: cellInfo.value,
+                            onSelectionChanged(selectionChangedArgs) {
+                                e.component.option('value', selectionChangedArgs.selectedRowKeys[0]);
+                                cellInfo.setValue(selectionChangedArgs.selectedRowKeys[0]);
+                                if (selectionChangedArgs.selectedRowKeys.length > 0) {
+                                    e.component.close();
+                                }
+                            },
+                        });
+                    },
+                });
+            }
+
+            //function tagBoxEditorTemplate(cellElement, cellInfo) {
+            //    return $('<div>').dxTagBox({
+            //        dataSource: employees,
+            //        value: cellInfo.value,
+            //        valueExpr: 'ID',
+            //        displayExpr: 'FullName',
+            //        showSelectionControls: true,
+            //        maxDisplayedTags: 3,
+            //        showMultiTagOnly: false,
+            //        applyValueMode: 'useButtons',
+            //        searchEnabled: true,
+            //        onValueChanged(e) {
+            //            cellInfo.setValue(e.value);
+            //        },
+            //        onSelectionChanged() {
+            //            cellInfo.component.updateDimensions();
+            //        },
+            //    });
+            //}
+
+            function sendRequest(url, method = 'GET', data) {
+                const d = $.Deferred();
+                //logRequest(method, url, data);
+                $.ajax(url, {
+                    method,
+                    data,
+                    cache: false,
+                    headers: headerToken
+                    //xhrFields: { withCredentials: true },
+                }).done((result) => {
+                    result.data != undefined ? d.resolve(result.data) : d.resolve(result)
+                    //d.resolve(method === 'GET' ? result.data : result);
+                    //d.resolve(result);
+                }).fail((xhr) => {
+                    d.reject(xhr.responseJSON ? xhr.responseJSON.Message : xhr.statusText);
+                });
+
+                return d.promise();
+            }
+
+            function sendBatchRequest(url, changes) {
+                const d = $.Deferred();
+
+                $.ajax(url, {
+                    method: 'POST',
+                    data: JSON.stringify(changes),
+                    cache: false,
+                    contentType: 'application/json',
+                    headers: headerToken,
+                    xhrFields: { withCredentials: true },
+                })
+                    .done(function (response) {
+                        d.resolve({ data: response.data, totalCount: 0 });
+                        //d.resolve({ data: response.data, totalCount: response.totalCount });
+                        //d.resolve(response.data, {
+                        //    totalCount: response.totalCount
+                        //    //summary: response.summary,
+                        //    //groupCount: response.groupCount
+                        //});
+                    })
+                    .fail((xhr) => {
+                        d.reject(xhr.responseJSON ? xhr.responseJSON.Message : xhr.statusText);
+                    });
+
+                return d.promise();
+            }
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var accountInfos = JSON.parse(sessionStorage.getItem('accountInfos'));
+            if (accountInfos == null) {
+                alert("You need to have a valid session to access this site!");
+                return;
+            }
+        })
+    </script>
+
+</body>
+</html>

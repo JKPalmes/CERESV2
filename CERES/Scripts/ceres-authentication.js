@@ -42,7 +42,6 @@ File: Main Js File
                         sessionStorage.setItem("accountType", data.accountType);
 
                         window.location.href = data.clientId == 0 ? "reset.html" : baseUrl + "/Dashboard/Index"
-                        //window.location.href = data.clientId == 0 ? "reset.html" : "/Dashboard/Index"
                     }
                 },
                 error: function (err) {
