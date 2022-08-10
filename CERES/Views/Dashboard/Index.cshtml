@@ -169,11 +169,12 @@
                 </div>
 
                 <div id="attributes-panel" class="col-lg-4 col-md-12 col-sm-12">
-                    <div class="card">
+                    <div class="card" id="cardAtt">
                         <div class="card-header">
                             <h6 class="card-title mb-0">Attributes</h6>
                             <div class="dropdown morphing scale-left">
                                 <a id="btnFullScreenAttrib" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
+                                <button id="btnClose" class="hidden" onclick="closeCard()"><b>X</b></button>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2">
                                     <li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
@@ -186,9 +187,13 @@
                             </div>
                         </div>
                         <div class="card-body divEntry">
+
                             <table id="tblAttribFields" class="table table-responsive table-hover">
                                 <tbody></tbody>
                             </table>
+                            <button type="button" class="btn btn-primary hidden" onclick="submitForm()" id="btnSave">
+                                Save changes
+                            </button>
                             <div class="div-signin-loading-attrib" style="position: fixed; left: 50%;top:30%;z-index:10">
                                 <div style="position: relative; left: -50%;">
                                     <img src="../images/2.gif" alt="" width="32px" height="32px" />

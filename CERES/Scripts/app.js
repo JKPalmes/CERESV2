@@ -655,6 +655,10 @@ function showProductionDetails() {
     $("#tblAttribFields").removeClass("hidden").show();
     $("#tblMetricFields").removeClass("hidden").show();
 }
+function closeCard() {
+    $("#cardAtt").toggleClass('fullscreen');
+    
+}
 
 function addNew() {
     if ($("#ddlServiceArea").val() != null) {
@@ -667,6 +671,7 @@ function addNew() {
     //showProductionDetails();
 
     $("#btnSave").removeClass("hidden").show();
+    $("#btnClose").removeClass("hidden").show();
     transactionId = 0;
     submitButtonType = 0;
     isUpdate = false;
@@ -736,6 +741,9 @@ function addNew() {
         success: serviceAreaCallback,
         error: handleXHRError
     });
+    $("#btnFullScreenAttrib").toggleClass('hidden');
+    $("#cardAtt").toggleClass('fullscreen');
+    
 }
 
 function initProductionDate() {
@@ -1283,7 +1291,7 @@ function setupGenericColumns(model, isAddMode) {
         "sortOrder": "asc",
         "sortIndex": "6",
         "cellTemplate": function (container, options) {
-            var maxID = +sessionStorage.getItem('maxTransactionID') + 1;
+           var maxID = +sessionStorage.getItem('maxTransactionID') + 1;
             $("<div>").append(
                 $("<div>").innerHTML = isFiltered && isClone && options.key == maxID ? "Auto-Generated" : options.value)
                 .appendTo(container);
@@ -1840,7 +1848,7 @@ function getTransactionData(e, isTr) {
 
     submitButtonType = 2;
     isPrevious = false;
-    var tranId = isClone ? e.TransactionId - 1 : e.TransactionId;
+    var tranId = isClone ? e.TransactionId - 1 : e.TransactionId; // KPalmes
     if (isTr) {
         trIndex = $(e).index();
     }
@@ -1868,7 +1876,7 @@ function getTransactionData(e, isTr) {
     };
 
     console.log("payload get tran by id", payload);
-    transactionId = tranId;
+    transactionId = tranId; //16494
     $.ajax({
         url: baseUrl + "api/client/GetTransactionById",
         method: "GET",

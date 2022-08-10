@@ -151,3 +151,18 @@ C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Debug\CERES.Core.csproj.C
 C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Debug\CERES.Core.dll
 C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Debug\CERES.Core.pdb
 C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\obj\Debug\CERES.Core.csprojAssemblyReference.cache
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\CERES.Core.dll.config
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\CERES.Core.dll
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\CERES.Core.pdb
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\EntityFramework.dll
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\Newtonsoft.Json.dll
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\EntityFramework.xml
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\bin\Debug\Newtonsoft.Json.xml
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\obj\Debug\CERES.Core.csproj.AssemblyReference.cache
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\obj\Debug\CERES.Core.csproj.CoreCompileInputs.cache
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\obj\Debug\CERES.Core.csproj.CopyComplete
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\obj\Debug\CERES.Core.dll
+C:\Users\n69754\Desktop\New folder (6)\CERESV2\CERES.Core\obj\Debug\CERES.Core.pdb
