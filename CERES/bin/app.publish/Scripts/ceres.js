@@ -1,5 +1,5 @@
 /*
-Template Name: Ceres - Admin & Dashboard Template
+Template Name: CERES - Admin & Dashboard Template
 Author: Data Technology Group
 Version: 1.5.0
 Website: https://Data Technology Group.com/
@@ -331,10 +331,10 @@ File: Main Js File
     }
 
     $(document).ready(function () {
-        let delayInMilliseconds = 3000;
-        setTimeout(function () {
+        //let delayInMilliseconds = 3000;
+        //setTimeout(function () {
             init();
-        }, delayInMilliseconds);
+        //}, delayInMilliseconds);
 
         //$("input[type='text']").on("click", function () {
         //    $(this).select();

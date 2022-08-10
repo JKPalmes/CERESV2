@@ -1,5 +1,5 @@
 /*
-Template Name: Ceres - Admin & Dashboard Template
+Template Name: CERES - Admin & Dashboard Template
 Author: Data Technology Group
 Version: 1.5.0
 Website: https://Data Technology Group.com/

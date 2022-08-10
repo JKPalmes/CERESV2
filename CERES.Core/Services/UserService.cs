@@ -101,6 +101,7 @@ namespace CERES.Core.Services
                             validUser.Id = appUser.userID;
                             validUser.AccountType = appUser.AccountType;
                             validUser.ClientID = resetPwd ? 0 : appUser.clientID;
+                            validUser.CompanyName = appUser.company_nm;
                             //validUser.ClientID = 0; //triggers reset password in login3.html
                             return validUser;
                         }
@@ -139,10 +140,9 @@ namespace CERES.Core.Services
                 result = int.Parse(Convert.ToString(cmd.Parameters["@result"].Value));
 
                 //Sync password with MicroStrategy
-                var fileName = Common.CreateChangePwdFiles(newPassword, email);
+                //var fileName = Common.CreateChangePwdFiles(newPassword, email);
                 //Common.SyncMSTRPassword(fileName);
                 //Common.DeleteChangePwdFiles(fileName);
-
             }
             catch (Exception ex)
             {
@@ -694,6 +694,48 @@ namespace CERES.Core.Services
             }
         }
 
+        public static string GetUserPassword(string email)
+        {
+            var result = "";
+            SqlConnection conn = new SqlConnection();
+            SqlCommand cmd = new SqlCommand();
+            conn.ConnectionString = WebConfigurationManager.AppSettings["EDS"];
+            cmd.Connection = conn;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = "spEDSUser_GetUserPassword";
+            cmd.Parameters.AddWithValue("pUserName", email);
+            cmd.Parameters.AddWithValue("passkey", "1344F6E6C7956616C6964416E64417574686F72697A65644170704973416C6C6F776564");
+
+            cmd.Parameters.Add("@pPassword", SqlDbType.NVarChar, 50);
+            cmd.Parameters["@pPassword"].Direction = ParameterDirection.Output;
+            try
+            {
+                conn.Open();
+                int i = cmd.ExecuteNonQuery();
+                //Storing the output parameters value in different variables.  
+                result = Convert.ToString(cmd.Parameters["@pPassword"].Value);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                // throw the exception  
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return null;
+        }
+
+        public static void SyncMstrPassword(string userName, string newPassword)
+        {
+            using (BIDE_DbContext dbContext = new BIDE_DbContext())
+            {
+                var req = new RequestHandler(dbContext);
+                req.UpdateMstrAccount(userName, newPassword);
+            }
+        }
+
         public IEnumerable<TransactionV2Response> GetDataBySiteAccess(string email, List<int> acl, int pageSize, string viewData, string accountType, int lastDayProductionDate = 90)
         {
             //var allData = false;
@@ -784,7 +826,7 @@ namespace CERES.Core.Services
                                   join c in dbContext.sites on t.siteID equals c.siteID
                                   join d in dbContext.Clients on t.accountID equals d.clientID
                                   where
-                                  acl.Contains(t.accountID) && t.accountID == clientId && 
+                                  acl.Contains(t.accountID) && t.accountID == clientId &&
                                   (t.tDate >= searchDateRange && t.tDate <= today) //&&
                                   //(t.StatusCode == "U" || t.StatusCode == null)   //NOT DELETED FLAG
                                   //(t.StatusCode == "U" || t.StatusCode == null || t.StatusCode == "")   //NOT DELETED FLAG
@@ -2066,8 +2108,8 @@ namespace CERES.Core.Services
         }
 
 
-        public static int SaveServiceAreaFieldInfo(int svcID, int svcFieldNumber, string svcFieldName, int svcFieldID, string shade, int serviceAreaFieldGroup_SAID, 
-            string metricShortName, string metricFormat, int isVisible, int isMandatory, int isLogVisible, string groupName, int fieldType, string description_Txt, 
+        public static int SaveServiceAreaFieldInfo(int svcID, int svcFieldNumber, string svcFieldName, int svcFieldID, string shade, int serviceAreaFieldGroup_SAID,
+            string metricShortName, string metricFormat, int isVisible, int isMandatory, int isLogVisible, string groupName, int fieldType, string description_Txt,
             string defaultValue, string dataType, string categoryCode, string constraint_Txt)
         {
             var result = 0;
@@ -2169,7 +2211,7 @@ namespace CERES.Core.Services
             }
             return result;
         }
-        public static int SaveUserInfo(int UserID, string fullname, string userName, string AccountType,  int userStatus, int resetflag, int Upload_ind, int MstrUser_Ind, 
+        public static int SaveUserInfo(int UserID, string fullname, string userName, string AccountType, int userStatus, int resetflag, int Upload_ind, int MstrUser_Ind,
             int GoldReports_ind, int admin, int ClientID, string ClientFolderName, string managerUserName, string company_nm, string contact_phone_nbr, int visit_cnt)
         {
             var result = 0;

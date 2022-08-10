@@ -453,7 +453,17 @@ namespace CERES.Web.Api.Controllers
             var newPassword = values.NewPassword.ToString();
             var oldPassword = values.OldPassword.ToString();
 
-            return Ok(UserService.ChangePassword(userName, oldPassword, newPassword));
+            UserService.ChangePassword(userName, oldPassword, newPassword);
+
+            var isMstrUser = values.MstrUser.ToString();
+            if (isMstrUser == "1")
+            {
+                //Sync password with MicroStrategy
+                //UserService.SyncMstrPassword(userName, newPassword);
+            }
+
+            return Ok("Ok");
+
         }
 
         [HttpPost]

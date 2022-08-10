@@ -1,5 +1,5 @@
 /*
-Template Name: Ceres - Admin & Dashboard Template
+Template Name: CERES - Admin & Dashboard Template
 Author: Data Technology Group
 Version: 1.5.0
 Website: https://Data Technology Group.com/
@@ -40,10 +40,8 @@ File: Main Js File
                         sessionStorage.setItem("userName", data.userName);
                         sessionStorage.setItem("email", data.email);
                         sessionStorage.setItem("accountType", data.accountType);
-                        //sessionStorage.setItem("userId", data.Id);
 
                         window.location.href = data.clientId == 0 ? "reset.html" : baseUrl + "/Dashboard/Index"
-                        //window.location.href = data.clientId == 0 ? "reset.html" : "/Dashboard/Index"
                     }
                 },
                 error: function (err) {

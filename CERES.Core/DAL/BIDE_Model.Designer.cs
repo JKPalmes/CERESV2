@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\development\ceres.dev\CERES.Core\DAL\BIDE_Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\N52776\source\repos\BI\CERESV2\CERES.Core\DAL\BIDE_Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

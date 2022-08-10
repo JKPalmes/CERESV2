@@ -48,6 +48,7 @@
                                                 </div>
                                             </div>
                                             <div id="clientMenu" class="dropdown morphing scale-left" style="padding-top:0px;">
+                                                <button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#CreateNew" type="button"><i class="fa fa-plus"></i></button>
                                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                                 <ul class="dropdown-menu shadow border-0 p-2">
                                                     <li><a class="dropdown-item" href="#" onclick="popupAccountInfoForm();" ;><i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;Account Info</a></li>
@@ -154,12 +155,12 @@
                                 <a id="btnFullScreen" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
+                                    @*<li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>*@
+                                    <li><a class="dropdown-item" href="#" onclick="selectorContext();"><i class="fa fa-building"></i>&nbsp;&nbsp;&nbsp;Set Selectors</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(false);"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;&nbsp;Export Transaction Records To Csv</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="helpContext();"><i class="fa fa-question-circle-o"></i>&nbsp;&nbsp;&nbsp;Help On Data Entry</a></li>
-                                    @*<li><a class="dropdown-item" href="#">Delete Transaction</a></li>*@
                                 </ul>
                             </div>
                         </div>

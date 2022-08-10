@@ -1,16 +1,16 @@
 ﻿$("#btnSSO").on("click", function () {
     sso();
-    init();
 })
 
 function sso() {
+    let baseUrl = 'http://localhost:55979'
+    //let baseUrl = "https://microstrategy.cbpsportal.com/edsv2";
+
     const config = {
         auth: {
             clientId: '91be1c6c-891e-4bd6-b876-b67f5606020d',
             authority: 'https://login.microsoftonline.com/869c0d1d-42e3-4230-a045-be018a9ea361',
-            redirectUri: 'http://localhost:55979'
-            //redirectUri: 'https://localhost:44392'
-            //redirectUri: 'https://microstrategy.cbpsportal.com/edsv2'
+            redirectUri: baseUrl
         },
         cache: {
             cacheLocation: "sessionStorage",
@@ -40,15 +40,11 @@ function sso() {
             //console.log(decoded);
             //let userEmail = decoded.upn;
             let userEmail = decoded.preferred_username;
-            //for testing
-            //userEmail = "bbeltran@cbps.canon.com";
 
-            //let apiEndPoint = "https://localhost:44326/hello";
             //let apiEndPoint = "https://localhost:44326/api/users/" + userEmail;
             //let apiEndPoint = "https://ceres.cbpsportal.com/birequests/nexus/api/Users/" + userEmail;
 
-            let baseUrl = "http://localhost:55979/";
-            let url = baseUrl + "api/Client/SetUserProfile";
+            let url = baseUrl + "/api/Client/SetUserProfile";
 
             $.ajax({
                 //url: apiEndPoint,
@@ -75,10 +71,6 @@ function sso() {
                     sessionStorage.setItem("userId", user.Id);
 
                     //window.location.href = 'https://localhost:44392/index3.html';
-                    /*window.location.href = 'http://localhost:55979/dashboard/index';*/
-                    //window.location.href = 'https://microstrategy.cbpsportal.com/edsv2/dashboard/index';
-                    //window.location.href = '/dashboard/index';
-
                     window.location.href = user.clientID == 0 ? "reset.html" : baseUrl + "/Dashboard/Index"
 
                     //window.location.replace("http://localhost:55979/dashboard/index");
@@ -94,11 +86,6 @@ function sso() {
                     $(".div-signin-loading img").addClass("hidden").hide();
                     $("#myModal").modal("show");
                 }
-                //sessionStorage.setItem("data", JSON.stringify(data));
-                //sessionStorage.setItem("accessToken", data.access_token);
-                //sessionStorage.setItem("accountType", data.accountType);
-                //sessionStorage.setItem("accountType", "A");
-                //window.location.href = data.clientId == 0 ? "reset.html" : home;
 
             }).fail((err) => {
                 console.log("ERROR => ", err);

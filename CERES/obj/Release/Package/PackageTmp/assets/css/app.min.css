@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
-Template Name: Ceres - Admin & Dashboard Template
+Template Name: CERES - Admin & Dashboard Template
 Author: Data Technology Group
 Version: 1.5.0
 Website: https://Data Technology Group.com/
@@ -14705,4 +14705,9 @@ span.flatpickr-weekday {
 }
 [data-layout-mode=dark] .layout-wrapper.landing footer.bg-dark {
   background-color: var(--vz-card-bg) !important;
+}
+
+.auth-logo {
+    padding-left: -50px;
+    align-content: center;
 }

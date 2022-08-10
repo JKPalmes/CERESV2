@@ -1,6 +1,6 @@
 using System;
 
-namespace Ceres.Models
+namespace CERES.Models
 {
     public class ErrorViewModel
     {

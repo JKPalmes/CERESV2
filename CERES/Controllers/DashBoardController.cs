@@ -12,7 +12,7 @@ using System.Security.Claims;
 using static CERES.Web.Api.Classes.Helper;
 using CERES.Core.DTO;
 
-namespace Ceres.Controllers
+namespace CERES.Controllers
 {
     public class DashBoardController : Controller
     {

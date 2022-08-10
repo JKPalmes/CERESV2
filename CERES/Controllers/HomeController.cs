@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CERES.Core.DTO;
 
-namespace Ceres.Controllers
+namespace CERES.Controllers
 {
     public class HomeController : Controller
     {

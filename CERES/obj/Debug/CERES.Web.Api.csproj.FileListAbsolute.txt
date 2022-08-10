@@ -849,3 +849,5 @@ C:\Users\N52776\source\repos\BI\CERESV2\CERES\obj\Debug\CERES.Web.Api.csproj.Cor
 C:\Users\N52776\source\repos\BI\CERESV2\CERES\obj\Debug\CERES.Web.Api.csproj.CopyComplete
 C:\Users\N52776\source\repos\BI\CERESV2\CERES\obj\Debug\CERES.Web.Api.dll
 C:\Users\N52776\source\repos\BI\CERESV2\CERES\obj\Debug\CERES.Web.Api.pdb
+C:\Users\N52776\source\repos\BI\CERESV2\CERES\bin\RestSharp.dll
+C:\Users\N52776\source\repos\BI\CERESV2\CERES\bin\RestSharp.xml
