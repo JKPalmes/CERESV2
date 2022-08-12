@@ -3927,7 +3927,8 @@ function loginExecutiveDashboard(clientName, clientId, accountType) {
 
 function loginMstr(pwd) {
     var form = document.createElement("form");
-    form.action = 'https://microstrategy.cbpsportal.com/MicroStrategy/asp/Main.aspx';
+    form.action = 'https://bi.cbpsportal.com/MicroStrategy/asp/Main.aspx';
+    //form.action = 'https://microstrategy.cbpsportal.com/MicroStrategy/asp/Main.aspx';
     //form.action = 'https://microstrategy.cbpsportal.com:8080/MicroStrategy/servlet/mstrWeb';
     form.method = 'POST';
     form.target = "_blank";
@@ -3951,7 +3952,8 @@ function getUserPassword() {
     let url = baseUrl + "api/Client/GetUserPassword";
     $.ajax({
         url: url,
-        method: "GET",
+        type: "POST",
+        data: { "email": sessionStorage.getItem("email") },
         dataType: "json",
         headers: headerToken,
         success: function (data) {
@@ -3960,6 +3962,7 @@ function getUserPassword() {
         error: handleXHRError
     });
 }
+
 
 function filterByStatus() {
     if (isFiltered) getSavedDataByServiceArea(localStorage.getItem('areaId'));

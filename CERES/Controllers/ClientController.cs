@@ -43,6 +43,7 @@ namespace CERES.Web.Api.Controllers
         private readonly int _maxUploadFileSize = Int32.Parse(WebConfigurationManager.AppSettings["MaxUploadFileSize"]);
         private readonly string _allowedFileExtensions = WebConfigurationManager.AppSettings["AllowedFileExtensions"];
         private readonly string _eDUploadsFolderLocation = WebConfigurationManager.AppSettings["ExecutiveDashboardUploadsLocation"];
+        private readonly string _uploadsServerFolderPath = WebConfigurationManager.AppSettings["UploadsServerFolderPath"];
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -488,6 +489,17 @@ namespace CERES.Web.Api.Controllers
             var jsonString = folderClass.ConvertTreeNodeToJson(treeNodes, serverPath);
 
             return Ok(jsonString.ToString().Replace("\"items\": {},", ""));
+        }
+
+        [HttpPost]
+        [Route("api/Client/GetUserPassword")]
+        public IHttpActionResult GetUserPassword([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+            if (values.email.ToString() == "") return Ok("");
+            var email = values.email.ToString();
+            return Ok(UserService.GetUserPassword(email));
         }
 
         [HttpGet]
@@ -1208,5 +1220,40 @@ namespace CERES.Web.Api.Controllers
             //return Ok(UserService.UpdateUserProfile(_email, contactNo));
         }
 
+        [HttpPost]
+        [Route("api/Client/GetReportImageFiles")]
+        public IHttpActionResult GetReportImageFiles([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+
+            var clientId = values.clientId.ToString();
+            var reportId = values.reportId.ToString();
+
+            try
+            {
+                var currentFolderPath = clientId + @"/" + reportId + @"/img" ;
+                //var folderPath = Path.Combine(_eDUploadsFolderLocation, currentFolderPath);
+                //var folderPath = _eDUploadsFolderLocation + @"/" + currentFolderPath;
+                var folderPath = Path.Combine(HostingEnvironment.MapPath(_uploadsServerFolderPath), currentFolderPath);
+
+                DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
+                var listFiles = new List<string>();
+                if (currentDirectoryInfo.Exists)
+                {
+                    foreach (var file in currentDirectoryInfo.GetFiles())
+                    {
+                        //listFiles.Add(file.FullName);
+                        listFiles.Add(file.Name);
+                    }
+
+                }
+                return Ok(listFiles);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException(ex.Message, ex);
+            }
+        }
     }
 }

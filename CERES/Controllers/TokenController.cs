@@ -30,20 +30,41 @@ namespace CERES.Web.Api.Controllers
             var ret = "Success";
             if (photo != null)
             {
-                ret = SaveFile(photo, imageId);
+                ret = reportName.StartsWith("PowerPoint") ? SaveFile(photo, imageId) : SaveImageFile(photo, imageId);
             }
 
-            return Redirect(_reportsUrl + "/apps/dashboards/report" + reportId + "?" + ret);
+            return Redirect(_reportsUrl + "/apps/" + (reportName.StartsWith("PowerPoint") ? "presentations/presentation" : "dashboards/report") + reportId + "?" + ret);
         }
 
-        string SaveFile(HttpPostedFileBase file, string imageId)
+        string SaveImageFile(HttpPostedFileBase file, string imageId)
         {
-            var targetLocation = Server.MapPath("~/Uploads/");
+            var targetLocation = Server.MapPath("~/Uploads/") + imageId + @"/img";
 
             try
             {
                 //var path = Path.Combine(targetLocation, file.FileName);
-                var path = Path.Combine(targetLocation, imageId);
+                var path = Path.Combine(targetLocation, file.FileName);
+                file.SaveAs(path);
+            }
+            catch
+            {
+                Response.StatusCode = 400;
+                return "Error";
+            }
+
+            return "Success";
+        }
+
+        string SaveFile(HttpPostedFileBase file, string imageId)
+        {
+            //var targetLocation = Server.MapPath("~/Uploads/");
+            var targetLocation = Server.MapPath("~/Uploads/") + imageId + @"/ppt";
+            //var fileName = imageId.Replace(@"/", "-") + ".pptx";
+            var extension = Path.GetExtension(file.FileName);
+            try
+            {
+                //var path = Path.Combine(targetLocation, file.FileName);
+                var path = Path.Combine(targetLocation, "presentation" + extension );
                 file.SaveAs(path);
             }
             catch
