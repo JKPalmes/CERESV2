@@ -1188,7 +1188,8 @@ namespace CERES.Web.Api.Controllers
                         Email = user.Email,
                         AccountType = user.AccountType,
                         ClientID = user.ClientID,
-                        CompanyName = user.CompanyName
+                        CompanyName = user.CompanyName,
+                        MstrUser = user.MstrUser
                     };
 
                     var userData = new UserData

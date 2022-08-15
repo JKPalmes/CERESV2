@@ -201,8 +201,8 @@ J:\CERESV2-main\CERESV2-main\CERES.Core\bin\Debug\System.Text.Encodings.Web.xml
 J:\CERESV2-main\CERESV2-main\CERES.Core\bin\Debug\System.Text.Json.xml
 J:\CERESV2-main\CERESV2-main\CERES.Core\bin\Debug\System.Threading.Tasks.Extensions.xml
 J:\CERESV2-main\CERESV2-main\CERES.Core\bin\Debug\System.ValueTuple.xml
-J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Debug\CERES.Core.csprojAssemblyReference.cache
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Debug\CERES.Core.csproj.CoreCompileInputs.cache
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Debug\CERES.Core.csproj.CopyComplete
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Debug\CERES.Core.dll
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Debug\CERES.Core.pdb
+J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Debug\CERES.Core.csprojAssemblyReference.cache

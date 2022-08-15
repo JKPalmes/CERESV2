@@ -97,3 +97,4 @@ J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Release\CERES.Core.csproj.CoreCompil
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Release\CERES.Core.csproj.CopyComplete
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Release\CERES.Core.dll
 J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Release\CERES.Core.pdb
+J:\CERESV2-main\CERESV2-main\CERES.Core\obj\Release\CERES.Core.csprojAssemblyReference.cache

@@ -1,9 +1,7 @@
-﻿@{
-    ViewBag.Title = "Dashboard";
+﻿@{ ViewBag.Title = "Dashboard";
     ViewBag.pTitle = "Dashboard";
     ViewBag.pageTitle = "Dashboards";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @section styles{
     <!-- Application vendor css url-->
@@ -14,7 +12,7 @@
     <!-- DevExtreme theme -->
     <link rel="stylesheet" href="../content/dx.common.css">
     <link rel="stylesheet" href="../content/dx.light.css">
-
+    <link rel="stylesheet" type="text/css" href="../content/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="../content/jquery-idle-hands.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://rawcdn.githack.com/dmhendricks/file-icon-vectors/master/dist/file-icon-vectors.min.css" />
@@ -25,7 +23,7 @@
 }
 
 <!-- start: page body -->
-<form id="myform" class="myclass" method="get" autocomplete="off">
+<form id="myform-orig" class="myclass" method="get" autocomplete="off">
     <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-0 py-0 mt-0 mt-lg-0">
         <div id="main-panel">
             <div id="selector-panel" class="col-lg-12 col-md-12" style="padding-top: 0rem; padding-bottom: .5rem;">
@@ -48,7 +46,7 @@
                                                 </div>
                                             </div>
                                             <div id="clientMenu" class="dropdown morphing scale-left" style="padding-top:0px;">
-                                                @*<button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#CreateNew" type="button"><i class="fa fa-plus"></i></button>*@
+                                                @*<button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#AddNewTran" type="button"><i class="fa fa-plus"></i></button>*@
                                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                                 <ul class="dropdown-menu shadow border-0 p-2">
                                                     <li><a class="dropdown-item" href="#" onclick="popupAccountInfoForm();" ;><i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;Account Info</a></li>
@@ -141,6 +139,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h6 class="card-title mb-0">Production Data</h6>
+                            <button id="btnAddNewTran" class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#AddNewTran" type="button"><i class="fa fa-plus"></i></button>
                             <div class="btn-group me-3 justify-content-between" role="group">
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="transView = 'ShowPendingTransactions';filterByStatus()">
                                 <label class="btn btn-sm btn-outline-secondary" for="btnradio1">Pending</label>
@@ -149,9 +148,9 @@
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="transView = 'ShowCompletedTransactions';filterByStatus()">
                                 <label class="btn btn-sm btn-outline-secondary" for="btnradio3">Completed</label>
                             </div>
-
+                            @*class="d-none d-xl-inline-block*@
                             <div class="dropdown morphing scale-left">
-                                <button id="btnExpand" class="btn btn-outline-secondary" type="button" onclick="expandPanels()"><i class="fa fa-window-restore"></i></button>
+                                <button id="btnExpand" class="btn btn-outline-secondary d-none d-xl-inline-block" type="button" onclick="expandPanels()"><i class="fa fa-window-restore"></i></button>
                                 <a id="btnFullScreen" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2" aria-labelledby="dropdownMenuButton1">
@@ -243,6 +242,7 @@
     <script src="../scripts/jquery.validate.min.js"></script>
     <!--<script src="Scripts/additional-methods.min.js"></script>-->
 
+    <script src="../scripts/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="../scripts/w2ui-1.5.min.js"></script>
     <!-- DevExtreme library -->
     <script type="text/javascript" src="../scripts/dx.all.js"></script>

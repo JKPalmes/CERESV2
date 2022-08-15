@@ -1843,9 +1843,11 @@
     <Content Include="images\cbps.png" />
     <Content Include="images\CBPS_LOGO.png" />
     <Content Include="images\ceres_logo.png" />
+    <Content Include="images\exec-dashboard-logo.svg" />
     <Content Include="images\favicon-16x16.png" />
     <Content Include="images\favicon-32x32.png" />
     <Content Include="images\favicon.ico" />
+    <Content Include="images\microstrategy-logo.svg" />
     <Content Include="images\ms-symbollockup_signin_light.png" />
     <Content Include="images\null.png" />
     <Content Include="images\small cbpslogo.png" />
@@ -1927,6 +1929,7 @@
     <Content Include="Content\timepicker.less" />
     <None Include="Properties\PublishProfiles\bin-Release-Publish.pubxml" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\ceres-authentication.js" />
     <Content Include="Scripts\ceres-dashboard.js" />
     <Content Include="Scripts\ceres.js" />

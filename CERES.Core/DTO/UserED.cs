@@ -15,6 +15,5 @@ namespace CERES.Core.DTO
         public string photoURL { get; set; }
         public string shortcuts { get; set; }
 
-
     }
 }

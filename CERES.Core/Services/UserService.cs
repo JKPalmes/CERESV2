@@ -102,6 +102,7 @@ namespace CERES.Core.Services
                             validUser.AccountType = appUser.AccountType;
                             validUser.ClientID = resetPwd ? 0 : appUser.clientID;
                             validUser.CompanyName = appUser.company_nm;
+                            validUser.MstrUser = (int)appUser.MstrUser_ind;
                             //validUser.ClientID = 0; //triggers reset password in login3.html
                             return validUser;
                         }

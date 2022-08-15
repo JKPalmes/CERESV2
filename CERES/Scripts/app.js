@@ -220,23 +220,23 @@ function requiredLabel() {
     return "<span class='required-label'>&nbsp;*</span>";
 }
 
-//function generateDateFormControl(e, svcFieldId) {
-//    var target = "StringField" + e.svcFieldNumber;
-//    var toolTip = e.Description_Txt;
-//    var label = e.svcFieldName;
-//    var toolTip = label.indexOf('Date Completed') > -1 ? "" : e.Description_Txt;
-//    if (e.svcFieldName.indexOf("Date Completed") > -1) sessionStorage.setItem('dateCompletedFieldId', target);
-//    return [
-//        '<div class="form-group">',
-//        '    <div class="divAttribLabel">', label, (e.IsMandatory == 1) ? requiredLabel() : "", '</div>',
-//        '    <div class="input-group">',
-//        '        <input type="text" onchange="getSelectedValue(this)" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="', toolTip, '" class="nocleanup form-control pull-right date-', target, '" id="', target, '" name="', svcFieldId, '" placeholder="', label, '">',
-//        '        <div class="input-group-addon calendar-icon" onclick="$(this).prev().focus()" >',
-//        '            <i class="fa fa-calendar" onclick="$(this).parent().prev().focus()"></i>',
-//        '        </div>',
-//        '    </div>',
-//        '</div>'].join('');
-//}
+function generateDateFormControlBs(e, svcFieldId) {
+    var target = "StringField" + e.svcFieldNumber;
+    var toolTip = e.Description_Txt;
+    var label = e.svcFieldName;
+    var toolTip = label.indexOf('Date Completed') > -1 ? "" : e.Description_Txt;
+    if (e.svcFieldName.indexOf("Date Completed") > -1) sessionStorage.setItem('dateCompletedFieldId', target);
+    return [
+        '<div class="form-group">',
+        '    <div class="divAttribLabel">', label, (e.IsMandatory == 1) ? requiredLabel() : "", '</div>',
+        '    <div class="input-group">',
+        '        <input type="text" onchange="getSelectedValue(this)" data-toggle="tooltip" data-trigger="hover" data-placement="top" title="', toolTip, '" class="nocleanup form-control pull-right date-', target, '" id="', target, '" name="', svcFieldId, '" placeholder="', label, '">',
+        '        <div class="input-group-addon calendar-icon" onclick="$(this).prev().focus()" >',
+        '            <i class="fa fa-calendar" onclick="$(this).parent().prev().focus()"></i>',
+        '        </div>',
+        '    </div>',
+        '</div>'].join('');
+}
 
 function generateDateFormControl(e, svcFieldId) {
     var target = "StringField" + e.svcFieldNumber;
@@ -388,7 +388,7 @@ function showForm() {
     serviceAreaName = svc.find("option:selected").text();
 
     //brb 6/16/2022
-    if (sessionStorage.getItem('selectedArea') == 'All') {
+    if (sessionStorage.getItem('selectedArea') == 'All' && serviceAreaId == 0) {
         var client = $("#ddlClient");
         clientName = client.find("option:selected").text();
         var site = $("#ddlSite");
@@ -403,248 +403,54 @@ function showForm() {
         $("#ddlServiceArea").append(selData.join(''));
     }
 
-    if (clientName == '--- Select Client ---' || clientName == undefined) getClientName();
+    if (clientName == '--- Select Client ---' || clientName == undefined || clientName == '') getClientName();
 
     //brb 6/16/2022
-    let prodDetailsTextContent = "" + siteName + " | " + locName + " | " + serviceAreaName + "";
+    var prodDetailsTextContent = "";
+    //var selectedRowData = sessionStorage.getItem('selectedRow');
+    var selectedRowData = sessionStorage.getItem('model');
+    if (selectedRowData && selectedRowData != "undefined") {
+        var selectedRow = JSON.parse(selectedRowData);
+        if (selectedRow) {
+            prodDetailsTextContent = "Status: " + selectedRow.Transaction.StatusCode + "  |  JobID: " + selectedRow.Transaction.JOB_ID;
+        }
+    }
+
+    let saTextContent = "" + siteName + " | " + locName + " | " + serviceAreaName + "";
     let prodDataTextContent = "QUERY VIEW (" + clientName;
-    if (isFiltered && clientName !== '') prodDataTextContent = "ENTRY VIEW (" + clientName + " | " + prodDetailsTextContent;
+    if (isFiltered && clientName !== '' && localStorage.getItem('userMode') == 'Entry') {
+        prodDataTextContent = "ENTRY VIEW (" + clientName + " | " + saTextContent;
+        //show Add New Transaction button
+        $("#btnAddNewTran").show();
+        //show Clone Tran button
+        if (!isNewServiceArea) $("#cloneTranButton").dxButton("instance").option("visible", true);
+    } else {
+        var sa = $("#ddlServiceArea");
+        serviceAreaName = sa.find("option:selected").text();
+        if (clientName != '' && serviceAreaName != '--- Select Service Area ---' && serviceAreaName != undefined) prodDataTextContent += " | " + serviceAreaName;
+        $("#btnAddNewTran").hide();
+        $("#cloneTranButton").dxButton("instance").option("visible", false);
+    //    if (selectedRowData && selectedRowData != "undefined") {
+    //        var selectedRow = JSON.parse(selectedRowData);
+    //        if (selectedRow) {
+    //            prodDetailsTextContent = "Status: " + selectedRow.StatusCode + "  |  JobID: " + selectedRow.JOB_ID;
+    //        }
+    //    }
+    }
     prodDataTextContent += ")";
-
-
     $(".prod-data-text").text(" " + prodDataTextContent + " ");
-    //$(".prod-details-text").text(" " + prodDetailsTextContent + " ");
+    $(".prod-details-text").text(" " + prodDetailsTextContent.replaceAll('undefined','') + " ");
 
     //var oldSrc = '../images/1000001.png';
-
     var newSrc = '../images/' + clientId + '.png';
     if (clientId <= 1) newSrc = '../images/1000001.png';
     $('#company-logo').attr('src', newSrc);
     //$('img[src="' + oldSrc + '"]').attr('src', newSrc);
-
-    //PLACE CSS-GRID STYLING
-    //isEditMode = true;
-    //$("#main-data-list").hide();
-    //$("#main-attrib-capture, #main-metric-capture, .bide-content-attrib, .bide-content-metric").removeClass("hidden").show().children().removeClass("hidden").show();
-    //var cssToUpdate = '"h h h h h h h h h h h u" "m m n n n o o o o o o o" "f f f f f f f f f f f lr"';
-    //if (detectIEEdge() == false) {
-    //    $("#grid-container").css("grid-template-areas", cssToUpdate);
-    //}
-    //else {
-    //    $("#main-attrib-capture, #main-metric-capture").css("-ms-grid-row", "2");
-    //    $("#main-attrib-capture").css("-ms-grid-column", "3").css("-ms-grid-column-span", "3");
-    //    $("#main-metric-capture").css("-ms-grid-column", "6").css("-ms-grid-column-span", "7");
-    //}
-    ////$(".search-bar").addClass("hidden").hide();
-    //readySubmitForm();
+    if (isNewServiceArea) $("#JOB_ID").val(null); 
 }
-
-//function getRecentActivity() {
-//    didRequestSavedData = false;
-//    var d_data = sessionStorage.getItem("savedData");
-//    var d_fields = sessionStorage.getItem("serviceAreaFields");
-//    var data = { Transactions: JSON.parse(d_data), ServiceAreaFields: JSON.parse(d_fields), GenericTransactions: [] };
-//    if (d_data != null && d_fields != null && (d_data != null ? d_data[0].ServiceAreaId == $("#ddlServiceArea").val() : false)) {
-//        handleSavedData(data);
-//    }
-//    else {
-//        pageNumber = 0;
-//        sessionStorage.removeItem("pageNumber");
-//        isFiltered = true;
-//        getRecentSavedData();
-//    }
-//}
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
-}
-
-function performSearch() {
-    if ($("#txtSearch").val().trim().length <= 2)
-        return;
-
-    if (origDataModel != null) {
-        if (origDataModel.length == 0)
-            origDataModel = dataModel.Model;
-    }
-    else
-        origDataModel = dataModel.Model;
-
-    var results = [];
-    var toSearch = $("#txtSearch").val().trim().toLowerCase();
-    var objects = origDataModel == null ? dataModel.Model : origDataModel;
-
-    for (var i = 0; i < objects.length; i++) {
-        for (key in objects[i]) {
-            var v = ["'", objects[i][key], "'"].join('').replace(/\'/g, '');
-
-            if (v.toLowerCase().indexOf(toSearch) != -1) {
-                results.push(objects[i]);
-            }
-        }
-    }
-    var out = results.filter(onlyUnique);
-    updateDataModel(isFiltered, out);
-}
-
-function handleSearch(e) {
-    if (e.keyCode === 13) {
-        e.preventDefault();
-
-        performSearch();
-    }
-    if (e.keyCode === 46 || e.keyCode === 8) {
-        if (origDataModel != null)
-            updateDataModel(isFiltered, origDataModel);
-    }
-}
-
-function setup() {
-    getServiceAreaCategories();
-    //EVENTS HANDLER
-    $("#grid-container").css("grid-template-areas", '"h h h h h h h h h h h u" "m m p p p p p p p p p p" "f f f f f f f f f f f f"');
-    //$(".bg-image").on("click", function () { toggleShowSelectors(); });
-    $(".bg-image").on("click", function () { });
-
-    $(document)
-        .ajaxStart(function () {
-            $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").removeClass("hidden").show()
-        })
-        .ajaxStop(function () {
-
-            $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
-        });
-
-    $("#ddlClient").on("change", function () { ajaxRequest("#ddlSite", baseUrl + "api/client/GetSiteByUserName", { Id: $("#ddlClient").val(), email: sessionEmail }); clearProductionLog(); });
-    $("#ddlSite").on("change", function () { ajaxRequest("#ddlLocation", baseUrl + "api/client/GetLocationById", { Id: $("#ddlSite").val(), email: sessionEmail }); clearProductionLog(); });
-    $("#ddlLocation").on("change", function () { ajaxRequest("#ddlServiceArea", baseUrl + "api/client/GetServiceAreaById", { Id: $("#ddlLocation").val(), email: sessionEmail }); clearProductionLog(); });
-
-    $("#ddlServiceArea").on("change", function () {
-        isDelete = false;
-        isClone = false;
-        clientId = $("#ddlClient").val();
-        serviceAreaId = $("#ddlServiceArea").val();
-
-        //brb 6/3/2022
-        //handle all service area request
-        if (+serviceAreaId == 0) {
-            isFiltered = false;
-            getRecentSavedDataAll(clientId);
-        }
-        //brb 6/3/2022
-        else {
-            var areaId = serviceAreaId + '_' + clientId;
-            localStorage.setItem('areaId', areaId);
-            isFiltered = true;
-            getSavedDataByServiceArea(areaId);
-
-            $.ajax({
-                url: baseUrl + "api/client/GetServiceAreaFields",
-                type: "POST",
-                headers: headerToken,
-                data: { Id: $("#ddlServiceArea").val(), email: sessionEmail },
-                success: serviceAreaCallback,
-                error: handleXHRError
-            });
-
-            getServiceAreaCategory($("#ddlServiceArea").val());
-        }
-    });
-
-    //bootstrap
-    initProductionDate();
-
-    $("#txtProductionDate").on("focus", function () {
-        didChange = false;
-        var element = document.querySelector('.datepicker-days');
-        observer.observe(element, {
-            attributes: true //configure it to listen to attribute changes
-        });
-    });
-
-    $(".datepicker").removeAttr("style");
-
-    $(".prod-date, .calendar-icon").on("click", function () {
-
-        $("#txtProductionDate").focus()
-    });
-
-    $("#txtProductionDate").on("change", function () {
-        isPrevious = false;
-        isNew = false;
-        isConfirmDelete = false;
-        isUpdate = false;
-        isProductionMonthDidChange = true;
-        //$("#ddlServiceArea").change();
-    });
-
-    //$("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
-
-    //$(".fa-sitemap, .fa-location-arrow, .fa-server").on("click", function () {
-    //    if ($(this).prop("class").indexOf("site") >= 0)
-    //        $("#ddlClient").change();
-    //    else if ($(this).prop("class").indexOf("location") >= 0) {
-    //        $("#ddlSite").change();
-    //        $("#ddlServiceArea option").remove();
-    //        $("#ddlServiceArea").append('<option value="--- Select ServiceArea---">--- Select ServiceArea ---</option>');
-    //    }
-    //    else
-    //        $("#ddlLocation").change();
-
-    //});
-
-    //$(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseover", function () {
-    //    $('#siteRefresh').w2tag();
-    //    if ($(this).prop("class").indexOf("site") >= 0) {
-    //        $('#siteRefresh').w2tag("Initialize/Select New Site", { position: "left", className: 'w2ui-dark' });
-    //    }
-    //    else if ($(this).prop("class").indexOf("location") >= 0) {
-    //        $('#locationRefresh').w2tag("Initialize/Select New Location", { position: "left", className: 'w2ui-dark' });
-    //    }
-    //    else
-    //        $('#serviceAreaRefresh').w2tag("Initialize/Select New Service Area", { position: "right", className: 'w2ui-dark' });
-    //});
-
-    //$(".fa-sitemap, .fa-location-arrow, .fa-server").on("mouseout", function () {
-    //    $('#siteRefresh').w2tag();
-    //    $('#locationRefresh').w2tag();
-    //    $('#serviceAreaRefresh').w2tag();
-
-    //});
-
-
-    //$(".w2ui-sidebar-top").on("mouseover", function () {
-    //    $('#sidebarLabel').w2tag("Entry View - User Saved Preferences [Client | Site | Location | Service Area]", { position: "right", className: 'w2ui-dark' });
-    //});
-
-    //$(".w2ui-sidebar-top").on("mouseout", function () {
-    //    $('#sidebarLabel').w2tag();
-    //});
-
-    //POPULATE RECENT DATA
-    let areaId = localStorage.getItem('areaId');
-    if (areaId == null || areaId.indexOf('null') > -1) {
-        let userSavedPref = localStorage.getItem('userSavedPreferences');
-        if (userSavedPref) {
-            areaId = JSON.parse(userSavedPref)[0].Id;
-            localStorage.setItem('areaId', areaId);
-        } else {
-            areaId = "0_0";
-            localStorage.setItem('areaId', areaId);
-            return;
-        }
-    }
-    //clientName = sessionStorage.getItem('clientData')[0].Value;
-    let userMode = localStorage.getItem('userMode');
-    if (userMode == 'Entry') {
-        isFiltered = true;
-        getSavedDataByServiceArea(areaId);
-    } else {
-        isFiltered = false;
-        //initClientList();
-        getRecentSavedData();
-    }
-
 }
 
 function hideProductionDetails() {
@@ -656,9 +462,82 @@ function showProductionDetails() {
     $("#tblMetricFields").removeClass("hidden").show();
 }
 
+function addNewTran() {
+    if ($("#ddlServiceArea").val() != null) {
+        if ($("#ddlServiceArea").val().match(pattern) != null || $("#ddlServiceArea").val() == '0') {
+            toastr.info("Kindly complete the selectors up to Service Area level");
+            return;
+        }
+    }
+
+    $("#btnSave").removeClass("hidden").show();
+    transactionId = 0;
+    submitButtonType = 0;
+    isUpdate = false;
+    isConfirmDelete = false;
+    $("#JOB_ID").val("Auto-Generated").attr("disabled", "disabled");
+
+    let dDate = new Date($("#txtProductionDate").val());
+    let pDate = ("00" + (dDate.getMonth() + 1).toString()).slice(-2) + "/01/" + dDate.getFullYear().toString();
+
+    //initializeDateControl();
+    initializeTimeControl();
+
+    //var maxID = +sessionStorage.getItem('maxTransactionID');
+
+    //model = JSON.parse(sessionStorage.getItem('model'));
+    //if (model.GenericTransactions.length > 0) {
+    //    //var clonedItem1 = $.extend({}, model.GenericTransactions[0], { TransactionId: ++maxID, ProductionDate: newDate });
+    //    var clonedItem1 = $.extend({}, model.GenericTransactions[0], { TransactionId: ++maxID, ProductionDate: pDate });
+    //    model.GenericTransactions.splice(0, 0, clonedItem1);
+    //    var clonedItem2 = $.extend({}, model.Transactions[0], { TransactionId: maxID });
+    //    //model.Transactions.splice(0, 0, clonedItem2);
+    //} else {
+    //    isUpdate = true;
+    //    var tranItem1 = {
+    //        TransactionId: ++maxID,
+    //        JOB_ID: "Auto-Generated",
+    //        ProductionDate: $("#txtProductionDate").val(),
+    //        AccountId: $("#ddlClient").val(),
+    //        SiteId: $("#ddlSite").val(),
+    //        LocationId: $("#ddlLocation").val(),
+    //        ServiceAreaId: $("#ddlServiceArea").val(),
+    //        AccountName: $("#ddlClient option:selected").text(),
+    //        SiteName: $("#ddlSite option:selected").text(),
+    //        LocationName: $("#ddlLocation option:selected").text(),
+    //        ServiceAreaName: $("#ddlServiceArea option:selected").text()
+    //    };
+    //    model.GenericTransactions.push(tranItem1);
+    //    var tranItem2 = $.extend({}, model.GenericTransactions[0], {
+    //        TransactionId: maxID,
+    //    });
+    //    model.Transactions.push(tranItem2);
+    //}
+
+    //sessionStorage.setItem('model', JSON.stringify(model));
+
+    isClone = false;
+
+    isNew = true;
+
+    //populateGrid(model, true, maxID);
+    //var gridInstance = $("#gridContainer").dxDataGrid("instance");
+    //gridInstance.selectRows([++maxID], true);
+    //gridInstance.focusedRowKey = ++maxID;
+
+    $.ajax({
+        url: baseUrl + "api/client/GetServiceAreaFields",
+        type: "POST",
+        headers: headerToken,
+        data: { Id: $("#ddlServiceArea").val(), email: sessionEmail },
+        success: addNewTranCallback,
+        error: handleXHRError
+    });
+}
+
 function addNew() {
     if ($("#ddlServiceArea").val() != null) {
-        if ($("#ddlServiceArea").val().match(pattern) != null) {
+        if ($("#ddlServiceArea").val().match(pattern) != null || $("#ddlServiceArea").val() == '0') {
             toastr.info("Kindly complete the selectors up to Service Area level");
             return;
         }
@@ -687,7 +566,7 @@ function addNew() {
     //}
 
     //initializeDateControl();
-    //initializeTimeControl();
+    initializeTimeControl();
 
     model = JSON.parse(sessionStorage.getItem('model'));
     var maxID = +sessionStorage.getItem('maxTransactionID');
@@ -758,9 +637,39 @@ function initProductionDate() {
 
 function initializeDateControl() {
     var now = new Date();
-    if (isNew) $('*[class*="date-StringField"]').datepicker('update', null);
+    //if (isNew) $('*[class*="date-StringField"]').datepicker('update', null);
+    //if (isNew) $('*[class*="date-StringField"]').flatpickr('update', null);
+
+    //if (isNew) $('*[class*="date-StringField"]').flatpickr.val(new Date().toLocaleDateString());
+
     //else $('*[class*="date-StringField"]').datepicker('update', new Date(now.getFullYear(), now.getMonth(), now.getDate()));
+        $('*[class*="date-StringField"]').flatpickr({
+            enableTime: false,
+            minDate: "today",
+            time_24hr: true,
+            altInput: true,
+            defaultDate: null
+        });
+    //}
 }
+
+function initializeTimeControl() {
+    var now = new Date();
+    //$('*[class*="time-StringField"]').timepicker({ disableMousewheel: false, template: 'dropdown', minuteStep: 5 });//, defaultTime: 'current' });
+    //$('*[class*="time-StringField"]').flatpickr();
+    if (isNew) {
+        $('*[class*="time-StringField"]').val("");
+        //$('*[class*="time-StringField"]').timepicker('setTime', null);
+    }
+
+    if (isUpdate)
+        return;
+
+    return;
+
+    //$('*[class*="time-StringField"]').timepicker('setTime', now.getHours() + ":" + now.getMinutes());
+}
+
 
 function getMaxTransactionId() {
     ajaxGetRequest("maxTransactionID", baseUrl + "api/Client/GetLatestTransactionId");
@@ -973,7 +882,7 @@ function saveUserPreferences() {
         headers: headerToken,
         success: function (data) {
             localStorage.setItem("userSavedPreferences", JSON.stringify(data));
-            //insertItems(data);
+            insertItems(data);
         },
         error: handleXHRError
     });
@@ -999,7 +908,7 @@ function handleRecentSavedData(data) {
         if (sessionStorage.getItem('selectedArea') != 'All') {
             setSelectors(localStorage.getItem('areaId'));
         }
-        showProductionDetails();
+        //showProductionDetails();
         isUpdate = true;
         selectGridRow();
         showForm();
@@ -1052,14 +961,13 @@ function handleSavedData(data) {
         clearProductionLog();
         //hideProductionDetails();
         isNewServiceArea = true;
-        if (!isClone && !isDelete) {
-            addNew();
-            showData();
-            //isDelete = true;
-        }
+    //    if (!isClone && !isDelete) {
+    //        addNew();
+    //        showData();
+    //    }
     } else {
         setSelectors(localStorage.getItem('areaId'));
-        showProductionDetails();
+        //showProductionDetails();
         isUpdate = true;
         if (data.Transactions && data.Transactions.length == 0) {
             isUpdate = false;
@@ -1100,9 +1008,11 @@ function selectGridRow() {
     populateGrid(model, false, rowKey);
     var gridInstance = $("#gridContainer").dxDataGrid("instance");
     gridInstance.pageSize(+userSettings.PageSize);
+    //gridInstance.pager.showInfo(true);
     gridInstance.focusedRowKey = rowKey;
     gridInstance.selectRows([rowKey], false);
 
+    $(".div-signin-loading-attrib").hide();
     //if (userMode == 'Query') {
     //    //hideSelectors();
     //    //toggleShowData();
@@ -1135,6 +1045,8 @@ function populateGrid(model, isAddMode, rowKey) {
     var oColumns = setupGenericColumns(model, isAddMode);
 
     if (!isAddMode && isFiltered) {
+        if (oColumns.length == 9) oColumns.splice(0, 1);
+
         var header = ['AccountName', 'JOB_ID', 'LocationName', 'ProductionDate', 'ServiceAreaName', 'SiteName', 'TransactionId', 'UserName', 'AccountId', 'LocationId', 'SiteId', 'ServiceAreaId'];
 
         var csv = generateCsvData(false).split('\n');
@@ -1184,7 +1096,6 @@ function populateGrid(model, isAddMode, rowKey) {
                     });
             }
         }
-        //oColumns.splice(1, 1);
     }
 
     setupGrid(model, isAddMode, rowKey, oColumns);
@@ -1200,11 +1111,11 @@ function populateGrid(model, isAddMode, rowKey) {
     //var x = document.getElementsByClassName('w2ui-button');
     //x[9].hidden = isFiltered ? false : true;
 
-    if (isAddMode && !isPageChanged) {
-        showData()
-    } else {
-        //if (submitButtonType != 2) hideData();
-    }
+//    if (isAddMode && !isPageChanged) {
+//        showData()
+//    } else {
+//        //if (submitButtonType != 2) hideData();
+//    }
 }
 
 function setupGenericColumns(model, isAddMode) {
@@ -1241,8 +1152,86 @@ function setupGenericColumns(model, isAddMode) {
         });
     }
     oColumns.push({
+        "dataField": "ProductionDate",
+        "caption": "DATE",
+        "width": "80",
+        "showInColumnChooser": false,
+        "allowHiding": false,
+        "fixedPosition": "left",
+        "format": "MM/dd/yyyy",
+        "dataType": "date",
+        "sortOrder": "asc",
+        "sortIndex": "0"
+    });
+    oColumns.push({
+        "dataField": "JOB_ID",
+        "caption": "JOB ID",
+        "width": "200",
+        "showInColumnChooser": false,
+        "allowHiding": false,
+        "fixedPosition": "left",
+        "alignment": "left",
+        "dataType": "string",
+        "sortOrder": "asc",
+        "sortIndex": "6",
+        "cellTemplate": function (container, options) {
+            var maxID = +sessionStorage.getItem('maxTransactionID') + 1;
+            $("<div>").append(
+                $("<div>").innerHTML = isFiltered && isClone && options.key == maxID ? "Auto-Generated" : options.value)
+                .appendTo(container);
+        }
+    });
+    oColumns.push({
+        "dataField": "ServiceAreaName",
+        "caption": "SERVICE AREA",
+        "width": "300",
+        "visible": true,
+        "showInColumnChooser": false,
+        "allowHiding": false,
+        "fixedPosition": "left",
+        "dataType": "string",
+        "sortOrder": "asc",
+        "sortIndex": "3"
+    });
+    oColumns.push({
+        "dataField": "AccountName",
+        "caption": "CLIENT",
+        "width": "300",
+        "visible": true,
+        "showInColumnChooser": false,
+        "allowHiding": false,
+        "fixedPosition": "left",
+        "dataType": "string",
+        "sortOrder": "asc",
+        "sortIndex": "1"
+    });
+    oColumns.push({
+        "dataField": "SiteName",
+        "caption": "SITE",
+        "width": "250",
+        "visible": true,
+        "dataType": "string",
+        "sortOrder": "asc",
+        "sortIndex": "2"
+    });
+    oColumns.push({
+        "dataField": "LocationName",
+        "caption": "LOCATION",
+        "visible": true,
+        "width": "250",
+        "dataType": "string"
+    });
+    oColumns.push({
+        "dataField": "UserName",
+        "caption": "CREATED BY",
+        "width": "250",
+        "dataType": "string",
+        "sortOrder": "asc",
+        "sortIndex": "5"
+    });
+    oColumns.push({
         "dataField": "TransactionId",
-        "width": "70",
+        "width": "100",
         "caption": "SEQNO",
         "showInColumnChooser": false,
         "allowHiding": false,
@@ -1259,92 +1248,15 @@ function setupGenericColumns(model, isAddMode) {
                 .appendTo(container);
         }
     });
-    oColumns.push({
-        "dataField": "ProductionDate",
-        "caption": "DATE",
-        "width": "80",
-        "showInColumnChooser": false,
-        "allowHiding": false,
-        "fixedPosition": "left",
-        "format": "MM/dd/yyyy",
-        "dataType": "date",
-        "sortOrder": "asc",
-        "sortIndex": "0"
-    });
-    oColumns.push({
-        "dataField": "JOB_ID",
-        "caption": "JOB ID",
-        "width": "160",
-        "showInColumnChooser": false,
-        "allowHiding": false,
-        "fixedPosition": "left",
-        "alignment": "left",
-        "dataType": "string",
-        "sortOrder": "asc",
-        "sortIndex": "6",
-        "cellTemplate": function (container, options) {
-            var maxID = +sessionStorage.getItem('maxTransactionID') + 1;
-            $("<div>").append(
-                $("<div>").innerHTML = isFiltered && isClone && options.key == maxID ? "Auto-Generated" : options.value)
-                .appendTo(container);
-        }
-    });
-    oColumns.push({
-        "dataField": "AccountName",
-        "caption": "CLIENT",
-        "width": "100",
-        "visible": true,
-        "showInColumnChooser": false,
-        "allowHiding": false,
-        "fixedPosition": "left",
-        "dataType": "string",
-        "sortOrder": "asc",
-        "sortIndex": "1"
-    });
-    oColumns.push({
-        "dataField": "ServiceAreaName",
-        "caption": "SERVICE AREA",
-        "width": "150",
-        "visible": true,
-        "showInColumnChooser": false,
-        "allowHiding": false,
-        "fixedPosition": "left",
-        "dataType": "string",
-        "sortOrder": "asc",
-        "sortIndex": "3"
-    });
-    oColumns.push({
-        "dataField": "SiteName",
-        "caption": "SITE",
-        "width": "100",
-        "visible": false,
-        "dataType": "string",
-        "sortOrder": "asc",
-        "sortIndex": "2"
-    });
-    oColumns.push({
-        "dataField": "LocationName",
-        "caption": "LOCATION",
-        "visible": false,
-        "width": "100",
-        "dataType": "string"
-    });
-    oColumns.push({
-        "dataField": "UserName",
-        "caption": "CREATED BY",
-        "width": "80",
-        "dataType": "string",
-        "sortOrder": "asc",
-        "sortIndex": "5"
-    });
-    if (!addNew || localStorage.getItem('userMode') != 'Entry') {
+
+    if (!addNew || localStorage.getItem('userMode') === 'Query') {
         oColumns.unshift({
             "dataField": "StatusCode",
-            "caption": "Status",
+            "caption": "Status Code",
             "showInColumnChooser": false,
             "allowHiding": false,
             "fixedPosition": "left",
-            "width": "80",
+            "width": "100",
             "cellTemplate": function (container, options) {
                 let color = 'red';
                 if (options.value == 'C' || options.value == 'Completed') {
@@ -1383,7 +1295,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             //mode: "dragAndDrop"
             mode: "select"
         },
-        columnsAutoWidth: false,
+        columnsAutoWidth: true,
         allowColumnResizing: true,
         columnResizingMode: "widget",
         showColumnLines: true,
@@ -1490,7 +1402,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
 
         },
         paging: {
-            pageSize: userSettings.PageSize,
+            pageSize: +userSettings.PageSize,
             enabled: true
         },
         pager: {
@@ -1592,37 +1504,22 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
         },
         onToolbarPreparing: function (e) {
             e.toolbarOptions.items.unshift(
-            //{
-            //    location: "before",
-            //    widget: "dxButton",
-            //    options: {
-            //        //icon: "material-icons ic-client",
-            //        //text: "Set Client",
-            //        text: "Set Selectors",
-            //        showText: "always",
-            //        icon: "client-icon",
-            //        //hint: "Select New Client",
-            //        hint: "Set New Selectors",
-            //        cssClass: "cls",
-            //        onClick: function (e) {
-            //            $('#context-menu2').dxContextMenu("show");
-            //        }
-            //    }
-            //    },
                 {
-                location: "before",
-                widget: "dxButton",
-                options: {
-                    visible: true,
-                    text: "Query View",
-                    showText: "always",
-                    icon: "refresh-icon",
-                    hint: "Switch to Query View",
-                    onClick: function () {
-                        reloadAllUserTrans();
+                    location: "before",
+                    widget: "dxButton",
+                    options: {
+                        visible: true,
+                        text: "Query View",
+                        showText: "always",
+                        icon: "refresh-icon",
+                        hint: "Switch to Query View",
+                        onClick: function () {
+                            localStorage.setItem('userMode', 'Query');
+                            reloadAllUserTrans();
+                            //$("#btnAddNewTran").removeClass("hidden").addClass("hidden");
+                        }
                     }
-                }
-            }, {
+                }, {
                 location: "before",
                 widget: "dxButton",
                 options: {
@@ -1633,6 +1530,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                     icon: "fa fa-plus-circle",
                     hint: "Switch to Entry View",
                     onClick: function () {
+                        localStorage.setItem('userMode', 'Entry');
                         if (clientId == undefined) {
                             let client = $("#ddlClient");
                             clientId = parseInt(client.val());
@@ -1642,12 +1540,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                         if (svc.val() == "--- Select ServiceArea---" || svc.val() == "--- Select All---") {
                             var userPref = JSON.parse(localStorage.getItem('userSavedPreferences'));
                             areaId = userPref[0].Id;
-                        }
-                        //else if (svc.val() == "--- Select All---") {
-                        //    getFirstServiceArea(clientId);
-                        //    areaId = serviceAreaId + '_' + clientId;
-                        //}
-                        else {
+                        } else {
                             serviceAreaId = parseInt(svc.val());
                             areaId = serviceAreaId + '_' + clientId;
                         }
@@ -1658,7 +1551,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 location: "after",
                 widget: "dxButton",
                 options: {
-                    visible: isAdmin,
+                    visible: isAdmin && isFiltered,
                     text: "Delete",
                     showText: "always",
                     icon: "fa fa-trash",
@@ -1673,16 +1566,17 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 location: "before",
                 widget: "dxButton",
                 options: {
-                    visible: isFiltered,
-                    //icon: "add-icon",
-                    text: "New Tran",
-                    showText: "always",
-                    icon: "fa fa-plus",
-                    hint: "Add New Transaction (Entry View)",
-                    onClick: function () {
-                        addNew();
+                    elementAttr: { id: 'cloneTranButton' },
+                        visible: false,//isFiltered,
+                        //icon: "add-icon",
+                        text: "Clone Tran",
+                        showText: "always",
+                        icon: "fa fa-clone",
+                        hint: "Clone Transaction",
+                        onClick: function () {
+                            addNew();
+                        }
                     }
-                }
             }, {
                 location: 'center',
                 template() {
@@ -1714,10 +1608,11 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             mode: "single"
         },
         onSelectionChanged: function (selectedItems) {
-            if (isFiltered) return;
+            //if (isFiltered) return;
             if (isAddMode) return;
             isEditMode = true;
             var data = selectedItems.selectedRowsData[0];
+            //sessionStorage.setItem('selectedRow', JSON.stringify(data));
             if (data) {
                 //show Entry View button
                 if (!isFiltered) $("#entryViewButton").dxButton("instance").option("visible", true);
@@ -1887,6 +1782,13 @@ function handleClientData(data, targetElement) {
     populateClientHierarchyData(data, targetElement);
 }
 
+function resetGrid() {
+    localStorage.setItem('filter', '');
+    localStorage.setItem('userMode', 'Query');
+    localStorage.removeItem('storage');
+
+}
+
 function populateClientHierarchyData(data, targetElement) {
     var selData = [];
     var defaultOpt = '<option value="--- Select ' + targetElement + '---">--- Select ' + targetElement + ' ---</option>';
@@ -1913,6 +1815,8 @@ function populateClientHierarchyData(data, targetElement) {
     $(targetElement).append(selData.join(''));
 
     localStorage.setItem('userMode', 'Entry');
+
+    //resetGrid();
 }
 
 function handleTransactionView(data, id) {
@@ -2004,6 +1908,12 @@ function handleXHRError(err) {
         //sessionStorage.clear();
         window.location.href = baseUrl + "Authentication/Errors500/";
     }
+}
+
+function saveChanges() {
+    submitButtonType = 0;
+    var f = document.getElementById('entryFormSubmitButton');
+    f.click();
 }
 
 function submitForm(e) {
@@ -2153,11 +2063,11 @@ function refreshGrid() {
     $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
 }
 
-function populateForms(data) {
+function populateEntryForm(data) {
     //if ($("#ddlServiceArea").val().match(pattern) != null)
     //return;
 
-    scrollFunction();
+    scrollFunctionEntryForm();
 
     var client = $("#ddlClient");
     clientName = client.find("option:selected").text();
@@ -2186,10 +2096,12 @@ function populateForms(data) {
     let serviceAreaCategories = JSON.parse(sessionStorage.getItem('serviceAreaCategories'));
     var areaCategory = serviceAreaCategories.filter(f => f.Id == serviceAreaId)[0].Value;
     var serviceAreaCategory = 'Others';
-    for (let x of StandardServiceAreaCategories) {
-        if (areaCategory.toLowerCase() === x.toLowerCase()) {
-            serviceAreaCategory = x;
-            break;
+    if (areaCategory != undefined) {
+        for (let x of StandardServiceAreaCategories) {
+            if (areaCategory.toLowerCase() === x.toLowerCase()) {
+                serviceAreaCategory = x;
+                break;
+            }
         }
     }
     sessionStorage.setItem('serviceAreaCategory', serviceAreaCategory);
@@ -2224,7 +2136,356 @@ function populateForms(data) {
     var shade = "";
     isClientWithDefaultValue = $.inArray($("#ddlClient").val(), nullClientId) >= 0 ? true : false;
 
-    //console.log("noAttribSvcAreaSum", noAttribSvcAreaSum);
+    var tbAttrib = $("#tblAttribFields-entry");
+    var tbMetric = $("#tblMetricFields-entry");
+    var dataSize = d_data.length;
+
+    if (noAttribSvcAreaSum == d_data.length) {    //METRIC ONLY
+        if (isClientWithDefaultValue) { //DEFAULT NULL E.G: LIBERTY MUTUAL
+            defaultVal = "";
+            required = "";
+        }
+    } else {    //ATTRIB + METRIC
+        //TODO: ADD STYLING
+    }
+
+    var attribIdx = 0;
+    var metricIdx = 0;
+    var isLast = false;
+    var isJobId = false;
+    var requiredAttr = " required='required' ";
+    var seq = getNewSequence();
+    var row = "";
+
+    attribData = [];
+    metricData = [];
+    tblDataAttrib = [];
+    tblDataMetric = [];
+
+    tbMetric.find("tbody tr").remove();
+    tbAttrib.find("tbody tr").remove();
+
+    var row = "";
+    var label = "";
+    var isMandatory = false;
+    var attribCount = 0;
+    var toolTip = "";
+    $.each(d_data, function (i, e) {
+        isMandatory = false;
+        isLast = i == dataSize - 1 ? true : false;
+        isJobId = e.svcFieldName === "JOB ID" ? true : false;
+        var fieldId = isJobId ? "JOB_ID" : e.FieldType == 0 || e.FieldType == "0" ? "StringField" : "Field";
+        if (fieldId != "JOB_ID") {
+            fieldId += e.svcFieldNumber;
+        }
+        var svcFieldId = isJobId ? "JOB_ID" : serviceAreaCategory;
+        if (!isJobId) {
+            serviceAreaCategory == 'Others' ? svcFieldId += "_" + e.svcFieldName.replace(/ /g, "_") : svcFieldId += "_" + fieldId;
+        }
+        row = "";
+        label = [e.svcFieldName, isJobId ? requiredLabel() : ""].join('');
+        toolTip = e.Description_Txt;
+
+        if (e.IsMandatory == 1) {
+            isMandatory = true;
+            e.required = true;
+        }
+
+        if (e.DataType !== null && e.DataType !== undefined) {
+            if (e.DataType.toLowerCase() == "lov") {
+                if (model.FieldLOV != null) {
+                    var lstItems = model.FieldLOV.filter(function (o) { return o.svcFieldId == e.svcFieldID });
+                    if (e.svcFieldName == "Status") sessionStorage.setItem('statusFieldId', fieldId);
+                    var control = ["<select data-toggle='tooltip' data-trigger='hover' data-placement='top' title='", toolTip, "' class='form-control attrib-input select-", fieldId, "' onchange='getSelectedValue(this)' name='", svcFieldId, "' id='", fieldId, "' ", isMandatory ? requiredAttr : "", "> "];
+                    if ((serviceAreaCategory == 'Others') && e.svcFieldName == 'Status') lstItems = StatusOthers;
+                    $.each(lstItems, function (i, e) {
+                        var id = e.FieldId;
+                        var text = e.FieldText;
+                        if (serviceAreaCategory == 'Others') {
+                            id = i + 1;
+                            text = lstItems[i];
+                        }
+                        if (text == 'Completed') sessionStorage.setItem('completedStatusId', id);
+                        control.push(["<option value='", id, "'>", text, "</option>"].join(''));
+                    });
+                    row = ["<tr><td>", label, isMandatory ? requiredLabel() : "", control.join(''), "</td></tr>"].join('');
+                }
+            }
+            else if (e.DataType.toLowerCase() == "date")
+                row = ["<tr><td>", generateDateFormControlBs(e, svcFieldId)].join('');
+            else if (e.DataType.toLowerCase() == "time")
+                row = ["<tr><td>", generateTimeFormControl(e, svcFieldId)].join('');
+            else
+                row = ["<tr><td>", label, isMandatory ? requiredLabel() : "", "<input class='form-control attrib-input' type='text' rel='txtTooltip' title='", toolTip, "' data-toggle='tooltip' data-placement='bottom' name='", svcFieldId, "' id='", fieldId, "' placeholder='", e.svcFieldName, "' value='", isJobId ? seq : "", "'", isJobId ? " disabled=disabled " : " ", isJobId ? requiredAttr : "", "/></td></tr>"].join('');
+        }
+
+        if (e.Shade == "T")
+            shade = " btn-info "
+        else if (e.Shade == "A")
+            shade = " btn-warning "
+        else
+            shade = "";
+
+        if (e.FieldType == 0 || e.FieldType == "0") {
+            attribCount++;
+            tblDataAttrib.push(row);
+        }
+        else {
+            let colSpan = 1;//(isLast && (i % 2 == 0)) ? 2 : 1;
+            metricData.push(
+                ["<td width='32%' colspan=", colSpan, ">", e.svcFieldName, "</td>",
+                    "<td width='14%'>",
+                    "<input class='form-control", shade, "' type='text' name='" + svcFieldId, "' id='field", e.svcFieldNumber, "' title='", e.Description_Txt, "' value='", defaultVal, "' ", " onkeyup='checkNum(this,\"d\")' />",
+                    "</td>"].join(''));
+            metricIdx++;
+            if (metricIdx % 2 == 0 || (metricIdx % 2 > 0 && metricIdx >= noAttribSvcAreaSum)) {
+                tblDataMetric.push(["<tr>", metricData.join(''), "</tr>"].join(''));
+                metricData = [];
+            }
+        }
+
+    });
+
+    if (isClientWithDefaultValue)
+        tblDataMetric.push(["<tr>", "<td colspan='4'>Note:<br/><textarea class='form-control' height='4' id='remarks'  placeholder='Notes for ", $("#ddlServiceArea option:selected").text(), "' /></td>", "</tr>"].join(''));
+
+    if (isUpdate) {
+        tbMetric.find("tbody tr").remove();
+        tbAttrib.find("tbody tr").remove();
+    }
+
+    tbMetric.find("tbody").append(tblDataMetric.join(''));
+    tbAttrib.find("tbody").append(tblDataAttrib.join(''));
+
+    $(".glyphicon-plus-btn, .glyphicon-home-btn").removeClass("hidden");
+
+    if (isUpdate) {
+        //$('*[class*="time-StringField"]').timepicker('setTime', null);
+
+        //POPULATE VALUES
+        var input = $("input[id^=StringField]");    //ATRIB
+        var df = document.createDocumentFragment();
+        //console.log(model.ServiceAreaFields);
+        $.each(input, function (i, e) {
+            var skip = false;
+            var attribValue = model.Transaction[e.id];
+            if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
+                try {
+                    if (attribValue == "" || attribValue == null) {
+                        attribValue = "";
+                        skip = true;
+                    }
+                    //else if (isNaN(Date.parse(attribValue)))
+                    //attribValue = attribValue.slice(-8);//.replace(/[AP]M/g, " $&");
+                }
+                catch (e) {
+                    attribValue = "";
+                }
+            }
+            else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
+                if (isNaN(Date.parse(attribValue))) {
+                    attribValue = attribValue == "" || attribValue == null ? "" : formatDate(attribValue.replace(attribValue.slice(-7), ""));	//formatDate(Date.parse(attribValue.replace(attribValue.slice(-7), "")));
+                }
+                else {
+                    attribValue = attribValue == "" ? "" : formatDate(attribValue);
+                }
+            }
+
+            if (!skip) $(e).val(attribValue);
+
+        });
+
+        input = $("select[id^=StringField]");    //ATRIB SELECT
+        $.each(input, function (i, e) {
+            $(e).val(model.Transaction[e.id]);
+        });
+
+        var input = $("input[id^=field]");          //METRIC
+        $.each(input, function (i, e) { $(e).val(model.Transaction[e.id]) });
+
+        $("#JOB_ID").val(model.Transaction.JOB_ID);
+
+        showForm();
+
+        //$("input:text").focus(function () { $(this).select(); });
+    }
+
+    if (isNew) {
+        //POPULATE VALUES
+        var input = $("input[id^=StringField]");    //ATRIB
+        var df = document.createDocumentFragment();
+        var currentDate = new Date().toLocaleDateString();
+        var d_time = new Date().toLocaleTimeString();
+
+        $.each(input, function (i, e) {
+            var attribValue = "";
+            if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
+                try {
+                    if (e.title.toLowerCase().indexOf("must have data to save") > -1)
+                        attribValue = d_time;
+                }
+                catch (e) {
+                    attribValue = "";
+                }
+            }
+            else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
+                if (e.title.toLowerCase().indexOf("must have data to save") > -1)
+                    attribValue = currentDate;
+            }
+            $(e).val(attribValue);
+        });
+
+        input = $("select[id^=StringField]");    //ATRIB SELECT
+        $.each(input, function (i, e) {
+            $(e).val(null);
+        });
+
+        input = $("input[id^=field]");          //METRIC
+        $.each(input, function (i, e) { $(e).val(null) });
+
+        input = $("textarea[id^=StringField]");          //METRIC
+        $.each(input, function (i, e) { $(e).val(null) });
+
+        $("#JOB_ID").val('Auto-Generated');
+
+        //initializeDateControl();
+        showForm();
+
+        //$("input:text").focus(function () { $(this).select(); });
+    }
+
+    //initializeTimeControl();
+    //initializeDateControl();
+
+    ////APPLY FIELD PROPERTIES
+    $('*[class*="date-StringField"]').datepicker({
+        autoclose: true,
+        startDate: "-3m",
+        endDate: '+3m',
+        immediateUpdates: true,
+        maxViewMode: 0,
+        disableTouchKeyboard: true,
+        orientation: 'bottom', showOnFocus: true, todayHighlight: true,
+        zIndexOffset: 9
+    });
+
+    $('*[class*="time-StringField"]').flatpickr({
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+    });
+
+    if (isNew) { //initialize dropdown values
+        $("select[id^=StringField]").val(-1);
+    }
+
+    var isEqual = attribCount == tbAttrib.find("tbody tr").length && 1 == ($("select[id^=StringField]").length > 0 ? $("select[id^=StringField]")[0].length > 0 ? 1 : 0 : 1);
+    if (isEqual) {
+        $(".div-signin-loading-attrib").hide();
+    }
+    return isEqual;
+}
+
+//POPULATE METRIC FIELDS
+function addNewTranCallback(data) {
+    //if (data.length == 0) return;
+    $(".div-signin-loading-attrib").show();
+    //var i = 0;
+    var to = setInterval(function () {
+        result = populateEntryForm(data);
+        if (result) {
+            $(".div-signin-loading-attrib").hide();
+            clearInterval(to);
+        }
+        //i++;
+    }, 100);
+}
+
+//POPULATE METRIC FIELDS
+function serviceAreaCallback(data) {
+    //if (data.length == 0) return;
+    $(".div-signin-loading-attrib").show();
+    //var i = 0;
+    var to = setInterval(function () {
+        result = populateForms(data);
+        if (result) {
+            $(".div-signin-loading-attrib").hide();
+            clearInterval(to);
+        }
+        //i++;
+    }, 100);
+}
+
+function populateForms(data) {
+    scrollFunction();
+
+    var client = $("#ddlClient");
+    clientName = client.find("option:selected").text();
+    var site = $("#ddlSite");
+    siteId = $("#ddlSite").val();
+    siteName = site.find("option:selected").text();
+    var location = $("#ddlLocation");
+    locationId = $("#ddlLocation").val();
+    locName = location.find("option:selected").text();
+
+    var svc = $("#ddlServiceArea");
+    if (isProductionMonthDidChange || (serviceAreaId != parseInt(svc.val()))) {
+        origDataModel = [];
+        //getRecentActivity();
+        isProductionMonthDidChange = false;
+    }
+
+    serviceAreaId = parseInt(svc.val());
+    //POPULATE USERS SAVED DATA FIRST
+    serviceAreaName = svc.find("option:selected").text();
+    $("#txtSearch").attr("placeholder", "Search recently saved data for " + serviceAreaName);
+    //$("#txtSearch").attr("placeholder", "Search recently saved data for " + svc.find("option:selected").text());
+
+    clientId = $("#ddlClient").val();
+    localStorage.setItem('areaId', serviceAreaId + '_' + clientId);
+    let serviceAreaCategories = JSON.parse(sessionStorage.getItem('serviceAreaCategories'));
+    var areaCategory = serviceAreaCategories.filter(f => f.Id == serviceAreaId)[0].Value;
+    var serviceAreaCategory = 'Others';
+    if (areaCategory != undefined) {
+        for (let x of StandardServiceAreaCategories) {
+            if (areaCategory.toLowerCase() === x.toLowerCase()) {
+                serviceAreaCategory = x;
+                break;
+            }
+        }
+    }
+    sessionStorage.setItem('serviceAreaCategory', serviceAreaCategory);
+
+
+    var jobId = {
+        svcFieldID: 0,
+        svcID: serviceAreaId,
+        svcFieldNumber: 0,
+        svcFieldName: "JOB ID",
+        CategoryCode: null,
+        IsVisible: true,
+        Shade: null,
+        Description_Txt: null,
+        ServiceAreaFieldGroup_SAID: null,
+        FieldType: 0,
+        DataType: "text",
+        GroupName: null,
+        MetricShortName: null,
+        MetricFormat: null,
+        DefaultValue: null,
+    }
+    var d_data = [jobId].concat(data);
+    var metricData = [];
+    var attribData = [];
+    var tblDataAttrib = [];
+    var tblDataMetric = [];
+    var defaultVal = "";
+    var required = ' required="required" ';
+    var nullClientId = nullDefaultValueClientId.split(',');
+    var noAttribSvcAreaSum = d_data.reduce(function (cnt, o) { return cnt + o.FieldType }, 0);
+    var shade = "";
+    isClientWithDefaultValue = $.inArray($("#ddlClient").val(), nullClientId) >= 0 ? true : false;
+
     var tbAttrib = $("#tblAttribFields");
     var tbMetric = $("#tblMetricFields");
     var divAttrib = $(".bide-content-attrib");
@@ -2329,19 +2590,6 @@ function populateForms(data) {
         if (e.FieldType == 0 || e.FieldType == "0") {
             attribCount++;
             tblDataAttrib.push(row);
-
-            //    let colSpan = 1;//(isLast && (i % 2 == 0)) ? 2 : 1;
-            //    attribData.push(
-            //        [
-            //            /*"<td width='32%' colspan=", colSpan, ">", e.svcFieldName, "</td>",*/
-            //            "<td width='14%'>",
-            //            row.replace("<tr><td>", "").replace("</td></tr>", ""),
-            //            "</td>"].join(''));
-            //    attribIdx++;
-            //    if (attribIdx % 2 == 0 || (attribIdx % 2 > 0 && attribIdx >= noAttribSvcAreaSum)) {
-            //        tblDataAttrib.push(["<tr>", attribData.join(''), "</tr>"].join(''));
-            //        attribData = [];
-            //    }
         }
         else {
             let colSpan = 1;//(isLast && (i % 2 == 0)) ? 2 : 1;
@@ -2371,6 +2619,7 @@ function populateForms(data) {
     tbAttrib.find("tbody").append(tblDataAttrib.join(''));
 
     $(".glyphicon-plus-btn, .glyphicon-home-btn").removeClass("hidden");
+
     if (isUpdate) {
         //$('*[class*="time-StringField"]').timepicker('setTime', null);
 
@@ -2415,7 +2664,7 @@ function populateForms(data) {
         var input = $("input[id^=field]");          //METRIC
         $.each(input, function (i, e) { $(e).val(model.Transaction[e.id]) });
 
-        $("#JOB_ID").val(model.Transaction.JOB_ID);
+        if (!isNewServiceArea) $("#JOB_ID").val(model.Transaction.JOB_ID);
 
         showForm();
 
@@ -2473,16 +2722,22 @@ function populateForms(data) {
 
         $("#JOB_ID").val('Auto-Generated');
 
+        //initializeDateControl();
         showForm();
 
         //$("input:text").focus(function () { $(this).select(); });
     }
+
+    //initializeTimeControl();
+    //initializeDateControl();
+
     ////APPLY flatpickr FIELD PROPERTIES
     $('*[class*="date-StringField"]').flatpickr({
-        //$('#flatpicker').flatpickr({
         altInput: true,
         altFormat: "F j, Y",
         dateFormat: "Y-m-d",
+        //minDate: "today",
+        //defaultDate: 'null'
     });
 
     $('*[class*="time-StringField"]').flatpickr({
@@ -2490,20 +2745,6 @@ function populateForms(data) {
         noCalendar: true,
         dateFormat: "H:i",
     });
-
-    //$('*[class*="date-StringField"]').datepicker({
-    //    autoclose: true,
-    //    startDate: "-3m",
-    //    endDate: '+3m',
-    //    immediateUpdates: true,
-    //    maxViewMode: 0,
-    //    disableTouchKeyboard: true,
-    //    orientation: 'bottom', showOnFocus: true, todayHighlight: true,
-    //    zIndexOffset: 9
-    //});
-
-    //initializeTimeControl();
-    //initializeDateControl();
 
     if (isNew) { //initialize dropdown values
         $("select[id^=StringField]").val(-1);
@@ -2514,38 +2755,6 @@ function populateForms(data) {
         $(".div-signin-loading-attrib").hide();
     }
     return isEqual;
-}
-
-
-//POPULATE METRIC FIELDS
-function serviceAreaCallback(data) {
-    //if (data.length == 0) return;
-    $(".div-signin-loading-attrib").show();
-    //var i = 0;
-    var to = setInterval(function () {
-        result = populateForms(data);
-        if (result) {
-            $(".div-signin-loading-attrib").hide();
-            clearInterval(to);
-        }
-        //i++;
-    }, 100);
-}
-
-function initializeTimeControl() {
-    var now = new Date();
-    $('*[class*="time-StringField"]').timepicker({ disableMousewheel: false, template: 'dropdown', minuteStep: 5 });//, defaultTime: 'current' });
-    if (isNew) {
-        $('*[class*="time-StringField"]').val("");
-        //$('*[class*="time-StringField"]').timepicker('setTime', null);
-    }
-
-    if (isUpdate)
-        return;
-
-    return;
-
-    //$('*[class*="time-StringField"]').timepicker('setTime', now.getHours() + ":" + now.getMinutes());
 }
 
 function ajaxRequest(targetElement, url, parameter) {
@@ -2580,6 +2789,8 @@ function ajaxRequest(targetElement, url, parameter) {
 function clearProductionLog() {
     //let oCols = setupGenericColumns(model, false);
     //setupGrid(model, false, 0, oCols);
+    //resetGrid();
+
     model.GenericTransactions = [];
     setupGrid(model, false, 0, []);
     //hideProductionDetails();
@@ -2770,51 +2981,51 @@ var observer = new MutationObserver(function (mutations) {
 
 //brb layout manager
 function hideData() {
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[7]) {
-        if (x[7].textContent === 'Hide Details') {
-            w2ui['layout'].toggle('right', window.instant);
-            x[7].textContent = 'Show Details';
-            var i = document.getElementsByClassName("w2ui-tb-image");
-            i[7].children[0].className = "fa fa-arrow-left";
-        }
-    }
+    //var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+    //if (x[7]) {
+    //    if (x[7].textContent === 'Hide Details') {
+    //        w2ui['layout'].toggle('right', window.instant);
+    //        x[7].textContent = 'Show Details';
+    //        var i = document.getElementsByClassName("w2ui-tb-image");
+    //        i[7].children[0].className = "fa fa-arrow-left";
+    //    }
+    //}
 }
 
 function showData() {
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[7]) {
-        if (x[7].textContent === 'Show Details') {
-            w2ui['layout'].toggle('right', window.instant);
-            x[7].textContent = 'Hide Details';
-            var i = document.getElementsByClassName("w2ui-tb-image");
-            i[7].children[0].className = "fa fa-arrow-right";
-        }
-    }
+    //var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+    //if (x[7]) {
+    //    if (x[7].textContent === 'Show Details') {
+    //        w2ui['layout'].toggle('right', window.instant);
+    //        x[7].textContent = 'Hide Details';
+    //        var i = document.getElementsByClassName("w2ui-tb-image");
+    //        i[7].children[0].className = "fa fa-arrow-right";
+    //    }
+    //}
 }
 
 function toggleShowData() {
-    w2ui['layout'].toggle('right', window.instant);
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[7]) {
-        if (x[7].textContent === 'Show Details') {
-            x[7].textContent = 'Hide Details';
-        } else {
-            x[7].textContent = "Show Details";
-        }
-        var i = document.getElementsByClassName("w2ui-tb-image");
-        i[7].children[0].className = x[7].textContent === 'Show Details' ? "fa fa-arrow-left" : "fa fa-arrow-right"
-    }
+    //w2ui['layout'].toggle('right', window.instant);
+    //var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+    //if (x[7]) {
+    //    if (x[7].textContent === 'Show Details') {
+    //        x[7].textContent = 'Hide Details';
+    //    } else {
+    //        x[7].textContent = "Show Details";
+    //    }
+    //    var i = document.getElementsByClassName("w2ui-tb-image");
+    //    i[7].children[0].className = x[7].textContent === 'Show Details' ? "fa fa-arrow-left" : "fa fa-arrow-right"
+    //}
 }
 
 function hideSelectors() {
-    $("#selector-panel").hide();
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[5]) {
-        x[5].textContent = "Show Selectors";
-        var i = document.getElementsByClassName("w2ui-tb-image");
-        if (i) i[5].children[0].className = "fa fa-arrow-right";
-    }
+    //$("#selector-panel").hide();
+    //var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+    //if (x[5]) {
+    //    x[5].textContent = "Show Selectors";
+    //    var i = document.getElementsByClassName("w2ui-tb-image");
+    //    if (i) i[5].children[0].className = "fa fa-arrow-right";
+    //}
 }
 
 //function showSelectors() {
@@ -2828,30 +3039,30 @@ function hideSelectors() {
 //}
 
 function toggleExpandDetails() {
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[8].textContent === 'Expand Details') {
-        x[8].textContent = 'Restore Details to Default Size';
-        w2ui['layout'].sizeTo('right', 1000);
-    } else {
-        x[8].textContent = "Expand Details";
-        w2ui['layout'].sizeTo('right', 700);
-    }
-    var i = document.getElementsByClassName("w2ui-tb-image");
-    i[8].children[0].className = x[8].textContent === 'Expand Details' ? "fa fa-arrow-left" : "fa fa-arrow-right"
+    //var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+    //if (x[8].textContent === 'Expand Details') {
+    //    x[8].textContent = 'Restore Details to Default Size';
+    //    w2ui['layout'].sizeTo('right', 1000);
+    //} else {
+    //    x[8].textContent = "Expand Details";
+    //    w2ui['layout'].sizeTo('right', 700);
+    //}
+    //var i = document.getElementsByClassName("w2ui-tb-image");
+    //i[8].children[0].className = x[8].textContent === 'Expand Details' ? "fa fa-arrow-left" : "fa fa-arrow-right"
 }
 
 function toggleShowSelectors() {
-    var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
-    if (x[5].textContent === 'Show Selectors') {
-        x[5].textContent = 'Hide Selectors';
-        $("#selector-panel").show();
-    } else {
-        x[5].textContent = "Show Selectors";
-        $("#selector-panel").hide();
-        toggleExpandDetails();
-    }
-    var i = document.getElementsByClassName("w2ui-tb-image");
-    i[5].children[0].className = x[5].textContent === 'Show Selectors' ? "fa fa-arrow-right" : "fa fa-arrow-left"
+    //var x = document.getElementsByClassName("w2ui-tb-text w2ui-tb-caption");
+    //if (x[5].textContent === 'Show Selectors') {
+    //    x[5].textContent = 'Hide Selectors';
+    //    $("#selector-panel").show();
+    //} else {
+    //    x[5].textContent = "Show Selectors";
+    //    $("#selector-panel").hide();
+    //    toggleExpandDetails();
+    //}
+    //var i = document.getElementsByClassName("w2ui-tb-image");
+    //i[5].children[0].className = x[5].textContent === 'Show Selectors' ? "fa fa-arrow-right" : "fa fa-arrow-left"
 }
 
 //brb new 
@@ -2925,9 +3136,13 @@ function insertItems(data) {
         node.img = 'been-here-icon';
         return node;
     })
+    const node = {};
+    node.id = 0;
+    node.text = "";
+    nodes.unshift(node)
 
-    //w2ui.sidebar.insert('level-1', null, nodes);
-    //w2ui.sidebar.expand('level-1');
+    w2ui.sidebar.insert('level-1', null, nodes);
+    w2ui.sidebar.expand('level-1');
 }
 
 function reloadData() {
@@ -3258,6 +3473,8 @@ function generateAllCsvData(allVisible) {
 }
 
 function setSelectors(areaId) {
+    resetGrid();
+
     if (areaId == null) return;
     if (areaId == undefined) areaId = localStorage.getItem('areaId');
     //if (isFiltered) w2ui.sidebar.select(areaId);
@@ -3577,9 +3794,7 @@ function reloadAllUserTrans() {
     serviceAreaId = 0;
     //var x = document.getElementsByClassName('w2ui-button');
     //x[9].hidden = true;
-    localStorage.setItem('filter', '');
-    localStorage.setItem('userMode', 'Query');
-    localStorage.removeItem('storage');
+    resetGrid();
     var grid = $("#gridContainer").dxDataGrid("instance");
     grid.clearFilter();
     isFiltered = false;
@@ -3974,9 +4189,19 @@ function scrollFunction() {
     mybutton.style.display = "block";
 }
 
+var mybutton1 = document.getElementById("back-to-top-ceres-entry-form");
+function scrollFunctionEntryForm() {
+    mybutton1.style.display = "block";
+}
+
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
     document.getElementById('page-title').scrollIntoView();
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunctionEntryForm() {
+    document.getElementById('ceres-entry-form').scrollIntoView();
 }
 
 //Common plugins
@@ -3989,9 +4214,13 @@ function topFunction() {
 
 function getClientName() {
     let areaId = localStorage.getItem('areaId');
-    clientId = areaId.split('_')[1];
+    clientId = +areaId.split('_')[1];
     let clients = JSON.parse(sessionStorage.getItem('clientData'));
-    clientName = clients.filter(c => c.Id == clientId).Value;
+    if (clients) {
+        let clientsArr = clients.filter(c => c.Id == clientId);
+        if (clientsArr.length > 0) clientName = clientsArr[0].Value; else clientName = "";
+    }
+    return "";
 }
 
 function redirectTo(route) {
@@ -4102,16 +4331,18 @@ function setup() {
     getServiceAreaCategories();
     //EVENTS HANDLER
     $("#grid-container").css("grid-template-areas", '"h h h h h h h h h h h u" "m m p p p p p p p p p p" "f f f f f f f f f f f f"');
-    //$(".bg-image").on("click", function () { toggleShowSelectors(); });
-    $(".bg-image").on("click", function () { });
+    //$(".bg-image").on("click", function () { });
+    $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").on("click", function () {
+        $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
+    });
 
     $(document)
         .ajaxStart(function () {
             $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").removeClass("hidden").show()
         })
         .ajaxStop(function () {
-
             $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
+            $(".div-signin-loading-attrib").hide();
         });
 
     $("#ddlClient").on("change", function () { ajaxRequest("#ddlSite", baseUrl + "api/client/GetSiteByUserName", { Id: $("#ddlClient").val(), email: sessionEmail }); clearProductionLog(); });
@@ -4178,6 +4409,10 @@ function setup() {
     });
 
     $("#btnUpdate, #btnSaveNew, #btnSave, #btnConfirmDelete").on("click", function () { $("#btnSubmit").click() });
+
+    //$(".main-title").on("click", function () {
+    //    alert('i');
+    //});
 
     $(".fa-building").on("click", function () {
         popupAccountInfoForm();
@@ -4299,6 +4534,26 @@ function setup() {
         $('#btnDownloadReports').w2tag();
     });
 
+    $('#btnAddNewTran').on("mouseover", function () {
+        $('#btnAddNewTran').w2tag("Add New Transaction", { position: "left", className: 'w2ui-dark' });
+    });
+    $("#btnAddNewTran").on("mouseout", function () {
+        $('#btnAddNewTran').w2tag();
+    });
+    var myModal = document.getElementById('AddNewTran')
+    myModal.addEventListener('shown.bs.modal', function () {
+        var newSrc = '../images/' + clientId + '.png';
+        if (clientId <= 1) newSrc = '../images/1000001.png';
+        $('#company-logo-1').attr('src', newSrc);
+        addNewTran();
+    })
+
+    $('#userShortcuts').on("mouseover", function () {
+        $('#userShortcuts').w2tag("User Shortcuts", { position: "right", className: 'w2ui-dark' });
+    });
+    $("#userShortcuts").on("mouseout", function () {
+        $('#userShortcuts').w2tag();
+    });
     //POPULATE RECENT DATA
     let areaId = localStorage.getItem('areaId');
     if (areaId == null || areaId.indexOf('null') > -1 || areaId.indexOf('Select Client' > -1)) {
@@ -4312,7 +4567,6 @@ function setup() {
             return;
         }
     }
-    //clientName = sessionStorage.getItem('clientData')[0].Value;
 
     //let userMode = localStorage.getItem('userMode');
     //if (userMode == 'Entry') {
@@ -4320,6 +4574,7 @@ function setup() {
     //    getSavedDataByServiceArea(areaId);
     //} else {
         isFiltered = false;
+    //sessionStorage.removeItem('selectedRow');
         getRecentSavedData();
     //}
 }
