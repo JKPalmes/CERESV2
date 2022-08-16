@@ -10,36 +10,37 @@ var fileSystem = [];
 //        hideEvent: "mouseleave",
 //    });
 //});
-$.validator.addMethod(
-    "checkDateCompleted",
-    function (value, element) {
-        var check = false;
-        var dayNow = new Date();
-        var ddate = new Date(value);
-        check = (ddate > dayNow) ? false : true;
-        return this.optional(element) || check;
-    },
-    "Completed date cannot be greater than current date"
-);
-
-$.validator.addMethod(
-    "checkDateCompletedIfStatusNotComplete",
-    function (value, element) {
-        var check = false;
-        var status = +document.getElementById(sessionStorage.getItem('statusFieldId')).value;
-        var completedStatus = +sessionStorage.getItem('completedStatusId');
-        var dateCompletedId = sessionStorage.getItem('dateCompletedFieldId');
-        var dateCompletedEl = document.getElementById(dateCompletedId);
-        var dateCompleted = dateCompletedEl.value;
-
-        check = (status !== completedStatus && dateCompleted != null) ? false : true;
-        return this.optional(element) || check;
-        //return check;
-    },
-    "This field should be null if status is not set to completed"
-);
-
 $(function () {
+    $.validator.addMethod(
+        "checkDateCompleted",
+        function (value, element) {
+            var check = false;
+            var dayNow = new Date();
+            var ddate = new Date(value);
+            check = (ddate > dayNow) ? false : true;
+            return this.optional(element) || check;
+        },
+        "Completed date cannot be greater than current date"
+    );
+
+    $.validator.addMethod(
+        "checkDateCompletedIfStatusNotComplete",
+        function (value, element) {
+            var check = false;
+            var status = +document.getElementById(sessionStorage.getItem('statusFieldId')).value;
+            var completedStatus = +sessionStorage.getItem('completedStatusId');
+            var dateCompletedId = sessionStorage.getItem('dateCompletedFieldId');
+            var dateCompletedEl = document.getElementById(dateCompletedId);
+            var dateCompleted = dateCompletedEl.value;
+
+            check = (status !== completedStatus && dateCompleted != null) ? false : true;
+            return this.optional(element) || check;
+            //return check;
+        },
+        "This field should be null if status is not set to completed"
+    );
+});
+
     $("#myform").validate({
         submitHandler: function (form) {
             submitForm();
@@ -152,6 +153,928 @@ $(function () {
                 checkDateCompleted: true,
                 checkDateCompletedIfStatusNotComplete: true
             },            
+            "Commentary_StringField6": { //Public (Displays in Dashboards) 
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 2) return true;
+                }
+            },
+            "Commentary_StringField8": { //Subject
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 2) return true;
+                    else return false;
+                }
+            },
+            "Commentary_StringField9": { //Type
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 2) return true;
+                    else return false;
+                }
+            },
+            "Facilities_StringField4": { //Status
+                required: true,
+            },
+            "Facilities_StringField6": { //Work Type
+                required: true,
+            },
+            "Facilities_StringField7": { //Time Request Received/Scheduled
+                required: true,
+            },
+            "Facilities_StringField8": { //Date Received/Scheduled
+                required: true,
+            },
+            "Facilities_StringField9": { //Job Type
+                required: true,
+            },
+            "Facilities_StringField10": { //Requester
+                required: true,
+            },
+            "Facilities_StringField14": { //Due Date
+                required: true,
+            },
+            "Facilities_StringField17": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField4")[0].value
+                    if (status == 3) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+
+            },
+            "Facilities_Field1": { //Time to Complete
+                required: function (element) {
+                    var status = $("#StringField4")[0].value
+                    if (status == 3) return true;
+                    else return false;
+                }
+            },
+            "Facilities_StringField18": { //Errors Reported
+                required: function (element) {
+                    var status = $("#StringField4")[0].value
+                    if (status == 3) return true;
+                    else return false;
+                }
+            },
+            "Facilities_StringField20": { //Completed Late
+                required: function (element) {
+                    var status = $("#StringField4")[0].value
+                    if (status == 3) return true;
+                    else return false;
+                }
+            },
+            "Facilities_StringField23": { //Job Comments
+                required: function (element) {
+                    var completedLate = $("#StringField20")[0].value;
+                    if (completedLate == 1) return true; //1-yes
+                    else return false;
+                },
+            },
+            "Facilities_StringField19": { //Errors Comment
+                required: function (element) {
+                    var errorsReported = $("#StringField18")[0].value;
+                    if (errorsReported == 1) return true; //1-yes
+                    else return false;
+                }
+            },
+            "Facilities_StringField21": { //On Hold Reason
+                required: function (element) {
+                    var status = $("#StringField4")[0].value
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Facilities_StringField22": { //Canceled Reason
+                required: function (element) {
+                    var status = $("#StringField4")[0].value
+                    if (status == 5) return true;
+                    else return false;
+                }
+            },
+            "Facilities_StringField25": { //Work Type
+                required: function (element) {
+                    var subContractType = $("#StringField6")[0].value;
+                    if (subContractType == 11) return true; //11-Sub-Contract
+                    else return false;
+                }
+            },
+            "Facilities_StringField15": { //Employee(s) Dispatched
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 3) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField6": { //Status
+                required: true
+            },
+            "Hospitality_StringField5": { //Requester
+                required: true,
+            },
+            "Hospitality_StringField8": { //Due Time
+                required: true,
+            },
+            "Hospitality_StringField10": { //Job Type
+                required: true,
+            },
+            "Hospitality_StringField9": { //Due Date
+                required: true,
+            },
+            "Hospitality_Field1": { //# of Guests depending on conf rm setup
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType <= 2) return true;
+                    else return false;
+                },
+            },
+            "Hospitality_StringField15": { //Vendor Name depending on conf rm setup
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 2) return true;
+                    else return false;
+                },
+            },
+            "Hospitality_Field11": { //Breakdown Time to Complete (minutes)
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType < 3 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_Field10": { //Time to Complete (minutes)
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType <= 2 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField14": { //Vendor Time Called 
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 2 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField16": { //Was Catering Delivery on-time
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 2 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField22": { //Completion notification sent to requestor 
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 2 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField13": { //Conference Room Name/ID
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField17": { //Employee(s) dispatched
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField18": { //Time Completed
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Hospitality_StringField19": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+            "Hospitality_StringField20": { //Task completed On Time?
+                required: function (element) {
+                    var status = $("#StringField6")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField5": { //Status
+                required: true,
+            },
+            "Imaging_StringField4": { //Intake Person
+                required: true,
+            },
+            "Imaging_StringField6": { //Requester
+                required: true,
+            },
+            "Imaging_StringField8": { //Time Received
+                required: true,
+            },
+            "Imaging_StringField9": { //Date Received
+                required: true,
+            },
+            "Imaging_StringField11": { //Due Time
+                required: true,
+            },
+            "Imaging_StringField12": { //Due Date
+                required: true,
+            },
+            "Imaging_StringField26": { //CBPS Job Notes
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (+status >= 5) return true;
+                    else return false;
+                },
+            },
+            "Imaging_StringField10": { //Average Grade
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField21": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+            "Imaging_StringField18": { //Operator (s)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField19": { //QC Operator(s)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField20": { //Time Completed
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField23": { //Delivered On-Time
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_Field5": { //Time to Complete QC
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_Field4": { //Time to Complete Scanning (minutes)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            //"Imaging_StringField": { //Average Copy Type Grade 
+            //    required: function (element) {
+            //        var status = +sessionStorage.getItem('Imaging_StringField5');
+            //        if (status == 4) return true;
+            //    }
+            //},
+            "Imaging_StringField25": { //Delivery Method 
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField15": { //Vendor Name
+                required: function (element) {
+                    var vended = $("#StringField14")[0].value;
+                    if (vended == 1) return true;
+                    else return false;
+                }
+            },
+            "Imaging_StringField16": { //Vended Reason
+                required: function (element) {
+                    var vended = $("#StringField14")[0].value;
+                    if (vended == 1) return true;
+                    else return false;
+                }
+            },
+            "Imaging_Field17": { //Vended Cost
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    var vended = $("#StringField14")[0].value;
+                    if (vended == 1 && status == 4) return true;
+                    else return false;
+                }
+            },
+            //Mail e.g.4000721 format: [ServiceAreaCateogry]_(String)Field[ServiceFieldNumber]
+            "Mail_StringField4": { //Status
+                required: true,
+            },
+            "Mail_StringField7": { //Time Received
+                required: true,
+            },
+            "Mail_StringField8": { //Date Received
+                required: true,
+            },
+            "Mail_StringField10": { //Due Time
+                required: true,
+            },
+            "Mail_StringField11": { //Due Date
+                required: true,
+            },
+            "Mail_StringField12": { //Job type
+                required: true,
+            },
+            "Mail_StringField8": { //Date Received
+                required: true,
+            },
+            "Mail_Field16": { //Time to Complete (minutes) is required if status is complete
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 3) return true;
+                    else return false;
+                },
+            },
+            //"Mail_Field16": { //if fulfillment job, Time to Complete (minutes) is required if status is complete
+            //    required: function (element) {
+            //        var status = $("#StringField4")[0].value;
+            //        var fulfillmentJob = $("#StringField13")[0].value;
+            //        if (fulfillmentJob == 1 && status == 3) return true;
+            //        else return false;
+            //    },
+            //},
+            "Mail_StringField15": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 3) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+            "ManagedPrint_StringField5": { //Status
+                required: true,
+            },
+            "ManagedPrint_StringField10": { //Job Type
+                required: true,
+            },
+            "ManagedPrint_Field12": { //Time to Complete (minutes)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField19": { //Time Completed
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType != 6 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField20": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+            "ManagedPrint_StringField23": { //Completion notification sent to requestor  if job type = 1-Toner Replacement|2-Paper Jam|5-Quality Issue|9-User Training|8-Network Issue, and if status is complete
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if ((jobType == 1 || jobType == 2 || jobType == 5 || jobType == 8 || jobType == 9) && status == 4) return true;
+                    else return false;
+                },
+            },
+            "ManagedPrint_StringField21": { //Completed On Time if job type = 1-Toner Replacement|2-Paper Jam|5-Quality Issue|9-User Training|8-Network Issue, and if status is complete
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if ((jobType == 1 || jobType == 2 || jobType == 5 || jobType == 8 || jobType == 9) && status == 4) return true;
+                    else return false;
+                },
+            },
+            "ManagedPrint_StringField4": { //Intake Person if job type = 1-Toner Replacement|2-Paper Jam|3|4|5-Quality Issue|9-User Training|8-Network Issue regardless of status
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 || jobType == 2 || jobType == 3 || jobType == 4 || jobType == 5 || jobType == 8 || jobType == 9) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField6": { //Requester if job type = 1-Toner Replacement|2-Paper Jam|3|4|5-Quality Issue|9-User Training|8-Network Issue regardless of status
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 || jobType == 2 || jobType == 3 || jobType == 4 || jobType == 5 || jobType == 8 || jobType == 9) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField8": { //Time Received if job type = 1-Toner Replacement|2-Paper Jam|3|4|5-Quality Issue|9-User Training|8-Network Issue regardless of status
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 || jobType == 2 || jobType == 3 || jobType == 4 || jobType == 5 || jobType == 8 || jobType == 9) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField9": { //Date Received if job type = 1-Toner Replacement|2-Paper Jam|3|4|5-Quality Issue|9-User Training|8-Network Issue regardless of status
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 || jobType == 2 || jobType == 3 || jobType == 4 || jobType == 5 || jobType == 8 || jobType == 9) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField12": { //Due Date if job type = 1-Toner Replacement|2-Paper Jam|3|4|5-Quality Issue|9-User Training|8-Network Issue regardless of status
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 || jobType == 2 || jobType == 3 || jobType == 4 || jobType == 5 || jobType == 8 || jobType == 9) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField16": { //Equip Serial# if job type = 1-Toner Replacement|2-Paper Jam|3|4|5-Quality Issue|9-User Training|8-Network Issue regardless of status
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 || jobType == 2 || jobType == 3 || jobType == 4 || jobType == 5 || jobType == 8 || jobType == 9) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_Field5": { //# Equip Key Ops Scheduled required if job type  is 7-Scheduled Key Op
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_Field6": { //# Equip Key Oped required if job type  is 7-Scheduled Key Op
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_Field7": { //# Equip Key Oped Late required if job type is 7-Scheduled Key Op
+                required: function (element) {
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField14": { //Vendor Time Called required if serviced by = 2-Fleet Center or 3-3rd Party Vendor
+                required: function (element) {
+                    var servicedBy = $("#StringField13")[0].value;
+                    if (servicedBy == 2 || servicedBy == 3) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField15": { //Vendor Name required if serviced by = 3-3rd Party Vendor
+                required: function (element) {
+                    var servicedBy = $("#StringField13")[0].value;
+                    if (servicedBy == 3) return true;
+                    else return false;
+                }
+            },
+            "ManagedPrint_StringField22": { //Job Notes required if Completed On Time = 2-No
+                required: function (element) {
+                    var completedOnTime = $("#StringField21")[0].value;
+                    if (completedOnTime == 2) return true;
+                    else return false;
+                }
+            },
+            "Records_StringField5": { //Status
+                required: true,
+            },
+            "Records_StringField9": { //Date Received
+                required: true,
+            },
+            "Records_StringField4": { //Intake Person
+                required: true,
+            },
+            "Records_StringField6": { //Requester
+                required: true,
+            },
+            "Records_StringField10": { //Work Type
+                required: true,
+            },
+            "Records_StringField11": { //Job Type
+                required: true,
+            },
+            "Records_StringField13": { //Date Completed
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true,
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 3) return true;
+                    else return false;
+                },
+            },
+            "Records_Field13": { //Time to Complete (minutes)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (+status == 3) return true;
+                    else return false;
+                }
+            },
+            "ShippingReceiving_StringField4": { //Status
+                required: true,
+            },
+            "ShippingReceiving_StringField9": { //Date Received
+                required: true,
+            },
+            "ShippingReceiving_StringField10": { //Package Type A
+                required: true,
+            },
+            "ShippingReceiving_Field2": { //SR # Error Reported/Mis-delivered
+                required: true,
+            },
+            "ShippingReceiving_Field6": { //SR # Pick up Rounds Required 
+                required: true,
+            },
+            "ShippingReceiving_Field7": { //SR # Pick up Rounds completed late
+                required: true,
+            },
+            "ShippingReceiving_StringField19": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+            "ShippingReceiving_Field1": { //SR # Accountable Packages
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 4) return true; else return false;
+                },
+            },
+            "ShippingReceiving_Field3": { //SR # Pkgs Delivered Late
+                required: function (element) {
+                    var pkgType = $("#StringField10")[0].value;
+                    if (pkgType == 1) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_StringField4": { //Status
+                required: true,
+            },
+            "Warehouse_StringField10": { //Job Type
+                required: true,
+            },
+            "Warehouse_Field11": { //# Pick SKUs
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (status == 4 && (jobType == 2 || jobType == 4 || jobType == 6)) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_StringField8": { //Requester
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if ((jobType > 1 && jobType <= 6) && status == 4) return true;
+                    else return false;
+                },
+            },
+            "Warehouse_StringField9": { //GL Code / Charge Code
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if ((jobType > 1 && jobType <= 6) && status == 4) return true;
+                    else return false;
+                },
+            },
+            "Warehouse_StringField6": { //Time Received
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if ((jobType == 2 || jobType == 6 || jobType == 3 || jobType == 4) && status == 4) return true;
+                    else return false;
+                },
+            },
+            "Warehouse_StringField7": { //Date Received
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if ((jobType == 2 || jobType == 6 || jobType == 3 || jobType == 4) && status == 4) return true;
+                    else return false;
+                },
+            },
+            "Warehouse_StringField14": { //Return to Stock Reason Code
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 3 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field35": { //# SKUs Returned
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 3 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field1": { //# Shipments Received
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field3": { //# SKUs Received
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field5": { //# SKUs Stocked
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 1 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field25": { //# Cycle Counts
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 5 && status == 4) return true;
+                }
+            },
+            "Warehouse_Field26": { //# Incorrect SKUs
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 5 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field27": { //# Inventory Adjustments (SKU Qty)
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 5 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field29": { //# SKU Location Adjustments
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 5 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field30": { //Kit # Jobs Completed
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 4 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field32": { //Kit # Jobs Late
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 4 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field33": { //# Kit SKUs
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 4 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field38": { //# SKUs Scrapped
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_Field41": { //Time to Complete  (HOURS)
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_StringField11": { //Time Completed
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Warehouse_StringField12": { //Date Completed
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7 && status == 4) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+            "Warehouse_StringField15": { //Scrap Reason Code
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    var jobType = $("#StringField10")[0].value;
+                    if (jobType == 7 && status == 4) return true;
+                    else return false;
+                }
+            },
+            "Others_Status": { //status for all other category (others)
+                required: true
+            },
+            "Others_Date_Completed": { //date completed for all other category (others)
+                required: function (element) {
+                    var status = $("[name='Others_Status']")[0].value;
+                    var completedStatus = +sessionStorage.getItem('completedStatusId');
+                    if (status == completedStatus) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
+
+        },
+        
+        //onkeyup: false,
+        //focusCleanup: true,
+        //onfocusin: function (element, event) {
+        //    this.lastActive = element;
+
+        //    if (!$(element).hasClass("nocleanup")) {
+        //        if (this.settings.focusCleanup && !this.blockFocusCleanup) {
+        //            if (this.settings.unhighlight) {
+        //                this.settings.unhighlight.call(this, element, this.settings.errorClass, this.settings.validClass);
+        //            }
+        //            this.addWrapper(this.errorsFor(element)).hide();
+        //        }
+        //    }
+        //},
+        messages: {
+            "ShippingReceiving_Field1": "This should be greater than 0.",
+        }
+    });
+
+$(function () {
+    $("#ceres-entry-form").validate({
+        submitHandler: function (form) {
+            submitForm();
+        },
+        rules: {
+            "CentralPrint_StringField5": { //Status
+                required: true,
+            },
+            "CentralPrint_StringField4": { //Intake Person
+                required: true,
+            },
+            "CentralPrint_StringField6": { //Requester
+                required: true,
+            },
+            "CentralPrint_StringField8": { //Time Received
+                required: true,
+            },
+            "CentralPrint_StringField9": { //Date Received
+                required: true,
+            },
+            "CentralPrint_StringField10": { //Job type
+                required: true,
+            },
+            "CentralPrint_StringField19": { //Due Time
+                required: true,
+            },
+            "CentralPrint_StringField20": { //Due Date
+                required: true,
+            },
+            "CentralPrint_StringField32": { //CBPS Job Notes
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    console.log('statusid: ' + status);
+                    if (+status >= 5) return true;
+                    else return false;
+                },
+            },
+            "CentralPrint_StringField28": { //Date Completed
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true,
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_StringField25": { //Operator (s)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_StringField26": { //QC Operator(s)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_StringField27": { //Time Completed
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_Field11": { //Time to Complete (minutes)
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_StringField13": { //Average Copy Type Grade 
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_StringField31": { //Delivered by 
+                required: function (element) {
+                    var status = $("#StringField5")[0].value;
+                    if (status == 4) return true;
+                }
+            },
+            "CentralPrint_StringField23": { //Vendor Name
+                required: function (element) {
+                    var vended = $("#StringField22")[0].value;
+                    if (vended == 1) return true;
+                    else return false;
+                }
+            },
+            "CentralPrint_Field24": { //Vended Cost
+                required: function (element) {
+                    var vended = $("#StringField22")[0].value;
+                    if (vended == 1) return true;
+                }
+            },
+            "Commentary_StringField4": { //Status
+                required: true,
+            },
+            "Commentary_StringField5": { //Date Completed (Period End Date) 
+                required: function (element) {
+                    var status = $("#StringField4")[0].value;
+                    if (status == 2) return true;
+                    else return false;
+                },
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true
+            },
             "Commentary_StringField6": { //Public (Displays in Dashboards) 
                 required: function (element) {
                     var status = $("#StringField4")[0].value;
@@ -941,7 +1864,7 @@ $(function () {
             },
 
         },
-        
+
         //onkeyup: false,
         //focusCleanup: true,
         //onfocusin: function (element, event) {
@@ -962,7 +1885,6 @@ $(function () {
     });
 
 });
-
 //$(function () {
 //    $.idleHands({
 //        activityEvents: 'click',
@@ -1365,4 +2287,32 @@ $(() => {
             }
         }
     });
+});
+
+$(function () {
+    $('#sidebar').w2sidebar({
+        name: 'sidebar',
+        flatButton: false,
+        nodes: [
+            {
+                id: 'level-1', text: '[Client | Site | Location | Service Area] - Sorted by most commonly used', img: 'icon-folder', expanded: true, group: true, groupShowHide: false
+            },
+        ],
+        onCollapse(event) {
+            event.preventDefault()
+        },
+    });
+    w2ui.sidebar.on('click', function (event) {
+        let areaId = localStorage.getItem('areaId');
+        if (areaId != '0_0') {
+            var grid = $("#gridContainer").dxDataGrid("instance");
+            if (grid != undefined) grid.clearFilter();
+        }
+
+        localStorage.setItem('areaId', event.target);
+        transView = "ShowAllTransactions";
+        getSavedDataByServiceArea(event.target);
+        $('#sidebar-close').click();
+    });
+    toggleShowData();
 });

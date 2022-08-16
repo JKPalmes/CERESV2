@@ -763,7 +763,7 @@
                             <a class="nav-link dropdown-toggle after-none p-0" style="padding-top: 5px; margin-bottom: 0px; margin-right: 30px;" href="#" role="button" data-bs-toggle="dropdown">
                                 <img id="company-logo-1" class="company-logo " src="../images/1000001.png" alt="company_logo">
                             </a>
-                            @*<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>*@
+                            <button id="btnCloseAddNewTran" type="button" hidden class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                     </nav>
                 </div>
@@ -815,8 +815,8 @@
             </div>
             <div class="modal-footer">
                 @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
-                <button type="button" class="btn btn-primary" onclick="saveChanges()" ;>Save New Transaction</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveNewTran()" ;>Save New Transaction</button>
+                <button type="button" class="btn btn-secondary" onclick="checkChanges()" aria-label="Close">Close</button>@*data-bs-dismiss="modal"*@
                 <button onclick="topFunctionEntryForm()" class="btn btn-danger btn-icon back-to-top" id="back-to-top-ceres-entry-form">
                     <i class="ri-arrow-up-line"></i>
                 </button>

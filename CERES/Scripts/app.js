@@ -1612,7 +1612,7 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             if (isAddMode) return;
             isEditMode = true;
             var data = selectedItems.selectedRowsData[0];
-            //sessionStorage.setItem('selectedRow', JSON.stringify(data));
+            sessionStorage.setItem('selectedRow', JSON.stringify(data));
             if (data) {
                 //show Entry View button
                 if (!isFiltered) $("#entryViewButton").dxButton("instance").option("visible", true);
@@ -1910,10 +1910,33 @@ function handleXHRError(err) {
     }
 }
 
-function saveChanges() {
+function saveNewTran() {
     submitButtonType = 0;
     var f = document.getElementById('entryFormSubmitButton');
     f.click();
+}
+
+function saveChanges() {
+    submitButtonType = 2;
+    var f = document.getElementById('myFormSubmitButton');
+    f.click();
+}
+
+function checkChanges() {
+    w2confirm('Changes may not have been saved. Do you still want to close this window?')
+        .yes(() => {
+            $('#AddNewTran').modal('hide')
+            let row = sessionStorage.getItem('selectedRow');
+            if (row != 'undefined') {
+                let rowData = JSON.parse(row);
+                var keyIndex = model.GenericTransactions.findIndex(i => i.TransactionId == rowData.TransactionId)
+                if (keyIndex > -1) getTransactionData(model.GenericTransactions[keyIndex], false);
+            }
+        })
+        .no(() => {
+            //console.log('No')
+        })
+
 }
 
 function submitForm(e) {
@@ -2112,6 +2135,7 @@ function populateEntryForm(data) {
         svcID: serviceAreaId,
         svcFieldNumber: 0,
         svcFieldName: "JOB ID",
+        DisplaySvcFieldName: "JOB ID",
         CategoryCode: null,
         IsVisible: true,
         Shade: null,
@@ -2174,16 +2198,29 @@ function populateEntryForm(data) {
         isMandatory = false;
         isLast = i == dataSize - 1 ? true : false;
         isJobId = e.svcFieldName === "JOB ID" ? true : false;
+
+        //brb 8/15/2022
         var fieldId = isJobId ? "JOB_ID" : e.FieldType == 0 || e.FieldType == "0" ? "StringField" : "Field";
         if (fieldId != "JOB_ID") {
             fieldId += e.svcFieldNumber;
         }
+
         var svcFieldId = isJobId ? "JOB_ID" : serviceAreaCategory;
         if (!isJobId) {
-            serviceAreaCategory == 'Others' ? svcFieldId += "_" + e.svcFieldName.replace(/ /g, "_") : svcFieldId += "_" + fieldId;
+            if (serviceAreaCategory == 'Others') svcFieldId += "_" + e.svcFieldName.replace(/ /g, "_");
+            else {
+                if (e.SvcFieldRuleNumber > 0) {
+                    var type = (e.FieldType == 0 || e.FieldType == "0") ? "_StringField" : "_Field";
+                    svcFieldId += type + e.SvcFieldRuleNumber;
+                } else svcFieldId += fieldId;
+            }
         }
+        //brb 8/15/2022
+
         row = "";
-        label = [e.svcFieldName, isJobId ? requiredLabel() : ""].join('');
+        //label = [e.svcFieldName, isJobId ? requiredLabel() : ""].join('');
+        label = [e.DisplaySvcFieldName, isJobId ? requiredLabel() : ""].join('');
+
         toolTip = e.Description_Txt;
 
         if (e.IsMandatory == 1) {
@@ -2233,7 +2270,7 @@ function populateEntryForm(data) {
         else {
             let colSpan = 1;//(isLast && (i % 2 == 0)) ? 2 : 1;
             metricData.push(
-                ["<td width='32%' colspan=", colSpan, ">", e.svcFieldName, "</td>",
+                ["<td width='32%' colspan=", colSpan, ">", e.DisplaySvcFieldName, "</td>",
                     "<td width='14%'>",
                     "<input class='form-control", shade, "' type='text' name='" + svcFieldId, "' id='field", e.svcFieldNumber, "' title='", e.Description_Txt, "' value='", defaultVal, "' ", " onkeyup='checkNum(this,\"d\")' />",
                     "</td>"].join(''));
@@ -2462,6 +2499,7 @@ function populateForms(data) {
         svcID: serviceAreaId,
         svcFieldNumber: 0,
         svcFieldName: "JOB ID",
+        DisplaySvcFieldName: "JOB ID",
         CategoryCode: null,
         IsVisible: true,
         Shade: null,
@@ -2529,16 +2567,29 @@ function populateForms(data) {
         isMandatory = false;
         isLast = i == dataSize - 1 ? true : false;
         isJobId = e.svcFieldName === "JOB ID" ? true : false;
+
+        //brb 8/15/2022
         var fieldId = isJobId ? "JOB_ID" : e.FieldType == 0 || e.FieldType == "0" ? "StringField" : "Field";
-        if (fieldId != "JOB_ID") {
+        if (fieldId != "JOB_ID" ) {
+            //if (e.SvcFieldRuleNumber > 0) fieldIdPrefix = e.SvcFieldRuleNumber;
             fieldId += e.svcFieldNumber;
         }
+
         var svcFieldId = isJobId ? "JOB_ID" : serviceAreaCategory;
         if (!isJobId) {
-            serviceAreaCategory == 'Others' ? svcFieldId += "_" + e.svcFieldName.replace(/ /g, "_") : svcFieldId += "_" + fieldId;
+            if (serviceAreaCategory == 'Others') svcFieldId += "_" + e.svcFieldName.replace(/ /g, "_");
+            else {
+                if (e.SvcFieldRuleNumber > 0) {
+                    var type = (e.FieldType == 0 || e.FieldType == "0") ? "_StringField" : "_Field"; 
+                    svcFieldId += type + e.SvcFieldRuleNumber;
+                } else svcFieldId += fieldId;
+            }
         }
+        //brb 8/15/2022
+
         row = "";
-        label = [e.svcFieldName, isJobId ? requiredLabel() : ""].join('');
+        //label = [e.svcFieldName, isJobId ? requiredLabel() : ""].join('');
+        label = [e.DisplaySvcFieldName, isJobId ? requiredLabel() : ""].join('');
         toolTip = e.Description_Txt;
 
         if (e.IsMandatory == 1) {
@@ -2571,7 +2622,7 @@ function populateForms(data) {
                 }
             }
             else if (e.DataType.toLowerCase() == "date")
-                row = ["<tr><td>", generateDateFormControl(e, svcFieldId)].join('');
+                row = ["<tr><td>", generateDateFormControlBs(e, svcFieldId)].join('');
             else if (e.DataType.toLowerCase() == "time")
                 row = ["<tr><td>", generateTimeFormControl(e, svcFieldId)].join('');
             //else if (e.svcFieldName.toLowerCase().indexOf('commentary') > -1)
@@ -2594,7 +2645,7 @@ function populateForms(data) {
         else {
             let colSpan = 1;//(isLast && (i % 2 == 0)) ? 2 : 1;
             metricData.push(
-                ["<td width='32%' colspan=", colSpan, ">", e.svcFieldName, "</td>",
+                ["<td width='32%' colspan=", colSpan, ">", e.DisplaySvcFieldName, "</td>",
                     "<td width='14%'>",
                     "<input class='form-control", shade, "' type='text' name='" + svcFieldId, "' id='field", e.svcFieldNumber, "' title='", e.Description_Txt, "' value='", defaultVal, "' ", " onkeyup='checkNum(this,\"d\")' />",
                     "</td>"].join(''));
@@ -2731,14 +2782,26 @@ function populateForms(data) {
     //initializeTimeControl();
     //initializeDateControl();
 
-    ////APPLY flatpickr FIELD PROPERTIES
-    $('*[class*="date-StringField"]').flatpickr({
-        altInput: true,
-        altFormat: "F j, Y",
-        dateFormat: "Y-m-d",
-        //minDate: "today",
-        //defaultDate: 'null'
+    ////APPLY FIELD PROPERTIES
+    $('*[class*="date-StringField"]').datepicker({
+        autoclose: true,
+        startDate: "-3m",
+        endDate: '+3m',
+        immediateUpdates: true,
+        maxViewMode: 0,
+        disableTouchKeyboard: true,
+        orientation: 'bottom', showOnFocus: true, todayHighlight: true,
+        zIndexOffset: 9
     });
+
+    //////APPLY flatpickr FIELD PROPERTIES
+    //$('*[class*="date-StringField"]').flatpickr({
+    //    altInput: true,
+    //    altFormat: "F j, Y",
+    //    dateFormat: "Y-m-d",
+    //    //minDate: "today",
+    //    //defaultDate: 'null'
+    //});
 
     $('*[class*="time-StringField"]').flatpickr({
         enableTime: true,
@@ -4537,9 +4600,10 @@ function setup() {
     $('#btnAddNewTran').on("mouseover", function () {
         $('#btnAddNewTran').w2tag("Add New Transaction", { position: "left", className: 'w2ui-dark' });
     });
-    $("#btnAddNewTran").on("mouseout", function () {
+    $('#btnAddNewTran').on("mouseout", function () {
         $('#btnAddNewTran').w2tag();
     });
+
     var myModal = document.getElementById('AddNewTran')
     myModal.addEventListener('shown.bs.modal', function () {
         var newSrc = '../images/' + clientId + '.png';
@@ -4554,6 +4618,21 @@ function setup() {
     $("#userShortcuts").on("mouseout", function () {
         $('#userShortcuts').w2tag();
     });
+
+    $('#btnSaveTran1').on("mouseover", function () {
+        $('#btnSaveTran1').w2tag("Save Transaction", { position: "left", className: 'w2ui-dark' });
+    });
+    $('#btnSaveTran1').on("mouseout", function () {
+        $('#btnSaveTran1').w2tag();
+    });
+
+    $('#btnSaveTran2').on("mouseover", function () {
+        $('#btnSaveTran2').w2tag("Save Transaction", { position: "left", className: 'w2ui-dark' });
+    });
+    $('#btnSaveTran2').on("mouseout", function () {
+        $('#btnSaveTran2').w2tag();
+    });
+
     //POPULATE RECENT DATA
     let areaId = localStorage.getItem('areaId');
     if (areaId == null || areaId.indexOf('null') > -1 || areaId.indexOf('Select Client' > -1)) {

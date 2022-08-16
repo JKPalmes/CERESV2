@@ -1,9 +1,7 @@
-﻿@{
-    ViewBag.Title = "Dashboard";
+﻿@{ ViewBag.Title = "Dashboard";
     ViewBag.pTitle = "Dashboard";
     ViewBag.pageTitle = "Dashboards";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @section styles{
     <!-- Application vendor css url-->
@@ -14,7 +12,7 @@
     <!-- DevExtreme theme -->
     <link rel="stylesheet" href="../content/dx.common.css">
     <link rel="stylesheet" href="../content/dx.light.css">
-
+    <link rel="stylesheet" type="text/css" href="../content/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="../content/jquery-idle-hands.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://rawcdn.githack.com/dmhendricks/file-icon-vectors/master/dist/file-icon-vectors.min.css" />
@@ -48,7 +46,7 @@
                                                 </div>
                                             </div>
                                             <div id="clientMenu" class="dropdown morphing scale-left" style="padding-top:0px;">
-                                                @*<button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#CreateNew" type="button"><i class="fa fa-plus"></i></button>*@
+                                                @*<button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#AddNewTran" type="button"><i class="fa fa-plus"></i></button>*@
                                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                                 <ul class="dropdown-menu shadow border-0 p-2">
                                                     <li><a class="dropdown-item" href="#" onclick="popupAccountInfoForm();" ;><i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;Account Info</a></li>
@@ -141,6 +139,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h6 class="card-title mb-0">Production Data</h6>
+                            <button id="btnAddNewTran" class="btn text-white rounded-circle btn-outline-secondary fs-24" data-bs-toggle="modal" data-bs-target="#AddNewTran" type="button"><i class="fa fa-plus-circle"></i></button>
                             <div class="btn-group me-3 justify-content-between" role="group">
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio1" onclick="transView = 'ShowPendingTransactions';filterByStatus()">
                                 <label class="btn btn-sm btn-outline-secondary" for="btnradio1">Pending</label>
@@ -149,13 +148,12 @@
                                 <input type="radio" class="btn-check" name="btnradio" id="btnradio3" onclick="transView = 'ShowCompletedTransactions';filterByStatus()">
                                 <label class="btn btn-sm btn-outline-secondary" for="btnradio3">Completed</label>
                             </div>
-
+                            @*class="d-none d-xl-inline-block*@
                             <div class="dropdown morphing scale-left">
-                                <button id="btnExpand" class="btn btn-outline-secondary" type="button" onclick="expandPanels()"><i class="fa fa-window-restore"></i></button>
+                                <button id="btnExpand" class="btn btn-outline-secondary d-none d-xl-inline-block fs-18" type="button" onclick="expandPanels()"><i class="fa fa-window-restore"></i></button>
                                 <a id="btnFullScreen" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2" aria-labelledby="dropdownMenuButton1">
-                                    @*<li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>*@
                                     <li><a class="dropdown-item" href="#" onclick="selectorContext();"><i class="fa fa-building"></i>&nbsp;&nbsp;&nbsp;Set Selectors</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
@@ -174,10 +172,11 @@
                         <div class="card-header">
                             <h6 class="card-title mb-0">Attributes</h6>
                             <div class="dropdown morphing scale-left">
+                                <button id="btnSaveTran1" onclick="saveChanges();" class="btn btn-outline-secondary d-xl-inline-block fs-22" type="button"><i class="fa fa-save"></i></button>
                                 <a id="btnFullScreenAttrib" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2">
-                                    <li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="selectorContext();"><i class="fa fa-building"></i>&nbsp;&nbsp;&nbsp;Set Selectors</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(false);"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;&nbsp;Export Transaction Records To Csv</a></li>
@@ -203,10 +202,11 @@
                         <div class="card-header">
                             <h6 class="card-title mb-0">Metrics</h6>
                             <div class="dropdown morphing scale-left">
+                                <button id="btnSaveTran2" onclick="saveChanges();" class="btn btn-outline-secondary d-xl-inline-block fs-22" type="button"><i class="fa fa-save"></i></button>
                                 <a id="btnFullScreenMetrics" href="#" class="card-fullscreen" aria-label="Card Full-Screen"><i class="icon-size-fullscreen"></i></a>
                                 <a href="#" class="more-icon dropdown-toggle" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu shadow border-0 p-2">
-                                    <li><a class="dropdown-item" href="#" onclick="submitForm()" ;><i class="fa fa-save"></i>&nbsp;&nbsp;&nbsp;Save Transaction</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="selectorContext();"><i class="fa fa-building"></i>&nbsp;&nbsp;&nbsp;Set Selectors</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="reloadAllUserTrans();"><i class="fa fa-refresh"></i>&nbsp;&nbsp;&nbsp;Reload Transactions</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(true);"><i class="fa fa-download"></i>&nbsp;&nbsp;&nbsp;Download Transaction Records (For Upload)</a></li>
                                     <li><a class="dropdown-item" href="#" onclick="exportToCsv(false);"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;&nbsp;Export Transaction Records To Csv</a></li>
@@ -219,6 +219,7 @@
                             <table id="tblMetricFields" class="table table-responsive table-hover">
                                 <tbody></tbody>
                             </table>
+                            <input id="myFormSubmitButton" type="submit" value="Save Changes" hidden class="class=" btn btn-primary submit" />
                         </div>
                     </div>
                 </div>
@@ -243,6 +244,7 @@
     <script src="../scripts/jquery.validate.min.js"></script>
     <!--<script src="Scripts/additional-methods.min.js"></script>-->
 
+    <script src="../scripts/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="../scripts/w2ui-1.5.min.js"></script>
     <!-- DevExtreme library -->
     <script type="text/javascript" src="../scripts/dx.all.js"></script>

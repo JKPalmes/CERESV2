@@ -87,3 +87,12 @@
     height: 41px;
 }
 
+.required-label {
+    color: #f00;
+    font-weight: bold;
+}
+
+.error {
+    color: #f00;
+    font-weight: bold;
+}

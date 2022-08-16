@@ -2,7 +2,7 @@
 //ViewBag.model = list;
 //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div id="page-title" style="margin-top:20px;" class="page-toolbar px-xl-4 px-sm-2 px-0 py-1">
+<div id="page-title" style="margin-bottom:7px; padding-bottom:5px; margin-top:20px;" class="page-toolbar px-xl-4 px-sm-2 px-0 py-1">
     @*<div class="container-fluid">*@
     @*<div class="row g-3 mb-3 align-items-center">
             <div class="col">
@@ -25,33 +25,7 @@
         </div>
 
         <div class="main-search px-3 flex-fill">
-            <input class="form-control ms-xl-2" style="width:590px;" type="button" value="User saved links/preferences" onclick="$('#userPref').load(document.URL +  ' #userPref');">
-            <div class="card shadow rounded-4 search-result slidedown">
-                <div class="card-body" id="userPref">
-                    @*<small class="text-uppercase text-muted">Recent searches</small>
-                    <div class="d-flex flex-wrap align-items-start mt-2 mb-4">
-                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-primary text-white" href="#">HRMS Admin</a>
-                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-secondary text-white" href="#">Hospital Admin</a>
-                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-info text-white" href="../app-project.html">Project</a>
-                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-dark text-white" href="../app-social.html">Social App</a>
-                        <a class="small rounded py-1 px-2 m-1 fw-normal bg-danger text-white" href="#">University Admin</a>
-                    </div>*@
-                    <small class="text-uppercase text-muted">Recent Activities</small>
-                    <div class="card list-group list-group-flush list-group-custom mt-2">
-                        @if (ViewBag.model != null)
-                        {
-                            foreach (var item in ViewBag.model)
-                            {
-                                <a class="list-group-item list-group-item-action text-truncate" href="#" onclick="localStorage.setItem('areaId', '@item.Id');transView = 'ShowAllTransactions';getSavedDataByServiceArea('@item.Id')">
-                                    <div class="fw-bold">@item.Value</div>
-                                    <small class="text-muted"></small>
-                                </a>
-
-                            }
-                        }
-                    </div>
-                </div>
-            </div>
+            <button id="btnSidebar" class="btn form-control ms-xl-2" style="height: 40px; padding-bottom: 30px; width: 590px; background-color: #dbe9ff;" data-bs-toggle="modal" data-bs-target="#sidebar-modal" type="button">User Shortcuts/Service Area</button>
         </div>
 
         <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-12 mt-2 mt-md-0">

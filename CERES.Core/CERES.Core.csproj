@@ -166,6 +166,7 @@
     <Compile Include="DTO\GenericKeyValue.cs" />
     <Compile Include="DTO\TransactionUpdateViewModel.cs" />
     <Compile Include="DTO\TransactionV2Response.cs" />
+    <Compile Include="DTO\ServiceAreaFieldExtended.cs" />
     <Compile Include="DTO\UserED.cs" />
     <Compile Include="DTO\UserData.cs" />
     <Compile Include="DTO\User.cs" />

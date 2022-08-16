@@ -10,36 +10,37 @@ var fileSystem = [];
 //        hideEvent: "mouseleave",
 //    });
 //});
-$.validator.addMethod(
-    "checkDateCompleted",
-    function (value, element) {
-        var check = false;
-        var dayNow = new Date();
-        var ddate = new Date(value);
-        check = (ddate > dayNow) ? false : true;
-        return this.optional(element) || check;
-    },
-    "Completed date cannot be greater than current date"
-);
-
-$.validator.addMethod(
-    "checkDateCompletedIfStatusNotComplete",
-    function (value, element) {
-        var check = false;
-        var status = +document.getElementById(sessionStorage.getItem('statusFieldId')).value;
-        var completedStatus = +sessionStorage.getItem('completedStatusId');
-        var dateCompletedId = sessionStorage.getItem('dateCompletedFieldId');
-        var dateCompletedEl = document.getElementById(dateCompletedId);
-        var dateCompleted = dateCompletedEl.value;
-
-        check = (status !== completedStatus && dateCompleted != null) ? false : true;
-        return this.optional(element) || check;
-        //return check;
-    },
-    "This field should be null if status is not set to completed"
-);
-
 $(function () {
+    $.validator.addMethod(
+        "checkDateCompleted",
+        function (value, element) {
+            var check = false;
+            var dayNow = new Date();
+            var ddate = new Date(value);
+            check = (ddate > dayNow) ? false : true;
+            return this.optional(element) || check;
+        },
+        "Completed date cannot be greater than current date"
+    );
+
+    $.validator.addMethod(
+        "checkDateCompletedIfStatusNotComplete",
+        function (value, element) {
+            var check = false;
+            var status = +document.getElementById(sessionStorage.getItem('statusFieldId')).value;
+            var completedStatus = +sessionStorage.getItem('completedStatusId');
+            var dateCompletedId = sessionStorage.getItem('dateCompletedFieldId');
+            var dateCompletedEl = document.getElementById(dateCompletedId);
+            var dateCompleted = dateCompletedEl.value;
+
+            check = (status !== completedStatus && dateCompleted != null) ? false : true;
+            return this.optional(element) || check;
+            //return check;
+        },
+        "This field should be null if status is not set to completed"
+    );
+});
+
     $("#myform").validate({
         submitHandler: function (form) {
             submitForm();
@@ -688,18 +689,18 @@ $(function () {
                 required: true,
             },
             "Records_StringField13": { //Date Completed
+                checkDateCompleted: true,
+                checkDateCompletedIfStatusNotComplete: true,
                 required: function (element) {
                     var status = $("#StringField5")[0].value;
                     if (status == 3) return true;
                     else return false;
                 },
-                checkDateCompleted: true,
-                checkDateCompletedIfStatusNotComplete: true
             },
             "Records_Field13": { //Time to Complete (minutes)
                 required: function (element) {
                     var status = $("#StringField5")[0].value;
-                    if (status == 3) return true;
+                    if (+status == 3) return true;
                     else return false;
                 }
             },
@@ -960,8 +961,6 @@ $(function () {
             "ShippingReceiving_Field1": "This should be greater than 0.",
         }
     });
-
-});
 
 $(function () {
     $("#ceres-entry-form").validate({
@@ -2294,8 +2293,6 @@ $(function () {
     $('#sidebar').w2sidebar({
         name: 'sidebar',
         flatButton: false,
-        /*topHTML: '<div id="sidebarLabel" class="text-center" style="background-color: #eee; margin-bottom: 15px; padding: 0px, 15px; border-bottom: 1px solid silver"><span>[Client | Site | Location | Service Area]</span></div> ',*/
-        /*bottomHTML: '<div style="padding-bottom: 31px;"><a href="http://slcapoktaadmd2:83/" target="_blank">DTG</a></div> ',*/
         nodes: [
             {
                 id: 'level-1', text: '[Client | Site | Location | Service Area] - Sorted by most commonly used', img: 'icon-folder', expanded: true, group: true, groupShowHide: false
@@ -2304,9 +2301,6 @@ $(function () {
         onCollapse(event) {
             event.preventDefault()
         },
-        onFlat: function (event) {
-            //$('#sidebar').css('width', (event.goFlat ? '300px' : '300px'));
-        }
     });
     w2ui.sidebar.on('click', function (event) {
         let areaId = localStorage.getItem('areaId');
@@ -2319,10 +2313,6 @@ $(function () {
         transView = "ShowAllTransactions";
         getSavedDataByServiceArea(event.target);
         $('#sidebar-close').click();
-        //HACK: called 2x to prevent abnormal display of log/details
-        //w2ui.sidebar.goFlat();
-        //w2ui.sidebar.goFlat();
     });
-    //w2ui.sidebar.goFlat();
     toggleShowData();
 });

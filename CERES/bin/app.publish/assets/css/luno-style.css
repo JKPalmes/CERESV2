@@ -25145,7 +25145,14 @@ img {
 
 .main-title {
     position: relative;
-    width: calc(100% - 3000px);
+    width: calc(100% - 1760px);
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    z-index: 1;
+}
+
+.status-title {
+    position: relative;
+    width: calc(100% - 1700px);
     border-color: rgba(255, 255, 255, 0.1) !important;
     z-index: 1;
 }
@@ -26449,13 +26456,14 @@ button:focus:not(:focus-visible) {
 
     .modal .modal-dialog-vertical {
         margin: 0;
-        height: 100%
+        height: 100%;
     }
 
         .modal .modal-dialog-vertical .modal-content {
             height: 100%;
             border: 0;
-            border-radius: 0
+            border-radius: 0;
+            width: 100%;
         }
 
         .modal .modal-dialog-vertical.right-side {
@@ -26471,11 +26479,12 @@ button:focus:not(:focus-visible) {
     }
 }
 
-@media only screen and (max-width: 640px) {
-    .modal .modal-dialog-vertical.right-side {
-        position: unset
+/*@media only screen and (max-width: 640px) {*/
+    @media only screen and (max-width: 1640px) {
+        .modal .modal-dialog-vertical.right-side {
+            position: unset
+        }
     }
-}
 
 .offcanvas {
     background-color: var(--card-color)

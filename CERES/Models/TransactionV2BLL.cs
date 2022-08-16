@@ -102,7 +102,8 @@ namespace CERES.Web.Api.Models
             _data.UpdateUserID = updateUserId;
 
             var origTranData = this.GetTransactionOwner(_data.tID);
-            _data.UserID = Int32.Parse(origTranData[2]);
+            var id = 0;
+            if (int.TryParse(origTranData[2], out id) == true) _data.UserID = id;
             _data.userName = origTranData[0];
             _data.CreationDate = DateTime.Parse(origTranData[1]);
             //TODO: set tdate from production month to production date when Status Field = COMPLETE

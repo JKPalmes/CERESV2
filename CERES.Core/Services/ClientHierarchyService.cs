@@ -43,7 +43,7 @@ namespace CERES.Core.Services
             }
         }
 
-        public static IEnumerable<ServiceAreaField> GetServiceAreaFields(int value)
+        public static IEnumerable<ServiceAreaField> GetServiceAreaFieldsOriginal(int value)
         {
             using (BIDE_DbContext dbContext = new BIDE_DbContext())
             {
@@ -51,11 +51,31 @@ namespace CERES.Core.Services
                 {
                     var sites = dbContext.ServiceAreaFields.Where(e => e.svcID == value).OrderBy(o => o.FieldType).ThenBy(n => n.svcFieldNumber).ToList();
                     return sites;
+
                 }
                 catch (Exception e)
                 {
                     //throw new InvalidOperationException(e.Message, e);
                     return new List<ServiceAreaField>();
+                }
+            }
+        }
+
+        public static IEnumerable<ServiceAreaFieldExtended> GetServiceAreaFields(int value)
+        {
+            using (BIDE_DbContext dbContext = new BIDE_DbContext())
+            {
+                try
+                {
+                    var sites = dbContext.Database.SqlQuery<ServiceAreaFieldExtended>("EXEC Get_ServiceAreaFieldsList @svcID",
+                        new SqlParameter("@svcID", value)).ToList();
+                    return sites;
+
+                }
+                catch (Exception e)
+                {
+                    //throw new InvalidOperationException(e.Message, e);
+                    return new List<ServiceAreaFieldExtended>();
                 }
             }
         }
