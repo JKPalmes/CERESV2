@@ -14,18 +14,18 @@
         </div>*@ <!-- .row end -->
 
     <div class="row align-items-center">
-        <div class="form-control col text-center mx-2">
+        <div class="form-control col text-center mx-2 ">
             <h6 class="fs-14 color-900 mt-1 mb-0">
                 Welcome back,
                 <span class="text-start ms-xl-2 ">
-                    <span class="d-none d-xl-inline-block ms-1 fw-normal user-name-text"></span>&nbsp;:&nbsp;
+                    <span class="d-xl-inline-block ms-1 fw-normal user-name-text"></span>&nbsp;:&nbsp;
                 </span>
                 <small class="text-muted user-name-sub-text "></small>
             </h6>
         </div>
 
-        <div class="main-search px-3 flex-fill">
-            <button id="btnSidebar" class="btn form-control ms-xl-2" style="height: 40px; padding-bottom: 30px; width: 590px; background-color: #dbe9ff;" data-bs-toggle="modal" data-bs-target="#sidebar-modal" type="button">User Shortcuts/Service Area</button>
+        <div class="d-none d-xl-inline-block main-search px-3 flex-fill">
+            <button id="btnSidebar" class="btn form-control ms-xl-2" style="height: 40px; padding-bottom: 30px; width:600px; background-color: #dbe9ff;" data-bs-toggle="modal" data-bs-target="#sidebar-modal" type="button">User Shortcuts/Service Area</button>
         </div>
 
         <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-12 mt-2 mt-md-0">
@@ -33,9 +33,6 @@
                 <input type="text" name="daterange" class="form-control">
                 <button id="btnHide" class="btn btn-outline-secondary" type="button" onclick="hideSelectorPanel();" ><i class="fa fa-arrow-up"></i></button>
                 <button id="btnShow" class="btn btn-outline-secondary" type="button" onclick="showSelectorPanel();" ><i class="fa fa-arrow-down"></i></button>
-                @*<button class="btn btn-outline-secondary" type="button" onclick="expandPanels()" data-bs-toggle="tooltip" data-bs-placement="top" title="Expand/Collapse Panels"><i class="fa fa-window-restore"></i></button>*@
-                @*<button class="btn btn-outline-secondary" type="button" onclick="hideProductionData()" data-bs-toggle="tooltip" data-bs-placement="top" title="Hide Production Data"><i class="fa fa-arrow-left"></i></button>
-                <button class="btn btn-outline-secondary" type="button" onclick="restoreDefaultView()" data-bs-toggle="tooltip" data-bs-placement="top" title="Restore"><i class="fa fa-window-restore"></i></button>*@
                 <button id="btnSendReport" class="btn btn-outline-secondary" type="button"><i class="fa fa-envelope"></i></button>
                 <button id="btnDownloadReports" class="btn btn-outline-secondary" type="button"><i class="fa fa-download"></i></button>
                 <button id="btn1" class="btn btn-outline-secondary" type="button" ><i class="fa fa-upload"></i></button>

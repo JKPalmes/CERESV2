@@ -30,7 +30,15 @@ namespace CERES.Web.Api.Controllers
             var ret = "Success";
             if (photo != null)
             {
-                ret = reportName.StartsWith("PowerPoint") ? SaveFile(photo, imageId) : SaveImageFile(photo, imageId);
+                if (reportName == "logo")
+                {
+                    ret = SaveLogo(photo, imageId);
+                    return Redirect(_reportsUrl + "/apps/dashboards/report" + reportId + "?" + ret);
+                }
+                else
+                {
+                    ret = reportName.StartsWith("PowerPoint") ? SaveFile(photo, imageId) : SaveImageFile(photo, imageId);
+                }
             }
 
             return Redirect(_reportsUrl + "/apps/" + (reportName.StartsWith("PowerPoint") ? "presentations/presentation" : "dashboards/report") + reportId + "?" + ret);
@@ -75,6 +83,25 @@ namespace CERES.Web.Api.Controllers
 
             return "Success";
         }
+
+        string SaveLogo(HttpPostedFileBase file, string imageId)
+        {
+            var targetLocation = Server.MapPath("~/Uploads/");
+
+            try
+            {
+                var path = Path.Combine(targetLocation, imageId);
+                file.SaveAs(path);
+            }
+            catch
+            {
+                Response.StatusCode = 400;
+                return "Error";
+            }
+
+            return "Success";
+        }
+
 
     }
 }

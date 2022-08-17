@@ -412,14 +412,14 @@ function showForm() {
     if (selectedRowData && selectedRowData != "undefined") {
         var selectedRow = JSON.parse(selectedRowData);
         if (selectedRow) {
-            prodDetailsTextContent = "Status: " + selectedRow.Transaction.StatusCode + "  |  JobID: " + selectedRow.Transaction.JOB_ID;
+            prodDetailsTextContent = " " + selectedRow.Transaction.StatusCode + "  |  JobID: " + selectedRow.Transaction.JOB_ID;
         }
     }
 
     let saTextContent = "" + siteName + " | " + locName + " | " + serviceAreaName + "";
-    let prodDataTextContent = "QUERY VIEW (" + clientName;
+    let prodDataTextContent = "QUERY (" + clientName;
     if (isFiltered && clientName !== '' && localStorage.getItem('userMode') == 'Entry') {
-        prodDataTextContent = "ENTRY VIEW (" + clientName + " | " + saTextContent;
+        prodDataTextContent = "ENTRY (" + clientName + " | " + saTextContent;
         //show Add New Transaction button
         $("#btnAddNewTran").show();
         //show Clone Tran button

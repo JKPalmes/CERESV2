@@ -25145,14 +25145,14 @@ img {
 
 .main-title {
     position: relative;
-    width: calc(100% - 1760px);
+    width: calc(100% - 1700px);
     border-color: rgba(255, 255, 255, 0.1) !important;
     z-index: 1;
 }
 
 .status-title {
     position: relative;
-    width: calc(100% - 1700px);
+    width: calc(100% - 1760px);
     border-color: rgba(255, 255, 255, 0.1) !important;
     z-index: 1;
 }
