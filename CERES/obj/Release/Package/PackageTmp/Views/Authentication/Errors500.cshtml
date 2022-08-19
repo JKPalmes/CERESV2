@@ -12,26 +12,26 @@
     <meta content="Canon Enterprise Record Entry System" name="description">
     <meta content="Data Technology Group" name="author">
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/assets/images/favicon.ico">
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
     <!-- Layout config Js -->
     <!-- Bootstrap Css -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
     <!-- Jquery Core Js -->
-    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
 
     <!-- Icons Css -->
-    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
-    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="/assets/css/luno-style.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/luno-style.css" type="text/css">
     <!-- custom Css-->
-    <link href="/assets/css/custom.min.css" rel="stylesheet" type="text/css">
-    <link href="/Content/my-style.css" rel="stylesheet" type="text/css">
-    <link href="/content/styles.css" rel="stylesheet" type="text/css">
+    <link href="../assets/css/custom.min.css" rel="stylesheet" type="text/css">
+    <link href="../Content/my-style.css" rel="stylesheet" type="text/css">
+    <link href="../content/styles.css" rel="stylesheet" type="text/css">
 </head>
 @*<head>
     @Html.Partial("~/Views/Shared/_title_meta.cshtml")
@@ -48,13 +48,15 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-4 text-center">
                         <div class="error-500 position-relative">
-                            <img src="/assets/images/error500.png" alt="" class="img-fluid error-500-img error-img" />
+                            <img src="../assets/images/error500.png" alt="" class="img-fluid error-500-img error-img" />
                             <h1 class="title text-muted">500</h1>
                         </div>
                         <div>
                             <h3>Internal Server Error!</h3>
                             <p class="text-muted w-75 mx-auto">Server Error 500. We're not exactly sure what happened, but our servers say something is wrong.</p>
-                            <a href="@Url.Action("SignInBasic", "Authentication")" class="btn btn-success"><i class="mdi mdi-home me-1"></i>Back to home</a>
+                            @*<a href="@Url.Action("SignInBasic", "Authentication")" class="btn btn-success"><i class="mdi mdi-home me-1"></i>Back to home</a>*@
+                            <a href="https://microstrategy.cbpsportal.com/edsv2/Authentication/SigninBasic" class="btn btn-success"><i class="mdi mdi-home me-1"></i>Back to home</a>
+                            
                         </div>
                     </div><!-- end col-->
                 </div>

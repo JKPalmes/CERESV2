@@ -412,41 +412,50 @@ function showForm() {
     if (selectedRowData && selectedRowData != "undefined") {
         var selectedRow = JSON.parse(selectedRowData);
         if (selectedRow) {
-            prodDetailsTextContent = "Status: " + selectedRow.Transaction.StatusCode + "  |  JobID: " + selectedRow.Transaction.JOB_ID;
+            prodDetailsTextContent = " " + selectedRow.Transaction.StatusCode + "  |  JobID: " + selectedRow.Transaction.JOB_ID;
         }
     }
 
     let saTextContent = "" + siteName + " | " + locName + " | " + serviceAreaName + "";
-    let prodDataTextContent = "QUERY VIEW (" + clientName;
+    //let prodDataTextContent = "QUERY (" + clientName;
+    let prodDataTextContent = "QUERY ";//( + clientName;
     if (isFiltered && clientName !== '' && localStorage.getItem('userMode') == 'Entry') {
-        prodDataTextContent = "ENTRY VIEW (" + clientName + " | " + saTextContent;
+        $("#btnSidebar1").css("background-color", "#98ebaa")
+        $("#btnSidebar2").css("background-color", "#98ebaa")
+        //prodDataTextContent = "ENTRY (" + clientName + " | " + saTextContent;
+        prodDataTextContent = "ENTRY - " + saTextContent;
         //show Add New Transaction button
         $("#btnAddNewTran").show();
         //show Clone Tran button
-        if (!isNewServiceArea) $("#cloneTranButton").dxButton("instance").option("visible", true);
+        //if (!isNewServiceArea) $("#cloneTranButton").dxButton("instance").option("visible", true);
+        $("#cloneTranButton").dxButton("instance").option("visible", true);
     } else {
-        var sa = $("#ddlServiceArea");
-        serviceAreaName = sa.find("option:selected").text();
-        if (clientName != '' && serviceAreaName != '--- Select Service Area ---' && serviceAreaName != undefined) prodDataTextContent += " | " + serviceAreaName;
+        $("#btnSidebar1").css("background-color", "#dbe9ff")
+        $("#btnSidebar2").css("background-color", "#dbe9ff")
+        //var sa = $("#ddlServiceArea");
+        //serviceAreaName = sa.find("option:selected").text();
+        //if (clientName != '' && serviceAreaName != '--- Select Service Area ---' && serviceAreaName != undefined) prodDataTextContent += " | " + serviceAreaName;
+        //if (serviceAreaName != '--- Select Service Area ---' && serviceAreaName != undefined) prodDataTextContent += serviceAreaName;
+
         $("#btnAddNewTran").hide();
         $("#cloneTranButton").dxButton("instance").option("visible", false);
-    //    if (selectedRowData && selectedRowData != "undefined") {
-    //        var selectedRow = JSON.parse(selectedRowData);
-    //        if (selectedRow) {
-    //            prodDetailsTextContent = "Status: " + selectedRow.StatusCode + "  |  JobID: " + selectedRow.JOB_ID;
-    //        }
-    //    }
+        //    if (selectedRowData && selectedRowData != "undefined") {
+        //        var selectedRow = JSON.parse(selectedRowData);
+        //        if (selectedRow) {
+        //            prodDetailsTextContent = "Status: " + selectedRow.StatusCode + "  |  JobID: " + selectedRow.JOB_ID;
+        //        }
+        //    }
     }
-    prodDataTextContent += ")";
+    //prodDataTextContent += ")";
     $(".prod-data-text").text(" " + prodDataTextContent + " ");
-    $(".prod-details-text").text(" " + prodDetailsTextContent.replaceAll('undefined','') + " ");
+    $(".prod-details-text").text(" " + prodDetailsTextContent.replaceAll('undefined', '') + " ");
 
     //var oldSrc = '../images/1000001.png';
-    var newSrc = '../images/' + clientId + '.png';
-    if (clientId <= 1) newSrc = '../images/1000001.png';
+    var newSrc = '../uploads/' + clientId + '.png';
+    if (clientId <= 1) newSrc = '../uploads/1000001.png';
     $('#company-logo').attr('src', newSrc);
     //$('img[src="' + oldSrc + '"]').attr('src', newSrc);
-    if (isNewServiceArea) $("#JOB_ID").val(null); 
+    if (isNewServiceArea) $("#JOB_ID").val(null);
 }
 
 function onlyUnique(value, index, self) {
@@ -643,13 +652,13 @@ function initializeDateControl() {
     //if (isNew) $('*[class*="date-StringField"]').flatpickr.val(new Date().toLocaleDateString());
 
     //else $('*[class*="date-StringField"]').datepicker('update', new Date(now.getFullYear(), now.getMonth(), now.getDate()));
-        $('*[class*="date-StringField"]').flatpickr({
-            enableTime: false,
-            minDate: "today",
-            time_24hr: true,
-            altInput: true,
-            defaultDate: null
-        });
+    $('*[class*="date-StringField"]').flatpickr({
+        enableTime: false,
+        minDate: "today",
+        time_24hr: true,
+        altInput: true,
+        defaultDate: null
+    });
     //}
 }
 
@@ -903,6 +912,7 @@ function handleRecentSavedData(data) {
 
     if (data == "No data") {
         clearProductionLog;
+        //clearProductionDetails();
         //hideProductionDetails();
     } else {
         if (sessionStorage.getItem('selectedArea') != 'All') {
@@ -913,6 +923,8 @@ function handleRecentSavedData(data) {
         selectGridRow();
         showForm();
     }
+
+    clearProductionDetails();
 
     $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
     //try {
@@ -959,13 +971,15 @@ function handleSavedData(data) {
 
     if (model.GenericTransactions.length == 0) {
         clearProductionLog();
+        clearProductionDetails();
         //hideProductionDetails();
         isNewServiceArea = true;
-    //    if (!isClone && !isDelete) {
-    //        addNew();
-    //        showData();
-    //    }
+        //    if (!isClone && !isDelete) {
+        //        addNew();
+        //        showData();
+        //    }
     } else {
+        isNewServiceArea = false;
         setSelectors(localStorage.getItem('areaId'));
         //showProductionDetails();
         isUpdate = true;
@@ -1111,11 +1125,11 @@ function populateGrid(model, isAddMode, rowKey) {
     //var x = document.getElementsByClassName('w2ui-button');
     //x[9].hidden = isFiltered ? false : true;
 
-//    if (isAddMode && !isPageChanged) {
-//        showData()
-//    } else {
-//        //if (submitButtonType != 2) hideData();
-//    }
+    //    if (isAddMode && !isPageChanged) {
+    //        showData()
+    //    } else {
+    //        //if (submitButtonType != 2) hideData();
+    //    }
 }
 
 function setupGenericColumns(model, isAddMode) {
@@ -1319,18 +1333,17 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             //if (selectedData.length == 0) hideProductionDetails();
             //}
 
-            //brb 6/1/2022
+            //brb 8/19/2022
             //if (searchEntered && e.component.getVisibleRows().length == 0) hideProductionDetails(); else showProductionDetails();
-            //e.component.getVisibleRows().length == 0 ? hideProductionDetails() : showProductionDetails();
-            //brb 6/1/2022
+            if (e.component.getVisibleRows().length == 0) clearProductionDetails();
+            //brb 8/19/2022
 
             let userMode = localStorage.getItem('userMode');
             if (userMode == 'Query') {
                 //brb 6/16/2022
                 if (sessionStorage.getItem('selectedArea') != 'All') initClientList();
-                //localStorage.setItem('userMode', '');
-                //brb 6/16/2022
-
+                //brb 8/19/2022
+                clearProductionDetails();
                 //hideProductionDetails();
             }
 
@@ -1567,16 +1580,16 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 widget: "dxButton",
                 options: {
                     elementAttr: { id: 'cloneTranButton' },
-                        visible: false,//isFiltered,
-                        //icon: "add-icon",
-                        text: "Clone Tran",
-                        showText: "always",
-                        icon: "fa fa-clone",
-                        hint: "Clone Transaction",
-                        onClick: function () {
-                            addNew();
-                        }
+                    visible: false,//isFiltered,
+                    //icon: "add-icon",
+                    text: "Clone Tran",
+                    showText: "always",
+                    icon: "fa fa-clone",
+                    hint: "Clone Transaction",
+                    onClick: function () {
+                        addNew();
                     }
+                }
             }, {
                 location: 'center',
                 template() {
@@ -1906,7 +1919,8 @@ function handleXHRError(err) {
     toastr.error("Oops! Something went wrong. Please contact BI administrator");
     if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
         //sessionStorage.clear();
-        window.location.href = baseUrl + "Authentication/Errors500/";
+        //window.location.href = baseUrl + "Authentication/Errors500/";
+        window.location.href = 'https://microstrategy.cbpsportal.com/edsv2/authentication/errors500';
     }
 }
 
@@ -1926,12 +1940,18 @@ function checkChanges() {
     w2confirm('Changes may not have been saved. Do you still want to close this window?')
         .yes(() => {
             $('#AddNewTran').modal('hide')
+            let tranId = 0;
             let row = sessionStorage.getItem('selectedRow');
             if (row != 'undefined') {
                 let rowData = JSON.parse(row);
-                var keyIndex = model.GenericTransactions.findIndex(i => i.TransactionId == rowData.TransactionId)
-                if (keyIndex > -1) getTransactionData(model.GenericTransactions[keyIndex], false);
+                tranId = rowData.TransactionId;
+            } else {
+                let storage = localStorage.getItem('storage');
+                if (storage) tranId = JSON.parse(storage).focusedRowKey;
             }
+            var keyIndex = model.GenericTransactions.findIndex(i => i.TransactionId == tranId);
+            if (keyIndex > -1) getTransactionData(model.GenericTransactions[keyIndex], false);
+
         })
         .no(() => {
             //console.log('No')
@@ -2003,7 +2023,10 @@ function submitForm(e) {
             toastr.success(toastrMsg[submitButtonType]);
             console.log("saved", data);
 
+            //isNew = false; user can keep on adding new tran on the popup form
             isClone = false;
+            isNewServiceArea = false;
+            isUpdate = false;
 
             transactionId = data[0].Value;
             inputData.tID = transactionId;
@@ -2296,126 +2319,12 @@ function populateEntryForm(data) {
 
     $(".glyphicon-plus-btn, .glyphicon-home-btn").removeClass("hidden");
 
-    if (isUpdate) {
-        //$('*[class*="time-StringField"]').timepicker('setTime', null);
-
-        //POPULATE VALUES
-        var input = $("input[id^=StringField]");    //ATRIB
-        var df = document.createDocumentFragment();
-        //console.log(model.ServiceAreaFields);
-        $.each(input, function (i, e) {
-            var skip = false;
-            var attribValue = model.Transaction[e.id];
-            if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
-                try {
-                    if (attribValue == "" || attribValue == null) {
-                        attribValue = "";
-                        skip = true;
-                    }
-                    //else if (isNaN(Date.parse(attribValue)))
-                    //attribValue = attribValue.slice(-8);//.replace(/[AP]M/g, " $&");
-                }
-                catch (e) {
-                    attribValue = "";
-                }
-            }
-            else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
-                if (isNaN(Date.parse(attribValue))) {
-                    attribValue = attribValue == "" || attribValue == null ? "" : formatDate(attribValue.replace(attribValue.slice(-7), ""));	//formatDate(Date.parse(attribValue.replace(attribValue.slice(-7), "")));
-                }
-                else {
-                    attribValue = attribValue == "" ? "" : formatDate(attribValue);
-                }
-            }
-
-            if (!skip) $(e).val(attribValue);
-
-        });
-
-        input = $("select[id^=StringField]");    //ATRIB SELECT
-        $.each(input, function (i, e) {
-            $(e).val(model.Transaction[e.id]);
-        });
-
-        var input = $("input[id^=field]");          //METRIC
-        $.each(input, function (i, e) { $(e).val(model.Transaction[e.id]) });
-
-        $("#JOB_ID").val(model.Transaction.JOB_ID);
-
-        showForm();
-
-        //$("input:text").focus(function () { $(this).select(); });
-    }
-
-    if (isNew) {
-        //POPULATE VALUES
-        var input = $("input[id^=StringField]");    //ATRIB
-        var df = document.createDocumentFragment();
-        var currentDate = new Date().toLocaleDateString();
-        var d_time = new Date().toLocaleTimeString();
-
-        $.each(input, function (i, e) {
-            var attribValue = "";
-            if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
-                try {
-                    if (e.title.toLowerCase().indexOf("must have data to save") > -1)
-                        attribValue = d_time;
-                }
-                catch (e) {
-                    attribValue = "";
-                }
-            }
-            else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
-                if (e.title.toLowerCase().indexOf("must have data to save") > -1)
-                    attribValue = currentDate;
-            }
-            $(e).val(attribValue);
-        });
-
-        input = $("select[id^=StringField]");    //ATRIB SELECT
-        $.each(input, function (i, e) {
-            $(e).val(null);
-        });
-
-        input = $("input[id^=field]");          //METRIC
-        $.each(input, function (i, e) { $(e).val(null) });
-
-        input = $("textarea[id^=StringField]");          //METRIC
-        $.each(input, function (i, e) { $(e).val(null) });
-
-        $("#JOB_ID").val('Auto-Generated');
-
-        //initializeDateControl();
-        showForm();
-
-        //$("input:text").focus(function () { $(this).select(); });
-    }
-
-    //initializeTimeControl();
-    //initializeDateControl();
-
-    ////APPLY FIELD PROPERTIES
-    $('*[class*="date-StringField"]').datepicker({
-        autoclose: true,
-        startDate: "-3m",
-        endDate: '+3m',
-        immediateUpdates: true,
-        maxViewMode: 0,
-        disableTouchKeyboard: true,
-        orientation: 'bottom', showOnFocus: true, todayHighlight: true,
-        zIndexOffset: 9
-    });
-
-    $('*[class*="time-StringField"]').flatpickr({
-        enableTime: true,
-        noCalendar: true,
-        dateFormat: "H:i",
-    });
-
-    if (isNew) { //initialize dropdown values
-        $("select[id^=StringField]").val(-1);
-    }
-
+    populateRequiredDateFields();
+    clearProductionDetails();
+    showForm();
+    $("input:text").focus(function () { $(this).select(); });
+    initializeDateTimeControl();
+    
     var isEqual = attribCount == tbAttrib.find("tbody tr").length && 1 == ($("select[id^=StringField]").length > 0 ? $("select[id^=StringField]")[0].length > 0 ? 1 : 0 : 1);
     if (isEqual) {
         $(".div-signin-loading-attrib").hide();
@@ -2423,7 +2332,7 @@ function populateEntryForm(data) {
     return isEqual;
 }
 
-//POPULATE METRIC FIELDS
+//POPULATE METRIC FIELDS in popup entry form
 function addNewTranCallback(data) {
     //if (data.length == 0) return;
     $(".div-signin-loading-attrib").show();
@@ -2454,7 +2363,7 @@ function serviceAreaCallback(data) {
 }
 
 function populateForms(data) {
-    scrollFunction();
+    //scrollFunction();
 
     var client = $("#ddlClient");
     clientName = client.find("option:selected").text();
@@ -2479,7 +2388,12 @@ function populateForms(data) {
     //$("#txtSearch").attr("placeholder", "Search recently saved data for " + svc.find("option:selected").text());
 
     clientId = $("#ddlClient").val();
+
+    //brb 8/17/2022 handle areaid=0 (select all)
+    if (serviceAreaId == 0) serviceAreaId = 1;
     localStorage.setItem('areaId', serviceAreaId + '_' + clientId);
+    //brb 8/17/2022 handle areaid=0 (select all)
+
     let serviceAreaCategories = JSON.parse(sessionStorage.getItem('serviceAreaCategories'));
     var areaCategory = serviceAreaCategories.filter(f => f.Id == serviceAreaId)[0].Value;
     var serviceAreaCategory = 'Others';
@@ -2570,7 +2484,7 @@ function populateForms(data) {
 
         //brb 8/15/2022
         var fieldId = isJobId ? "JOB_ID" : e.FieldType == 0 || e.FieldType == "0" ? "StringField" : "Field";
-        if (fieldId != "JOB_ID" ) {
+        if (fieldId != "JOB_ID") {
             //if (e.SvcFieldRuleNumber > 0) fieldIdPrefix = e.SvcFieldRuleNumber;
             fieldId += e.svcFieldNumber;
         }
@@ -2580,7 +2494,7 @@ function populateForms(data) {
             if (serviceAreaCategory == 'Others') svcFieldId += "_" + e.svcFieldName.replace(/ /g, "_");
             else {
                 if (e.SvcFieldRuleNumber > 0) {
-                    var type = (e.FieldType == 0 || e.FieldType == "0") ? "_StringField" : "_Field"; 
+                    var type = (e.FieldType == 0 || e.FieldType == "0") ? "_StringField" : "_Field";
                     svcFieldId += type + e.SvcFieldRuleNumber;
                 } else svcFieldId += fieldId;
             }
@@ -2672,116 +2586,25 @@ function populateForms(data) {
     $(".glyphicon-plus-btn, .glyphicon-home-btn").removeClass("hidden");
 
     if (isUpdate) {
-        //$('*[class*="time-StringField"]').timepicker('setTime', null);
-
-        //POPULATE VALUES
-        var input = $("input[id^=StringField]");    //ATRIB
-        var df = document.createDocumentFragment();
-        //console.log(model.ServiceAreaFields);
-        $.each(input, function (i, e) {
-            var skip = false;
-            var attribValue = model.Transaction[e.id];
-            if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
-                try {
-                    if (attribValue == "" || attribValue == null) {
-                        attribValue = "";
-                        skip = true;
-                    }
-                    //else if (isNaN(Date.parse(attribValue)))
-                    //attribValue = attribValue.slice(-8);//.replace(/[AP]M/g, " $&");
-                }
-                catch (e) {
-                    attribValue = "";
-                }
-            }
-            else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
-                if (isNaN(Date.parse(attribValue))) {
-                    attribValue = attribValue == "" || attribValue == null ? "" : formatDate(attribValue.replace(attribValue.slice(-7), ""));	//formatDate(Date.parse(attribValue.replace(attribValue.slice(-7), "")));
-                }
-                else {
-                    attribValue = attribValue == "" ? "" : formatDate(attribValue);
-                }
-            }
-
-            if (!skip) $(e).val(attribValue);
-
-        });
-
-        input = $("select[id^=StringField]");    //ATRIB SELECT
-        $.each(input, function (i, e) {
-            $(e).val(model.Transaction[e.id]);
-        });
-
-        var input = $("input[id^=field]");          //METRIC
-        $.each(input, function (i, e) { $(e).val(model.Transaction[e.id]) });
-
-        if (!isNewServiceArea) $("#JOB_ID").val(model.Transaction.JOB_ID);
-
-        showForm();
-
-        //$("input:text").focus(function () { $(this).select(); });
+        populateFields();
+    } else {
+        populateRequiredDateFields();
+        clearProductionDetails();
+        //showForm();
     }
 
-    if (isNew) {
-        //POPULATE VALUES
-        var input = $("input[id^=StringField]");    //ATRIB
-        var df = document.createDocumentFragment();
-        var currentDate = new Date().toLocaleDateString();
-        var d_time = new Date().toLocaleTimeString();
+    showForm();
+    $("input:text").focus(function () { $(this).select(); });
+    initializeDateTimeControl();
 
-        $.each(input, function (i, e) {
-            var attribValue = "";
-            if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
-                try {
-                    if (e.title.toLowerCase().indexOf("must have data to save") > -1)
-                        attribValue = d_time;
-                    //attribValue = currentDate.slice(-8).replace(/[AP]M/g, " $&");
-                    //attribValue = currentDate.slice(-8);//.replace(/[AP]M/g, " $&")
-                    //    if (attribValue == "" || attribValue == null)
-                    //        attribValue = "";
-                    //    else if (isNaN(Date.parse(attribValue)))
-                    //        attribValue = attribValue.slice(-8);//.replace(/[AP]M/g, " $&");
-                }
-                catch (e) {
-                    attribValue = "";
-                }
-            }
-            else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
-                if (e.title.toLowerCase().indexOf("must have data to save") > -1)
-                    //attribValue = (currentDate.slice(-10), "");
-                    attribValue = currentDate;
-                //if (isNaN(Date.parse(attribValue))) {
-                //    attribValue = attribValue == "" || attribValue == null ? "" : formatDate(attribValue.replace(attribValue.slice(-7), ""));	//formatDate(Date.parse(attribValue.replace(attribValue.slice(-7), "")));
-                //}
-                //else {
-                //    attribValue = attribValue == "" ? "" : formatDate(attribValue);
-                //}
-            }
-            $(e).val(attribValue);
-        });
-
-        input = $("select[id^=StringField]");    //ATRIB SELECT
-        $.each(input, function (i, e) {
-            $(e).val(null);
-        });
-
-        input = $("input[id^=field]");          //METRIC
-        $.each(input, function (i, e) { $(e).val(null) });
-
-        input = $("textarea[id^=StringField]");          //METRIC
-        $.each(input, function (i, e) { $(e).val(null) });
-
-        $("#JOB_ID").val('Auto-Generated');
-
-        //initializeDateControl();
-        showForm();
-
-        //$("input:text").focus(function () { $(this).select(); });
+    var isEqual = attribCount == tbAttrib.find("tbody tr").length && 1 == ($("select[id^=StringField]").length > 0 ? $("select[id^=StringField]")[0].length > 0 ? 1 : 0 : 1);
+    if (isEqual) {
+        $(".div-signin-loading-attrib").hide();
     }
+    return isEqual;
+}
 
-    //initializeTimeControl();
-    //initializeDateControl();
-
+function initializeDateTimeControl() {
     ////APPLY FIELD PROPERTIES
     $('*[class*="date-StringField"]').datepicker({
         autoclose: true,
@@ -2791,7 +2614,8 @@ function populateForms(data) {
         maxViewMode: 0,
         disableTouchKeyboard: true,
         orientation: 'bottom', showOnFocus: true, todayHighlight: true,
-        zIndexOffset: 9
+        zIndexOffset: 9,
+        forceParse: false
     });
 
     //////APPLY flatpickr FIELD PROPERTIES
@@ -2808,16 +2632,104 @@ function populateForms(data) {
         noCalendar: true,
         dateFormat: "H:i",
     });
+}
 
-    if (isNew) { //initialize dropdown values
-        $("select[id^=StringField]").val(-1);
-    }
+function populateFields() {
+    //$('*[class*="time-StringField"]').timepicker('setTime', null);
 
-    var isEqual = attribCount == tbAttrib.find("tbody tr").length && 1 == ($("select[id^=StringField]").length > 0 ? $("select[id^=StringField]")[0].length > 0 ? 1 : 0 : 1);
-    if (isEqual) {
-        $(".div-signin-loading-attrib").hide();
-    }
-    return isEqual;
+    //POPULATE VALUES
+    var input = $("input[id^=StringField]");    //ATRIB
+    var df = document.createDocumentFragment();
+    //console.log(model.ServiceAreaFields);
+    $.each(input, function (i, e) {
+        var skip = false;
+        var attribValue = model.Transaction[e.id];
+        if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
+            try {
+                if (attribValue == "" || attribValue == null) {
+                    attribValue = "";
+                    skip = true;
+                }
+                //else if (isNaN(Date.parse(attribValue)))
+                //attribValue = attribValue.slice(-8);//.replace(/[AP]M/g, " $&");
+            }
+            catch (e) {
+                attribValue = "";
+            }
+        }
+        else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
+            if (isNaN(Date.parse(attribValue))) {
+                attribValue = attribValue == "" || attribValue == null ? "" : formatDate(attribValue.replace(attribValue.slice(-7), ""));	//formatDate(Date.parse(attribValue.replace(attribValue.slice(-7), "")));
+            }
+            else {
+                attribValue = attribValue == "" ? "" : formatDate(attribValue);
+            }
+        }
+
+        if (!skip) $(e).val(attribValue);
+
+    });
+
+    input = $("select[id^=StringField]");    //ATRIB SELECT
+    $.each(input, function (i, e) {
+        $(e).val(model.Transaction[e.id]);
+    });
+
+    var input = $("input[id^=field]");          //METRIC
+    $.each(input, function (i, e) { $(e).val(model.Transaction[e.id]) });
+
+    $("#JOB_ID").val(model.Transaction.JOB_ID);
+
+    //showForm();
+    //$("input:text").focus(function () { $(this).select(); });
+    //if (!isNewServiceArea) $("#JOB_ID").val(model.Transaction.JOB_ID);
+}
+
+function populateRequiredDateFields() {
+    var input = $("input[id^=StringField]");    //ATRIB
+    var df = document.createDocumentFragment();
+    var currentDate = new Date().toLocaleDateString();
+    var d_time = new Date().toLocaleTimeString();
+
+    $.each(input, function (i, e) {
+        var attribValue = "";
+        if (e.placeholder.toLowerCase().indexOf("time") >= 0) {
+            try {
+                if (e.title.toLowerCase().indexOf("must have data to save") > -1)
+                    attribValue = d_time;
+            }
+            catch (e) {
+                attribValue = "";
+            }
+        }
+        else if (e.placeholder.toLowerCase().indexOf("date") >= 0) {
+            if (e.title.toLowerCase().indexOf("must have data to save") > -1)
+                attribValue = currentDate;
+        }
+        $(e).val(attribValue);
+    });
+}
+
+function clearProductionDetails() {
+    input = $("select[id^=StringField]");    //ATRIB SELECT
+    $.each(input, function (i, e) {
+        $(e).val(null);
+    });
+
+    input = $("input[id^=StringField]");          //ATTRIB
+    $.each(input, function (i, e) { $(e).val(null) });
+
+    input = $("input[id^=field]");          //METRIC
+    $.each(input, function (i, e) { $(e).val(null) });
+
+    input = $("textarea[id^=StringField]");          //METRIC
+    $.each(input, function (i, e) { $(e).val(null) });
+
+    //initialize dropdown values
+    $("select[id^=StringField]").val(-1);
+
+    $("#JOB_ID").val('Auto-Generated');
+
 }
 
 function ajaxRequest(targetElement, url, parameter) {
@@ -2856,6 +2768,7 @@ function clearProductionLog() {
 
     model.GenericTransactions = [];
     setupGrid(model, false, 0, []);
+    clearProductionDetails();
     //hideProductionDetails();
 }
 
@@ -4391,6 +4304,8 @@ function initClientList() {
 }
 
 function setup() {
+    scrollFunction()
+
     getServiceAreaCategories();
     //EVENTS HANDLER
     $("#grid-container").css("grid-template-areas", '"h h h h h h h h h h h u" "m m p p p p p p p p p p" "f f f f f f f f f f f f"');
@@ -4606,7 +4521,8 @@ function setup() {
 
     var myModal = document.getElementById('AddNewTran')
     myModal.addEventListener('shown.bs.modal', function () {
-        var newSrc = '../images/' + clientId + '.png';
+        //var newSrc = '../images/' + clientId + '.png';
+        var newSrc = '../uploads/' + clientId + '.png';
         if (clientId <= 1) newSrc = '../images/1000001.png';
         $('#company-logo-1').attr('src', newSrc);
         addNewTran();
@@ -4652,8 +4568,8 @@ function setup() {
     //    isFiltered = true;
     //    getSavedDataByServiceArea(areaId);
     //} else {
-        isFiltered = false;
+    isFiltered = false;
     //sessionStorage.removeItem('selectedRow');
-        getRecentSavedData();
+    getRecentSavedData();
     //}
 }

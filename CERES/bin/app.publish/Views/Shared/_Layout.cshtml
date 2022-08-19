@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="en" >
+<head>
+    @Html.Partial("~/Views/Shared/_title_meta.cshtml")
+    @RenderSection("styles", required: false)
+    @Html.Partial("~/Views/Shared/_head_css.cshtml")
+</head>
+<body class="layout-1 h-menu" data-luno="theme-blue">
+    <!-- Begin page -->
+    @*<div id="layout-wrapper">*@
+    <div id="layout-wrapper" class="wrapper">
+        @Html.Partial("~/Views/Shared/_menu.cshtml")
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        @*<div class="">*@
+
+        @*<div class="">
+        <div class="">*@
+
+        @Html.Partial("~/Views/Shared/_page_title.cshtml")
+
+        @RenderBody()
+
+        @*</div>
+        </div>*@
+
+        @Html.Partial("~/Views/Shared/_footer.cshtml")
+
+        @Html.Partial("~/Views/Shared/_modal-theme-setting.cshtml")
+
+        @*</div>*@
+
+        <!--start back-to-top-->
+        <button onclick="topFunction()" class="btn btn-danger btn-icon back-to-top" id="back-to-top" >
+            <i class="ri-arrow-up-line"></i>
+        </button>
+        <!--end back-to-top-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    @*@Html.Partial("~/Views/Shared/_customizer.cshtml")*@
+
+    @Html.Partial("~/Views/Shared/_vendor_scripts.cshtml")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

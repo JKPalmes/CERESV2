@@ -33,7 +33,7 @@ namespace CERES.Web.Api.Controllers
                 if (reportName == "logo")
                 {
                     ret = SaveLogo(photo, imageId);
-                    return Redirect(_reportsUrl + "/apps/dashboards/report" + reportId + "?" + ret);
+                    return Redirect(_reportsUrl + "/apps/dashboards/report1?" + ret);
                 }
                 else
                 {

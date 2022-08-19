@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png" />
+    <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#e60000" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <meta name="description" content="CBPS Enterprise Record Entry System">
+    <meta name="author" content="CBPS DTG">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <title>CERES</title>
+    <link href="Content/new-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="Content/styles.css" />
+    <link rel="stylesheet" type="text/css" href="Content/w2ui-1.5.min.css" />
+
+</head>
+<body class="dx-viewport">
+    <div id="" class="" style="height: 850px;">
+        <div class="flexbox" style="height: 80px; ">
+            <div id="header" style="flex-grow: 1">
+                <div class="bg-image">
+                    <div id="toolbarAdmin" class="nav navbar-nav d-md-down-none"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flexbox">
+            <div id="main" style="width: 100%; height: 830px;"></div>
+            <!--<input id="submitButton1" type="submit" value="Submit" class="submit" hidden />-->
+        </div>
+
+        <div class="flexbox">
+            <div id="" class="" style="flex-grow: 1; height: 40px; padding: 0px; text-align: center;">
+                © 2021 Canon Business Process Services All rights reserved. Privacy Statement | Terms of Use
+            </div>
+            <div id="" style="height: 20px; padding: 0px;">
+                <div id="">
+                    <!--<img style="height: auto; display: block; width: 100%;" src="images/BI_R204_new.png" onclick="toggleShowSelectors();" />-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Scripts/w2ui-1.5.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <!--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+    <!--<script src="../Scripts/index.js"></script>-->
+    <script src="Scripts/toastr.min.js"></script>
+
+    <script type="text/javascript">
+        /*function getusers() {*/
+        //var uploadInd = [{ id: 0, text: 'false' }, { id: 1, text: 'true' }];
+        //var goldReportsInd = [{ id: 0, text: '0' }, { id: 1, text: '1' }];
+        //var mstrInd = [{ id: 0, text: '0' }, { id: 1, text: '1' }];
+        var resetFlag = [{ id: 0, text: 'false' }, { id: 1, text: 'true' }];
+        var acctTypes = [{ id: 'A', text: 'Administrator' }, { id: 'M', text: 'Manager' }, { id: 'U', text: 'User' }];
+        var userStatus = [{ id: 0, text: '0' }, { id: 1, text: 'Active' }, { id: 2, text: '2' }, { id: 3, text: 'Deactivated' }];
+
+        //let baseUrl = "https://microstrategy.cbpsportal.com/edsv2/";
+        let baseUrl = "http://localhost:55979/";
+        let sessionEmail = sessionStorage.getItem("email");
+        let sessionToken = sessionStorage.getItem("accessToken");
+        let headerToken = {
+            "Authorization": "Bearer " + sessionToken
+        };
+        console.log('token:' + headerToken);
+        $.ajax({
+            url: baseUrl + "api/Client/GetUsers",
+            method: "POST",
+            data: {},
+            dataType: "json",
+            headers: headerToken,
+            success: function (data) {
+                var users = data;
+                console.log("users:" + users);
+                var records = [], l = users.length, i;
+                for (i = 0; i < l; i++) {
+                    var record = {
+                        recid: i + 1,
+                        'UserID': users[i].UserID,
+                        'fullname': users[i].fullname,
+                        'userName': users[i].userName,
+                        'AccountType': users[i].AccountType,
+                        'userStatus': users[i].userStatus,
+                        'resetflag': users[i].resetflag,
+                        'visit_cnt': users[i].visit_cnt,
+                        'Upload_ind': users[i].Upload_ind,
+                        'GoldReports_ind': users[i].GoldReports_ind,
+                        'MstrUser_Ind': users[i].MstrUser_Ind,
+                        'ClientFolderName': users[i].ClientFolderName,
+                        'ClientID': users[i].ClientID,
+                        'managerUserName': users[i].managerUserName,
+                        'managerFullName': users[i].managerFullName,
+                        'company_nm': users[i].company_nm,
+                        'contact_phone_nbr': users[i].contact_phone_nbr,
+                        'admin': users[i].admin,
+                        'lastlogin_dttm': users[i].lastlogin_dttm
+                    };
+                    records.push(record);
+                }
+                // widget configuration
+                var config = {
+                    layout: {
+                        name: 'layout',
+                        padding: 4,
+                        panels: [
+                            { type: 'left', size: '50%', resizable: true, minSize: 300 },
+                            { type: 'main', minSize: 300 }
+                        ]
+                    },
+                    grid: {
+                        name: 'grid',
+                        show: {
+                            toolbar: true,
+                            //toolbarAdd: true
+                            //toolbarDelete: true
+                        },
+                        columns: [
+                            { field: 'UserID', text: 'UserID', size: '10%' },
+                            { field: 'fullname', text: 'Full Name', size: '33%', sortable: true, searchable: true },
+                            { field: 'userName', text: 'User Name', size: '33%', sortable: true, searchable: true },
+                            { field: 'AccountType', text: 'Account Type', size: '15%', sortable: true, searchable: true },
+                            { field: 'userStatus', text: 'User Status', size: '15%', sortable: true, searchable: true },
+                            { field: 'resetflag', text: 'Reset Flag', size: '15%', sortable: true, searchable: true },
+                            { field: 'visit_cnt', text: 'Visit Count', size: '10%', sortable: true, searchable: true },
+                            { field: 'Upload_ind', text: 'Upload_ind', size: '15%', sortable: true, searchable: true },
+                            { field: 'MstrUser_Ind', text: 'MstrUser_Ind', size: '20%' },
+                            { field: 'GoldReports_ind', text: 'GoldReports_ind', size: '5%' },
+                            { field: 'ClientID', text: 'ClientID', size: '10%' },
+                            { field: 'ClientFolderName', text: 'Folder Name', size: '40%', sortable: true, searchable: true },
+                            { field: 'managerUserName', text: 'Mgr User Name', size: '40%', sortable: true, searchable: true },
+                            { field: 'managerFullName', text: 'Mgr Full Name', size: '40%', sortable: true, searchable: true },
+                            { field: 'company_nm', text: 'Company Name', size: '40%', sortable: true, searchable: true },
+                            { field: 'contact_phone_nbr', text: 'Contact #', size: '40%', sortable: true, searchable: true },
+                            { field: 'admin', text: 'IsAdmin', size: '5%' },
+                            { field: 'lastlogin_dttm', text: 'Last Login', size: '5%' },
+                        ],
+                        //records: [
+                        //    { recid: 1, fname: 'John', lname: 'Doe', email: 'jdoe@gmail.com', sdate: '4/3/2012' },
+                        //],
+                        records: records,
+                        onClick: function (event) {
+                            var grid = this;
+                            var form = w2ui.form;
+                            console.log(event);
+                            event.onComplete = function () {
+                                var sel = grid.getSelection();
+                                console.log(sel);
+                                if (sel.length == 1) {
+                                    form.recid = sel[0];
+                                    form.record = $.extend(true, {}, grid.get(sel[0]));
+                                    form.refresh();
+                                } else {
+                                    form.clear();
+                                }
+                            }
+                        },
+                        onAdd: function (event) {
+                            w2alert('add');
+                        },
+                    },
+                    form: {
+                        header: 'Edit Record',
+                        name: 'form',
+                        fields: [
+                            { field: 'recid', type: 'text', html: { label: 'ID', attr: 'size="10" readonly' } },
+                            { field: 'UserID', type: 'text', html: { label: 'User Id', attr: 'size="10" readonly' } },
+                            { field: 'fullname', type: 'text', required: true, html: { label: 'User Full Name', attr: 'size="50" ' } },
+                            { field: 'userName', type: 'text', required: true, html: { label: 'User Name', attr: 'size="50" ' } },
+                            { field: 'userStatus', type: 'list', html: { label: 'User Status', attr: 'size="10" ' }, options: { items: userStatus, placeholder: "" } },
+                            { field: 'AccountType', type: 'list', html: { label: 'Account Type', attr: 'size="10" ' }, options: { items: acctTypes, placeholder: "" } },
+                            { field: 'ClientID', type: 'text', html: { label: 'Client Id', attr: 'size="10"' } },
+                            { field: 'ClientFolderName', type: 'text', html: { label: 'Client Folder Name', attr: 'size="50" readonly' } },
+                            { field: 'resetflag', type: 'list', html: { label: 'Reset Flag', attr: 'size="10" ' }, options: { items: resetFlag, placeholder: "" } },
+                            { field: 'visit_cnt', type: 'text', html: { label: 'Visit Count', attr: 'size="10" readonly' } },
+                            { field: 'admin', type: 'list', html: { label: 'Is Admin', attr: 'size="10" ' }, options: { items: resetFlag, placeholder: "" } },
+                            { field: 'Upload_ind', type: 'list', html: { label: 'Can Upload Files', attr: 'size="10"' }, options: { items: resetFlag, placeholder: "" } },
+                            { field: 'MstrUser_Ind', type: 'list', html: { label: 'MicroStrategy User', attr: 'size="10" ' }, options: { items: resetFlag, placeholder: "" } },
+                            { field: 'GoldReports_ind', type: 'list', html: { label: 'Gold Reports User', attr: 'size="10" ' }, options: { items: resetFlag, placeholder: "" } },
+                            { field: 'managerUserName', type: 'text', html: { label: 'Mgr User Name', attr: 'size="50" ' } },
+                            { field: 'managerFullName', type: 'text', html: { label: 'Mgr Full Name', attr: 'size="50" ' } },
+                            { field: 'company_nm', type: 'text', html: { label: 'Company Name', attr: 'size="50" ' } },
+                            { field: 'contact_phone_nbr', type: 'text', html: { label: 'Contact No.', attr: 'size="50" ' } },
+                            { field: 'lastlogin_dttm', type: 'text', html: { label: 'Last Login', attr: 'size="50" readonly ' } }
+                        ],
+                        actions: {
+                            //Reset: function () {
+                            //    this.clear();
+                            //},
+                            Save: function () {
+                                var errors = this.validate();
+                                if (errors.length > 0) return;
+                                if (this.recid == 0) {
+                                    w2ui.grid.add($.extend(true, this.record, { recid: w2ui.grid.records.length + 2 }));
+                                    w2ui.grid.selectNone();
+                                    this.clear();
+                                } else {
+                                    w2ui.grid.set(this.recid, this.record);
+                                    //save to db
+                                    var inputData = {
+                                        'UserID': this.record.UserID,
+                                        'fullname': this.record.fullname,
+                                        'userName': this.record.userName,
+                                        'AccountType': this.record.AccountType,
+                                        'userStatus': this.record.userStatus,
+                                        'resetflag': this.record.resetflag,
+                                        'ClientID': this.record.ClientID,
+                                        'ClientFolderName': this.record.ClientFolderName,
+                                        'Upload_ind': this.record.Upload_ind,
+                                        'MstrUser_Ind': this.record.MstrUser_Ind,
+                                        'GoldReports_ind': this.record.GoldReports_ind,
+                                        'managerUserName': this.record.managerUserName,
+                                        'managerFullName': this.record.managerFullName,
+                                        'company_nm': this.record.company_nm,
+                                        'contact_phone_nbr': this.record.contact_phone_nbr,
+                                        'visit_cnt': this.record.visit_cnt,
+                                        'admin': this.record.admin
+                                    };
+
+                                    var sessionToken = sessionStorage.getItem("accessToken");
+                                    headerToken = {
+                                        "Authorization": "Bearer " + sessionToken
+                                    };
+
+                                    $.ajax({
+                                        url: baseUrl + "api/client/SaveUserInfo",
+                                        method: "POST",
+                                        data: inputData,
+                                        dataType: "json",
+                                        headers: headerToken,
+                                        //xhrFields: {withCredentials:true},
+                                        success: function (data) {
+                                            w2ui.grid.selectNone();
+                                        },
+                                        error: handleXHRError
+                                    });
+                                }
+                            },
+                            Close: function () {
+                                //window.location.href = "index3.html";
+                                window.location.href = baseUrl + '/Dashboard/Index';
+                            }
+                        }
+                    }
+                };
+                /*}*/
+                $(function () {
+                    // initialization
+                    $('#main').w2layout(config.layout);
+                    w2ui.layout.html('left', $().w2grid(config.grid));
+                    w2ui.layout.html('main', $().w2form(config.form));
+                });
+
+            },
+            error: handleXHRError
+        });
+
+        function handleXHRError(err) {
+            toastr.error("Oops! Something went wrong. Please contact BI administrator");
+            if ((err.status >= 400 && err.status < 404) || err.status == 500 || err.status == 501) {
+                //sessionStorage.clear();
+                window.location.href = baseUrl + "Authentication/Errors500/";
+            }
+        }
+
+    </script>
+    <script type="text/javascript">
+        //$(document).ready(function () {
+            //$('input[type=list]').w2field('list', { items: yesNo });
+
+        //})
+    </script>
+
+</body>
+</html>

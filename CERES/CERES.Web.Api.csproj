@@ -1840,6 +1840,8 @@
     <Content Include="images\1000003.png" />
     <Content Include="images\1000004.png" />
     <Content Include="images\2.gif" />
+    <Content Include="images\analytics.svg" />
+    <Content Include="images\browser-upload.svg" />
     <Content Include="images\cbps.png" />
     <Content Include="images\CBPS_LOGO.png" />
     <Content Include="images\ceres_logo.png" />
