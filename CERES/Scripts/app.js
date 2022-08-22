@@ -407,46 +407,58 @@ function showForm() {
 
     //brb 6/16/2022
     var prodDetailsTextContent = "";
-    //var selectedRowData = sessionStorage.getItem('selectedRow');
+    var prodDataAcronym = "Q";
+    var sa = sessionStorage.getItem('serviceAreaCategory');//"ShippingReceiving";
+    if (sa != null && sa != undefined) {
+        //separate pascal cased name
+        var wordRe = /($[a-z])|[A-Z][^A-Z]+/g;
+        var str = sa.match(wordRe).join(" ");
+        //get capitalized initial
+        var matches = str.match(/\b(\w)/g);
+        prodDataAcronym = matches.join(''); 
+    }
+
+    var prodDataStatus = "S";
     var selectedRowData = sessionStorage.getItem('model');
     if (selectedRowData && selectedRowData != "undefined") {
         var selectedRow = JSON.parse(selectedRowData);
         if (selectedRow) {
-            prodDetailsTextContent = " " + selectedRow.Transaction.StatusCode + "  |  JobID: " + selectedRow.Transaction.JOB_ID;
-        }
+            prodDataStatus = selectedRow.Transaction.StatusCode == null ? "" : selectedRow.Transaction.StatusCode;
+                    }
+    }
+    if (prodDataStatus == 'C') {
+        prodDetailsTextContent = "Status Code: Complete | JobID: " + selectedRow.Transaction.JOB_ID;
+    } else {
+        prodDetailsTextContent = "Status Code: Pending | JobID: " + selectedRow.Transaction.JOB_ID;
+        $(".circle").css("background-color", "red")
     }
 
     let saTextContent = "" + siteName + " | " + locName + " | " + serviceAreaName + "";
-    //let prodDataTextContent = "QUERY (" + clientName;
     let prodDataTextContent = "QUERY ";//( + clientName;
-    if (isFiltered && clientName !== '' && localStorage.getItem('userMode') == 'Entry') {
+    //if (isFiltered && clientName !== '' && localStorage.getItem('userMode') == 'Entry') {
+    if (localStorage.getItem('userMode') == 'Entry') {
         $("#btnSidebar1").css("background-color", "#98ebaa")
         $("#btnSidebar2").css("background-color", "#98ebaa")
-        //prodDataTextContent = "ENTRY (" + clientName + " | " + saTextContent;
-        prodDataTextContent = "ENTRY - " + saTextContent;
+        //prodDataTextContent = "ENTRY - " + saTextContent;
+        prodDataTextContent = saTextContent;
         //show Add New Transaction button
         $("#btnAddNewTran").show();
         //show Clone Tran button
-        //if (!isNewServiceArea) $("#cloneTranButton").dxButton("instance").option("visible", true);
         $("#cloneTranButton").dxButton("instance").option("visible", true);
     } else {
         $("#btnSidebar1").css("background-color", "#dbe9ff")
         $("#btnSidebar2").css("background-color", "#dbe9ff")
-        //var sa = $("#ddlServiceArea");
-        //serviceAreaName = sa.find("option:selected").text();
-        //if (clientName != '' && serviceAreaName != '--- Select Service Area ---' && serviceAreaName != undefined) prodDataTextContent += " | " + serviceAreaName;
-        //if (serviceAreaName != '--- Select Service Area ---' && serviceAreaName != undefined) prodDataTextContent += serviceAreaName;
 
         $("#btnAddNewTran").hide();
         $("#cloneTranButton").dxButton("instance").option("visible", false);
-        //    if (selectedRowData && selectedRowData != "undefined") {
-        //        var selectedRow = JSON.parse(selectedRowData);
-        //        if (selectedRow) {
-        //            prodDetailsTextContent = "Status: " + selectedRow.StatusCode + "  |  JobID: " + selectedRow.JOB_ID;
-        //        }
-        //    }
+        prodDataStatus = "S";
+        prodDataAcronym = "Q";
+        prodDetailsTextContent = "STATUS CODE";
+        prodDataTextContent = "QUERY VIEW "
+        $(".circle").css("background-color", "blue")
     }
-    //prodDataTextContent += ")";
+    $(".prod-acronym").text(" " + prodDataAcronym + " ");
+    $(".prod-status").text(" " + prodDataStatus + " ");
     $(".prod-data-text").text(" " + prodDataTextContent + " ");
     $(".prod-details-text").text(" " + prodDetailsTextContent.replaceAll('undefined', '') + " ");
 
@@ -735,6 +747,22 @@ function getUserProfile(userEmail) {
                 ////    w2ui['toolbarAdmin'].enable('uploadFiles');
                 ////    w2ui['toolbarAdmin'].show('uploadFiles');
             }
+        },
+        error: handleXHRError
+    });
+
+}
+
+function getUploadFolders(userEmail) {
+    let url = baseUrl + "api/Client/GetUploadFolders";
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: { "email": userEmail },
+        dataType: "json",
+        headers: headerToken,
+        success: function (data) {
+            sessionStorage.setItem('uploadFolders', data);
         },
         error: handleXHRError
     });
@@ -1337,6 +1365,13 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
             //if (searchEntered && e.component.getVisibleRows().length == 0) hideProductionDetails(); else showProductionDetails();
             if (e.component.getVisibleRows().length == 0) clearProductionDetails();
             //brb 8/19/2022
+            let rowKeys = JSON.parse(localStorage.getItem('storage'))
+            if (rowKeys && rowKeys.selectedRowKeys != null) {
+                let rowKey = rowKeys.selectedRowKeys[0]
+                e.component.selectRows(rowKey);
+                focusedRowKey = rowKey;
+            }
+            //brb 8/19/2022
 
             let userMode = localStorage.getItem('userMode');
             if (userMode == 'Query') {
@@ -1345,17 +1380,14 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 //brb 8/19/2022
                 clearProductionDetails();
                 //hideProductionDetails();
+            } else {
+                //brb 8/19/2022
+                //e.component.pageIndex(e.component.pageCount() - 1);
             }
-
-            //brb 5/13/2022
-            let rowKeys = JSON.parse(localStorage.getItem('storage'))
-            if (rowKeys && rowKeys.selectedRowKeys != null) {
-                let rowKey = rowKeys.selectedRowKeys[0]
-                e.component.selectRows(rowKey);
-                focusedRowKey = rowKey;
-            }
-            //brb 5/13/2022
         },
+        //onGridContentReady: function (e) {
+        //    e.component.pageIndex(e.component.pageCount() - 1);
+        //},
         hoverStateEnabled: true,
         stateStoring: {
             enabled: true,
@@ -1538,10 +1570,10 @@ function setupGrid(model, isAddMode, rowKey, oColumns) {
                 options: {
                     elementAttr: { id: 'entryViewButton' },
                     visible: false,
-                    text: "Entry View",
+                    text: "Log View",
                     showText: "always",
-                    icon: "fa fa-plus-circle",
-                    hint: "Switch to Entry View",
+                    icon: "fa fa-info-circle",
+                    hint: "Switch to Production Log View",
                     onClick: function () {
                         localStorage.setItem('userMode', 'Entry');
                         if (clientId == undefined) {
@@ -1925,7 +1957,8 @@ function handleXHRError(err) {
 }
 
 function saveNewTran() {
-    submitButtonType = 0;
+    //submitButtonType = 0;
+    submitButtonType = 1;
     var f = document.getElementById('entryFormSubmitButton');
     f.click();
 }
@@ -1940,18 +1973,20 @@ function checkChanges() {
     w2confirm('Changes may not have been saved. Do you still want to close this window?')
         .yes(() => {
             $('#AddNewTran').modal('hide')
-            let tranId = 0;
-            let row = sessionStorage.getItem('selectedRow');
-            if (row != 'undefined') {
-                let rowData = JSON.parse(row);
-                tranId = rowData.TransactionId;
-            } else {
-                let storage = localStorage.getItem('storage');
-                if (storage) tranId = JSON.parse(storage).focusedRowKey;
-            }
-            var keyIndex = model.GenericTransactions.findIndex(i => i.TransactionId == tranId);
-            if (keyIndex > -1) getTransactionData(model.GenericTransactions[keyIndex], false);
 
+            reloadAfterSave(true);
+
+        //    let tranId = 0;
+        //    let row = sessionStorage.getItem('selectedRow');
+        //    if (row != 'undefined') {
+        //        let rowData = JSON.parse(row);
+        //        tranId = rowData.TransactionId;
+        //    } else {
+        //        let storage = localStorage.getItem('storage');
+        //        if (storage) tranId = JSON.parse(storage).focusedRowKey;
+        //    }
+        //    var keyIndex = model.GenericTransactions.findIndex(i => i.TransactionId == tranId);
+        //    if (keyIndex > -1) getTransactionData(model.GenericTransactions[keyIndex], false);
         })
         .no(() => {
             //console.log('No')
@@ -1972,7 +2007,8 @@ function submitForm(e) {
         return;
 
     inputData = {
-        "userName": sessionStorage.getItem("email")
+        "UserID": sessionStorage.getItem("userId")
+        ,"userName": sessionStorage.getItem("email")
         , "tDate": $("#txtProductionDate").val()
         , "accountID": $("#ddlClient").val()
         , "siteID": $("#ddlSite").val()
@@ -1981,10 +2017,10 @@ function submitForm(e) {
     };
     inputData["tID"] = transactionId;
 
-    if (isUpdate) {
-        inputData["userName"] = model.Transaction.userName;
-        inputData["UserName"] = model.Transaction.userName;
-    }
+    //if (isUpdate) {
+    //    inputData["userName"] = model.Transaction.userName;
+    //    inputData["UserName"] = model.Transaction.userName;
+    //}
 
     if (isClientWithDefaultValue)   //LIBERTY MUTUAL CLIENT ID
         inputData["Remarks"] = $("#remarks").val();
@@ -1998,10 +2034,10 @@ function submitForm(e) {
 
     //submit data
     //0 = Save
-    //1 = Save New
+    //1 = Save New From Popup
     //2 = Update
     //3 = Delete
-    if (submitButtonType == 0) {
+    if (submitButtonType == 0 || submitButtonType == 1) {
         //$("#JOB_ID").val(getNewSequence());
         inputData["tID"] = 0;
     }
@@ -2051,10 +2087,10 @@ function submitForm(e) {
 
             rowKey = transactionId;
 
-            if (submitButtonType == 0) {
+            //if (submitButtonType == 0) {
                 inputData["UserName"] = sessionStorage.getItem("email");
                 inputData["userName"] = sessionStorage.getItem("email");
-            }
+            //}
 
             //UPDATE MODEL
             model.lastSavedData = inputData;
@@ -2069,20 +2105,16 @@ function submitForm(e) {
                 isUpdate = false;
                 isNew = false;
                 rowKey = model.GenericTransactions[0].TransactionId;
-                refreshGrid();
+                refreshGrid(false);
             }
             else if (submitButtonType == 2) { //update
-                refreshGrid();
+                //refreshGrid(false);
             }
-            else {  //save/new                
-                model.GenericTransactions.TransactionId = transactionId;
-                if (model.GenericTransactions.length > 0) model.GenericTransactions[0].TransactionId = transactionId;
-                model.Transaction.tID = transactionId;
-                model.Transaction.ID = transactionId;
-                rowKey = transactionId;
-                sessionStorage.setItem('maxTransactionID', rowKey.toString());
-                sessionStorage.setItem('rowKey', rowKey.toString());
-                refreshGrid();
+            else if (submitButtonType == 1) { //save from popup
+                addNewTran();
+            }
+            else {  //save/new   
+                reloadAfterSave(false)
                 return;
             }
             sessionStorage.setItem('rowKey', rowKey.toString());
@@ -2093,20 +2125,30 @@ function submitForm(e) {
 
 }
 
-function refreshGrid() {
-    //if (submitButtonType != 2) hideData();
-    var areaId = localStorage.getItem('areaId');
-    var delayInMilliseconds = 0;
-    //var userPref = JSON.parse(localStorage.getItem('userSavedPreferences'));
-    //if (userPref.filter(u => u.Id === areaId).length == 0) {
-    //getUserPreferences();//refresh sidebar
-    //delayInMilliseconds = 1000; //1 second
-    //}
-    setTimeout(function () {
-        getSavedDataByServiceArea(areaId);
-    }, delayInMilliseconds);
+function reloadAfterSave(gotoLastPage) {
+    model.GenericTransactions.TransactionId = transactionId;
+    if (model.GenericTransactions.length > 0) model.GenericTransactions[0].TransactionId = transactionId;
+    model.Transaction.tID = transactionId;
+    model.Transaction.ID = transactionId;
+    rowKey = transactionId;
+    sessionStorage.setItem('maxTransactionID', rowKey.toString());
+    sessionStorage.setItem('rowKey', rowKey.toString());
+    refreshGrid(gotoLastPage);
+}
 
+function refreshGrid(gotoLastPage) {
+    var areaId = localStorage.getItem('areaId');
+    getSavedDataByServiceArea(areaId);
     $(".div-signin-loading, .div-signin-loading div, .div-signin-loading div img").addClass("hidden").hide();
+    if (gotoLastPage) {
+        var delayInMilliseconds = 3000;
+        setTimeout(function () {
+            var gridInstance = $("#gridContainer").dxDataGrid("instance");
+            //let pageIndex = gotoLastPage ? (gridInstance.pageCount() - 1) : JSON.parse(localStorage.getItem('storage')).pageIndex;
+            //let pageIndex = gridInstance.pageCount() - 1;
+            gridInstance.pageIndex(gridInstance.pageCount() - 1);
+        }, delayInMilliseconds);
+    }
 }
 
 function populateEntryForm(data) {
@@ -2319,8 +2361,8 @@ function populateEntryForm(data) {
 
     $(".glyphicon-plus-btn, .glyphicon-home-btn").removeClass("hidden");
 
-    populateRequiredDateFields();
     clearProductionDetails();
+    populateRequiredDateFields();
     showForm();
     $("input:text").focus(function () { $(this).select(); });
     initializeDateTimeControl();
@@ -2390,7 +2432,7 @@ function populateForms(data) {
     clientId = $("#ddlClient").val();
 
     //brb 8/17/2022 handle areaid=0 (select all)
-    if (serviceAreaId == 0) serviceAreaId = 1;
+    if (serviceAreaId == 0 || isNaN(serviceAreaId)) serviceAreaId = 1;
     localStorage.setItem('areaId', serviceAreaId + '_' + clientId);
     //brb 8/17/2022 handle areaid=0 (select all)
 
@@ -2588,8 +2630,8 @@ function populateForms(data) {
     if (isUpdate) {
         populateFields();
     } else {
-        populateRequiredDateFields();
         clearProductionDetails();
+        populateRequiredDateFields();
         //showForm();
     }
 
@@ -3774,6 +3816,7 @@ function reloadAllUserTrans() {
     var grid = $("#gridContainer").dxDataGrid("instance");
     grid.clearFilter();
     isFiltered = false;
+    sessionStorage.removeItem('serviceAreaCategory');
     getRecentSavedData();
 }
 
@@ -3807,7 +3850,8 @@ function uploadFiles() {
 }
 
 function goldReports() {
-    fileSystem = JSON.parse(sessionStorage.getItem('userFolders'));
+    //fileSystem = JSON.parse(sessionStorage.getItem('userFolders'));
+    var fileSystem = JSON.parse(sessionStorage.getItem('uploadFolders'));
     setFileManager(fileSystem);
     $('#popupGoldReports').w2popup();
 }
@@ -3916,35 +3960,6 @@ function onItemClick(args) {
     if (args.itemData.options.text == "Download File") getFileSystemItems(selectedItem, selectedItemPath);
 
 }
-
-//function getFileSystemItems(selectedFolder, folderPath) {
-//    $.ajax({
-//        url: baseUrl + "api/Client/GetFileSystemItems",
-//        method: "POST",
-//        data: { folderName: selectedFolder, folderPath: folderPath, email: sessionEmail },
-//        dataType: "json",
-//        headers: headerToken,
-//        success: function (data) {
-//            sessionStorage.setItem('fileSystemItems', JSON.stringify(data));
-//            let fileSystemCurrent = JSON.parse(localStorage.getItem('fileSystem'));
-//            let index = fileSystemCurrent.findIndex(f => f.path == folderPath);
-//            let userFolder = fileSystemCurrent[index]["items"];
-//            for (const d of data) {
-//                let item = {};
-//                item.name = d.Name;
-//                item.path = d.FullName;
-//                item.size = d.Size;
-//                item.isDirectory = d.IsDirectory;
-//                let file = userFolder.find(f => f.path == d.FullName);
-//                if (file == undefined) fileSystemCurrent[index]["items"].push(item);
-//            }
-//            //fileSystem = fileSystemCurrent;
-//            //$("#file-manager").dxFileManager("instance").refresh();
-//            //setFileManager(fileSystemCurrent);
-//        },
-//        error: handleXHRError
-//    });
-//}
 
 function getFileSystemItems(selectedItem, folderPath) {
     $.ajax({
@@ -4221,6 +4236,8 @@ function redirectTo(route) {
 function init() {
     let delayInMilliseconds = 3000;
 
+    //getUploadFolders('bbeltran@cbps.canon.com');
+
     getDefaultValues();
 
     setTimeout(function () {
@@ -4228,9 +4245,6 @@ function init() {
     }, delayInMilliseconds);
 
     setup();
-    //setTimeout(function () {
-    //setup();
-    //}, delayInMilliseconds);
 }
 
 function getDefaultValues() {
@@ -4259,8 +4273,6 @@ function getDefaultValues() {
     $(".user-name-sub-text").text(" " + userType + " ");
     $(".user-email-text").text(" " + sessionEmail + " ");
 
-    //getUserFolders();
-    //getUserProfile(sessionEmail);
     getUserProfile(sessionEmail);
 
     let settings = JSON.parse(localStorage.getItem('userSettings'));
@@ -4276,7 +4288,8 @@ function getDefaultValues() {
     getAccountInfos();
     getUserPreferences();
     saveUserPreferences();
-    getUserFolders(sessionEmail);
+    //getUserFolders(sessionEmail);
+    getUploadFolders(sessionEmail);
 
 }
 

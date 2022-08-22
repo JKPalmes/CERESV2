@@ -1,46 +1,66 @@
-﻿using System.Web.Mvc;
+﻿using DevExtreme.AspNet.Mvc.FileManagement;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CERES.Core.DTO;
+using System.Net.Http;
+using System.Web;
+using System.Web.Http;
+using System.Web.Mvc;
+using System.Net.Http.Headers;
 
-namespace CERES.Controllers
+namespace DevExtreme.MVC.Demos.Controllers.ApiControllers
 {
-    public class HomeController : Controller
+    public class FileManagerScriptsApiController : ApiController
     {
-        public ActionResult Index(string username, string password, string clientId)
+        HttpContext CurrentContext = HttpContext.Current;
+
+        string TempDirectoryPath
         {
-            // validate the user credential
-            // add cookie
-            var user = new User();
-            user.Email = username;
-            user.Password = password;
-            //AddCookie(user);
-
-            //get client info
-            //var clientId = "1000002";
-            //var clientId = int.Parse(clientid);
-            if (clientId == "1") clientId = "1000001";
-            //return RedirectToAction("Index", "Dashboard");
-
-                //var segment = string.Join(" ", address, Area, city, zipCode);
-                //var escapedSegment = Uri.EscapeDataString(segment);
-                //var baseFormat = "https://www.google.co.za/maps/search/{0}/";
-                //var url = string.Format(baseFormat, escapedSegment);
-                //return Redirect(url);
-
-                //save email and token to aspnetusertokens
-                //return Redirect("http://localhost:3011/auth/reset-password?email=" + email + "&token=" + token);
-            return Redirect("http://localhost:3011/metronic8/react/demo2/dashboard?clientId=" + clientId + "&password=" + password + "&email=" + username);
-            //return Redirect(appUrl + "/auth/reset-password?email=" + email + "&token=" + token);
-
-            //var appUrl = _authManager.GetAppUrl();
-
-            //return Redirect(appUrl + "?email=" + email + "&token=" + token);
-            //return Redirect(appUrl);// + "?email=" + email + "&token=" + token);
-
+            get { return CurrentContext.Server.MapPath("~/App_Data/UploadTemp"); }
         }
 
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [System.Web.Http.Route("api/file-manager-file-system-scripts", Name = "FileManagementScriptsApi")]
+        public HttpResponseMessage FileSystem()
+        {
+            FileSystemCommand command;
+            Enum.TryParse(CurrentContext.Request["command"], out command);
+            string arguments = CurrentContext.Request["arguments"];
+            var config = new FileSystemConfiguration
+            {
+                Request = new HttpContextWrapper(CurrentContext).Request,
+                FileSystemProvider = new PhysicalFileSystemProvider(CurrentContext.Server.MapPath("~/Scripts")),
+                //uncomment the code below to enable file/folder management
+                //AllowCopy = true,
+                //AllowCreate = true,
+                //AllowMove = true,
+                //AllowDelete = true,
+                //AllowRename = true,
+                //AllowUpload = true,
+                AllowDownload = true,
+                AllowedFileExtensions = new[] { ".js", ".json", ".css" },
+                TempDirectory = TempDirectoryPath
+            };
+            var processor = new FileSystemCommandProcessor(config);
+            var commandResult = processor.Execute(command, arguments);
+            var result = commandResult.GetClientCommandResult();
+            return command == FileSystemCommand.Download && commandResult.Success ? CreateDownloadResponse(result) : Request.CreateResponse(result);
+        }
+
+        HttpResponseMessage CreateDownloadResponse(object result)
+        {
+            var fileContent = result as FileStreamResult;
+            if (fileContent == null)
+                return Request.CreateResponse(result);
+
+            var response = new HttpResponseMessage()
+            {
+                Content = new StreamContent(fileContent.FileStream)
+            };
+            response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = fileContent.FileDownloadName
+            };
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            return response;
+        }
     }
 }

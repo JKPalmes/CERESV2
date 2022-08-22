@@ -80,7 +80,7 @@ namespace CERES.Web.Api.Controllers
             using (BIDE_DbContext dbContext = new BIDE_DbContext())
             {
                 //if (string.IsNullOrEmpty(_identity[0])) return new List<int>();
-                
+
                 //int userId = Int32.Parse(_identity[0]);
 
                 //if (clientId == 0)
@@ -248,12 +248,16 @@ namespace CERES.Web.Api.Controllers
         {
             //log.Info(string.Format("{0} {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString()));
             var tranType = "Update";
+            var email = value["userName"].ToString();
+            var userId = value["UserID"].ToString();
+
             using (var data = new TransactionV2())
             {
                 if (string.IsNullOrEmpty(value["tID"].Value<int>().ToString()) || value["tID"].Value<int>() == 0)
                 {
-                    value["UserID"] = Int32.Parse(_identity[0]);
-                    value["userName"] = _email;
+                    //value["UserID"] = Int32.Parse(_identity[0]);
+                    //value["userName"] = _email;
+
                     value["ID"] = 0;
                 }
                 //transform data
@@ -275,7 +279,8 @@ namespace CERES.Web.Api.Controllers
                     }
                     else
                     {
-                        tran = tranData.TransformData(statusCode, _email, Int32.Parse(_identity[0]));
+                        //tran = tranData.TransformData(statusCode, _email, Int32.Parse(_identity[0]));
+                        tran = tranData.TransformData(statusCode, email, Int32.Parse(userId));
                         data.TransactionV2Repository.Alter(tran);
                     }
                 }
@@ -302,10 +307,11 @@ namespace CERES.Web.Api.Controllers
                     result.Add(new KeyValuePair<string, string>("StringField" + svcFieldStatus.svcFieldNumber.ToString(), statusField));
                 }
 
-                log.Info(string.Format("{0}| {1} is called: {2}|{3}|{4}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString(),
+                log.Info(string.Format("{0}| {1} is called: {2}|{3}|{4}", email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), value.ToString(),
                     tranType, tran.tID));
 
-                UserService.SaveUserTransactionLog(tran.tID, DateTime.Today, tranType, _email, "");
+                //UserService.SaveUserTransactionLog(tran.tID, DateTime.Today, tranType, _email, "");
+                UserService.SaveUserTransactionLog(tran.tID, DateTime.Today, tranType, email, "");
 
                 return Ok(result);
             }
@@ -477,21 +483,6 @@ namespace CERES.Web.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/Client/SetUserFolders")]
-        public IHttpActionResult SetUserFolders([FromBody] JObject value)
-        {
-            var json = value.ToString(Formatting.None);
-            dynamic values = JObject.Parse(json);
-            var email = values.email.ToString();
-            var folderClass = new FolderStuctureClass(email);
-            TreeNode treeNodes = folderClass.PopulateTree();
-            var serverPath = HostingEnvironment.MapPath(_serverFolderPath);
-            var jsonString = folderClass.ConvertTreeNodeToJson(treeNodes, serverPath);
-
-            return Ok(jsonString.ToString().Replace("\"items\": {},", ""));
-        }
-
-        [HttpPost]
         [Route("api/Client/GetUserPassword")]
         public IHttpActionResult GetUserPassword([FromBody] JObject value)
         {
@@ -568,19 +559,117 @@ namespace CERES.Web.Api.Controllers
             return Ok(appSettings);
         }
 
-        [HttpGet]
-        [Route("api/Client/GetUserFolders")]
-        public IHttpActionResult GetUserFolders()
+        [HttpPost]
+        [Route("api/Client/SetUserFolders")]
+        public IHttpActionResult SetUserFolders([FromBody] JObject value)
         {
-            //log.Info(string.Format("{0}: {1} is called: {2}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), transactionId));
-
-            var folderClass = new FolderStuctureClass(_email);
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+            var email = values.email.ToString();
+            var folderClass = new FolderStuctureClass(email);
             TreeNode treeNodes = folderClass.PopulateTree();
             var serverPath = HostingEnvironment.MapPath(_serverFolderPath);
             var jsonString = folderClass.ConvertTreeNodeToJson(treeNodes, serverPath);
 
             return Ok(jsonString.ToString().Replace("\"items\": {},", ""));
         }
+
+        [HttpPost]
+        [Route("api/Client/GetUploadFolders")]
+        public IHttpActionResult GetUploadFolders([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+            var email = values.email.ToString();
+            var folderClass = new FolderStuctureClass(email);
+            TreeNode treeNodes = folderClass.PopulateUploadsTree();
+            var serverPath = HostingEnvironment.MapPath(_uploadsServerFolderPath);
+            var jsonString = folderClass.ConvertUploadTreeNodesToJson(treeNodes, serverPath);
+
+            return Ok(jsonString.ToString().Replace("\"items\": {},", ""));
+        }
+
+        [HttpPost]
+        [Route("api/Client/GetUploadFileNamePowerpoint")]
+        public IHttpActionResult GetUploadFileNamePowerpoint([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+
+            var clientId = values.clientId.ToString();
+            var reportId = values.reportId.ToString();
+            var currentFolderPath = clientId + @"/" + reportId + @"/ppt";
+            var folderPath = Path.Combine(HostingEnvironment.MapPath(_uploadsServerFolderPath), currentFolderPath);
+
+            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
+            if (currentDirectoryInfo.Exists)
+            {
+                foreach (var file in currentDirectoryInfo.GetFiles())
+                {
+                    if (file.Extension.Contains(".ppt") && file.Name.StartsWith("_"))
+                    {
+                        var fileName = file.Name;
+                        var str = Path.GetFileNameWithoutExtension(file.Name).Remove(0, 1);
+                        fileName = char.ToUpper(str[0]) + str.Substring(1);
+                        return Ok(fileName);
+                    }
+                }
+            }
+            return Ok("");
+        }
+
+        [HttpPost]
+        [Route("api/Client/GetUploadFullFileNamePowerpoint")]
+        public IHttpActionResult GetUploadFullFileNamePowerpoint([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+
+            var clientId = values.clientId.ToString();
+            var reportId = values.reportId.ToString();
+            var currentFolderPath = clientId + @"/" + reportId + @"/ppt";
+            var folderPath = Path.Combine(HostingEnvironment.MapPath(_uploadsServerFolderPath), currentFolderPath);
+
+            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
+            if (currentDirectoryInfo.Exists)
+            {
+                foreach (var file in currentDirectoryInfo.GetFiles())
+                {
+                    if (file.Extension.Contains(".ppt") && file.Name.StartsWith("_"))
+                    {
+                        var fileName = file.Name;
+                        return Ok(fileName);
+                    }
+                }
+            }
+            return Ok("");
+        }
+
+        [HttpPost]
+        [Route("api/Client/GetUploadFileSystemItem")]
+        public IHttpActionResult GetUploadFileSystemItem([FromBody] JObject value)
+        {
+            var json = value.ToString(Formatting.None);
+            dynamic values = JObject.Parse(json);
+
+            var currentFolderPath = values.folderPath.ToString();//.Replace("D:\\BI_REPORTS\\", "");
+            var folderPath = Path.Combine(HostingEnvironment.MapPath(_serverFolderPath), currentFolderPath);
+
+            var rtdBase64Data = "";
+            if (File.Exists(folderPath))
+            {
+                rtdBase64Data = Convert.ToBase64String(File.ReadAllBytes(folderPath));
+            }
+            return Ok(rtdBase64Data);
+
+            //var serverPath = Path.Combine(_rootPath, imagePath);
+            //var fileInfo = new FileInfo(serverPath);
+            //return !fileInfo.Exists
+            //    ? (IHttpActionResult)NotFound()
+            //    : new FileResult(fileInfo.FullName);
+
+        }
+
 
         [HttpPost]
         [Route("api/Client/GetFileSystemItems")]
@@ -662,22 +751,22 @@ namespace CERES.Web.Api.Controllers
                 //{
                 var folderPath = Path.Combine(HostingEnvironment.MapPath(_uploadsFolderLocation));
                 foreach (HttpContent file in provider.Contents)
-                        {
-                            string filename = file.Headers.ContentDisposition.FileName.Trim('\"');
-                            var filePath = folderPath + "//" + filename;
-                            UserService.SaveUserTransactionLog(0, DateTime.Today, "Upload", _email, filename);
+                {
+                    string filename = file.Headers.ContentDisposition.FileName.Trim('\"');
+                    var filePath = folderPath + "//" + filename;
+                    UserService.SaveUserTransactionLog(0, DateTime.Today, "Upload", _email, filename);
 
-                            byte[] buffer = await file.ReadAsByteArrayAsync();
+                    byte[] buffer = await file.ReadAsByteArrayAsync();
 
-                            using (MemoryStream stream = new MemoryStream(buffer))
-                            {
-                                //await stream.CopyToAsync(stream);
-                                //write to file
-                                FileStream fileToSave = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-                                stream.WriteTo(fileToSave);
-                                fileToSave.Close();
-                            }
-                        }
+                    using (MemoryStream stream = new MemoryStream(buffer))
+                    {
+                        //await stream.CopyToAsync(stream);
+                        //write to file
+                        FileStream fileToSave = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+                        stream.WriteTo(fileToSave);
+                        fileToSave.Close();
+                    }
+                }
                 log.Info(string.Format("{0}| {1} is called: {2}|{3}|{4}", this._email, System.Reflection.MethodBase.GetCurrentMethod().ToString(), provider.Contents.ToString(),
                     "Upload", _email));
 
@@ -903,7 +992,7 @@ namespace CERES.Web.Api.Controllers
                 var svcFieldNumber = int.Parse(values.svcFieldNumber.ToString());
                 var svcID = int.Parse(values.svcID.ToString());
                 var constraint_Txt = values.constraint_Txt.ToString();
-                result = UserService.SaveServiceAreaFieldInfo(svcID, svcFieldNumber, svcFieldName, svcFieldID, shade, serviceAreaFieldGroup_SAID, metricShortName, metricFormat, 
+                result = UserService.SaveServiceAreaFieldInfo(svcID, svcFieldNumber, svcFieldName, svcFieldID, shade, serviceAreaFieldGroup_SAID, metricShortName, metricFormat,
                     isVisible, isMandatory, isLogVisible, groupName, fieldType, description_Txt, defaultValue, dataType, categoryCode, constraint_Txt);
             }
             return Ok(result);
@@ -956,7 +1045,7 @@ namespace CERES.Web.Api.Controllers
                 var recId = int.Parse(values.recid.ToString());
                 var svcFieldId = int.Parse(values.svcFieldId.ToString());
                 var fieldId = int.Parse(values.FieldId.ToString());
-                var fieldText= values.FieldText.ToString();
+                var fieldText = values.FieldText.ToString();
                 result = UserService.SaveServiceAreaFieldLOV(recId, svcFieldId, fieldId, fieldText);
             }
             return Ok(result);
@@ -972,7 +1061,7 @@ namespace CERES.Web.Api.Controllers
             var json = value.ToString(Formatting.None);
             dynamic values = JObject.Parse(json);
             {
-                var UserID = int.Parse(values.UserID.ToString()); 
+                var UserID = int.Parse(values.UserID.ToString());
                 var fullname = values.fullname.ToString();
                 var userName = values.userName.ToString();
                 var AccountType = values.AccountType.id.ToString();
@@ -1045,7 +1134,7 @@ namespace CERES.Web.Api.Controllers
                         if (change.Type == "update" || change.Type == "remove")
                         {
                             var key = Convert.ToInt32(change.Key);
-                            clientSetting = dbContext.ClientSettings.First(o => o.clientID== key);
+                            clientSetting = dbContext.ClientSettings.First(o => o.clientID == key);
                         }
                         else
                         {
@@ -1233,7 +1322,7 @@ namespace CERES.Web.Api.Controllers
 
             try
             {
-                var currentFolderPath = clientId + @"/" + reportId + @"/img" ;
+                var currentFolderPath = clientId + @"/" + reportId + @"/img";
                 //var folderPath = Path.Combine(_eDUploadsFolderLocation, currentFolderPath);
                 //var folderPath = _eDUploadsFolderLocation + @"/" + currentFolderPath;
                 var folderPath = Path.Combine(HostingEnvironment.MapPath(_uploadsServerFolderPath), currentFolderPath);

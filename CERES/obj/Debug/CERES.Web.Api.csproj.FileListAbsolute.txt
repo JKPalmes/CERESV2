@@ -945,3 +945,5 @@ J:\CERESV2-main\CERESV2-main\CERES\obj\Debug\CERES.Web.Api.csproj.CoreCompileInp
 J:\CERESV2-main\CERESV2-main\CERES\obj\Debug\CERES.Web.Api.csproj.CopyComplete
 J:\CERESV2-main\CERESV2-main\CERES\obj\Debug\CERES.Web.Api.dll
 J:\CERESV2-main\CERESV2-main\CERES\obj\Debug\CERES.Web.Api.pdb
+J:\CERESV2-main\CERESV2-main\CERES\bin\DevExtreme.AspNet.Mvc.dll
+J:\CERESV2-main\CERESV2-main\CERES\bin\DevExtreme.AspNet.Mvc.xml

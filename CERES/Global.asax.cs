@@ -1,4 +1,4 @@
-﻿using CERES.Core.Services;
+using CERES.Core.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
@@ -21,6 +21,7 @@ namespace CERES.Web.Api
         
         protected void Application_Start()
         {
+            DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

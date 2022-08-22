@@ -1,11 +1,13 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" >
 <head>
     @Html.Partial("~/Views/Shared/_title_meta.cshtml")
     @RenderSection("styles", required: false)
     @Html.Partial("~/Views/Shared/_head_css.cshtml")
+	@Styles.Render("~/Content/DevExtremeBundle")
+	@Scripts.Render("~/Scripts/DevExtremeBundle")
 </head>
-<body class="layout-1 h-menu" data-luno="theme-blue">
+<body class="layout-1 h-menu dx-viewport dx-device-desktop dx-device-generic dx-theme-generic dx-theme-generic-typography dx-color-scheme-light" data-luno="theme-blue">
     <!-- Begin page -->
     @*<div id="layout-wrapper">*@
     <div id="layout-wrapper" class="wrapper">

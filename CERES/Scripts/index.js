@@ -1,5 +1,5 @@
 //var baseUrl = "http://localhost:55979/";
-var fileSystem = [];
+//var fileSystem = [];
 //var transView = "ShowPendingTransactions";
 //var transView = "ShowAllTransactions";
 

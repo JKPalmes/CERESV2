@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\N52776\source\repos\BI\CERESV2\CERES\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2022-08-19T06:47:10.3611827Z;True|2022-08-17T07:38:22.1468223-04:00;True|2022-08-17T03:06:58.1398484-04:00;True|2022-08-16T07:03:41.9009994-04:00;True|2022-08-15T11:23:56.2266094-04:00;True|2022-08-11T20:47:58.5396081-04:00;True|2022-08-11T12:01:37.6755653-04:00;True|2022-08-11T08:25:08.6302686-04:00;True|2022-08-10T08:54:28.0478015-04:00;True|2022-08-10T08:54:03.1870784-04:00;True|2022-08-08T20:45:32.6714841-04:00;True|2022-08-08T03:50:23.2060662-04:00;True|2022-08-08T02:48:47.5012025-04:00;True|2022-08-05T03:09:31.9113404-04:00;True|2022-08-04T22:49:21.3069403-04:00;True|2022-08-04T07:47:07.8661142-04:00;False|2022-08-04T07:46:15.6279528-04:00;False|2022-08-04T07:45:23.4267393-04:00;True|2022-08-03T07:48:22.2728323-04:00;</History>
+    <_PublishTargetUrl>J:\CERESV2-main\CERESV2-main\CERES\bin\app.publish\</_PublishTargetUrl>
+    <History>True|2022-08-22T08:58:45.6320958Z;True|2022-08-22T03:29:04.9925915-04:00;True|2022-08-22T03:15:00.8039204-04:00;True|2022-08-22T02:45:19.8907449-04:00;True|2022-08-21T10:37:03.3816889-04:00;True|2022-08-19T23:37:42.4990966-04:00;True|2022-08-19T19:57:18.2641112-04:00;True|2022-08-19T10:48:44.8238204-04:00;True|2022-08-17T07:38:22.1468223-04:00;True|2022-08-17T03:06:58.1398484-04:00;True|2022-08-16T07:03:41.9009994-04:00;True|2022-08-15T11:23:56.2266094-04:00;True|2022-08-11T20:47:58.5396081-04:00;True|2022-08-11T12:01:37.6755653-04:00;True|2022-08-11T08:25:08.6302686-04:00;True|2022-08-10T08:54:28.0478015-04:00;True|2022-08-10T08:54:03.1870784-04:00;True|2022-08-08T20:45:32.6714841-04:00;True|2022-08-08T03:50:23.2060662-04:00;True|2022-08-08T02:48:47.5012025-04:00;True|2022-08-05T03:09:31.9113404-04:00;True|2022-08-04T22:49:21.3069403-04:00;True|2022-08-04T07:47:07.8661142-04:00;False|2022-08-04T07:46:15.6279528-04:00;False|2022-08-04T07:45:23.4267393-04:00;True|2022-08-03T07:48:22.2728323-04:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="approvers.html">
@@ -4761,25 +4761,28 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="bin/CERES.Core.dll">
-      <publishTime>08/19/2022 02:46:53</publishTime>
+      <publishTime>08/22/2022 04:58:19</publishTime>
     </File>
     <File Include="bin/CERES.Core.dll.config">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="bin/CERES.Core.pdb">
-      <publishTime>08/19/2022 02:46:53</publishTime>
+      <publishTime>08/22/2022 04:58:19</publishTime>
     </File>
     <File Include="bin/CERES.Web.Api.dll">
-      <publishTime>08/19/2022 02:46:54</publishTime>
+      <publishTime>08/22/2022 04:58:22</publishTime>
     </File>
     <File Include="bin/CERES.Web.Api.pdb">
-      <publishTime>08/19/2022 02:46:54</publishTime>
+      <publishTime>08/22/2022 04:58:22</publishTime>
     </File>
     <File Include="bin/Content/w2ui-1.5.min.css">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="bin/DevExtreme.AspNet.Data.dll">
       <publishTime>08/10/2022 08:57:09</publishTime>
+    </File>
+    <File Include="bin/DevExtreme.AspNet.Mvc.dll">
+      <publishTime>08/21/2022 04:14:15</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -4878,7 +4881,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>05/27/2022 23:41:54</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -4890,22 +4893,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>05/27/2022 23:42:20</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>05/27/2022 23:42:06</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>05/27/2022 23:42:46</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>05/27/2022 23:42:16</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>05/27/2022 23:42:50</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -4940,68 +4943,185 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Content/bootstrap.min.css">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
+    <File Include="Content/Charset.css">
+      <publishTime>08/21/2022 04:46:55</publishTime>
+    </File>
+    <File Include="Content/dx-diagram.css">
+      <publishTime>08/21/2022 04:49:10</publishTime>
+    </File>
+    <File Include="Content/dx-diagram.min.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx-gantt.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx-gantt.min.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.carmine.compact.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.carmine.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
     <File Include="Content/dx.common.css">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.contrast.compact.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.contrast.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.dark.compact.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.dark.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.darkmoon.compact.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.darkmoon.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.darkviolet.compact.css">
+      <publishTime>08/21/2022 04:49:09</publishTime>
+    </File>
+    <File Include="Content/dx.darkviolet.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.greenmist.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.greenmist.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/dx.light.compact.css">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/dx.light.css">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.blue.dark.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.blue.dark.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.blue.light.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.blue.light.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.lime.dark.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.lime.dark.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.lime.light.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.lime.light.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.orange.dark.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.orange.dark.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.orange.light.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.orange.light.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.purple.dark.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.purple.dark.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.purple.light.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.purple.light.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.teal.dark.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.teal.dark.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.teal.light.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.material.teal.light.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.softblue.compact.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
+    </File>
+    <File Include="Content/dx.softblue.css">
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-300.ttf">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-300.woff">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-300.woff2">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-400.ttf">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-400.woff">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-400.woff2">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-500.ttf">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-500.woff">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-500.woff2">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-700.ttf">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-700.woff">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:08</publishTime>
     </File>
     <File Include="Content/fonts/Roboto-700.woff2">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/icons/dxicons.ttf">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/icons/dxicons.woff">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/icons/dxicons.woff2">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/icons/dxiconsmaterial.ttf">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/icons/dxiconsmaterial.woff">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/icons/dxiconsmaterial.woff2">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:07</publishTime>
     </File>
     <File Include="Content/images/account.png">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -5094,7 +5214,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="Content/my-style.css">
-      <publishTime>08/14/2022 02:11:04</publishTime>
+      <publishTime>08/19/2022 22:19:18</publishTime>
     </File>
     <File Include="Content/new-style-v0.00.1.css">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -5214,13 +5334,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:54:09</publishTime>
     </File>
     <File Include="Scripts/app.js">
-      <publishTime>08/19/2022 02:34:26</publishTime>
+      <publishTime>08/20/2022 07:06:01</publishTime>
+    </File>
+    <File Include="Scripts/aspnet/dx.aspnet.data.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/aspnet/dx.aspnet.mvc.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datepicker.min.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
     </File>
     <File Include="Scripts/ceres-authentication.js">
       <publishTime>08/19/2022 01:52:20</publishTime>
@@ -5231,14 +5360,158 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/ceres.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
+    <File Include="Scripts/cldr.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/cldr.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/cldr/event.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/cldr/event.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/cldr/supplemental.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/cldr/supplemental.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/cldr/unresolved.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/cldr/unresolved.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/devextreme-localization/dx.messages.de.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/devextreme-localization/dx.messages.en.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/devextreme-localization/dx.messages.ja.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/devextreme-localization/dx.messages.ru.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/dx-diagram.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/dx-diagram.min.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/dx-gantt.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/dx-gantt.min.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
+    <File Include="Scripts/dx-quill.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/dx-quill.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/dx.all.debug.js">
+      <publishTime>08/21/2022 04:49:07</publishTime>
+    </File>
     <File Include="Scripts/dx.all.js">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/dx.aspnet.mvc.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/dx.viz.debug.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/dx.viz.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/dx.web.debug.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/dx.web.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/exceljs.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/exceljs.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/FileSaver.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/FileSaver.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/globalize.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/globalize.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/globalize/currency.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/globalize/currency.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/globalize/date.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/globalize/date.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/globalize/message.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/globalize/message.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/globalize/number.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/globalize/number.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/globalize/plural.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/globalize/relative-time.js">
+      <publishTime>08/21/2022 04:48:57</publishTime>
+    </File>
+    <File Include="Scripts/globalize/unit.js">
+      <publishTime>08/21/2022 04:48:57</publishTime>
     </File>
     <File Include="Scripts/index.js">
-      <publishTime>08/16/2022 02:54:24</publishTime>
+      <publishTime>08/20/2022 07:06:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.5.1.js">
+      <publishTime>08/21/2022 04:48:56</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.5.1.min.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.5.1.min.map">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.5.1.slim.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.5.1.slim.min.js">
+      <publishTime>08/21/2022 04:48:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.5.1.slim.min.map">
+      <publishTime>08/21/2022 04:48:55</publishTime>
     </File>
     <File Include="Scripts/jquery-idle-hands.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
+    </File>
+    <File Include="Scripts/jquery.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
     </File>
     <File Include="Scripts/jquery.min.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -5246,8 +5519,92 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="Scripts/jquery.validate.min.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
+    <File Include="Scripts/jspdf.plugin.autotable.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/jspdf.plugin.autotable.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/jspdf.umd.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/jspdf.umd.min.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/jszip.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
+    <File Include="Scripts/jszip.min.js">
+      <publishTime>08/21/2022 04:48:58</publishTime>
+    </File>
     <File Include="Scripts/jwt-decode.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.ar.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.cs.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.de.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.el.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.en.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.es.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.fi.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.fr.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.hu.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.it.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.ja.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.nb.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.nl.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.pt.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.ro.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.ru.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.sl.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.sv.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.tr.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.vi.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.zh-tw.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
+    </File>
+    <File Include="Scripts/localization/dx.messages.zh.js">
+      <publishTime>08/21/2022 04:14:15</publishTime>
     </File>
     <File Include="Scripts/lookup-data.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -5260,6 +5617,33 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="Scripts/toastr.min.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-data/africa.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-data/canada.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-data/eurasia.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-data/europe.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-data/usa.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-data/world.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-utils/dx.vectormaputils.debug.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-utils/dx.vectormaputils.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
+    </File>
+    <File Include="Scripts/vectormap-utils/dx.vectormaputils.node.js">
+      <publishTime>08/21/2022 04:49:06</publishTime>
     </File>
     <File Include="Scripts/w2ui-1.5.min.js">
       <publishTime>08/10/2022 08:57:09</publishTime>
@@ -5379,13 +5763,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/16/2022 21:08:01</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:46:55</publishTime>
     </File>
     <File Include="Views/Shared/_menu.cshtml">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="Views/Shared/_modal-theme-setting.cshtml">
-      <publishTime>08/19/2022 02:09:51</publishTime>
+      <publishTime>08/19/2022 22:29:49</publishTime>
     </File>
     <File Include="Views/Shared/_page_title.cshtml">
       <publishTime>08/16/2022 10:59:25</publishTime>
@@ -5397,19 +5781,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="Views/Shared/_topbar.cshtml">
-      <publishTime>08/18/2022 22:16:21</publishTime>
+      <publishTime>08/19/2022 23:30:13</publishTime>
     </File>
     <File Include="Views/Shared/_vendor_scripts.cshtml">
       <publishTime>08/13/2022 10:20:38</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>08/10/2022 08:57:09</publishTime>
+      <publishTime>08/21/2022 04:46:54</publishTime>
     </File>
     <File Include="Views/_ViewImports.cshtml">
       <publishTime>08/10/2022 08:57:09</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/19/2022 02:47:06</publishTime>
+      <publishTime>08/22/2022 04:58:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

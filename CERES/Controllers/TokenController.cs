@@ -37,17 +37,17 @@ namespace CERES.Web.Api.Controllers
                 }
                 else
                 {
-                    ret = reportName.StartsWith("PowerPoint") ? SaveFile(photo, imageId) : SaveImageFile(photo, imageId);
+                    ret = reportName.StartsWith("Presentation") ? SaveFile(photo, imageId) : SaveImageFile(photo, imageId);
                 }
             }
 
-            return Redirect(_reportsUrl + "/apps/" + (reportName.StartsWith("PowerPoint") ? "presentations/presentation" : "dashboards/report") + reportId + "?" + ret);
+            return Redirect(_reportsUrl + "/apps/" + (reportName.StartsWith("Presentation") ? "presentations/presentation" : "dashboards/report") + reportId + "?" + ret);
         }
 
         string SaveImageFile(HttpPostedFileBase file, string imageId)
         {
             var targetLocation = Server.MapPath("~/Uploads/") + imageId + @"/img";
-
+            CreateDirIfDoesNotExist(imageId, targetLocation);
             try
             {
                 //var path = Path.Combine(targetLocation, file.FileName);
@@ -63,16 +63,52 @@ namespace CERES.Web.Api.Controllers
             return "Success";
         }
 
+        private void CreateDirIfDoesNotExist(string imageId, string targetLocation)
+        {
+            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(targetLocation);
+            if (!currentDirectoryInfo.Exists)
+            {
+                var targetDir = Server.MapPath("~/Uploads/");
+                //separate clientId from imageId -> clientId/reportId)
+                var clientId = imageId.Split('/')[0];
+                var reportId = imageId.Split('/')[1];
+                var clientDir = targetDir + clientId;
+                var rptDir = clientDir + @"/" + reportId;
+                //create client folder
+                Directory.CreateDirectory(clientDir);
+                //create report folder
+                Directory.CreateDirectory(rptDir);
+                //create ppt/img folder
+                if (targetLocation.EndsWith("ppt"))  
+                {
+                    Directory.CreateDirectory(clientDir + @"/ppt");
+                }
+                else
+                {
+                    Directory.CreateDirectory(clientDir + @"/img");
+                }
+            }
+        }
         string SaveFile(HttpPostedFileBase file, string imageId)
         {
-            //var targetLocation = Server.MapPath("~/Uploads/");
             var targetLocation = Server.MapPath("~/Uploads/") + imageId + @"/ppt";
-            //var fileName = imageId.Replace(@"/", "-") + ".pptx";
-            var extension = Path.GetExtension(file.FileName);
+            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(targetLocation);
+            if (currentDirectoryInfo.Exists)
+            {
+                foreach (var pptFile in currentDirectoryInfo.GetFiles())
+                {
+                    if (pptFile.Extension.Contains(".ppt") && pptFile.Name.StartsWith("_"))
+                    {
+                        var fileName = pptFile.Name.Remove(0, 1);
+                        var oldFile = Path.Combine(targetLocation, pptFile.Name);
+                        var newFile = Path.Combine(targetLocation, fileName);
+                        System.IO.File.Move(oldFile, newFile);
+                    }
+                }
+            }
             try
             {
-                //var path = Path.Combine(targetLocation, file.FileName);
-                var path = Path.Combine(targetLocation, "presentation" + extension );
+                var path = Path.Combine(targetLocation, "_" + file.FileName);
                 file.SaveAs(path);
             }
             catch

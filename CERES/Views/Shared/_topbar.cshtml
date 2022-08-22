@@ -26,18 +26,12 @@
             </div>
             <!-- start: status area -->
             <div class="main-title px-3 flex-fill text-center">
-                @*<div class="col form-control" style="height:40px; padding-bottom:30px; background-color:#dbe9ff;">
-            <h6 class="fs-12 color-900 mt-1 mb-0">
-                <span class="ms-xl-2 ">*@
                 <button id="btnSidebar1" class="btn d-xl-inline-block form-control ms-xl-2" style="height: 40px; padding-bottom: 30px; background-color: #dbe9ff;" data-bs-toggle="modal" data-bs-target="#sidebar-modal-view" type="button">
-                    <h6 class="fs-12 color-900 mt-1 mb-0">
-                        <span class="d-xl-inline-block ms-1 mt-1 fw-bolder ">View:</span>&nbsp;
+                    <h6 class="fs-12 color-900 mt-0 mb-0">
+                        <span class="d-xl-inline-block ms-0 mt-0 fw-bolder prod-acronym circle"></span>&nbsp;
                         <span class="d-none d-xl-inline-block ms-1 fw-bolder fs-10 prod-data-text"></span>
                     </h6>
                 </button>
-                @*</span>
-                </h6>
-            </div>*@
             </div>
 
             <!-- start: link -->
@@ -75,7 +69,7 @@
                                 <div class="row g-1 text-center p-3" style="width: 302px;">
                                     <div class="col-6">
                                         <a id="execDashboard" hidden class="card p-3 color-600 lift align-items-center" href="#" onclick="execDashboard()" title="">
-                                            <img src="../images/exec-dashboard-logo.svg" style="height:26px;"/>
+                                            <img src="../images/exec-dashboard-logo.svg" style="height:26px;" />
 
                                             <p class="mb-0 color-600">Executive Dashboard</p>
                                             <small class="text-muted">View All</small>
@@ -96,8 +90,8 @@
                                         <a id="goldReports" hidden class="card p-3 color-600 lift align-items-center" href="#" onclick="goldReports();" title="">
                                             <img src="../images/analytics.svg" style="height:36px;" />
                                             @*<svg viewBox="0 0 16 16" width="30px" class="mb-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <path class="fill-secondary" d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
-        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />*@
+                                        <path class="fill-secondary" d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+                                        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />*@
                                             <p class="mb-0 color-600">Professional Reports</p>
                                             @*<small class="text-muted">Legacy</small>*@
                                         </a>
@@ -106,9 +100,9 @@
                                         <a id="uploadFiles" hidden class="card p-3 color-600 lift align-items-center" href="#" onclick="uploadFiles();" title="">
                                             <img src="../images/browser-upload.svg" style="height:38px;" />
                                             @*<svg viewBox="0 0 16 16" width="30px" class="mb-3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
-                                                <path class="fill-secondary" d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
-                                            </svg>*@
+                                            <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z" />
+                                            <path class="fill-secondary" d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z" />
+                                        </svg>*@
                                             <p class="mb-0 color-600">File Uploads</p>
                                             <small class="text-muted">EDI Intake</small>
                                         </a>
@@ -165,24 +159,25 @@
 
             <!-- start: sub-status area -->
             <!--<div class="d-xl-inline-block status-title px-3 flex-fill text-center">
-                <div class="col form-control" style="height:40px; padding-bottom:30px; background-color:#dbe9ff;">-->
-                    @*<small class="text-center text-muted prod-details-text ">Status:  | JobId: </small>*@
-                    <!--<h6 class="fs-12 color-900 mt-1 mb-0">
-                        <span class="ms-xl-2 ">
-                            <span class="d-xl-inline-block ms-1 mt-1 fw-normal ">Status:</span>
-                            <span class="d-none d-xl-inline-block ms-1 fw-normal prod-details-text"></span>
-                        </span>
-                    </h6>
-                </div>
-            </div>-->
+    <div class="col form-control" style="height:40px; padding-bottom:30px; background-color:#dbe9ff;">-->
+            @*<small class="text-center text-muted prod-details-text ">Status:  | JobId: </small>*@
+            <!--<h6 class="fs-12 color-900 mt-1 mb-0">
+                <span class="ms-xl-2 ">
+                    <span class="d-xl-inline-block ms-1 mt-1 fw-normal ">Status:</span>
+                    <span class="d-none d-xl-inline-block ms-1 fw-normal prod-details-text"></span>
+                </span>
+            </h6>
+        </div>
+    </div>-->
 
-            <div class="d-xl-inline-block status-title px-3 flex-fill text-center">
+            <div class="status-title px-3 flex-fill text-center">
                 <button id="btnSidebar2" class="btn d-xl-inline-block form-control ms-xl-2" style="height: 40px; padding-bottom: 30px; background-color: #dbe9ff;" data-bs-toggle="modal" data-bs-target="#sidebar-modal-status" type="button">
-                    <span class="d-xl-inline-block ms-1 mt-1 fw-bolder ">Status:</span>
-                    <span class="d-none d-xl-inline-block ms-1 fw-bolder prod-details-text"></span>
+                    <h6 class="fs-12 color-900 mt-0 mb-0">
+                        <span class="d-xl-inline-block ms-0 mt-0 fw-bolder prod-status circle"></span>&nbsp;
+                        <span class="d-none d-xl-inline-block ms-0 fw-bolder fs-10 prod-details-text"></span>
+                    </h6>
                 </button>
             </div>
-
 
             <!-- start: User dropdown-menu -->
             <ul class="header-right justify-content-end d-flex align-items-center mb-0 mx-4">

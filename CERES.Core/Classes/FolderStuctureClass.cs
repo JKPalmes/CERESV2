@@ -448,5 +448,166 @@ namespace CERES.Core.Classes
 
             return tiffCount;
         }
+
+        public TreeNode PopulateUploadsTree()
+        {
+            var i = 1;
+            var tNodes = new TreeNode(i, _userName.ToString().Trim(), true, ""); ;
+            string _ConnectionString = Common.GetSqlConnectionString();
+            try
+            {
+                System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(_ConnectionString);
+                conn.Open();
+                System.Data.SqlClient.SqlCommand comm = new System.Data.SqlClient.SqlCommand();
+                comm.CommandText =
+                    string.Format("select case when cl.clientid = 1 then '1000001' else cl.clientid end as clientId, cl.clientname as clientName from dbo.UserFolderConfig ufc INNER JOIN dbo.Users usr ON ufc.userid = usr.userid  INNER JOIN dbo.Client cl on ufc.clientid = cl.clientid where ufc.userid = dbo.fnGetUserID('{0}') order by cl.clientid", _userName.ToString().Trim());
+                comm.CommandType = System.Data.CommandType.Text;
+                comm.Connection = conn;
+                System.Data.SqlClient.SqlDataReader reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    //nodeUsers.ChildNodes.Add(new TreeNode(reader["clientName"].ToString(), reader["siteFolderName"].ToString()));
+                    i++;
+                    tNodes.Add(new TreeNode(i, reader["clientName"].ToString(), true, reader["clientId"].ToString()));
+                }
+                conn.Close();
+                comm.Dispose();
+            }
+            catch (System.Data.SqlClient.SqlException sqlException)
+            {
+                string mm = sqlException.Message;
+            }
+            //TreeView1.Nodes.Add(nodeUsers);
+            //var t = tNodes;
+            var treeNodes = GetUploadTreeFor_SubFolders(tNodes);
+            return treeNodes;
+            //GetTreeFor_Locations();
+        }
+
+        public TreeNode GetUploadTreeFor_SubFolders(TreeNode tNodes)
+        {
+            string _ConnectionString = Common.GetSqlConnectionString();
+
+            var i = tNodes.items.Count;
+            foreach (var tChild in tNodes.items)
+            {
+                try
+                {
+                    var tClient = tChild.Value;
+                    int j = 0;
+                    while (j < 10)
+                    {
+                        i++;
+                        j++;
+                        tClient.Add(new TreeNode(i, j.ToString(), true, tClient.path.ToString()+@"/"+j.ToString()));
+                    }
+                }
+                catch (Exception e)
+                {
+                    //string mm = sqlException.Message;
+                }
+            }
+            var t = tNodes;
+            return t;
+        }
+        //int id,
+        //    string text,
+        //    bool isDirectory,
+        //    string path
+        public string ConvertUploadTreeNodesToJson(TreeNode tNodes, string serverPath)
+        {
+            var sb = new System.Text.StringBuilder();
+            var sw = new StringWriter(sb);
+            using (var writer = new JsonTextWriter(sw))
+            {
+                writer.WriteStartArray();
+                foreach (var item in tNodes.items)
+                {
+                    writer.WriteStartObject();
+                    writer.WritePropertyName("id");
+                    writer.WriteValue(item.Key);
+                    writer.WritePropertyName("name");
+                    writer.WriteValue(item.Value.name);
+                    writer.WritePropertyName("path");
+                    //writer.WriteValue(item.Value.path);
+                    writer.WriteValue(Path.Combine(serverPath, item.Value.path));
+                    writer.WritePropertyName("isDirectory");
+                    writer.WriteValue(true);
+                    //sub-folders
+                    writer.WritePropertyName("items");
+                    writer.WriteStartArray();
+                    var child = tNodes.items[item.Key];
+                    foreach (var gChild in child.items)
+                    {
+                        writer.WriteStartObject();
+                        writer.WritePropertyName("id");
+                        writer.WriteValue(gChild.Key);
+                        writer.WritePropertyName("name");
+                        writer.WriteValue(gChild.Value.name);
+                        writer.WritePropertyName("path");
+                        //writer.WriteValue(gChild.Value.path);
+                        writer.WriteValue(Path.Combine(serverPath, gChild.Value.path));
+                        writer.WritePropertyName("isDirectory");
+                        writer.WriteValue(true);
+
+                        //files
+                        writer.WritePropertyName("items");
+                        writer.WriteStartArray();
+                        if (!string.IsNullOrEmpty(gChild.Value.path))
+                        {
+                            var currentFolderPath = gChild.Value.path.ToString();
+                            var folderPath = Path.Combine(serverPath, currentFolderPath);
+
+                            DirectoryInfo currentDirectoryInfo = new DirectoryInfo(folderPath);
+                            if (currentDirectoryInfo.Exists)
+                            {
+                                var files1 = GetFileSystemItems(folderPath + @"/img");//img
+                                if (files1 != null)
+                                {
+                                    foreach (var file in files1)
+                                    {
+                                        writer.WriteStartObject();
+                                        writer.WritePropertyName("name");
+                                        writer.WriteValue(file.Name);
+                                        writer.WritePropertyName("path");
+                                        writer.WriteValue(file.FullName);
+                                        writer.WritePropertyName("isDirectory");
+                                        writer.WriteValue(false);
+                                        writer.WritePropertyName("size");
+                                        writer.WriteValue(file.Size);
+                                        writer.WriteEndObject();
+                                    }
+                                }
+                                var files2 = GetFileSystemItems(folderPath + @"/ppt");//ppt
+                                if (files2 != null)
+                                {
+                                    foreach (var file in files2)
+                                    {
+                                        writer.WriteStartObject();
+                                        writer.WritePropertyName("name");
+                                        writer.WriteValue(file.Name);
+                                        writer.WritePropertyName("path");
+                                        writer.WriteValue(file.FullName);
+                                        writer.WritePropertyName("isDirectory");
+                                        writer.WriteValue(false);
+                                        writer.WritePropertyName("size");
+                                        writer.WriteValue(file.Size);
+                                        writer.WriteEndObject();
+                                    }
+                                }
+                            }
+                        }
+                        writer.WriteEndArray();
+
+                        writer.WriteEndObject();
+                    }
+                    writer.WriteEndArray();
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+            }
+            return sb.ToString();
+        }
     }
 }

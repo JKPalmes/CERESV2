@@ -58,7 +58,7 @@ namespace CERES.Web.Api.Models
                 else if (propertyInfo.Name.StartsWith("StringField") || propertyInfo.Name.StartsWith("Remarks"))
                 {
                     var encodedData = propertyInfo.GetValue(_data);
-                    propertyInfo.SetValue(_data, HttpUtility.HtmlEncode(encodedData));//ENCODE VERYTHING
+                    propertyInfo.SetValue(_data, HttpUtility.HtmlEncode(encodedData));//ENCODE EVERYTHING
                 }
 
                 //brb
